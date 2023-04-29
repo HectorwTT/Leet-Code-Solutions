@@ -1,0 +1,26 @@
+class Solution {
+        public boolean isAnagram(String s,String t){
+        int []soccurrences = new int [26];
+        int []toccurrences = new int[26];
+        String s1 = s.toLowerCase();
+        String t1 = t.toLowerCase();
+        for(int i = 0;i < s1.length();i++){
+            char c = s1.charAt(i);
+            if(Character.isLetter(c)){
+                int index = c-97;
+                soccurrences[index]++;
+            }
+        }
+        for(int j=0;j<t1.length();j++){
+            char c1 = t1.charAt(j);
+            if(Character.isLetter(c1)){
+                int index = c1-97;
+                toccurrences[index]++;
+            }
+        }
+        for(int k =0; k<26;k++){
+            if (soccurrences[k]!=toccurrences[k]) return false;
+        }
+        return true;
+    }
+}
