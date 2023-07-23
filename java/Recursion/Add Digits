@@ -1,0 +1,17 @@
+class Solution {
+    public int addDigits(int num) {
+        if(num<10) return num;
+        else if(num<19) return  num-10 +1;
+        else{
+            int num1=num;
+            int sum=0;
+            while(num1!=0){
+              int mod= num1%10;
+              sum+=mod;
+              num1/=10;
+            }
+            return addDigits(sum);
+
+        }
+    }
+}
