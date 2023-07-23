@@ -1,0 +1,24 @@
+class Solution {
+    public ListNode sortList(ListNode head) {
+         if(head==null) return null;
+         ListNode current=head;
+         List<Integer> nodes = new ArrayList<>();
+         while(current!=null){
+             int val= current.val;
+             nodes.add(val);
+             current=current.next;
+         }
+         int[] numbers = nodes.stream()
+                         .mapToInt(Integer::intValue)
+                         .toArray();
+          Arrays.sort(numbers);
+          ListNode newhead= new ListNode(numbers[0]);
+          ListNode newcurrent= newhead;
+          for(int i=1;i<numbers.length;i++){
+            ListNode tmp= new ListNode(numbers[i]);
+            newcurrent.next= tmp;
+            newcurrent=newcurrent.next;
+          }
+          return newhead;
+    }
+}
