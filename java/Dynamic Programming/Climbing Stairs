@@ -1,0 +1,13 @@
+class Solution {
+    public int climbStairs(int n) {
+        if(n==0) return 0;
+        if(n==1) return 1;
+        int []numOfSteps= new int [n];
+        numOfSteps[0]=1;
+        numOfSteps[1]=2;
+        for(int i=2;i<numOfSteps.length;i++){
+         numOfSteps[i]= numOfSteps[i-1] + numOfSteps[i-2];
+        }
+        return numOfSteps[n-1];
+    }
+}
