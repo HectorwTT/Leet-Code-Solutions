@@ -1,0 +1,8 @@
+class Solution {
+    public boolean squareIsWhite(String coordinates) {
+        char coordinatesrow= coordinates.charAt(1);
+        char coordinatescolumn = coordinates.charAt(0);
+        return ((coordinatescolumn-97)%2==0 && coordinatesrow%2==0)
+        ||((coordinatescolumn-97)%2==1 && coordinatesrow%2==1);
+    }
+}
