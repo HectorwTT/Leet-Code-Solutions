@@ -1,0 +1,48 @@
+class Solution {
+    public String intToRoman(int num) {
+        Map <Integer,String> values = new HashMap<>();
+       values.put(0,"");
+       values.put(1,"I");
+       values.put(2,"II");
+       values.put(3,"III");
+       values.put(4,"IV");
+       values.put(5,"V");
+       values.put(6,"VI");
+       values.put(7,"VII");
+       values.put(8,"VIII");
+       values.put(9,"IX");
+       values.put(10,"X");
+       values.put(20,"XX");
+       values.put(30,"XXX");
+       values.put(40,"XL");
+       values.put(50,"L");
+       values.put(60,"LX");
+       values.put(70,"LXX");
+       values.put(80,"LXXX");
+       values.put(90,"XC");
+       values.put(100,"C");
+       values.put(200,"CC");
+       values.put(300,"CCC");
+       values.put(400,"CD");
+       values.put(500,"D");
+       values.put(600,"DC");
+       values.put(700,"DCC");
+       values.put(800,"DCCC");
+       values.put(900,"CM");
+       values.put(1000,"M");
+       values.put(2000,"MM");
+       values.put(3000,"MMM");
+       values.put(4000,"MMMM");
+       int power =0;
+       String str ="";
+       while(num!=0){
+         int mod = num% 10;
+         int number = mod * (int)Math.pow(10,power);
+         String  ch = values.get(number);
+         str = ch +str;
+         power++;
+         num /=10;
+       } 
+    return str;
+    }
+}
