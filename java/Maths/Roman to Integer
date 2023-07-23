@@ -1,0 +1,27 @@
+class Solution {
+    public int romanToInt(String s) {
+      
+       int number = 0;
+       Map <Character,Integer> values = new HashMap<>();
+       values.put('I',1);
+       values.put('V',5);
+       values.put('X',10);
+       values.put('L',50);
+       values.put('C',100);
+       values.put('D',500);
+       values.put('M',1000);
+       int pointer= s.length()-1;
+       int sum =0;
+       int curr=0;
+       int previous =0;
+       while(pointer >=0){
+           char numeral = s.charAt(pointer);
+           curr = values.get(numeral);
+           if (curr < previous) curr = -1*curr;
+           sum += curr;
+           previous = curr;
+           pointer = pointer -1;
+       }
+     return sum;
+    }
+}
