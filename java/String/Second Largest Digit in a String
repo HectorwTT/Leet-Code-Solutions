@@ -1,0 +1,8 @@
+class Solution {
+    public int secondHighest(String s) {
+        int[] nums = s.chars().filter(i->i>=48 && i<=57).
+                       distinct().sorted().toArray();
+        if(nums.length==0 || nums.length==1) return -1;
+        else return  nums[nums.length-2]-48;
+    }
+}
