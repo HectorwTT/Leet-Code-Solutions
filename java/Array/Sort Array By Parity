@@ -1,0 +1,11 @@
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int [] even= Arrays.stream(nums).filter(i->i%2==0).toArray();
+        int [] odd = Arrays.stream(nums).filter(i->i%2==1).toArray(); 
+        int[] numbers = new int[even.length +odd.length];
+        System.arraycopy(even, 0, numbers, 0, even.length);  
+        System.arraycopy(odd, 0, numbers, even.length, odd.length); 
+        return numbers;
+        
+    }
+}
