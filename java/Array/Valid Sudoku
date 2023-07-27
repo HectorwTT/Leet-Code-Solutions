@@ -1,0 +1,48 @@
+boolean solution(char[][] grid) {
+  int[] values= new int[9];
+  int column=0;
+  int row=0;
+  int index=0;
+  long numcount=0;
+  long distinctcount=0;
+  while(row<9){
+      values[column]=grid[row][column++];
+      if(column==9){
+        row++;
+        column=0;
+        numcount=Arrays.stream(values).filter(ch->ch!='.')
+                       .filter(ch->ch>=48&&ch<=57).count();
+        distinctcount = Arrays.stream(values).filter(ch->ch!='.').distinct().count();
+        if(distinctcount!=numcount)return false;
+        
+      }    
+    }
+    row=0;
+    column=0;
+   while(column<9){
+      values[row]=grid[row++][column];
+      if(row ==9){
+           row=0;
+           column++;
+            numcount=Arrays.stream(values).filter(ch->ch!='.')
+                       .filter(ch->ch>=48&&ch<=57).count();
+           distinctcount = Arrays.stream(values).filter(ch->ch!='.').distinct().count();
+           if(distinctcount!=numcount)return false;
+       }
+   }
+   for(int squarerow=0;squarerow<9;squarerow+=3){
+     for(int squarecolumn=0;squarecolumn<9;squarecolumn+=3){
+       for(int i=squarerow;i<squarerow+3;i++){
+        for(int j=squarecolumn;j<squarecolumn+3;j++){
+          values[index++]= grid[i][j];
+          }
+       }
+       index=0;
+       numcount=Arrays.stream(values).filter(ch->ch!='.')
+                       .filter(ch->ch>=48&&ch<=57).count();
+       distinctcount = Arrays.stream(values).filter(ch->ch!='.').distinct().count();
+       if(distinctcount!=numcount)return false;
+     }
+   }
+ return true;
+}
