@@ -1,4 +1,4 @@
-boolean solution(char[][] grid) {
+boolean solution(char[][] board) {
   int[] values= new int[9];
   int column=0;
   int row=0;
@@ -6,7 +6,7 @@ boolean solution(char[][] grid) {
   long numcount=0;
   long distinctcount=0;
   while(row<9){
-      values[column]=grid[row][column++];
+      values[column]=board[row][column++];
       if(column==9){
         row++;
         column=0;
@@ -20,7 +20,7 @@ boolean solution(char[][] grid) {
     row=0;
     column=0;
    while(column<9){
-      values[row]=grid[row++][column];
+      values[row]=board[row++][column];
       if(row ==9){
            row=0;
            column++;
@@ -34,7 +34,7 @@ boolean solution(char[][] grid) {
      for(int squarecolumn=0;squarecolumn<9;squarecolumn+=3){
        for(int i=squarerow;i<squarerow+3;i++){
         for(int j=squarecolumn;j<squarecolumn+3;j++){
-          values[index++]= grid[i][j];
+          values[index++]= board[i][j];
           }
        }
        index=0;
