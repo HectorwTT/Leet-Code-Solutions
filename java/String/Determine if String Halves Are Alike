@@ -1,0 +1,15 @@
+class Solution {
+    public boolean halvesAreAlike(String s) {
+        s=s.toLowerCase();
+        String firsthalf=s.substring(0,s.length()/2);
+        String lasthalf=s.substring(s.length()/2);
+        long firsthalfvowelcount = firsthalf.chars()
+                                    .filter(ch->ch=='a'|| ch=='e'
+                                    ||ch=='i'||ch=='o'||ch=='u').count();
+        long lasthalfvowelcount = lasthalf.chars()
+                                    .filter(ch->ch=='a'|| ch=='e'
+                                    ||ch=='i'||ch=='o'||ch=='u').count();
+         return
+           firsthalfvowelcount==lasthalfvowelcount;                      
+    }
+}
