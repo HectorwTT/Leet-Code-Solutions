@@ -1,0 +1,4 @@
+select name as Employee from employee,
+(select salary,id from employee )t
+where t.id=employee.managerID
+and employee.salary>t.salary;
