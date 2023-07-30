@@ -1,0 +1,45 @@
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+        Arrays.sort(strs);
+        if(strs.length==1) return strs[0];
+        if(strs[0].equals(""))return"";
+        if(strs[0]==null)return "";
+        if(strs[0].charAt(0)!=strs[1].charAt(0))return "";
+        String first= strs[0];
+        String second = strs[1];
+        int index=0;
+        char firstch=first.charAt(index);
+        char secondch= second.charAt(index);
+        String prefix="";
+        while(firstch==secondch && 
+               index<first.length()&& 
+                index<second.length()){
+            prefix+=firstch;
+            index++;
+            if(index!=second.length())secondch=second.charAt(index);
+            if(index!= first.length()) firstch=first.charAt(index);
+        }
+        firstch=prefix.charAt(0);
+        for(int i=2;i<strs.length;i++){
+            if(strs[i].charAt(0)!=firstch) return "";
+            if(prefix.length()>strs[i].length()
+               ||!strs[i].substring(0,prefix.length()).equals(prefix)){
+                secondch=strs[i].charAt(0);
+                first=prefix;
+                prefix="";
+                int index1=0;
+                while(firstch==secondch&& 
+                       index1<first.length()&& 
+                       index1<strs[i].length()){
+                 prefix+=firstch;
+                 index1++;
+                 if(index1!=first.length())firstch=first.charAt(index1);
+                 if(index1!=second.length())
+                  secondch=strs[i].charAt(index1);     
+                }
+                firstch=prefix.charAt(0);
+            }
+        }
+        return prefix;
+    }
+}
