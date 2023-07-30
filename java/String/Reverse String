@@ -1,8 +1,15 @@
 class Solution {
     public void reverseString(char[] s) {
-        char[]sclone =s.clone();
-        int curr=s.length-1;
-        for(int i=0;i<s.length;i++)
-         s[i]=sclone[curr--];
+     int left=0;
+     int right=s.length-1;
+     while(left<right){
+         char lefttmp= s[left];
+         char righttmp=s[right];
+         s[left]=righttmp;
+         s[right]=lefttmp;
+         left++;
+         right--;
+     }
+     
     }
 }
