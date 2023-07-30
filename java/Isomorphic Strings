@@ -1,0 +1,20 @@
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        Map<Character,Character> mappedletters = new HashMap<>();
+        Map<Character,Character> mappedletters1 = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char sch= s.charAt(i);
+            char tch= t.charAt(i);
+            if(mappedletters.containsKey(sch)){
+                char tch1=mappedletters.get(sch);
+                if(tch1!=tch)return false;
+            }else mappedletters.put(sch,tch);
+             if(mappedletters1.containsKey(tch)){
+                char sch1=mappedletters1.get(tch);
+                if(sch1!=sch)return false;
+            }else mappedletters1.put(tch,sch);
+
+        }
+        return true;
+    }
+}
