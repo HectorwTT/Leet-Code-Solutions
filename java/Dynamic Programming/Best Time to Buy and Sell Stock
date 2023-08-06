@@ -1,0 +1,19 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+        if(prices.length==1)return 0;
+        if(prices.length==2 ){
+          if(prices[1]>=prices[0]) return prices[1]-prices[0] ;
+          else return 0;
+        } 
+        int [] dailyprofits = new int[prices.length];
+        int minprice=Math.min(prices[0],prices[1]);
+        dailyprofits[1]= Math.min(prices[1]-prices[0],0);
+        for(int i=1;i<prices.length;i++){
+            minprice=Math.min(prices[i-1],minprice);
+            dailyprofits[i] =Math.max(prices[i]-minprice,
+                                      dailyprofits[i-1]);
+        }
+        if(dailyprofits[prices.length-1]<=0)return 0;
+        else return dailyprofits[prices.length-1];
+    }
+}
