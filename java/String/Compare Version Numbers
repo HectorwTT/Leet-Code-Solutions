@@ -1,0 +1,35 @@
+class Solution {
+    public int compareVersion(String version1, String version2) {
+        String [] ver1 = version1.split("\\.");
+        String [] ver2 = version2.split("\\.");
+        int index=0;
+        for(int i=0;i<ver1.length && i<ver2.length;i++){
+         index=i;
+         String ver1i= ver1[i];
+         String ver2i = ver2[i];
+         try{
+          int number1= Integer.parseInt(ver1i);
+          int number2 = Integer.parseInt(ver2i);
+          if(number1>number2)return 1;
+          if(number2>number1)return -1;
+         }
+         catch(Exception e){ }
+        }
+        index++;
+        if(index>ver1.length-1){
+            for(int j=index;j<ver2.length;j++){
+                String word=ver2[j];
+                int val=Integer.parseInt(word);
+                if(val!=0) return -1;
+            }
+        }
+        if(index>ver2.length-1){
+            for(int j=index;j<ver1.length;j++) {
+                String word = ver1[j];
+                int val= Integer.parseInt(word);
+                if(val!=0) return 1;
+            }
+        }
+         return 0;
+    }
+}
