@@ -1,0 +1,38 @@
+class Solution {
+    public boolean canConstruct(String a, String b) {
+        Map <Character,Integer> alettercounts = new HashMap<>();
+        Map<Character,Integer> blettercounts= new HashMap<>();
+        Map<Character,Integer> commonletters= new HashMap<>();
+        int maxlength= Math.max(a.length(),b.length());
+        for(int index=0;index<maxlength;index++){
+         if(index<a.length()){
+           char ach= a.charAt(index);
+           if(alettercounts.containsKey(ach))alettercounts.replace(ach,
+                                          alettercounts.get(ach)+1);
+           else alettercounts.put(ach,1);
+         }
+         if(index<b.length()){
+           char bch= b.charAt(index);
+           if(blettercounts.containsKey(bch))blettercounts.replace(bch,
+                                          blettercounts.get(bch)+1);
+           else blettercounts.put(bch,1);
+           }
+        }
+        for(char ch:alettercounts.keySet()){
+         if(!blettercounts.containsKey(ch) 
+             ||(blettercounts.get(ch)<   alettercounts.get(ch)))          
+              return false;
+          else {
+            commonletters.
+              put(ch,blettercounts.get(ch)/alettercounts.get(ch));
+           }
+        }
+        int mincount=maxlength;
+        for(char ch:commonletters.keySet()){
+         if(commonletters.get(ch)==1) return true;
+         int commoncount= commonletters.get(ch);
+         if(mincount>commoncount) mincount= commoncount;
+        }
+        return mincount>=1;
+    }
+}
