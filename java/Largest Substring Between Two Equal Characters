@@ -1,0 +1,16 @@
+class Solution {
+    public int maxLengthBetweenEqualCharacters(String s) {
+        if(s.chars().distinct().count()==s.length())return -1;
+        if(s.chars().distinct().count()==1) return 0;
+        int maxlength=0;
+        for(int i=0;i<s.length();i++){
+            char c= s.charAt(i);
+            if(s.substring(i+1).contains(""+c)){
+                int nextindex=s.lastIndexOf(""+c);
+                int length= nextindex-i-1;
+                if(length>maxlength) maxlength=length;
+            }
+        }
+        return maxlength;
+    }
+}
