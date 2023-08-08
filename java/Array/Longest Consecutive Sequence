@@ -1,0 +1,18 @@
+class Solution {
+    public int longestConsecutive(int[] nums) {
+        int [] nums1= Arrays.stream(nums).distinct().sorted().toArray();
+        if(nums1.length==0) return 0;
+        int sequence=1;
+        int maxsequence=1;
+        for(int i=1;i<nums1.length;i++){
+            int previous=nums1[i-1];
+            int current = nums1[i];
+            if(current-previous==1){
+                 sequence++;
+                 if(maxsequence<sequence) maxsequence=sequence;
+            } 
+            else sequence=1;
+        }
+        return maxsequence;
+    }
+}
