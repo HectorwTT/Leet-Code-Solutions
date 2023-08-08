@@ -1,0 +1,16 @@
+class Solution {
+    public int percentageLetter(String s, char letter) {
+        int [] letters = new int [26];
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            int asciich=ch;
+            letters[asciich-97]++;
+        }
+        int asciival= letter;
+        int letterval = asciival-97;
+        int numberOfLetter = letters[letterval];
+        double fraction = (double)numberOfLetter/s.length();
+        int percent = (int)Math.floor(fraction *100);
+        return percent;
+    }
+}
