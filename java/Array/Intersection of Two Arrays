@@ -1,0 +1,16 @@
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        int [] nums1distinct= Arrays.stream(nums1).distinct().toArray();
+        int [] nums2distinct = Arrays.stream(nums2).distinct().toArray();
+        List <Integer> intersection= new ArrayList<>();
+        for(int i=0;i<nums1distinct.length;i++){
+            for(int j=0;j<nums2distinct.length;j++){
+                if(nums2distinct[j]== nums1distinct[i]){
+                    intersection.add(nums2distinct[j]);
+                    break;
+                }
+            }
+        }
+        return intersection.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
