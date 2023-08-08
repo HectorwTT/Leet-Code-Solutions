@@ -1,0 +1,23 @@
+class Solution {
+    public int minSubArrayLen(int target, int[] nums) {
+      if(nums[0]>=target)return 1;
+      int minlength=nums.length;
+      int [] sums= new int[nums.length];
+      sums[0]=nums[0];
+      for(int i=1;i<sums.length;i++){
+       if(nums[i]>=target) return 1;
+       sums[i]= nums[i]+sums[i-1];
+       if(sums[i]>=target) {
+         for(int j=0;j<i;j++){
+           int currenttotal= sums[i]-sums[j];
+           if(nums[i]+nums[j]>=target &&j==i-1) return 2;
+           if(currenttotal>=target){
+             if(i-j<minlength)minlength=i-j;
+           }
+         }
+        }
+      }
+      if (minlength==nums.length && sums[sums.length-1]<target) return 0;
+      else return minlength;
+ }   
+}
