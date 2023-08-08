@@ -1,0 +1,32 @@
+class Solution {
+    public String frequencySort(String s) {
+        Map <Character,Integer> map = new HashMap<>();
+        for(int i=0;i<s.length();i++){
+            char ch= s.charAt(i);
+            if(!map.containsKey(ch))map.put(ch,1);
+            else map.replace(ch,map.get(ch)+1);
+        }
+        int [] frequencies = new int[map.size()];
+        int index=0;
+        for(Integer num: map.values()){
+           int numval = num.intValue();
+           frequencies[index++]= numval;
+        }
+        Arrays.sort(frequencies);
+        int index1= frequencies.length-1;
+        String newstr="";
+        for(int i=index1;i>=0;i--){
+            for (Character ch: map.keySet()) {
+              if(map.get(ch)==frequencies[i]){
+                  if(frequencies[i]>1){
+                    String str = new String(""+ch);
+                    String str1= str.repeat(frequencies[i]);
+                    newstr+=str1;
+                  } else newstr+=ch;
+                  map.replace(ch,0);
+              }
+            }
+        }
+        return newstr;
+    }
+}
