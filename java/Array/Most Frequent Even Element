@@ -1,0 +1,31 @@
+class Solution {
+    public int mostFrequentEven(int[] nums) {
+        int [] evennums = Arrays.stream(nums).filter(i->i%2==0).toArray();
+        Arrays.sort(evennums);
+        if(evennums.length==0) return -1;
+        int maxFrequency=0;
+        int frequency=1;
+        int number=evennums[0];
+        for(int i =1;i<evennums.length;i++){
+           int previous= evennums[i-1];
+           int current= evennums[i];
+           if(current==previous){
+             frequency++;
+             if(i==evennums.length-1){
+                 if(frequency>maxFrequency){
+                  maxFrequency=frequency;
+                  number=previous;
+               }
+             }
+           } 
+           else{
+               if(frequency>maxFrequency){
+                 maxFrequency=frequency;
+                 number=previous;
+               }
+               frequency=1;
+           }
+        }
+        return number;
+    }
+}
