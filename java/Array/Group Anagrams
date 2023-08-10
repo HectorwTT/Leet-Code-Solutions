@@ -1,0 +1,26 @@
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        List<List<String>> anagrams = new ArrayList<>();
+        int [] processed= new int[strs.length];
+        for(int i=0;i<strs.length;i++){
+            if(processed[i]==0){
+              String word = strs[i];
+              int [] chars = word.chars().sorted().toArray();
+              List<String> anagram = new ArrayList<>();
+              anagram.add(word);
+              for(int j=i+1;j<strs.length;j++){
+                if(strs[j].length()==word.length()
+                    && processed[j]!=1 ){
+                        int []chars1 =strs[j].chars().sorted().toArray();
+                        if(Arrays.equals(chars,chars1)){
+                          anagram.add(strs[j]);
+                          processed[j]=1;
+                        }
+                    }
+               }
+              anagrams.add(anagram);
+            }          
+        }
+        return anagrams;
+    }
+}
