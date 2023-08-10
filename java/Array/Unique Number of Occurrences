@@ -1,0 +1,14 @@
+class Solution {
+    public boolean uniqueOccurrences(int[] arr) {
+        Map<Integer,Integer>numOfOccurrences = new HashMap<>();
+        for(int i=0;i<arr.length;i++){
+            int number =arr[i];
+            if(!numOfOccurrences.containsKey(number))
+                numOfOccurrences.put(number,1);
+            else numOfOccurrences.replace(number,
+                     numOfOccurrences.get(number)+1);
+        }
+        return numOfOccurrences.values().stream().count()==
+               numOfOccurrences.values().stream().distinct().count();
+    }
+}
