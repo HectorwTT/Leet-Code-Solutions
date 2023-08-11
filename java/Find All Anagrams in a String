@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> findAnagrams(String s, String p) {
+        List<Integer> indexes = new ArrayList<>();
+        int plength= p.length();
+        char[] pchars= p.toCharArray();
+        Arrays.sort(pchars);
+        for(int i=0;i<=s.length()-plength;i++){
+            String substr="";
+            if(i==s.length()-plength)substr=s.substring(i);
+            else substr = s.substring(i,i+plength);
+            char[] substrchars= substr.toCharArray();
+            Arrays.sort(substrchars);
+            if(Arrays.equals(pchars,substrchars))indexes.add(i);
+        }
+        return indexes;
+    }
+}
