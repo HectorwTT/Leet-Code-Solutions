@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isCircularSentence(String sentence) {
+      String [] words = sentence.split(" ");
+      for(int i=1;i<words.length;i++){
+          String current= words[i];
+          String previous= words[i-1];
+          char currentfirstch= current.charAt(0);
+          char previouslastch = previous.charAt(previous.length()-1);
+          if(currentfirstch!=previouslastch)return false;
+      }   
+      return (words[0].charAt(0)==words[words.length-1]
+                               .charAt(words[words.length-1].length()-1));
+    }
+}
