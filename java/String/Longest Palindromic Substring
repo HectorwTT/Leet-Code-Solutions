@@ -1,0 +1,25 @@
+class Solution {
+    public String longestPalindrome(String s) {
+        String palindrome=""+s.charAt(0);
+        int maxlength=1;
+        for(int i=1;i<s.length();i++){
+          char ch = s.charAt(i);
+          int startIndex=s.indexOf(""+ch);
+          while(startIndex<i){
+              String teststring = s.substring(startIndex,i)+ch;
+              StringBuffer sb = new StringBuffer(teststring);
+              sb.reverse();
+              String reversestring = sb.toString();
+              if(teststring.equals(reversestring)){
+                  if(maxlength<teststring.length()){
+                      maxlength=teststring.length();
+                      palindrome=teststring;
+                      break;
+                  }
+              }
+                startIndex= s.indexOf(""+ch,startIndex+1);
+            }
+        }
+         return palindrome;
+    }
+}
