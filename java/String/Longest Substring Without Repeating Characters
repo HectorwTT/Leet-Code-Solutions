@@ -2,23 +2,21 @@ class Solution {
     public int lengthOfLongestSubstring(String s) {
         int maxlength=1;
         if((int)s.chars().distinct().count()==s.length()) 
-          return s.length();
-          String substring="";
-          int start=0;
+         return s.length();
+        String substring="";
+        int start=0;
         for(int i=0;i<s.length();i++){
-             char ch= s.charAt(i);
-             substring = s.substring(start,i)+ch;
-             int distinctcount = (int)substring.chars().distinct().count();
-             if(distinctcount==substring.length()){
-                 if(maxlength<substring.length())
-                  maxlength=substring.length();
-             }
-             else{
-                 int index = s.indexOf(""+ch,start);
-                 if(index==i-1)start=i;
-                 else start= index+1;
-             }         
-             
+         char ch= s.charAt(i);
+         substring = s.substring(start,i)+ch;
+         int distinctcount = (int)substring.chars().distinct().count();
+         if(distinctcount==substring.length()){
+          if(maxlength<substring.length())
+           maxlength=substring.length();
+         }else{
+           int index = s.indexOf(""+ch,start);
+           if(index==i-1)start=i;
+           else start= index+1;
+          }         
         }
         return maxlength;
     }
