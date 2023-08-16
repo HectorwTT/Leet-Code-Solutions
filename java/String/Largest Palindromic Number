@@ -1,0 +1,63 @@
+class Solution {
+    public String largestPalindromic(String num) {
+        HashMap<Character,Integer> map = new HashMap<>();
+        List<Character> evenchars= new ArrayList<>();
+        List<Character> oddchars= new ArrayList<>();
+        String palindrome="";
+        for(int i=0;i<num.length();i++){
+            char ch = num.charAt(i);
+            if(!map.containsKey(ch))map.put(ch,1);
+            else map.replace(ch,map.get(ch)+1);
+        }
+        if(map.containsKey('0')){
+            int numOfZeroes = map.get('0');
+            if(num.length()-numOfZeroes==1 || num.length()==numOfZeroes){
+                  char[]digits = num.toCharArray();
+                  Arrays.sort(digits);
+                  return ""+digits[digits.length-1];
+            }
+        }
+        if(map.size()==1)return num;
+        for(Character ch:map.keySet()){
+            if(map.get(ch)%2==0) evenchars.add(ch);
+            else {
+             if(map.get(ch)!=1){
+                 map.replace(ch,map.get(ch)-1);
+                 evenchars.add(ch);
+             }     
+             oddchars.add(ch);
+            }
+        }
+        char[] evenchars1= new char[evenchars.size()];
+        char[] oddchars1= new char[oddchars.size()];
+        for(int i=0;i<evenchars.size();i++){
+            Character ch = evenchars.get(i);
+            char ch1 = ch.charValue();
+            evenchars1[i]=ch1;
+        }
+         for(int i=0;i<oddchars.size();i++){
+            Character ch = oddchars.get(i);
+            char ch1 = ch.charValue();
+            oddchars1[i]=ch1;
+        }
+        Arrays.sort(evenchars1);
+        Arrays.sort(oddchars1);
+        for(int i=evenchars1.length-1;i>=0;i--){
+             char ch1= evenchars1[i];
+             int number = map.get(ch1)/2;
+             String characters =(""+ch1).repeat(number); 
+             palindrome+=characters;
+            
+        }
+        if(oddchars1.length!=0) palindrome+=oddchars1[oddchars1.length-1];
+         for(int i=0;i<evenchars1.length;i++){
+              char ch1= evenchars1[i];
+              int number = map.get(ch1)/2;
+              String characters =(""+ch1).repeat(number); 
+              palindrome+=characters;
+        }
+        if(palindrome.charAt(0)=='0')
+         palindrome=palindrome.substring(1,palindrome.length()-1);
+        return palindrome;
+    }
+}
