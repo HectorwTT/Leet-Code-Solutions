@@ -1,0 +1,53 @@
+class Solution {
+    public int[] numSmallerByFrequency(String[] queries, String[] words) {
+        int[]results = new int[queries.length];
+        int[]queryfrequencies= new int[queries.length];
+        int[]wordfrequencies = new int[words.length];
+        for(int i=0;i<queries.length;i++){
+            String query = queries[i];
+            HashMap<Character,Integer> frequencies= new HashMap<>();
+            int min = query.charAt(0);
+            char chmin=query.charAt(0);
+            frequencies.put(query.charAt(0),1);
+            for(int j=1;j<query.length();j++){
+                char ch = query.charAt(j);
+                int chval=ch;
+                if(chval<min){
+                 chmin=(char)chval;
+                 min=chmin;
+                }
+                if(!frequencies.containsKey(ch))
+                  frequencies.put(ch,1);
+                else frequencies.replace(ch,frequencies.get(ch)+1);
+            }
+            queryfrequencies[i]=frequencies.get(chmin);
+        }
+        for(int i=0;i<words.length;i++){
+            String word = words[i];
+            Map<Character,Integer> frequencies= new HashMap<>();
+            int min = word.charAt(0);
+            char chmin=word.charAt(0);
+            frequencies.put(word.charAt(0),1);
+            for(int j=1;j<word.length();j++){
+                char ch = word.charAt(j);
+                int chval=ch;
+                if(chval<min){
+                 chmin=(char)chval;
+                 min=chmin;
+                }
+                if(!frequencies.containsKey(ch))
+                  frequencies.put(ch,1);
+                else frequencies.replace(ch,frequencies.get(ch)+1);
+            }
+            wordfrequencies[i]= frequencies.get(chmin);
+        }
+        for(int i=0;i<queryfrequencies.length;i++){
+            int frequencyOfQuery= queryfrequencies[i];
+            results[i]= (int)Arrays.stream(wordfrequencies)
+                                       .filter(num
+                                        ->num>frequencyOfQuery)
+                                        .count();
+        }
+        return results;
+    }
+}
