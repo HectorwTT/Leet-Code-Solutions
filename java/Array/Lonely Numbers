@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> findLonely(int[] nums) {
+        List<Integer> lonelyNumbers= new ArrayList<>();
+        HashMap<Integer,Integer> counts= new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+            if(!counts.containsKey(nums[i])){
+                counts.put(nums[i],1);
+            }else counts.replace(nums[i],counts.get(nums[i])+1);
+        }
+        for(Integer key:counts.keySet()){
+            if(counts.get(key)==1 
+                &&!counts.containsKey(key-1)
+                &&!counts.containsKey(key+1))lonelyNumbers.add(key);
+        }
+        return lonelyNumbers;
+    }
+}
