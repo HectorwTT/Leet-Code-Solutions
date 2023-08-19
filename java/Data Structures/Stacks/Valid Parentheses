@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isValid(String s) {
+        Stack<Character> brackets = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+            if(ch=='('||ch=='['||ch=='{') brackets.push(ch);
+            if(ch==')'||ch==']'||ch=='}'){
+                if(brackets.isEmpty())return false;
+                else{
+                  char preceding = brackets.peek();
+                  if(ch==')'&& preceding!='(') return false;
+                  else if(ch==']'&& preceding !='[') return false;
+                  else if(ch=='}' && preceding !='{') return false;
+                  else brackets.pop();
+                }
+            }
+        }
+         if(brackets.isEmpty())return true;
+         else return false;
+    }
+}
