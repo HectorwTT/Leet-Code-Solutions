@@ -1,0 +1,92 @@
+class Solution {
+    public int[] findFrequentTreeSum(TreeNode root) {
+     if(root==null)return new int[0];
+     HashMap<Integer,Integer> frequencies= new HashMap<>();
+     TreeNode sumsTree= getSums(root);
+     List<Integer> listOfNumbers= inorderTraversal(sumsTree);
+     List<Integer>mostFrequent= new ArrayList<>();
+     for(int i=0;i<listOfNumbers.size();i++){
+      int number= listOfNumbers.get(i);
+      if(!frequencies.containsKey(number))frequencies.put(number,1);
+      else frequencies.replace(number,frequencies.get(number)+1);
+     }
+     int maxfrequency= frequencies.values()
+                       .stream().max(Integer::compare).get();
+     for(Integer key: frequencies.keySet()){
+      int value= frequencies.get(key);
+      if(value==maxfrequency)mostFrequent.add(key);
+     }
+     int [] result=mostFrequent.stream()
+                    .mapToInt(Integer::intValue)
+                    .toArray();
+     Arrays.sort(result);
+     return result; 
+    }
+TreeNode getSums(TreeNode t){
+    TreeNode sums;
+    if(t==null){
+        return null;
+    } else if(t.left ==null && t.right==null){
+        sums= new TreeNode(t.val);
+        return sums;
+    }
+    else if(t.left==null){
+      TreeNode rightSums= getSums(t.right);
+      int sum=t.val + rightSums.val;
+      sums= new TreeNode(sum);
+      sums.right=rightSums;
+      return sums;
+    } 
+    else if(t.right==null){
+      TreeNode leftSums= getSums(t.left);
+      int sum=t.val+leftSums.val;
+      sums= new TreeNode(sum);
+      sums.left=leftSums;
+     return sums;
+    }
+    else{
+        TreeNode leftSums= getSums(t.left);
+        TreeNode rightSums= getSums(t.right);
+        int sum= t.val+leftSums.val+rightSums.val;
+        sums= new TreeNode(sum);
+        sums.left=leftSums;
+        sums.right= rightSums;
+        return sums;
+    }
+}
+public List<Integer> inorderTraversal(TreeNode root) {
+         if(root==null)return new ArrayList<>();
+         if (root.left==null && root.right==null) {
+             List<Integer> rootlist = new ArrayList<>();
+             rootlist.add(root.val);
+             return rootlist;
+        }
+        else {
+            if(root.left==null){
+                List <Integer> result = new ArrayList<>();
+                result.add(root.val);
+                List<Integer> rightlist = inorderTraversal(root.right);
+                result.addAll(rightlist);
+                return result;
+            }
+            else if (root.right==null){
+                List <Integer> result = new ArrayList<>();
+                List<Integer> leftlist = inorderTraversal(root.left);
+                result.addAll(leftlist);
+                result.add(root.val);
+                return result;
+            }else{
+            List <Integer> leftlist=new ArrayList<>();
+            List <Integer> rightlist=new ArrayList<>();
+            if(root.left!=null)leftlist=inorderTraversal(root.left);  
+            if (root.right!=null)
+              rightlist= inorderTraversal(root.right);
+            List <Integer> result = new ArrayList<>();
+            result.addAll(leftlist);
+            result.add(root.val);
+            result.addAll(rightlist);
+            return result;
+            }
+        } 
+    }
+}
