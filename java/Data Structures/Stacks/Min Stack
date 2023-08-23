@@ -1,0 +1,28 @@
+class MinStack {
+    private List<Integer> stack;
+    public MinStack() {
+        stack= new ArrayList<>();
+    }
+    public void push(int val) {
+        stack.add(val);
+    }
+    public void pop() {
+        if(stack.size()!=0) stack.remove(stack.size()-1);
+    }
+    public int top() {
+        try{
+          return stack.get(stack.size()-1);
+        }
+        catch(Exception e){
+            System.out.println("Stack Empty");
+            return -1;
+        }
+        
+    }
+    public int getMin() {
+        int []arr=stack.stream().mapToInt(Integer::intValue)
+                  .toArray();
+        Arrays.sort(arr);
+        return arr[0];
+    }
+}
