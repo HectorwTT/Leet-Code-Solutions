@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+     if(root==null)return new ArrayList<>();
+     if (root.left==null && root.right==null) {
+             List<Integer> rootlist = new ArrayList<>();
+             rootlist.add(root.val);
+             return rootlist;
+     }else {
+      if(root.left==null){
+       List <Integer> result = new ArrayList<>();
+       result.add(root.val);
+       List<Integer> rightlist = preorderTraversal(root.right);
+       result.addAll(rightlist);
+       return result;
+      }else if (root.right==null){
+        List <Integer> result = new ArrayList<>();
+        List<Integer> leftlist = preorderTraversal(root.left);
+        result.add(root.val);
+        result.addAll(leftlist);
+        return result;
+      }else{
+        List <Integer> leftlist=new ArrayList<>();
+        List <Integer> rightlist=new ArrayList<>();
+        if(root.left!=null)leftlist=preorderTraversal(root.left);  
+        if (root.right!=null)
+         rightlist= preorderTraversal(root.right);
+         List <Integer> result = new ArrayList<>();
+         result.add(root.val);
+         result.addAll(leftlist);
+         result.addAll(rightlist);
+         return result;
+        }
+     } 
+    }
+}
