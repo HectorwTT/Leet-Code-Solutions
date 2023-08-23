@@ -1,0 +1,26 @@
+class Solution {
+    public String simplifyPath(String path) {
+     String[] directories= path.split("/");
+     Stack<String> folders= new Stack<>();
+     for(int i=0;i<directories.length;i++){
+      String directory= directories[i];
+      if(directory.equals(".")||directory.equals("")) continue;
+      else if(directory.equals("..")){
+       if(!folders.isEmpty())folders.pop();
+      }
+      else folders.push("/"+directory);
+     }
+     List<String> listOfFolders=new ArrayList<>();
+     while(!folders.isEmpty()){
+      listOfFolders.add(folders.pop());
+     }
+     String [] paths= listOfFolders.stream()
+                            .toArray(String[]::new);
+     String newPath="";
+     for(int i=paths.length-1;i>=0;i--){
+      newPath+=paths[i];
+     }
+     if(newPath.equals(""))return"/";
+     return newPath;
+    }
+}
