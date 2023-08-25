@@ -1,0 +1,68 @@
+class Solution {
+    public ListNode addTwoNumbers(ListNode a, ListNode b) {
+     Queue<Integer> aqueue= new LinkedList<>();
+     Queue<Integer> bqueue= new LinkedList<>();
+     Queue<Integer>restqueue=new LinkedList<>();
+     int carryover=0;
+     ListNode result= null;
+     ListNode resultcurrent=null;
+     ListNode acurrent= a;
+     ListNode bcurrent=b;
+     while(acurrent!=null){
+      int acurrentval= acurrent.val;
+      aqueue.add(acurrentval);
+      acurrent=acurrent.next;
+     }
+     while(bcurrent!=null){
+      int bcurrentval= bcurrent.val;
+      bqueue.add(bcurrentval);
+      bcurrent=bcurrent.next;
+     }
+     while(!aqueue.isEmpty() &&!bqueue.isEmpty()){
+      int avalue= aqueue.remove();
+      int bvalue= bqueue.remove();
+      int total=avalue+bvalue+carryover;
+      int resultval=0;
+      if(total>=10){
+       resultval=total-10;
+       carryover=1;
+      }
+      else {
+       resultval=total;
+       carryover=0;
+      }
+      if(result==null){
+       result = new ListNode(resultval);
+       resultcurrent=result;
+      } else {
+        ListNode tmp = new ListNode(resultval);
+        resultcurrent.next= tmp;
+        resultcurrent= resultcurrent.next;
+      }
+    }
+    if(aqueue.isEmpty())restqueue=bqueue;
+    else restqueue=aqueue;
+    while(!restqueue.isEmpty()){
+     int restval= restqueue.remove();
+     int total=restval+carryover;
+     if(total>=10){
+      total-=10;
+      carryover=1;
+     }else{
+     carryover=0;
+    }
+        ListNode tmp = new ListNode(total);
+        resultcurrent.next= tmp;
+        resultcurrent= resultcurrent.next;
+      
+  }
+  if(result.val==0 ||carryover==1){
+   if(carryover==1){
+    ListNode tmp= new ListNode(1);
+    resultcurrent.next=tmp;
+   }
+   
+ }
+ return result;
+}
+}
