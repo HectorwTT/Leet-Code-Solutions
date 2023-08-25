@@ -1,0 +1,61 @@
+class Solution {
+    public ListNode addTwoNumbers(ListNode a, ListNode b) {
+     Stack<Integer> astack= new Stack<>();
+     Stack<Integer> bstack= new Stack<>();
+     Stack<Integer>reststack=new Stack<>();
+     int carryover=0;
+     ListNode result= null;
+     ListNode acurrent= a;
+     ListNode bcurrent=b;
+     while(acurrent!=null){
+      int acurrentval= acurrent.val;
+      astack.push(acurrentval);
+      acurrent=acurrent.next;
+     }
+     while(bcurrent!=null){
+      int bcurrentval= bcurrent.val;
+      bstack.push(bcurrentval);
+      bcurrent=bcurrent.next;
+     }
+     while(!astack.isEmpty() &&!bstack.isEmpty()){
+      int avalue= astack.pop();
+      int bvalue= bstack.pop();
+      int total=avalue+bvalue+carryover;
+      int resultval=0;
+      if(total>=10){
+       resultval=total-10;
+       carryover=1;
+      }
+      else {
+       resultval=total;
+       carryover=0;
+      }
+      ListNode resultnext=result;
+      result = new ListNode(resultval);
+      result.next=resultnext;
+     }
+     if(astack.isEmpty())reststack=bstack;
+     else reststack=astack;
+     while(!reststack.isEmpty()){
+      int restval= reststack.pop();
+      int total=restval+carryover;
+      if(total>=10){
+       total-=10;
+       carryover=1;
+      }else{
+      carryover=0;
+      }
+      ListNode resultnext=result;
+      result= new ListNode(total);
+      result.next= resultnext;
+     }
+     if(result.val==0 ||carryover==1){
+      if(carryover==1){
+       ListNode resultnext= result;
+       result= new ListNode(1);
+       result.next=resultnext;
+      }
+     }
+     return result;
+    }
+}
