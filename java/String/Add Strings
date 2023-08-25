@@ -1,0 +1,46 @@
+class Solution {
+    public String addStrings(String a, String b) {
+     Stack<Integer> astack= new Stack<>();
+     Stack<Integer> bstack= new Stack<>();
+     Stack<Integer> reststack= new Stack<>();
+     String result="";
+     int carryover=0;
+     for(int i=0;i<a.length();i++){
+      char ch= a.charAt(i);
+      int chval= ch-48;
+      astack.push(chval);
+     }
+     for(int i=0;i<b.length();i++){
+      char ch= b.charAt(i);
+      int chval= ch-48;
+      bstack.push(chval);
+     }
+     while(!astack.isEmpty() && !bstack.isEmpty()){
+      int aval=astack.pop();
+      int bval=bstack.pop();
+      int total=aval+bval+carryover;
+      if(total>=10){
+        total-=10;
+        carryover=1;
+      }else{
+        carryover=0;
+      }
+      result= total+result;
+     }
+     if(astack.isEmpty())reststack= bstack;
+     else reststack=astack;
+     while(!reststack.isEmpty()){
+       int restval= reststack.pop();
+       int total= restval+carryover;
+       if(total>=10){
+         total-=10;
+         carryover=1;
+       }else {
+         carryover=0;
+       }
+       result=total+result;
+     }
+     if(carryover==1) result="1"+result;
+     return result;
+    }
+}
