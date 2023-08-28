@@ -1,0 +1,13 @@
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+     int [] lengths= new int[nums.length];
+     for(int i=0;i<lengths.length;i++)lengths[i]=1;
+     for(int i=1;i<nums.length;i++){
+      for(int j=0;j<i;j++){
+       if(nums[j]<nums[i] && lengths[i]<=lengths[j]) lengths[i]=lengths[j]+1;
+      }
+     }
+     Arrays.sort(lengths);
+     return lengths[lengths.length-1];
+    }
+}
