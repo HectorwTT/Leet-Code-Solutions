@@ -1,0 +1,67 @@
+class Solution {
+    public List<String> letterCombinations(String digits) {
+        digits= digits.toLowerCase();
+        if(digits.equals("")) return new ArrayList<>();
+        else{
+         HashMap<Character,List<String>> letters = new HashMap<>();
+         List<String> two= new ArrayList<>();
+         two.add("a");
+         two.add("b");
+         two.add("c");
+         List<String> three= new ArrayList<>();
+         three.add("d");
+         three.add("e");
+         three.add("f");
+         List<String> four= new ArrayList<>();
+         four.add("g");
+         four.add("h");
+         four.add("i");
+         List<String> five= new ArrayList<>();
+         five.add("j");
+         five.add("k");
+         five.add("l");
+         List<String> six= new ArrayList<>();
+         six.add("m");
+         six.add("n");
+         six.add("o");
+         List<String> seven= new ArrayList<>();
+         seven.add("p");
+         seven.add("q");
+         seven.add("r");
+         seven.add("s");
+         List<String> eight= new ArrayList<>();
+         eight.add("t");
+         eight.add("u");
+         eight.add("v");
+         List<String>nine= new ArrayList<>();
+         nine.add("w");
+         nine.add("x");
+         nine.add("y");
+         nine.add("z");
+         letters.put('2',two);
+         letters.put('3',three);
+         letters.put('4',four);
+         letters.put('5',five);
+         letters.put('6',six);
+         letters.put('7',seven);
+         letters.put('8',eight);
+         letters.put('9',nine);
+         if(digits.length()==1) return letters.get(digits.charAt(0));
+         else{
+          char first= digits.charAt(0);
+          List<String>combos=letters.get(first);
+          List<String> result = new ArrayList<>();
+          for(int i=0;i<combos.size();i++){
+           String digit=combos.get(i);
+           List<String>combos1 =letterCombinations(digits.substring(1));
+           for(int j=0;j<combos1.size();j++){
+               String combination1=combos1.get(j);
+               String newcombo=digit+combination1;
+               result.add(newcombo);
+           }
+          }
+          return result;
+         }
+        }
+    }
+}
