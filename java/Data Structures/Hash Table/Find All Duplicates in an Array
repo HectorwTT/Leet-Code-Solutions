@@ -1,0 +1,12 @@
+class Solution {
+    public List<Integer> findDuplicates(int[] nums) {
+     HashMap<Integer,Integer> duplicates= new HashMap<>();
+     List<Integer>numbers= new ArrayList<>();
+     for(int i=0;i<nums.length;i++){
+      int number=nums[i];
+      if(!duplicates.containsKey(number))duplicates.put(number,i);
+      else numbers.add(number);
+     }
+     return numbers;
+    }
+}
