@@ -1,0 +1,75 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+   public HashMap<Integer,List<Integer>> getRestOfTree(int level,TreeNode t){
+    int value= t.val;
+   List<Integer> root= new ArrayList<>();
+   root.add(value);
+   HashMap<Integer,List<Integer>> tree= new HashMap<>();
+   tree.put(level,root);
+   if(t.left ==null && t.right== null){
+      return tree;
+   } else{
+      int nextlevel =level+1;
+      if(t.left==null){
+         HashMap<Integer,List<Integer>> rightSubtree= getRestOfTree(nextlevel,t.right);
+         tree.putAll(rightSubtree);
+         return tree;
+      }else if(t.right==null){
+          HashMap<Integer,List<Integer>> leftSubtree= getRestOfTree(nextlevel,t.left);
+         tree.putAll(leftSubtree);
+         return tree;
+      }else{
+         HashMap<Integer,List<Integer>> leftSubtree= getRestOfTree(nextlevel, t.left);
+         HashMap<Integer,List<Integer>> rightSubtree= getRestOfTree(nextlevel, t.right);
+         HashMap<Integer,List<Integer>> bigTree;
+         HashMap<Integer,List<Integer>> smallTree;
+         if(rightSubtree.size()>= leftSubtree.size()){
+          bigTree=rightSubtree;
+          smallTree= leftSubtree;
+         }else{
+           smallTree= rightSubtree;
+           bigTree= leftSubtree;
+         }
+         for(Integer key:bigTree.keySet()){
+            if(smallTree.containsKey(key)){
+               List<Integer> bigTreeList = bigTree.get(key);
+               List<Integer>smallTreeList=smallTree.get(key);
+               bigTreeList.addAll(smallTreeList);
+               bigTree.replace(key,bigTreeList);
+            }
+         }
+         tree.putAll(bigTree);
+         return tree;
+      }
+   }
+}
+    public List<Integer> largestValues(TreeNode root) {
+      if(root==null)return new ArrayList<>();
+      HashMap<Integer,List<Integer>> tree = getRestOfTree(0,root);
+      List<Integer> maxValues= new ArrayList<>();
+      for(Integer key: tree.keySet()){
+       List<Integer> nodes= tree.get(key);
+       int max = nodes.get(0);
+       for(int i=1;i<nodes.size();i++){
+        int value= nodes.get(i);
+        if(value>max)max = value;
+       }
+       maxValues.add(max);
+      }
+    return maxValues;
+    }
+}
