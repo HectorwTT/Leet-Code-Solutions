@@ -1,0 +1,26 @@
+boolean isEqual(Tree<Integer>t1,Tree<Integer>t2){
+  if(t1==null && t2!=null) return false;
+  if(t1!=null && t2 ==null) return false;
+  if(t1==null && t2==null) return true;
+  if(t1.value != t2.value) return false;
+  else{
+    boolean areLeftEqual=isEqual(t1.left,t2.left);
+    boolean areRightEqual= isEqual(t1.right,t2.right);
+    return areLeftEqual &&areRightEqual;
+  }
+}
+List<Tree<Integer>> getLevelOrder(Tree<Integer>t){
+  List <Tree<Integer>> list = new ArrayList<Tree<Integer>>();
+    if (t == null ) return  null;
+    Queue <Tree<Integer>> queue = new LinkedList<Tree<Integer>>();
+    queue.offer(t);
+    while (!queue.isEmpty()){
+      Tree<Integer> current = queue.poll();
+      list.add(current);
+      Optional<Tree<Integer>> leftChOptional= Optional.ofNullable(current.left);
+      Optional<Tree<Integer>>rightChOptional=Optional.ofNullable(current.right);
+      if(leftChOptional.isPresent()) queue.offer(leftChOptional.get());
+      if(rightChOptional.isPresent())queue.offer(rightChOptional.get());
+      }
+      return list;
+}
