@@ -1,0 +1,29 @@
+class Solution {
+    public List<TreeNode> getAncestors(TreeNode root, TreeNode key) {
+        List<TreeNode> nodes= new ArrayList<>();
+        TreeNode current= root;
+        while(current !=null){
+            nodes.add(current);
+            if(current.val==key.val) return nodes;
+            else if(current.val>key.val) current= current.left;
+            else current= current.right;
+           
+        }
+        return new ArrayList<>();
+    }
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> pancestors= getAncestors(root,p);
+        List<TreeNode> qancestors= getAncestors(root,q);
+        List<TreeNode> biggerList;
+        if(qancestors.contains(p) && pancestors.contains(p)) return p;
+        if(qancestors.contains(q) &&pancestors.contains(q)) return q;
+        if(pancestors.size()>qancestors.size()) biggerList= pancestors;
+        else biggerList= qancestors;
+        for(int i=biggerList.size()-1;i>=0;i--){
+            TreeNode current= biggerList.get(i);
+            if(pancestors.contains(current) && qancestors.contains(current)) return current;
+        }
+        return null;
+
+    }
+}
