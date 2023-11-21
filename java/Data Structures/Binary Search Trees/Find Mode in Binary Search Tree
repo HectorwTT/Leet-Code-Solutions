@@ -1,0 +1,70 @@
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+         if(root==null)return new ArrayList<>();
+         if (root.left==null && root.right==null) {
+             List<Integer> rootlist = new ArrayList<>();
+             rootlist.add(root.val);
+             return rootlist;
+        }
+        else {
+            if(root.left==null){
+                List <Integer> result = new ArrayList<>();
+                result.add(root.val);
+                List<Integer> rightlist = inorderTraversal(root.right);
+                result.addAll(rightlist);
+                return result;
+            }
+            else if (root.right==null){
+                List <Integer> result = new ArrayList<>();
+                List<Integer> leftlist = inorderTraversal(root.left);
+                result.addAll(leftlist);
+                result.add(root.val);
+                return result;
+            }else{
+            List <Integer> leftlist=new ArrayList<>();
+            List <Integer> rightlist=new ArrayList<>();
+            if(root.left!=null)leftlist=inorderTraversal(root.left);  
+            if (root.right!=null)
+              rightlist= inorderTraversal(root.right);
+            List <Integer> result = new ArrayList<>();
+            result.addAll(leftlist);
+            result.add(root.val);
+            result.addAll(rightlist);
+            return result;
+            }
+        } 
+    }
+    public int[] findMode(TreeNode root) {
+        List<Integer> inorderList= inorderTraversal(root);
+        
+        int[] inorderArray = inorderList.stream()
+                            .mapToInt(Integer::intValue)
+                            .toArray();
+        HashMap<Integer,Integer> counts= new HashMap<>();
+        HashMap<Integer,List<Integer>> countsAndNumbers= new HashMap<>();
+        int maxCount=0;
+        for(int i=0;i<inorderArray.length;i++){
+           int number= inorderArray[i];
+           if(!counts.containsKey(number))counts.put(number,1);
+           else counts.replace(number,counts.get(number)+1);
+        }
+        for(Integer key:counts.keySet()){
+            int count = counts.get(key);
+            if(!countsAndNumbers.containsKey(count)){
+                List<Integer> numbers= new ArrayList<>();
+                numbers.add(key);
+                countsAndNumbers.put(count,numbers);
+            }else{
+                List<Integer> numbers = countsAndNumbers.get(count);
+                numbers.add(key);
+                countsAndNumbers.replace(count,numbers);
+            }
+            if(maxCount<count) maxCount=count;
+
+        }
+        List<Integer> modesList = countsAndNumbers.get(maxCount);
+        return modesList.stream()
+                            .mapToInt(Integer::intValue)
+                            .toArray();
+    }
+}
