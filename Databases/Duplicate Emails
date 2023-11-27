@@ -1,0 +1,3 @@
+select e.email from
+(select email,count(email) as number from person group by email)e
+where e.number>1;
