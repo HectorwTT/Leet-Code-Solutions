@@ -1,0 +1,48 @@
+class Solution {
+     public ListNode reverseKGroup(ListNode head, int k) {
+     ListNode current= head;
+     ListNode result=null;
+     ListNode resultCurrent=null;
+     Stack <Integer>nodes= new Stack<>();
+     int count=0;
+     while(current !=null){
+      while(count<k){
+        nodes.push(current.val);
+        current=current.next;
+        if(current==null)break;
+        count++;
+      }
+      if(current==null) break;
+      if(result==null){
+       result= new ListNode(nodes.pop());
+       resultCurrent= result;
+       resultCurrent.next= null;
+      }
+      while(!nodes.isEmpty()){
+        ListNode newnode= new ListNode(nodes.pop());
+        resultCurrent.next= newnode;
+        resultCurrent = resultCurrent.next;
+      }
+      count=0;
+    }
+      
+     if(nodes.size()%k!=0)Collections.reverse(nodes);
+     if(result==null){
+       result= new ListNode(nodes.pop());
+       resultCurrent= result;
+       resultCurrent.next= null;
+      }
+      while(!nodes.isEmpty()){
+       ListNode newnode= new ListNode(nodes.pop());
+       System.out.println(result.val);
+       resultCurrent.next= newnode;
+       resultCurrent = resultCurrent.next;
+      }
+     
+      return result;
+    }
+    public ListNode swapPairs(ListNode head) {
+        if(head==null || head.next==null) return head;
+        return reverseKGroup(head,2);
+    }
+}
