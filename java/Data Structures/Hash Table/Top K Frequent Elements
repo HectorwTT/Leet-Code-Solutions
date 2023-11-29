@@ -1,0 +1,38 @@
+class Solution {
+    public int[] topKFrequent(int[] nums, int k) {
+        HashMap<Integer,Integer> frequencies= new HashMap<>();
+        HashMap<Integer,List<Integer>> frequenciesGrouped= new HashMap<>();
+        List<Integer> resultsList= new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            int number= nums[i];
+            if(frequencies.containsKey(number)) 
+              frequencies.replace(number,frequencies.get(number)+1);
+            else frequencies.put(number,1);
+        }
+        int maxFrequency=0;
+        for(Integer key:frequencies.keySet()){
+            int frequency= frequencies.get(key);
+            if(frequency>maxFrequency) maxFrequency= frequency;
+            if(frequenciesGrouped.containsKey(frequency)){
+             List<Integer> frequenciesList= frequenciesGrouped.get(frequency);
+             frequenciesList.add(key);
+             frequenciesGrouped.replace(frequency,frequenciesList);
+            }else{
+              List<Integer> frequenciesList= new ArrayList<>();
+              frequenciesList.add(key);
+              frequenciesGrouped.put(frequency,frequenciesList);
+            }
+        }
+        while(resultsList.size()<k){
+          List<Integer> frequenciesList= frequenciesGrouped.get(maxFrequency);
+          if(frequenciesGrouped.containsKey(maxFrequency))resultsList.addAll(frequenciesList);
+          maxFrequency--;
+        }
+        while(resultsList.size()>k) resultsList.remove(resultsList.size()-1);
+        return resultsList.stream()
+                            .mapToInt(Integer::intValue)
+                            .toArray();
+
+
+    }
+}
