@@ -1,0 +1,9 @@
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+        String word1concat="";
+        String word2concat="";
+        for(int i=0;i<word1.length;i++) word1concat+=word1[i];
+        for(int i=0;i<word2.length;i++) word2concat+=word2[i];
+        return word1concat.equals(word2concat);
+    }
+}
