@@ -1,0 +1,90 @@
+class Solution {
+    public void merge(int[][] v, int[] ans, int l, int mid, int h)
+    {
+        int[][] t = new int[h - l + 1][2]; // temporary array for merging both halves
+        int i = l;
+        int j = mid + 1;
+        int k = 0;
+        while (i < mid + 1 && j <= h) {
+ 
+            // v[i][0] is greater than all
+            // the elements from j till h.
+            if (v[i][0] > v[j][0]) {
+                ans[v[i][1]] += (h - j + 1);
+                t[k][0] = v[i][0];
+                t[k][1] = v[i][1];
+                i++;
+            }
+            else {
+                t[k][0] = v[j][0];
+                t[k][1] = v[j][1];
+                j++;
+            }
+            k++;
+        }
+        // if any elements left in left array
+        while (i <= mid) {
+            t[k][0] = v[i][0];
+            t[k][1] = v[i][1];
+            k++;
+            i++;
+        }
+        // if any elements left in right array
+        while (j <= h) {
+            t[k][0] = v[j][0];
+            t[k][1] = v[j][1];
+            k++;
+            j++;
+        }
+        // putting elements back in main array in
+        // descending order
+        k = 0;
+        for (i = l; i <= h; i++, k++) {
+            v[i][0] = t[k][0];
+            v[i][1] = t[k][1];
+        }
+    }
+ 
+    public void mergesort(int[][] v, int[] ans, int i, int j)
+    {
+        if (i < j) {
+            int mid = (i + j) / 2;
+ 
+            // calling mergesort for left half
+            mergesort(v, ans, i, mid);
+ 
+            // calling mergesort for right half
+            mergesort(v, ans, mid + 1, j);
+ 
+            // merging both halves and generating answer
+            merge(v, ans, i, mid, j);
+        }
+    }
+ 
+    public int[] constructLowerArray(int[] arr, int n)
+    {
+ 
+        int[][] v = new int[n][2];
+        // inserting elements and corresponding index
+        // as pair
+        for (int i = 0; i < n; i++) {
+            v[i][0] = arr[i];
+            v[i][1] = i;
+        }
+ 
+        // answer array for keeping count
+        // initialized by 0,
+        int[] ans = new int[n];
+ 
+        // calling mergesort
+        mergesort(v, ans, 0, n - 1);
+ 
+        return ans;
+    }
+    public List<Integer> countSmaller(int[] nums) {
+     int [] newArray= constructLowerArray(nums,nums.length);
+     return  Arrays.stream(newArray)        
+                   .boxed()          
+                   .collect(Collectors.toList());
+    }
+}
