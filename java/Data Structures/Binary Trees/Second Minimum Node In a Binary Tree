@@ -1,0 +1,22 @@
+class Solution {
+    public List<Integer> getTraversal(TreeNode root){
+        if(root==null) return new ArrayList<>();
+        List<Integer> result= new ArrayList<>();
+        result.add(root.val);
+        List<Integer> leftresult= getTraversal(root.left);
+        List<Integer> rightresult= getTraversal(root.right);
+        result.addAll(leftresult);
+        result.addAll(rightresult);
+        return result;
+    }
+    public int findSecondMinimumValue(TreeNode root) {
+        List <Integer> preorder= getTraversal(root);
+        int[] preorderArray = preorder.stream().distinct()
+                            .mapToInt(Integer::intValue)
+                            .toArray();
+        Arrays.sort(preorderArray);
+        int distinctvals= (int)preorder.stream().distinct().count();
+        if(distinctvals==1)return -1;
+        else return preorderArray[1];
+    }
+}
