@@ -1,0 +1,16 @@
+class Solution {
+    public int numSquares(int n) {
+     int squareroot = (int)Math.floor(Math.pow(n,0.5));
+     int [][]minsquares = new int [squareroot+1][n+1];
+     for(int i=1;i<=squareroot;i++){
+      for(int j=1;j<=n;j++){
+          if(i==1)minsquares[i][j]= j/i;
+          else{
+            if(j<i*i)minsquares[i][j]=minsquares[i-1][j];
+            else minsquares[i][j]= Math.min(minsquares[i-1][j],minsquares[i][j-i*i]+1);
+          }
+      }
+     }
+     return minsquares[squareroot][n];
+    }
+}
