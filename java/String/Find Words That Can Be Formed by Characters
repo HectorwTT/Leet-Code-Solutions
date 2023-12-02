@@ -1,0 +1,38 @@
+class Solution {
+    public int countCharacters(String[] words, String chars) {
+        int total=0;
+        HashMap<Character,Integer> charsHMap= new HashMap<>();
+        for(int i=0;i<chars.length();i++){
+         char ch= chars.charAt(i);
+         if(!charsHMap.containsKey(ch)) charsHMap.put(ch,1);
+         else charsHMap.replace(ch,charsHMap.get(ch)+1);
+        }
+        for(int i=0;i<words.length;i++){
+         String word= words[i];
+         boolean allArePresent=true;
+         HashMap<Character,Integer> wordHMap= new HashMap<>();
+         for(int j=0;j<word.length();j++){
+            char ch= word.charAt(j);
+            if(!wordHMap.containsKey(ch)) wordHMap.put(ch,1);
+            else wordHMap.replace(ch,wordHMap.get(ch)+1);
+         }
+         for(Character key:wordHMap.keySet()){
+             if(!charsHMap.containsKey(key) ){
+                 allArePresent=false;
+                 break;
+             }else{
+                if(charsHMap.get(key)<wordHMap.get(key)){
+                    allArePresent=false;
+                    break;
+                }
+             }
+         }
+        if(allArePresent) {
+            System.out.println(word);
+            total+=word.length();
+        }
+
+        }
+        return total;
+    }
+}
