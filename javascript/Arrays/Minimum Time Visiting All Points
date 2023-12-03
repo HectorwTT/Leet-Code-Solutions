@@ -1,0 +1,24 @@
+var minTimeToVisitAllPoints = function(points) {
+        let ans = 0;
+        for(let i = 0 ; i < points.length-1; i++)
+        {
+            let first = 0;
+            let second = 0;
+            // Index (i, 0)
+            if (points[i][0] < 0 && points[i+1][0] < 0)
+                first = Math.abs( Math.abs(points[i][0]) - Math.abs(points[i+1][0]));
+            else if(points[i][0] < 0 || points[i+1][0] < 0)
+                first = Math.abs( Math.abs(points[i][0]) + Math.abs(points[i+1][0]));
+            else
+                first = Math.abs( Math.abs(points[i][0]) - Math.abs(points[i+1][0]));
+            // Index (i, 1)
+            if(points[i][1] < 0 && points[i+1][1] < 0)
+                second = Math.abs( Math.abs(points[i][1]) - Math.abs(points[i+1][1]));
+            else if(points[i][1] < 0 || points[i+1][1] < 0)
+                second = Math.abs( Math.abs(points[i][1]) + Math.abs(points[i+1][1]));
+            else
+                second = Math.abs( Math.abs(points[i][1]) - Math.abs(points[i+1][1]));
+            ans += Math.max(first,second);
+        }
+        return ans;
+};
