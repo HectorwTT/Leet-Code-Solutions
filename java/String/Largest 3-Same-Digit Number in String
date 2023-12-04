@@ -1,0 +1,17 @@
+class Solution {
+    public String largestGoodInteger(String num) {
+        int max=-1;
+        String result="";
+        for(int i=0;i<num.length()-2;i++){
+            String substring= num.substring(i,i+3);
+            long count=substring.chars().distinct().count();
+            if(count==1){
+                if(Integer.parseInt(substring)>max){
+                    max=Integer.parseInt(substring);
+                    result= substring;
+                }
+            }
+        }
+        return result;
+    }
+}
