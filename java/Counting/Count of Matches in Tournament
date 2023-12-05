@@ -1,0 +1,14 @@
+class Solution {
+    public int numberOfMatches(int n) {
+        int numberOfWinners=n;
+        int numberOfMatches=0;
+        int matches=n;
+        while(numberOfWinners!=1){
+         if(matches%2==0) numberOfMatches+=matches/2;
+         else numberOfMatches+=matches/2+1;
+         matches=matches/2;
+         numberOfWinners=numberOfWinners/2;
+        }
+        return numberOfMatches;
+    }
+}
