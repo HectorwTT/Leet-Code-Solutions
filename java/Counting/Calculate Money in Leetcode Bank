@@ -1,0 +1,15 @@
+class Solution {
+    public int totalMoney(int n) {
+       int total=0;
+       int day=0;
+       int money=1;
+       int moneyOnMonday=1;
+       while(day<n){
+           if(day%7==0) money=moneyOnMonday++;
+           else money++;
+           total +=money;
+           day++;
+       }       
+       return total;
+    }
+}
