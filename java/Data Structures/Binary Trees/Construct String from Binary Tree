@@ -1,0 +1,15 @@
+class Solution {
+    public String tree2str(TreeNode root) {
+      if(root==null)return "";
+      String result=""+root.val;
+      String leftChild= tree2str(root.left);
+      String rightChild= tree2str(root.right);
+     if(leftChild.equals("") && rightChild.equals("")) return result;
+     else if(leftChild.equals(""))
+      return result+"("+leftChild+")"+"("+rightChild+")";
+     else if  (rightChild.equals(""))
+      return result+"("+leftChild+")";
+     else 
+      return result+"("+leftChild+")"+"("+rightChild+")";
+    }
+}
