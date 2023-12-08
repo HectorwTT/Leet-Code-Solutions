@@ -1,0 +1,79 @@
+class Solution {
+    public TreeNode deleteNode(TreeNode t, int value) {
+     TreeNode current=t;
+     TreeNode previous=current;
+     while(current!=null){
+      int currentvalue= current.val;
+      if(currentvalue==value) break;
+      else if(value<currentvalue){
+       previous=current;
+       current=current.left; 
+      }
+      else{
+       previous=current;
+       current=current.right;
+      }
+     }
+    if(current !=null){
+     if(current==t){
+      if(t.left==null && t.right==null )return null;
+      else if(t.left==null) t= t.right;
+      else if(t.right==null) t=t.left;
+      else{
+      TreeNode currentptr= current.left;
+      TreeNode currentptrprev= null;
+      while(currentptr.right!=null){
+        currentptrprev=currentptr;
+        currentptr=currentptr.right;
+      } 
+        if(currentptr==current.left){
+          current.val=current.left.val;
+          current.left= currentptr.left;
+        }else{
+          if(currentptr.left==null){
+            current.val=currentptr.val;
+            currentptrprev.right=null;
+          }else{
+            current.val=currentptr.val;
+            currentptrprev.right=currentptr.left;
+          }
+        }
+      }
+    }
+    else if(current.left==null && current.right==null){
+      if(previous.left==current) previous.left=null;
+      else previous.right= null;
+    }else if(current.left!=null){
+      TreeNode currentptr= current.left;
+      TreeNode currentptrprev= null;
+      while(currentptr.right!=null){
+        currentptrprev=currentptr;
+        currentptr=currentptr.right;
+      } 
+      if(currentptr==current.left){
+          current.val=current.left.val;
+          current.left= currentptr.left;
+      }else{
+        if(currentptr.left==null){
+         current.val=currentptr.val;
+         currentptrprev.right=null;
+        }else{
+          current.val=currentptr.val;
+          currentptrprev.right=currentptr.left;
+        }
+      }
+      }else{
+        if(current.right==null){
+          if(previous.left==current)previous.left=null;
+          else previous.right=null;
+        }else{
+          current.val=current.right.val;
+          current.left= current.right.left;
+          current.right=current.right.right;
+        }
+      }
+    }
+    return t;  
+    }
+    
+}
