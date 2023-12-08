@@ -1,0 +1,56 @@
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length==0) return null;
+        List<List<Integer>> newList= new ArrayList<>();
+        ListNode resultListNode;
+        for(int i=0;i<lists.length;i++){
+         List<Integer> list= new ArrayList<>();
+         ListNode current= lists[i];
+         while(current !=null){
+           int value= current.val;
+           list.add(value);
+           current=current.next;
+         }
+         newList.add(list);
+        }
+        int[][] arr = newList.stream()
+                .map(l -> l.stream().mapToInt(Integer::intValue).toArray())
+                .toArray(int[][]::new);
+        List<Integer> result= mergeKArrays(arr);
+        if(result.size()==0) return null;
+        resultListNode= new ListNode (result.get(0).intValue());
+        ListNode current= resultListNode;
+        for(int i=1;i<result.size();i++){
+         int nextval= result.get(i).intValue();
+         ListNode tmp= new ListNode(nextval);
+         current.next=tmp;
+         current=current.next;
+        }
+        return resultListNode;
+    }
+    
+    public List<Integer> mergeKArrays(int[][] arrays) {
+     int[] firstUnused = new int[arrays.length];
+     List<Integer> result = new ArrayList<>();
+     int n = 0;
+     for (int i = 0; i < arrays.length; i++) {
+      n += arrays[i].length;
+     }
+     for (int i = 0; i < n; i++) {
+      int minIndex = -1;
+      int minValue = 0;
+      for (int j = 0; j < arrays.length; j++) {
+       if (firstUnused[j] < arrays[j].length) {
+        if (minIndex==-1 ||arrays[j][firstUnused[j]]<minValue) {
+          minIndex = j;
+          minValue = arrays[j][firstUnused[j]];
+        }
+       }
+      }
+      result.add(minValue);
+      firstUnused[minIndex]++;
+     }
+     return result;
+    }
+
+}
