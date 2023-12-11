@@ -1,0 +1,17 @@
+class Solution {
+    public int findSpecialInteger(int[] arr) {
+      int quarter= arr.length/4;
+      int prev= arr[0];
+      int count=1;
+      for(int i=1;i<arr.length;i++){
+       int curr=arr[i];
+       if(curr!= prev){
+         if(count> quarter) return prev;
+         count=1;
+       }else count++;
+       prev=curr;
+      }
+      if(count>quarter) return prev;
+      else return -1;
+    }
+}
