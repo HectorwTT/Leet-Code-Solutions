@@ -1,0 +1,32 @@
+class Solution {
+    public int numSpecial(int[][] mat) {
+        int total=0;
+        for(int i=0;i<mat.length;i++){
+         for(int j=0;j<mat[0].length;j++){
+             int num =mat[i][j];
+             int numZeroesInRow= findZeroesInRow(mat,i,j);
+             int numZeroesInColumns= findZeroesInColumn(mat,i,j);
+             
+             if(num==1 &&
+                numZeroesInRow==mat[i].length-1 
+                && numZeroesInColumns==mat.length-1)total++;
+                
+         }
+        }
+        return total;
+    }
+
+    public int findZeroesInRow(int[][]mat,int row,int column){
+        int total=0;
+        for(int j=0;j<mat[row].length;j++)
+          if(mat[row][j]==0)total++;
+        return total;  
+    }
+
+    public int findZeroesInColumn(int[][]mat,int row,int column){
+        int total=0;
+        for(int i=0;i<mat.length;i++)
+          if(mat[i][column]==0)total++;
+        return total;  
+    }
+}
