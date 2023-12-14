@@ -1,0 +1,14 @@
+class Solution {
+    public List<String> findRepeatedDnaSequences(String s) {
+      String[] strings= IntStream.rangeClosed(0, s.length() - 10)
+        .mapToObj(n -> s.substring(n, n + 10))
+        .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        .entrySet()
+        .stream()
+        .filter(e -> e.getValue() > 1)
+        .map(Map.Entry::getKey)
+        .sorted()
+        .toArray(String[]::new);  
+        return Arrays.asList(strings); 
+    }
+}
