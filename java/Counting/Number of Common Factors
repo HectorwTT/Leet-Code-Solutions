@@ -1,0 +1,9 @@
+class Solution {
+    public int commonFactors(int a, int b) {
+     int total=0;
+     for(int factor=1;factor<=a;factor++ ){
+      if(a %factor==0 && b%factor==0) total++;
+     }
+     return total;
+    }
+}
