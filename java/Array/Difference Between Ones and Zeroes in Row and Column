@@ -1,0 +1,41 @@
+class Solution {
+    public int[][] onesMinusZeros(int[][] grid) {
+        int [][] diff= new int [grid.length][grid[0].length];
+        HashMap<Integer,Integer> rowOneCounts= new HashMap<>();
+        HashMap<Integer,Integer> columnOneCounts= new HashMap<>();
+        for(int i=0;i<grid.length;i++){
+            int numOfOnes= getNumOfOnesInRow(grid,i);
+            rowOneCounts.put(i,numOfOnes);
+        }
+        for(int j=0;j<grid[0].length;j++){
+            int numOfColumns= getNumOfOnesInColumn(grid,j);
+            columnOneCounts.put(j,numOfColumns);
+        }
+        for(int i=0;i<grid.length;i++){
+            int numOfOnesInRow= rowOneCounts.get(i);
+            int numOfZeroesInRow= grid[i].length-numOfOnesInRow;
+            for(int j=0;j<grid[i].length;j++){
+             int numOfOnesInColumn= columnOneCounts.get(j);
+             int numOfZeroesInColumn= grid.length-numOfOnesInColumn;
+             diff[i][j]=numOfOnesInRow+numOfOnesInColumn-numOfZeroesInRow-numOfZeroesInColumn;
+            }
+        }
+        return diff;
+    }
+
+    public int getNumOfOnesInRow(int [][] grid,int row){
+        int total=0;
+        for(int j=0;j<grid[row].length;j++){
+            if(grid[row][j]==1) total++;
+        }
+        return total;
+    }
+
+     public int getNumOfOnesInColumn(int [][] grid,int column){
+        int total=0;
+        for(int i=0;i<grid.length;i++){
+            if(grid[i][column]==1) total++;
+        }
+        return total;
+    }
+}
