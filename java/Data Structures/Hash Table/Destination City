@@ -1,0 +1,26 @@
+class Solution {
+    public String destCity(List<List<String>> paths) {
+       HashMap<String,List<String>> fromAndTo = new HashMap<>();
+       List<String> destinations = new ArrayList<>();
+       for(int i=0;i<paths.size();i++){
+        List<String> path = paths.get(i);
+        String from = path.get(0);
+        String to= path.get(1);
+        if(fromAndTo.containsKey(from)){
+         List<String> dests= fromAndTo.get(from);
+         dests.add(to);
+         fromAndTo.replace(from,dests);
+        }else{
+          List<String> dests= new ArrayList<>();
+          dests.add(to);
+          fromAndTo.put(from,dests);
+        }
+        destinations.add(to);
+       } 
+       for(int i=0;i<destinations.size();i++){
+        String destination= destinations.get(i);
+        if(!fromAndTo.containsKey(destination)) return destination;
+       }
+       return"";
+    }
+}
