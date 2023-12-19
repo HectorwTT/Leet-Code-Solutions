@@ -1,0 +1,30 @@
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> result= new ArrayList<>();
+        List<List<Integer>> result1= new ArrayList<>();
+        List<Integer> first= new ArrayList<>();
+        first.add(1);
+        List<Integer> otherFirst= new ArrayList<>();
+        otherFirst.add(1);
+        result.add(first);
+        result1.add(otherFirst);
+        while(result.size()!=numRows){
+         List<Integer>currentList= result.get(result.size()-1);
+         List<Integer>currentList1= currentList;
+         int prev= currentList1.get(0);
+         List<Integer> next= new ArrayList<>();
+         currentList1.add(prev);
+         next.add(1);
+         for(int i=1;i<currentList1.size();i++){
+           int curr= currentList1.get(i);
+           int sum= prev+curr;
+           next.add(sum);
+           prev=curr;
+         }
+         result.add(next);
+        }
+        result.remove(result.size()-1);
+        result1.addAll(result);
+        return result1;
+    }
+}
