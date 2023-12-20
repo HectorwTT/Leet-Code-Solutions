@@ -1,0 +1,29 @@
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+      int[][] pathSums = triangle.stream()
+                .map(l -> l.stream().mapToInt(Integer::intValue).toArray())
+                .toArray(int[][]::new);
+      int[][]minPathSums=triangle.stream()
+                .map(l -> l.stream().mapToInt(Integer::intValue).toArray())
+                .toArray(int[][]::new);
+      for(int i=1;i<minPathSums.length;i++){
+        for(int j=0;j<minPathSums[i].length;j++){
+            minPathSums[i][j]=0;
+        }
+      }
+      for(int i=1;i<pathSums.length;i++){
+        for(int j=0;j<pathSums[i].length;j++){
+            if(j==0)minPathSums[i][j]=pathSums[i][j]+minPathSums[i-1][j];
+            else{
+            if(j>=minPathSums[i-1].length) minPathSums[i][j]= pathSums[i][j]
+                                            +minPathSums[i-1][minPathSums[i-1].length-1];
+            else minPathSums[i][j]= pathSums[i][j]+Math.min(minPathSums[i-1][j],
+                                                       minPathSums[i-1][j-1]);
+            }
+        }
+      }
+      int[] minPathSumLastRow= minPathSums[minPathSums.length-1];
+      Arrays.sort(minPathSumLastRow);
+      return minPathSumLastRow[0];
+    }
+}
