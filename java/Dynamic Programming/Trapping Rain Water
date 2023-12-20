@@ -1,0 +1,25 @@
+class Solution {
+    public int trap(int[] heights) {
+     int totalWater = 0;
+     int leftPointer = 0;
+     int rightPointer = heights.length - 1;
+     int leftBound = 0;
+     int rightBound = 0;
+     int[] water= new int[heights.length];
+     while(leftPointer<rightPointer){
+       if(heights[leftPointer]<=
+         heights[rightPointer]){
+          leftBound= Math.max(heights[leftPointer],
+                   leftBound);
+          totalWater+= leftBound-heights[leftPointer];
+          leftPointer++;        
+         }else{
+          rightBound=Math.max(heights[rightPointer],rightBound);
+          totalWater+=rightBound-heights[rightPointer];
+          rightPointer--; 
+         }
+     }
+     return totalWater;
+  }    
+    
+}
