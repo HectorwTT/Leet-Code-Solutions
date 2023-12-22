@@ -1,0 +1,29 @@
+class Solution {
+    public int maxScore(String s) {
+        int max=-1;
+        for(int i=1;i<s.length();i++){
+         int numOfZeroes=getZeroes(s.substring(0,i));
+         int numOfOnes= getOnes(s.substring(i));
+         int total=numOfZeroes+numOfOnes;
+         if(max<total)max=total;
+        }
+        return max;
+    }
+    public int getZeroes(String left){
+     int total=0;
+     for(int i=0;i<left.length();i++){
+      char ch= left.charAt(i);
+      if(ch=='0')total++;
+     }
+     return total;
+    }
+
+      public int getOnes(String right){
+     int total=0;
+     for(int i=0;i<right.length();i++){
+      char ch= right.charAt(i);
+      if(ch=='1')total++;
+     }
+     return total;
+    }
+}
