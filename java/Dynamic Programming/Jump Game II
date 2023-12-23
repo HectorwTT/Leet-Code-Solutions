@@ -1,0 +1,31 @@
+class Solution {
+    public int jump(int[] nums) {
+     int [] minJumps= new int[nums.length];
+     minJumps[nums.length-1]=0;
+     for(int i=nums.length-2;i>=0;i--){
+      if(nums[i]!=0){
+        if(nums.length-1-i<=nums[i])minJumps[i]=1;
+        else{
+         int jump=0;
+         List<Integer> list= new ArrayList<>();
+         while(jump<=nums[i]){
+          if(minJumps[i+jump]!=0){
+            minJumps[i]=1+ minJumps[i+jump];
+            list.add(minJumps[i]);
+          }
+          jump++;
+         }
+         if(list.size()!=0){
+          int minJump=list.get(0);
+          for(int j=1;j<list.size();j++){
+           int x= list.get(j);
+           if(x<minJump)minJump=x;
+          }
+          minJumps[i]=minJump;
+         }
+        }
+      }
+     }
+     return minJumps[0];
+    }
+}
