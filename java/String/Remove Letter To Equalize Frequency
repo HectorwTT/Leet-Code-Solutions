@@ -1,0 +1,46 @@
+class Solution {
+    public boolean equalFrequency(String word) {
+      HashMap<Character,Integer> counts= new HashMap<>();
+      HashMap<Integer,List<Character>>frequencies= new HashMap<>();
+      for(int i=0;i<word.length();i++){
+       char ch= word.charAt(i);
+       if(counts.containsKey(ch)){
+         counts.replace(ch,counts.get(ch)+1);
+       }else{
+         counts.put(ch,1);
+       }
+      }
+      for(Character key:counts.keySet()){
+        if(frequencies.containsKey(counts.get(key))){
+            List<Character> chars= frequencies.get(counts.get(key));
+            chars.add(key);
+            frequencies.replace(counts.get(key),chars);
+        }
+        else{
+             List<Character> chars= new ArrayList<>();
+            chars.add(key);
+            frequencies.put(counts.get(key),chars);
+
+        }
+      }
+      
+        if(counts.size()==1)return true;
+        else{
+         if(frequencies.size()==1 && frequencies.containsKey(1))return true;
+         else{
+             if(frequencies.size()!=2)return false;
+             else{
+              List<Integer> freqList= new ArrayList<>();
+              for(Integer key:frequencies.keySet()){
+                freqList.add(key);
+              }
+              int [] freqarr= freqList.stream().mapToInt(Integer::intValue)
+                            .toArray();
+              Arrays.sort(freqarr);
+              return (freqarr[0]==1 && frequencies.get(freqarr[0]).size()==1)
+                     ||(freqarr[1]-freqarr[0]==1 && frequencies.get(freqarr[1]).size()==1);
+             }
+         }
+        }
+    }
+}
