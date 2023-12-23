@@ -1,0 +1,22 @@
+class Solution {
+    public boolean canJump(int[] nums) {
+     boolean[] canReachEnd= new boolean[nums.length];
+     canReachEnd[nums.length-1]=true;
+     for(int i=nums.length-2;i>=0;i--){
+      if(nums[i]!=0){
+        if(nums.length-1-i<=nums[i])canReachEnd[i]=true;
+        else{
+         int jump=0;
+         while(jump<=nums[i]){
+          if(canReachEnd[i+jump]){
+              canReachEnd[i]=true;
+              break;
+          }
+          jump++;
+         }
+        }
+      }
+     }
+     return canReachEnd[0];
+    }
+}
