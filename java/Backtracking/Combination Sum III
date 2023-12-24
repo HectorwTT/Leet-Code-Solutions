@@ -1,0 +1,33 @@
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+     int []nums={1,2,3,4,5,6,7,8,9};
+     List<List<Integer>> result= new ArrayList<>();
+     List<List<Integer>> subsets= subsetsWithTargetSum(nums,n);
+     for(int i=0;i<subsets.size();i++){
+      List<Integer> subset= subsets.get(i);
+      if(subset.size()==k) result.add(subset);
+     }    
+     return result;
+    }
+    public List<List<Integer>> subsetsWithTargetSum(int[] nums, int targetSum) {
+     List<List<Integer>> result = new ArrayList<>();
+     backtrack(nums, targetSum, 0, new ArrayList<Integer>(), result);
+     return result;
+    }
+
+    private void backtrack(int[] nums, int targetSum, int index, 
+                         List<Integer> subset,List<List<Integer>> result) {
+     if (targetSum == 0) {
+      result.add(new ArrayList<>(subset));
+      return;
+     }
+     for (int i = index; i < nums.length; i++){
+      int num = nums[i];
+      if(targetSum - num >= 0) {
+       subset.add(num);
+       backtrack(nums, targetSum - num, i + 1, subset, result);
+       subset.remove(subset.size() - 1);
+      }
+     }
+    }
+}
