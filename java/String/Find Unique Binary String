@@ -1,0 +1,43 @@
+class Solution {
+    public String findDifferentBinaryString(String[] nums) {
+     List<Integer> numbers= new ArrayList<>();
+     int maxNumber=(int)Math.pow(2,nums.length);
+     int current=0;
+     for(int i=0;i<nums.length;i++){
+      int number= getNumber(nums[i]);
+      numbers.add(number);
+     }        
+     while(current<maxNumber){
+      if(!numbers.contains(current)){
+        String binary=getBinary(current);
+        if(binary.length()!=nums.length){
+         String zeroes= "0".repeat(nums.length-binary.length());
+         binary=zeroes+binary;
+        }
+        return binary;
+      } 
+      current++;
+     }
+     return "";
+    }
+    int getNumber(String binary){
+     int total=0;
+     for(int i=0;i<binary.length();i++){
+      char ch=binary.charAt(i);
+      if(ch=='1'){
+        int value=(int)Math.pow(2,binary.length()-1-i);
+        total+=value;
+      }
+      
+     }
+     return total;
+    }
+    String getBinary(int number){
+     String binary="";
+     while(number!=0){
+      binary=number%2+binary;
+      number/=2;
+     }
+     return binary;
+    }
+}
