@@ -1,0 +1,24 @@
+class Solution {
+    public ListNode swapNodes(ListNode head, int k) {
+     List<Integer>  values= new ArrayList<>();
+     ListNode current=head;
+     while(current!=null){
+      int value= current.val;
+      values.add(value);
+      current=current.next;
+     }
+     int [] arr= values.stream().mapToInt(Integer::intValue).toArray();
+     int tmp=arr[k-1];
+     int tmp1=arr[arr.length-k];
+     arr[k-1]=tmp1;
+     arr[arr.length-k]=tmp;
+     ListNode newHead= new ListNode(arr[0]);
+     ListNode current1=newHead;
+     for(int i=1;i<arr.length;i++){
+      ListNode tmp2=new ListNode(arr[i]);
+      current1.next=tmp2;
+      current1=current1.next;
+     }
+     return newHead;
+    }
+}
