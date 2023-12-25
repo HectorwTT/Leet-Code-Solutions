@@ -1,0 +1,17 @@
+class Solution {
+    public int distanceTraveled(int mainTank, int additionalTank) {
+     final int distancePerLiter=10;
+     int total=0;
+     int prevMainTank=mainTank;
+     while(mainTank!=0){
+      total+=distancePerLiter;
+      mainTank--;
+      if(prevMainTank-mainTank==5 && additionalTank!=0){
+        mainTank++;
+        additionalTank--;
+        prevMainTank=mainTank;
+      }
+     }
+     return total;
+    }
+}
