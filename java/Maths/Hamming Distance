@@ -1,0 +1,29 @@
+class Solution {
+    public int hammingDistance(int x, int y) {
+     String xstr=getBinary(x);
+     String ystr=getBinary(y);
+     int total=0;
+     if(xstr.length()>=ystr.length()){
+        String zeroes= "0".repeat(xstr.length()-ystr.length());
+        ystr=zeroes+ystr;
+     }else{
+        String zeroes="0".repeat(ystr.length()-xstr.length());
+        xstr=zeroes+xstr;
+     }
+     for(int i=0;i<xstr.length();i++){
+      char xchar=xstr.charAt(i);
+      char ychar=ystr.charAt(i);
+      if(xchar!=ychar)total++;
+     }
+     return total;
+    }
+
+    String getBinary(int number){
+     String binary="";
+     while(number!=0){
+      binary= number%2+binary;
+      number/=2;
+     }
+     return binary;
+    }
+}
