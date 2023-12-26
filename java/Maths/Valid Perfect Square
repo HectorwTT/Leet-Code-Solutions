@@ -1,0 +1,7 @@
+class Solution {
+    public boolean isPerfectSquare(int num) {
+     double squareRoot= Math.pow(num,0.5);
+     int squareRootFloor= (int)Math.floor(squareRoot);
+     return squareRootFloor*squareRootFloor==num;
+    }
+}
