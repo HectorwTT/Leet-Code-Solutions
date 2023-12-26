@@ -1,0 +1,74 @@
+✅☑Beats 100% Users || [C++/Java/Python/JavaScript] || DP || EXPLAINED🔥
+
+MarkSPhilip31
+100 Days Badge 2023
+1382
+0
+8 minutes ago
+C++
+Java
+Python
+Python3
+3+
+PLEASE UPVOTE IF IT HELPED
+Screenshot 2023-12-24 062247.png
+
+Approaches
+(Also explained in the code)
+
+numRollsToTarget initializes a 2D DP array for memoization and calls the recursive function recursion with the initial parameters.
+
+recursion is a recursive function that calculates the number of ways to obtain the target sum using 'n' dice rolls and 'k' faces on each die.
+
+Base Cases:
+
+If the target sum is reached with 'n' dice rolls (target == 0 && n == 0), there's only one way to reach it, return 1.
+If 'n' becomes 0 or the target reaches 0 (n == 0 || target <= 0), no further rolls can be made, return 0.
+Memoization:
+
+Check if the result for the current state is already calculated. If so, return the stored result from the DP array.
+Calculation:
+
+For each possible face value (from 1 to 'k'), calculate the ways to achieve the target sum by recursively calling the function for 'n-1' dice rolls and subtracting the face value from the target sum.
+Store Result:
+
+Store the computed result in the DP array for future reference.
+Return the Result:
+
+Return the computed result modulo '10^9 + 7' to handle large values.
+Complexity
+Time complexity:
+O(n∗target∗k)O(n * target * k)O(n∗target∗k)
+(where 'n' is the number of dice, 'k' is the number of faces, and 'target' is the target sum.)
+
+Space complexity:
+** O(n∗target)O(n * target)O(n∗target)**
+(the space used by the memoization table (dp).)
+
+Code
+import java.util.Arrays;
+
+class Solution {
+    final int mod = (int) Math.pow(10, 9) + 7;
+
+    public int numRollsToTarget(int n, int k, int target) {
+        int[][] dp = new int[n + 1][target + 1];
+        for (int[] d : dp) {
+            Arrays.fill(d, -1);
+        }
+        return recursion(dp, n, k, target);
+    }
+
+    private int recursion(int[][] dp, int n, int k, int target) {
+        if (target == 0 && n == 0) return 1;
+        if (n == 0 || target <= 0) return 0;
+
+        if (dp[n][target] != -1) return (int) (dp[n][target] % mod);
+        int ways = 0;
+        for (int i = 1; i <= k; i++) {
+            ways = (ways + recursion(dp, n - 1, k, target - i)) % mod;
+        }
+        dp[n][target] = ways % mod;
+        return dp[n][target];
+    }
+}
