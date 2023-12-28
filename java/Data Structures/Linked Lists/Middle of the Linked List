@@ -1,0 +1,12 @@
+class Solution {
+    public ListNode middleNode(ListNode head) {
+     List<ListNode> listOfNodes= new ArrayList<>();
+     ListNode current=head;
+     while(current!=null){
+      listOfNodes.add(current);
+      current=current.next;
+     }
+     if(listOfNodes.size()%2==0) return listOfNodes.get(listOfNodes.size()/2);
+     else return listOfNodes.get((listOfNodes.size()-1)/2);
+    }
+}
