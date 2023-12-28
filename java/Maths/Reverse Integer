@@ -1,0 +1,26 @@
+class Solution {
+    public int reverse(int x) {
+     final int LOWER= (int)Math.pow(-2,31);
+     final int UPPER= (int)Math.pow(2,31)-1;
+     String xstr=""+x;
+     if(xstr.charAt(0)=='-')xstr=xstr.substring(1);
+     StringBuffer sb= new StringBuffer(xstr);
+     String xstr1=sb.reverse().toString();
+     try{
+       int x1= Integer.parseInt(xstr1);
+       if(x!=Integer.parseInt(xstr)){
+        x1=-1*x1;
+        System.out.println(x1);
+        if(x1<LOWER)return 0;
+        else return x1;
+      }else {
+        if(x1>UPPER)return 0;
+        else return x1;
+       }   
+     }
+     catch(Exception e){
+      return 0;
+     }
+    
+    }
+} 
