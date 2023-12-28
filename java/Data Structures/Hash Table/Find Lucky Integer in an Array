@@ -1,0 +1,17 @@
+class Solution {
+    public int findLucky(int[] arr) {
+      int maxNumber=-1;
+      HashMap<Integer,Integer> frequencies= new HashMap<>();
+      for(int i=0;i<arr.length;i++){
+       if(!frequencies.containsKey(arr[i]))frequencies.put(arr[i],1);
+       else frequencies.replace(arr[i],frequencies.get(arr[i])+1);
+      }
+      for(Integer key:frequencies.keySet()){
+       int frequency=frequencies.get(key);
+       if(frequency==key){
+        if(maxNumber<key)maxNumber=key;
+       } 
+      }
+      return maxNumber;
+    }
+}
