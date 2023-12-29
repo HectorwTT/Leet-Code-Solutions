@@ -1,0 +1,26 @@
+class Solution {
+    public String[] findRestaurant(String[] list1, String[] list2) {
+      HashMap<Integer,List<String>> indexSums= new HashMap<>();
+      List<String>listTwo= Arrays.stream(list2).collect(Collectors.toList());
+      int minSum=2001;
+      for(int index1= 0;index1<list1.length;index1++){
+        String word1= list1[index1];
+        if(listTwo.contains(word1)){
+         int sum=index1+ listTwo.indexOf(word1);
+         if(sum<minSum)minSum=sum;
+         if(indexSums.containsKey(sum)){
+            List<String> list= indexSums.get(sum);
+            list.add(word1);
+            indexSums.replace(sum,list);
+         }else{
+            List<String> list= new ArrayList<>();
+            list.add(word1);
+            indexSums.put(sum,list);  
+         }
+
+        }
+      }
+      List<String> result= indexSums.get(minSum);
+      return result.toArray(new String[0]);
+    }
+}
