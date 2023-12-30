@@ -1,0 +1,33 @@
+class Solution {
+    public List<String> letterCasePermutation(String s) {
+     List<String> result= new ArrayList<>();
+     backtrack(result,0,s);
+     return result.stream().distinct().collect(Collectors.toList());
+    }
+    public void backtrack(List<String>strings,int index,String s){
+     if(index==s.length()){
+      strings.add(s);
+      return;
+     }
+     for(int i=index;i<s.length();i++){
+      char ch= s.charAt(i);
+      if(ch>=65 && ch<=90){
+        String chstr=""+ch;
+        chstr=chstr.toLowerCase();
+        String newstr="";
+        if(i+1<s.length()) newstr=s.substring(0,i)+chstr+s.substring(i+1);
+        else newstr=s.substring(0,i)+chstr;
+        backtrack(strings,i+1,newstr);
+      }else if(ch>=97 && ch<=122){
+         String chstr=""+ch;
+        chstr=chstr.toUpperCase();
+        String newstr="";
+        if(i+1<s.length()) newstr=s.substring(0,i)+chstr+s.substring(i+1);
+        else newstr=s.substring(0,i)+chstr;
+        backtrack(strings,i+1,newstr); 
+      } 
+      backtrack(strings,i+1,s);
+     }
+
+    }
+}
