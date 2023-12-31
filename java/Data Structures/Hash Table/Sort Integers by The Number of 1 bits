@@ -1,0 +1,29 @@
+class Solution {
+    public int[] sortByBits(int[] arr) {
+     HashMap<Integer,List<Integer>> bitcounts= new HashMap<>();
+     List<Integer> nums= new ArrayList<>();
+     List<Integer>result= new ArrayList<>();
+     for(int i=0;i<arr.length;i++){
+        int bitcount= Integer.bitCount(arr[i]);
+        if(bitcounts.containsKey(bitcount)){
+         List<Integer> numbers= bitcounts.get(bitcount);
+         numbers.add(arr[i]);
+         numbers.sort(null);
+         bitcounts.replace(bitcount,numbers);
+         nums.add(bitcount);
+        }else{
+          List<Integer> numbers= new ArrayList<>();
+          numbers.add(arr[i]);
+          numbers.sort(null);
+          bitcounts.put(bitcount,numbers);
+          nums.add(bitcount);
+        }
+     }
+     List<Integer> newnums= nums.stream().distinct().sorted().collect(Collectors.toList());
+     for(int i=0;i<newnums.size();i++){
+      List<Integer> bitcountsList= bitcounts.get(newnums.get(i));
+      result.addAll(bitcountsList);
+     }
+     return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
