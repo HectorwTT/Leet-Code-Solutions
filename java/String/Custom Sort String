@@ -1,0 +1,16 @@
+class Solution {
+    public String customSortString(String order, String s) {
+      String newstr ="";
+      for(int i=0;i<order.length();i++){
+       char c = order.charAt(i);
+       int slength= s.length();
+       if(s.contains(""+c)){
+           s = s.replaceAll(""+c,"");
+           String str = (""+c).repeat(slength-s.length());
+           newstr +=str;
+       }
+      }
+      newstr +=s;
+      return newstr;  
+    }
+}
