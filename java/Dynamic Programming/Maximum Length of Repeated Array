@@ -1,0 +1,37 @@
+class Solution {
+    public int findLength(int[] nums1, int[] nums2) {
+     int [] shorterLength;
+     int [] longerLength;
+     if(nums1.length<=nums2.length){
+      shorterLength=nums1;
+      longerLength=nums2;
+     }else{
+      shorterLength=nums2;
+      longerLength=nums1;
+     } 
+     int maxlength=0;
+     int [][] lengths= new int[shorterLength.length][longerLength.length];
+     for(int j=0;j<lengths[0].length;j++){
+          if(shorterLength[0]==longerLength[j]){
+           lengths[0][j]=1;
+           maxlength=1;
+          }
+      
+     }
+     for(int i=1;i<lengths.length;i++){
+      for(int j=0;j<lengths[0].length;j++){
+         int numi=shorterLength[i];
+         int numj= longerLength[j];
+         if(numi==numj){
+             if(j!=0){
+                 if(lengths[i-1][j-1]!=0) lengths[i][j]= lengths[i-1][j-1]+1;
+                 else lengths[i][j]=1;
+             }
+             else lengths[i][j]=1;
+             if(lengths[i][j]>maxlength)maxlength=lengths[i][j];
+         }
+      }
+     }
+     return maxlength;
+    }
+}
