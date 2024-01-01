@@ -1,0 +1,24 @@
+class Solution {
+    public int networkDelayTime(int[][] times, int n, int K) {
+        //uses floyd warshall
+        double[][] graph = new double[n + 1][n + 1];
+        for(int i = 1; i <= n; i++) Arrays.fill(graph[i], Double.POSITIVE_INFINITY);
+        for(int i = 1; i <= n; i++) graph[i][i] = 0;
+        for(int[] edge: times) graph[edge[0]][edge[1]] = edge[2];
+        for(int k = 1; k <= n; k++) {
+            for(int i = 1; i <= n; i++) {
+                for(int j = 1; j<=n; j++) {
+                    if(graph[i][j] > graph[i][k] + graph[k][j]) 
+                      graph[i][j] = graph[i][k] + graph[k][j];
+                }
+            }
+        }
+
+        double max = Double.MIN_VALUE;
+        for(int i = 1; i <= n; i++) {
+            if(graph[K][i] == Double.POSITIVE_INFINITY) return -1;
+            max = Math.max(max, graph[K][i]);
+        }
+        return (int)max;        
+    }
+}
