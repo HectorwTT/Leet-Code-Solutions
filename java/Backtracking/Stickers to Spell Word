@@ -1,0 +1,57 @@
+class Solution {
+    public int minStickers(String[] stickers, String target) {
+        HashMap<String, HashMap<Character, Integer>> map =new HashMap<>();
+        for(String str:stickers)
+        {
+            HashMap<Character, Integer>x = new HashMap<>();
+            
+            for(int i=0;i<str.length();i++)
+            {
+                char ch = str.charAt(i);
+                if(!x.containsKey(ch)) x.put(ch, 1);
+                else x.put(ch, x.get(ch)+1);
+            }
+            map.put(str, x);
+        }
+    
+    
+        int res =  recursion(stickers, target, new HashMap<>(), map);
+        return res<1 || res>=Integer.MAX_VALUE ? -1 : res;
+    }
+    
+    
+    int recursion(String[]stick, String target, HashMap<String, Integer>dp, HashMap<String, HashMap<Character, Integer>> map)
+    {
+        if(target.length()==0)return 0;
+        if(dp.containsKey(target))return dp.get(target);
+        
+        int res = Integer.MAX_VALUE;
+        for(String str: map.keySet())
+        {
+            HashMap<Character, Integer>x = new HashMap(map.get(str));
+            String temp = target;
+            
+            char ch = temp.charAt(0);
+            if(x.containsKey(ch))
+            {
+                for(int i=0;i<temp.length();i++)
+                {
+                    ch = temp.charAt(i);
+                    if(x.containsKey(ch) && x.get(ch)>0)
+                    {
+                        x.put(ch, x.get(ch)-1);
+                        temp = temp.substring(0,i)+temp.substring(i+1);
+                        i--;
+                    }
+                }
+                if(temp.length()!=target.length())
+                {
+                    
+                    res = Math.min( res,1+ recursion(stick, temp, dp, map));  
+                    dp.put(target, res );
+                }
+            }
+        }
+        return res;
+    }
+}
