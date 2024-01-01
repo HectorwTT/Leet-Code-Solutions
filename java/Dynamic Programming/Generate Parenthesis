@@ -1,0 +1,35 @@
+class Solution {
+    public List<String> generateParenthesis(int n) {
+        ArrayList<ArrayList<String>> dp=new ArrayList();
+        dp.add(new ArrayList<String>());
+        dp.add(new ArrayList<String>());
+        dp.get(1).add("()");
+        for(int k=2;k<=n;k++){
+            int i=1;
+            int j=dp.size()-1;
+            HashSet<String> result=new HashSet();
+            while(i<=j){
+                ArrayList<String> list1=dp.get(i);
+                ArrayList<String> list2=dp.get(j);
+                for(int l=0;l<list1.size();l++){
+                    for(int m=0;m<list2.size();m++){
+                        result.add(list1.get(l)+list2.get(m));
+                        result.add(list2.get(m)+list1.get(l));
+                    }
+                }
+                i++;
+                j--;
+            }
+            j=dp.size()-1;
+            ArrayList<String> list2=dp.get(j);
+            for(int m=0;m<list2.size();m++){
+                result.add("("+list2.get(m)+")");
+            }
+            ArrayList<String> resultList=new ArrayList();
+            for(String str:result)
+                resultList.add(str);
+            dp.add(resultList);
+        }
+        return dp.get(n);
+    }
+}
