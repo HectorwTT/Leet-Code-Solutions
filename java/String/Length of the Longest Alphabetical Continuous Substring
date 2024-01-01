@@ -1,0 +1,14 @@
+class Solution {
+    public int longestContinuousSubstring(String s) {
+       int maxLength=1;
+       int length=1;
+       for(int i=1;i<s.length();i++){
+         int diff= s.charAt(i)-s.charAt(i-1);
+         if(diff==1){
+          length++;
+          if(length>maxLength)maxLength=length;
+         }else{length=1;}
+       }
+       return maxLength; 
+    }
+}
