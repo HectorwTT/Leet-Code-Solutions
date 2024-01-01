@@ -1,0 +1,26 @@
+class Solution {
+    public int findPairs(int[] nums, int k) {
+     HashMap<Integer,Integer> numbers= new HashMap<>();
+     List<List<Integer>> list= new ArrayList<>();
+     for(int i=0;i<nums.length;i++){
+      int addKToCurr=nums[i]+k;
+      int minusKFromCurr=nums[i]-k;
+      if(numbers.containsKey(addKToCurr)){
+       List<Integer> numbers1= new ArrayList<>();
+       numbers1.add(addKToCurr);
+       numbers1.add(nums[i]);
+       numbers1.sort(null);
+       if(!list.contains(numbers1))list.add(numbers1);
+      }
+      if(numbers.containsKey(minusKFromCurr)){
+       List<Integer>numbers1=new ArrayList<>();
+       numbers1.add(minusKFromCurr);
+       numbers1.add(nums[i]);
+       numbers1.sort(null);
+       if(!list.contains(numbers1))list.add(numbers1);
+      }
+      if(!numbers.containsKey(nums[i]))numbers.put(nums[i],1);
+     }
+     return list.size();
+    }
+}
