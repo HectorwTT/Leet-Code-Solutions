@@ -1,0 +1,21 @@
+class Solution {
+    public List<List<Integer>> findMatrix(int[] nums) {
+     List<List<Integer>> result= new ArrayList<>();
+     boolean[]wasAdded= new boolean [nums.length];
+     int total=0;
+     while(total!=nums.length){
+      List<Integer> list= new ArrayList<>();
+     for(int i=0;i<nums.length;i++){
+      if(!wasAdded[i]){
+        if(!list.contains(nums[i])){
+          wasAdded[i]=true;
+          list.add(nums[i]);
+          total++;
+        }
+      }
+     }
+     result.add(list);
+     }
+     return result;
+    }
+}
