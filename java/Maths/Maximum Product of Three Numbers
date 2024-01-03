@@ -1,0 +1,26 @@
+class Solution {
+    public int maximumProduct(int[] nums) {
+        Arrays.sort(nums);
+        if(nums[0]>=0) return nums[nums.length-1]* nums[nums.length-2]*nums[nums.length-3];
+        else{
+         int split=-1;
+         for(int i=0;i<nums.length;i++){
+          if(nums[i]>0){
+            split=i-1;
+            break;
+          }
+         }
+         int productNegatives=0;
+         int productPositives=0;
+         if(split>=1){
+          productNegatives= nums[0]*nums[1];
+          productPositives=nums[nums.length-1];
+         }else{
+           productNegatives=nums[0];
+           productPositives= nums[nums.length-1]*nums[nums.length-2];
+         }
+         return Math.max(nums[nums.length-1]*nums[nums.length-2]*nums[nums.length-3],
+                         productPositives*productNegatives);
+        }
+    }
+}
