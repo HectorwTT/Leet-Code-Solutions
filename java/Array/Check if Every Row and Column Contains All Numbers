@@ -1,0 +1,29 @@
+class Solution {
+    public boolean checkValid(int[][] matrix) {
+        
+        for(int [] arr:matrix){
+          List<Integer> list = Arrays.stream(arr)
+                                     .boxed().distinct()
+                                     .collect(Collectors.toList());
+          list.sort(null);
+          if(!containsAll(list))return false;
+          
+           
+        }
+        for(int col=0;col<matrix.length;col++){
+            List<Integer> list= new ArrayList<>();
+            for(int row=0;row<matrix.length;row++){
+             list.add(matrix[row][col]);
+            }
+            list.sort(null);
+            if(!containsAll(list)) return false;
+        }
+        return true;
+    }
+    public boolean containsAll(List<Integer> list){
+          for(int i=0;i<list.size();i++){
+              if(list.get(i)!=i+1)return false;
+          }
+          return true;
+    }
+}
