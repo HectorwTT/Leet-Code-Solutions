@@ -1,0 +1,45 @@
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+     if(head==null ||k==0)return head;
+     ListNode[] arr= getNewArray(head);
+     ListNode [] newArr= rotateByK(arr,k);
+     ListNode newHead= newArr[0];
+     ListNode current= newHead;
+     int index=1;
+     while(index!=newArr.length){
+      ListNode tmp= new ListNode(newArr[index].val);
+      current.next=tmp;
+      current=current.next;
+      index++;
+     }
+     return newHead;
+    }
+    public ListNode[] rotateByK(ListNode [] nums,int k){
+      ListNode [] result= new ListNode[nums.length];
+      int newIndex= 0;
+      if(k<nums.length)newIndex=nums.length-k;
+      else newIndex=nums.length-k%nums.length;
+      int index=0;
+      for(int i=newIndex;i<nums.length;i++){
+          result[index++]= nums[i];
+      }
+      for(int i=0;i<newIndex;i++){
+          result[index++]=nums[i];
+      }
+      return result;
+    }
+    public ListNode [] getNewArray(ListNode head){
+     List<ListNode> newList= new ArrayList<>();
+     ListNode current=head;
+     while(current!=null){
+        newList.add(current);
+        current=current.next;
+     }
+     ListNode [] arr= new ListNode[newList.size()];
+     for(int i=0;i<newList.size();i++){
+         ListNode curr= newList.get(i);
+         arr[i]= curr;
+     }
+     return arr;
+    }
+}
