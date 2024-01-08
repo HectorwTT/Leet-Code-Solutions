@@ -1,0 +1,13 @@
+class Solution {
+    public String[] sortPeople(String[] names, int[] heights) {
+        HashMap<Integer,String> heightsAndNames= new HashMap<>();
+        String[] result= new String[names.length];
+        for(int i=0;i<heights.length;i++){
+         heightsAndNames.put(heights[i],names[i]);
+        }
+        Arrays.sort(heights);
+        for(int i=0;i<result.length;i++) 
+         result[i]=heightsAndNames.get(heights[heights.length-1-i]);
+        return result;
+    }
+}
