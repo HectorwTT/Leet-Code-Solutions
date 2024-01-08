@@ -1,0 +1,10 @@
+class Solution {
+    public boolean rotateString(String s, String goal) {
+        for(int i=0;i<s.length();i++){
+            String substr= s.substring(0,i);
+            String newS= s.substring(i);
+            if(goal.equals(newS+substr))return true;
+        }
+        return false;
+    }
+}
