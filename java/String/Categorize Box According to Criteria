@@ -1,0 +1,20 @@
+class Solution {
+    public String categorizeBox(int length, int width, int height, int mass) {
+        boolean isBulky= false;
+        boolean isHeavy=false;
+        if(length>= (int)Math.pow(10,4) 
+                     || width>=(int)Math.pow(10,4)
+                     ||height>=(int)Math.pow(10,4)
+                     ||length*width*height>=(int)Math.pow(10,9))isBulky=true;
+       if(mass>=100) isHeavy=true;
+       if(isBulky){
+           if(isHeavy)return "Both";
+           else return"Bulky";
+       }
+       if(isHeavy){
+         return "Heavy";
+       }
+       return "Neither";
+       
+    }
+}
