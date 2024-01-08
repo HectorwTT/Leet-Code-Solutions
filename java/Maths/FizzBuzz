@@ -1,0 +1,15 @@
+class Solution {
+    public List<String> fizzBuzz(int n) {
+        int number =1;
+        List<String> result= new ArrayList<>();
+        while(number<=n){
+         if(number %5==0){
+          if(number%3==0) result.add("FizzBuzz");
+          else result.add("Buzz");
+         }else if(number %3==0) result.add("Fizz");
+         else result.add(""+number);
+         number++;
+        }
+        return result;
+    }
+}
