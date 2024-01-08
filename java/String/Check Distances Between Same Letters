@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkDistances(String s, int[] distance) {
+     HashMap<Character,Integer> distances= new HashMap<>();
+     int [] counts= new int [26];
+     for(int i=0;i<s.length();i++){
+      if(i==s.length()-1)continue;
+      char ch= s.charAt(i);
+      int nextIndex= s.indexOf(""+ch,i+1);
+      int distanceBetween= nextIndex-i-1;
+      int index= ch-97;
+      counts[index]++;
+      if(distance[index]!= distanceBetween && counts[index]==1){
+       return false;
+      } 
+     }
+     return true;
+    }
+}
