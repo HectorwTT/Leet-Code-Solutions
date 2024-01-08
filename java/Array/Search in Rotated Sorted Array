@@ -5,7 +5,7 @@ class Solution {
       index--;
      }
     
-     if(index==nums.length-1) return bSearch(nums,0,index,taArget);
+     if(index==nums.length-1) return bSearch(nums,0,index,target);
      else{
          int index1= bSearch(nums,0,index,target);
          int index2=bSearch(nums,index+1,nums.length-1,target);
