@@ -1,0 +1,17 @@
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int[] flatArray = Arrays.stream(matrix)
+        .flatMapToInt(Arrays::stream)
+        .toArray();
+        Arrays.sort(flatArray);
+        int left=0;
+        int right=flatArray.length-1;
+        while(left<=right){
+         int mid= (left+right)/2;
+         if(flatArray[mid]==target)return true;
+         else if(flatArray[mid]>target)right=mid-1;
+         else left=mid+1;
+        }
+        return false;
+    }
+}
