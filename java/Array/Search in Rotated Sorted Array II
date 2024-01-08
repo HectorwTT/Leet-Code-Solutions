@@ -1,0 +1,28 @@
+class Solution {
+    public boolean search(int[] nums, int target) {
+     int index=nums.length-1;
+     while(nums[index]<=nums[0] && index>0){
+      if(nums[index]==target)return true;
+      index--;
+     }
+    
+     if(index==nums.length-1) return bSearch(nums,0,index,target);
+     else{
+         boolean isInFirst= bSearch(nums,0,index,target);
+         boolean isInSecond=bSearch(nums,index+1,nums.length-1,target);
+         return isInFirst || isInSecond;
+     }  
+    }
+    public boolean bSearch(int [] nums,int start,int end,int target){
+     if(nums[start]==target || nums[end]==target) return true;
+     int left=start;
+     int right=end;
+     while(left<=right){
+      int mid=(left +right)/2;
+      if(nums[mid]==target)return true;
+      else if(nums[mid]>target)right=mid-1;
+      else left = mid+1;
+     }
+     return false;
+    }
+}
