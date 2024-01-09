@@ -1,0 +1,41 @@
+class Solution {
+    public boolean leafSimilar(TreeNode root1, TreeNode root2) {
+        List<Integer> root1List= getLeaves(root1);
+        List<Integer>root2List= getLeaves(root2);
+        root1List= root1List.stream().filter(t->t!=null).collect(Collectors.toList());
+        root2List= root2List.stream().filter(t->t!=null).collect(Collectors.toList());
+        if(root1List.size()!= root2List.size())return false;
+        else{
+          for(int i=0;i<root1List.size();i++){
+            int root1Val= root1List.get(i);
+            int root2Val= root2List.get(i);
+            if(root1Val!= root2Val) return false;
+          }
+          return true;
+        }
+    }
+
+    public List<Integer> getLeaves(TreeNode root){
+        if(root!=null){
+             List<Integer> list= new ArrayList<>();
+            if(root.left ==null && root.right ==null){
+             list.add(root.val);
+             return list;
+            }else if(root.left== null){
+                List<Integer> list1= getLeaves(root.right);
+                list.addAll(list1);
+                return list;
+            }else if(root.right==null){
+                List<Integer> list1= getLeaves(root.left);
+                list.addAll(list1);
+                return list;
+            }else{
+                List<Integer> list1= getLeaves(root.left);
+                List<Integer> list2= getLeaves(root.right);
+                list.addAll(list1);
+                list.addAll(list2);
+                return list;
+            }
+        }else return null;
+    }
+}
