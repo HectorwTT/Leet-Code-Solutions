@@ -1,0 +1,38 @@
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+     HashMap <Integer,List<Integer>> counts= new HashMap<>();
+     HashMap<Integer,Integer>frequencies= new HashMap<>();
+     HashMap<Integer,Integer>firstIndexes= new HashMap<>();
+     HashMap<Integer,Integer>lastIndexes= new HashMap<>();
+     int minLength=nums.length+1;
+     for(int i=0;i<nums.length;i++){
+      if(!frequencies.containsKey(nums[i])) frequencies.put(nums[i],1);
+      else frequencies.replace(nums[i],frequencies.get(nums[i])+1);
+      if(!firstIndexes.containsKey(nums[i]))firstIndexes.put(nums[i],i);
+      if(firstIndexes.containsKey(nums[i])){
+          if(lastIndexes.containsKey(nums[i]))lastIndexes.replace(nums[i],i);
+          else lastIndexes.put(nums[i],i);
+      }
+     }
+     int maxFrequency=-1;
+     for(Integer key: frequencies.keySet()){
+       if(frequencies.get(key)>maxFrequency)maxFrequency=frequencies.get(key);
+       if(!counts.containsKey(frequencies.get(key))){
+         List<Integer> list= new ArrayList<>();
+         list.add(key);
+         counts.put(frequencies.get(key),list);
+       }else{
+         List<Integer> list= counts.get(frequencies.get(key));
+         list.add(key);
+         counts.replace(frequencies.get(key),list);
+       }
+     }
+     List<Integer> indexes= counts.get(maxFrequency);
+     for(int i=0;i<indexes.size();i++){
+         int lastIndex=lastIndexes.get(indexes.get(i));
+         int firstIndex= firstIndexes.get(indexes.get(i));
+         if(lastIndex-firstIndex+1<minLength)minLength=lastIndex-firstIndex+1;
+     }
+     return minLength;
+    }
+}
