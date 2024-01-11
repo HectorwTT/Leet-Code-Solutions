@@ -1,0 +1,36 @@
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) {
+     HashMap<Integer,List<String>> map= new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      String number= nums[i];
+      if(!map.containsKey(number.length())){
+       List<String> numbers= new ArrayList<>();
+       numbers.add(number);
+       //numbers.sort(null);
+       map.put(number.length(),numbers);
+      }else{
+        List<String> numbers= map.get(number.length());
+        numbers.add(number);
+        //numbers.sort(null);
+        map.replace(number.length(),numbers);
+      }
+     }
+     List<Integer> lengths= new ArrayList<>();
+     for(Integer length:map.keySet()){
+      lengths.add(length);
+     }
+     lengths.sort(null);
+     int number=0;
+     for(int i=lengths.size()-1;i>=0;i--){
+      int length= lengths.get(i);
+      List<String>strings= map.get(length);
+      strings.sort(null);
+      for(int j=strings.size()-1;j>=0;j--){
+       String str= strings.get(j);
+       number++;
+       if(number==k)return str;
+      }
+     }
+     return "";
+    }
+}
