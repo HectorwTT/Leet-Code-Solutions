@@ -1,0 +1,27 @@
+class Solution {
+    public String kthDistinct(String[] arr, int k) {
+     HashMap<String,Integer> strings = new HashMap<>();
+     HashMap<Integer,String> indexes= new HashMap<>();
+     List<String> result= new ArrayList<>();
+     List<Integer> indices= new ArrayList<>();
+     for(int i=0;i<arr.length;i++){
+      String string= arr[i];
+      if(!strings.containsKey(string)){
+       strings.put(string,1);
+       indexes.put(i,string);
+      }
+      else strings.replace(string,strings.get(string)+1);
+     }
+     for(Integer key:indexes.keySet()){
+      String string= indexes.get(key);
+      if(strings.get(string)==1)indices.add(key);
+     }
+     indices.sort(null);
+     for(int i=0;i<indices.size();i++){
+      String string= indexes.get(indices.get(i));
+      result.add(string);
+     }
+     if(k>result.size())return "";
+     else return result.get(k-1);
+    }
+}
