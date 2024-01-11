@@ -1,0 +1,38 @@
+class Solution {
+    public String largestNumber(int[] nums) {        
+     if(nums.length==1)return ""+nums[0];
+     String result="";
+     String [] numbers= new String[nums.length];
+     for(int i=0;i<numbers.length;i++)numbers[i]=""+nums[i];
+     Arrays.sort(numbers);   
+     for(int i=1;i<numbers.length;i++){
+      String prev= numbers[i-1];
+      String curr=numbers[i];
+      if(curr.equals(prev)){
+       String newstr= curr+prev;
+       numbers[i]= newstr;
+       numbers[i-1]="";
+      } 
+     }
+     List<String> strings= Arrays.asList(numbers);
+     strings= strings.stream().filter(str->!str.equals("")).collect(Collectors.toList());
+     numbers= new String[strings.size()];
+     for(int i=0;i<numbers.length;i++)numbers[i]=strings.get(i);
+     Arrays.sort(numbers);
+     for(int i=1;i<numbers.length;i++){
+      String prev= numbers[i-1];
+      String curr= numbers[i];
+      String prevcurr= prev+curr;
+      String currprev=curr+prev;
+      if(prevcurr.compareTo(currprev)>0){
+       String tmp= prev;
+       String tmp1=curr;
+       numbers[i]=tmp;
+       numbers[i-1]=tmp1;
+      } 
+     }
+     for(int i=numbers.length-1;i>=0;i--) result+= numbers[i];
+     if(result.equals("0".repeat(nums.length)))return "0";
+     return result;
+    }
+}
