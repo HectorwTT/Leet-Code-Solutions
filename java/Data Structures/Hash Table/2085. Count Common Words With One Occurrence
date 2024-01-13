@@ -1,0 +1,19 @@
+class Solution {
+    public int countWords(String[] words1, String[] words2) {
+       HashMap <String,Integer> words1map= new HashMap<>();
+       HashMap<String,Integer> words2map= new HashMap<>();
+       int total=0;
+       for(int i=0;i<words1.length;i++){
+        if(!words1map.containsKey(words1[i]))words1map.put(words1[i],1);
+        else words1map.replace(words1[i],words1map.get(words1[i])+1);
+       } 
+        for(int i=0;i<words2.length;i++){
+        if(!words2map.containsKey(words2[i]))words2map.put(words2[i],1);
+        else words2map.replace(words2[i],words2map.get(words2[i])+1);
+       } 
+       for(String key:words1map.keySet()){
+           if(words1map.get(key)==1 && words2map.containsKey(key) && words2map.get(key)==1)total++;
+       }
+       return total;
+    }
+}
