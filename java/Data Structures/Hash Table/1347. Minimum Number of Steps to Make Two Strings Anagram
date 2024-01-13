@@ -1,0 +1,29 @@
+class Solution {
+    public int minSteps(String s, String t) {
+        char[] schars= s.toCharArray();
+        HashMap<Character,Integer> tmap= new HashMap<>();
+        int total=0;
+        Arrays.sort(schars);
+        for(int i=0;i<t.length();i++){
+         char ch= t.charAt(i);
+         if(!tmap.containsKey(ch)) tmap.put(ch,1);
+         else tmap.replace(ch,tmap.get(ch)+1);
+        }
+        int index=0;
+        for(int i=0;i<schars.length;i++){
+         char ch= schars[i];
+         if(tmap.size()==0){
+           index=i;
+           break;
+         }
+         
+         if(!tmap.containsKey(ch))total++;
+         else{
+          tmap.replace(ch,tmap.get(ch)-1);
+          if(tmap.get(ch)==0)tmap.remove(ch);
+         }
+        }
+        if(index!=0)total+=schars.length-index;
+        return total;
+    }
+}
