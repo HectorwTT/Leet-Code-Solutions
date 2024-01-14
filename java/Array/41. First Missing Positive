@@ -1,0 +1,17 @@
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+     
+        List<Integer> numbers = Arrays.stream(nums)
+                                    .boxed()
+                                    .filter(num->num>0)
+                                    .distinct()
+                                    .sorted()          
+                                    .collect(Collectors.toList());
+     if(numbers.size()==0) return 1;
+     for(int i=0;i<numbers.size();i++){
+       if(numbers.get(i)!=i+1)return i+1;
+     }
+     return numbers.size()+1;
+        
+    }
+}
