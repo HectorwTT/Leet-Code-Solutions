@@ -1,0 +1,51 @@
+class Solution {
+    public boolean closeStrings(String word1, String word2) {
+     if(word1.length()!= word2.length())return false;
+     HashMap<Character,Integer> word1map= new HashMap<>();
+     HashMap<Character,Integer> word2map = new HashMap<>();
+     HashMap<Integer,List<Character>> word1counts= new HashMap<>();
+     HashMap<Integer,List<Character>> word2counts= new HashMap<>();
+     for(int i=0;i< word1.length();i++){
+        char ch1= word1.charAt(i);
+        char ch2= word2.charAt(i);
+        if(!word1map.containsKey(ch1)) word1map.put(ch1,1);
+        else word1map.replace(ch1,word1map.get(ch1)+1);
+        if(!word2map.containsKey(ch2))word2map.put(ch2,1);
+        else word2map.replace(ch2,word2map.get(ch2)+1);
+
+     }
+    for(Character key:word1map.keySet()){
+        if(!word2map.containsKey(key)) return false;
+    }
+     for(Character key:word1map.keySet()){
+        int count= word1map.get(key);
+        if(!word1counts.containsKey(count)){
+          List<Character> list= new ArrayList<>();
+          list.add(key);
+          word1counts.put(count,list);
+        }else{
+          List<Character> list= word1counts.get(count);
+          list.add(key);
+          word1counts.replace(count,list);
+        }
+     }
+      for(Character key:word2map.keySet()){
+        int count= word2map.get(key);
+        if(!word2counts.containsKey(count)){
+          List<Character> list= new ArrayList<>();
+          list.add(key);
+          word2counts.put(count,list);
+        }else{
+          List<Character> list= word2counts.get(count);
+          list.add(key);
+          word2counts.replace(count,list);
+        }
+     }
+     for(Integer key:word1counts.keySet()){
+         if(!word2counts.containsKey(key)) return false;
+         if(word1counts.get(key).size()!= word2counts.get(key).size())return false;
+     }
+  
+     return true;
+    }
+}
