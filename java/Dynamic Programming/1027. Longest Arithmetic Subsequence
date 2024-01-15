@@ -1,0 +1,35 @@
+class Solution {
+    public int longestArithSeqLength(int[] nums) {
+        int max= getMax(nums);
+        int maxLength=-1;
+        for(int i=-1*max;i<=max;i++){
+         int length= getLongestSubsequence(nums,i);
+         maxLength=Math.max(maxLength,length);
+        }
+        return maxLength;
+    }
+    public int getMax(int []nums){
+        int [] nums1= new int [nums.length];
+        for(int i=0;i<nums1.length;i++)nums1[i]=nums[i];
+        Arrays.sort(nums1);
+        return nums1[nums1.length-1]-nums1[0];
+    }
+    public int getLongestSubsequence(int[] arr, int difference) {
+     int [] lengths= new int[arr.length];
+     HashMap<Integer,Integer> map= new HashMap<>();
+     for(int i=0;i<lengths.length;i++)lengths[i]=1;
+     int max= lengths[0];
+     for(int i=0;i<arr.length;i++){
+       if(map.containsKey(arr[i]-difference)){
+        int last= map.get(arr[i]-difference);
+        lengths[i]=lengths[last]+1;
+        max=Math.max(max,lengths[i]);
+       }
+
+       if(!map.containsKey(arr[i]))map.put(arr[i],i);
+       else map.replace(arr[i],i);
+     }
+     return max; 
+    }
+
+}
