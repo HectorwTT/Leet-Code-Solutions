@@ -1,0 +1,49 @@
+class Solution {
+    public TreeNode increasingBST(TreeNode root) {
+     List<Integer> inOrderList= inorderTraversal(root);
+     TreeNode newroot= new TreeNode(inOrderList.get(0));
+     TreeNode current= newroot;
+     for(int i=1;i<inOrderList.size();i++){
+        int val= inOrderList.get(i);
+        TreeNode newnode= new TreeNode(val);
+        current.right= newnode;
+        current= current.right; 
+     } 
+     return newroot;
+    }
+    public List<Integer> inorderTraversal(TreeNode root) {
+         if(root==null)return new ArrayList<>();
+         if (root.left==null && root.right==null) {
+             List<Integer> rootlist = new ArrayList<>();
+             rootlist.add(root.val);
+             return rootlist;
+        }
+        else {
+            if(root.left==null){
+                List <Integer> result = new ArrayList<>();
+                result.add(root.val);
+                List<Integer> rightlist = inorderTraversal(root.right);
+                result.addAll(rightlist);
+                return result;
+            }
+            else if (root.right==null){
+                List <Integer> result = new ArrayList<>();
+                List<Integer> leftlist = inorderTraversal(root.left);
+                result.addAll(leftlist);
+                result.add(root.val);
+                return result;
+            }else{
+            List <Integer> leftlist=new ArrayList<>();
+            List <Integer> rightlist=new ArrayList<>();
+            if(root.left!=null)leftlist=inorderTraversal(root.left);  
+            if (root.right!=null)
+              rightlist= inorderTraversal(root.right);
+            List <Integer> result = new ArrayList<>();
+            result.addAll(leftlist);
+            result.add(root.val);
+            result.addAll(rightlist);
+            return result;
+            }
+        } 
+    }
+}
