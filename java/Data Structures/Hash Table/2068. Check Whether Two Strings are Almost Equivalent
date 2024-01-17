@@ -1,0 +1,28 @@
+class Solution {
+    public boolean checkAlmostEquivalent(String word1, String word2) {
+       HashMap<Character,Integer> word1map= new HashMap<>();
+       HashMap<Character,Integer> word2map=new HashMap<>();
+       for(int i=0;i<word1.length();i++){
+        char ch1= word1.charAt(i);
+        char ch2= word2.charAt(i);
+        if(!word1map.containsKey(ch1))word1map.put(ch1,1);
+        else word1map.replace(ch1,word1map.get(ch1)+1);
+        if(!word2map.containsKey(ch2))word2map.put(ch2,1);
+        else word2map.replace(ch2,word2map.get(ch2)+1);
+       } 
+       for(int i=97;i<123;i++){
+         char ch= (char)i;
+         if(!word1map.containsKey(ch)){
+          if(word2map.containsKey(ch))if(word2map.get(ch)>=4)return false;
+         }else if(!word2map.containsKey(ch)){
+          if(word1map.containsKey(ch))if(word1map.get(ch)>=4)return false;
+         }else{
+            int word1count= word1map.get(ch);
+            int word2count= word2map.get(ch);
+            if(word1count>word2count+3) return false;
+            if(word2count>word1count+3) return false;
+         }
+       }
+       return true;
+    }
+}
