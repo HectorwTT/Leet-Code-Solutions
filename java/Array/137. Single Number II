@@ -1,0 +1,16 @@
+class Solution {
+    public int singleNumber(int[] nums) {
+     Arrays.sort(nums);
+     int count=1;
+     int prev= nums[0];
+     for(int i=1;i<nums.length;i++){
+      int curr= nums[i];
+      if(curr!= prev){
+        if(count==1)return nums[i-1];
+        else count=1;
+      }else count++;
+      prev= curr;
+     }
+     return nums[nums.length-1];
+    }
+}
