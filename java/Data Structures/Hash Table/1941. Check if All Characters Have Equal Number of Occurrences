@@ -1,0 +1,15 @@
+class Solution {
+    public boolean areOccurrencesEqual(String s) {
+     HashMap<Character,Integer> counts= new HashMap<>();
+     for(int i=0;i<s.length();i++){
+      char ch= s.charAt(i);
+      if(!counts.containsKey(ch))counts.put(ch,1);
+      else counts.replace(ch,counts.get(ch)+1);
+     }
+     int number= counts.get(s.charAt(0));
+     for(Character key: counts.keySet()){
+      if(counts.get(key)!=number)return false;
+     }
+     return true;
+    }
+}
