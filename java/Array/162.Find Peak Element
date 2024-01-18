@@ -1,0 +1,16 @@
+class Solution {
+    public int findPeakElement(int[] nums) {
+     int prev=0;
+     int curr=0;
+     int next=0;
+     for(int i=0;i<nums.length;i++){
+      if(i==0)prev=(int)Double.NEGATIVE_INFINITY;
+      else prev=nums[i-1];
+      curr= nums[i];
+      if(i==nums.length-1)next=(int)Double.NEGATIVE_INFINITY;
+      else next= nums[i+1];
+      if(curr>next && curr>prev) return i;
+     }   
+      return 0; 
+    }
+}
