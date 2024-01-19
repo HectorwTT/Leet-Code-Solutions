@@ -1,0 +1,18 @@
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+     int [][] minPath= new int[matrix.length][matrix[0].length];
+     minPath[0]= matrix[0];
+     for(int i=1;i<matrix.length;i++){
+      for(int j=0;j<matrix[i].length;j++){
+      if(j==0)minPath[i][j]=Math.min(minPath[i-1][j],minPath[i-1][j+1])+matrix[i][j];
+      else if(j==matrix[i].length-1)minPath[i][j]=Math.min(minPath[i-1][j],minPath[i-1][j-1])
+                                               +matrix[i][j];
+      else minPath[i][j]=matrix[i][j]+Math.min(minPath[i-1][j]
+                                               ,Math.min(minPath[i-1][j-1],minPath[i-1][j+1]));
+      }
+     }
+     int min=minPath[matrix.length-1][0];
+     for(int j=1;j<matrix[0].length;j++) min =Math.min(min,minPath[matrix.length-1][j]);
+     return min;
+    }
+}
