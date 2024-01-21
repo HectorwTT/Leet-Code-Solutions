@@ -1,0 +1,21 @@
+class Solution {
+    public String freqAlphabets(String s) {
+     
+     for(int i=106;i<123;i++){
+        int number=10+(i-106);
+        if(s.indexOf(number+"#")!=-1){
+         String str= number+"#";
+         char ch= (char)i;
+         s=s.replaceAll(str,""+ch);
+        }
+     }
+     for(int i=1;i<=9;i++){
+      if(s.indexOf(""+i)!=-1){
+        int number= 96+i;
+        char letter =(char)number;
+        s=s.replaceAll(""+i,""+letter);
+      }
+     }
+     return s;
+    }
+}
