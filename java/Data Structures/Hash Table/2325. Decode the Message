@@ -1,0 +1,23 @@
+class Solution {
+    public String decodeMessage(String key, String message) {
+       HashMap<Character,Character> keymap= new HashMap<>();
+       int current=97;
+       int index= 0;
+       String result="";
+       while(keymap.size()!=26){
+        char ch= (char)current;
+        char ch1= key.charAt(index++);
+        if(!keymap.containsKey(ch1) && ch1!=' '){
+            keymap.put(ch1,ch);
+            current++;
+        }
+       } 
+       for(int i=0;i<message.length();i++){
+        char ch = message.charAt(i);
+        char newch=' ';
+        if(ch!=' ')newch= keymap.get(ch);
+        result+=newch;
+       }
+       return result;
+    }
+}
