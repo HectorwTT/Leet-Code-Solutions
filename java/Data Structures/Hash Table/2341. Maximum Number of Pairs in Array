@@ -1,0 +1,19 @@
+class Solution {
+    public int[] numberOfPairs(int[] nums) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     int [] result= new int[2];
+     int numOfPairs=0;
+     int numLeftOver=0;
+     for(int i=0;i<nums.length;i++){
+      if(map.containsKey(nums[i])) map.replace(nums[i],map.get(nums[i])+1);
+      else map.put(nums[i],1);
+     }
+     for(Integer key:map.keySet()){
+      numOfPairs+= map.get(key)/2;
+      numLeftOver+=map.get(key)%2;
+     }
+     result[0]=numOfPairs;
+     result[1]= numLeftOver;
+     return result;
+    }
+}
