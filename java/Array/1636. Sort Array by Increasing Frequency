@@ -1,0 +1,39 @@
+class Solution {
+    public int[] frequencySort(int[] nums) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     List<Integer> numbers= new ArrayList<>();
+     List<Integer> counts= new ArrayList<>();
+     int [] result;
+     HashMap<Integer,List<Integer>> frequencies= new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      if(map.containsKey(nums[i])) map.replace(nums[i],map.get(nums[i])+1);
+      else map.put(nums[i],1);
+     }
+     for(Integer key:map.keySet()){
+      int count= map.get(key);
+      if(!counts.contains(count))counts.add(count);
+      if(frequencies.containsKey(count)){
+        List<Integer> list= frequencies.get(count);
+        list.add(key);
+        list.sort(null);
+        frequencies.replace(count,list);
+
+      }else{
+         List<Integer> list= new ArrayList<>();
+        list.add(key);
+        frequencies.put(count,list);  
+      }
+     }
+     counts.sort(null);
+     for(int i=0;i<counts.size();i++){
+      int count= counts.get(i);
+      List<Integer> list= frequencies.get(count);
+      for(int j=list.size()-1;j>=0;j--){
+        for(int k=0;k<count;k++)numbers.add(list.get(j));
+      }
+      
+     }
+     result =numbers.stream().mapToInt(Integer::intValue).toArray();
+     return result;
+    }
+}
