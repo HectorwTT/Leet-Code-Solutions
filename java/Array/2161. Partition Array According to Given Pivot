@@ -1,0 +1,17 @@
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        List<Integer> lessThanPivot= new ArrayList<>();
+        List<Integer> greaterThanPivot= new ArrayList<>();
+        List<Integer> equalToPivots= new ArrayList<>();
+        List<Integer>result= new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+         if(nums[i]<pivot)lessThanPivot.add(nums[i]);
+         if(nums[i]==pivot)equalToPivots.add(nums[i]);
+         if(nums[i]>pivot)greaterThanPivot.add(nums[i]);
+        }
+        result.addAll(lessThanPivot);
+        result.addAll(equalToPivots);
+        result.addAll(greaterThanPivot);
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
