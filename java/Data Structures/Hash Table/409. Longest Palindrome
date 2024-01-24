@@ -1,0 +1,22 @@
+class Solution {
+    public int longestPalindrome(String s) {
+     HashMap<Character,Integer> counts= new HashMap<>();
+     int total=0;
+     int maxOdd=0;
+     for(int i=0;i<s.length();i++){
+      char ch= s.charAt(i);
+      if(!counts.containsKey(ch))counts.put(ch,1);
+      else counts.replace(ch,counts.get(ch)+1);
+     }
+     for(Character key:counts.keySet()){
+       int count= counts.get(key);
+       if(count %2==0)total+=count;
+       else{
+         maxOdd=1;
+         total+= count-1;
+       }
+     }
+     total+=maxOdd;
+     return total;
+    }
+}
