@@ -1,0 +1,13 @@
+class Solution {
+    public boolean checkIfPangram(String sentence) {
+     if(sentence.length()<26) return false;
+     HashMap<Character,Integer> alphabet= new HashMap<>();
+     for(int i=0;i<sentence.length();i++){
+        char ch= sentence.charAt(i);
+        if(!alphabet.containsKey(ch))alphabet.put(ch,1);
+        else alphabet.replace(ch,alphabet.get(ch)+1);
+     }
+     if(alphabet.size()<26)return false;
+     else return true;
+    }
+}
