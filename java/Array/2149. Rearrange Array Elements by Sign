@@ -1,18 +1,16 @@
 class Solution {
     public int[] rearrangeArray(int[] nums) {
      int [] result= new int[nums.length];
-     List<Integer> positives= new ArrayList<>();
-     List<Integer> negatives= new ArrayList<>();
      int positivesIndex=0;
-     int negativesIndex=0;
-     for(int i=0;i<nums.length;i++){
-        if(nums[i]>0) positives.add(nums[i]);
-        else negatives.add(nums[i]);
-     }
-     System.out.println(positives);
+     int negativesIndex=1;
      for(int i=0;i<result.length;i++){
-      if(i%2==0) result[i]= positives.get(positivesIndex++);
-      else  result[i]= negatives.get(negativesIndex++);
+        if(nums[i]>0) {
+         result[positivesIndex]=nums[i];
+         positivesIndex+=2;
+        }else {
+          result[negativesIndex]= nums[i];
+          negativesIndex+=2;
+        }
      }
      return result;
     }
