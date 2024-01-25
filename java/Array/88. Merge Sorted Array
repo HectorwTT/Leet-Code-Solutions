@@ -1,0 +1,26 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int index1= 0;
+        int index2=0;
+        int index3=0;
+        int [] nums3= new int[nums1.length];
+        while(index1<m && index2<n){
+         if(nums1[index1]<nums2[index2])nums3[index3++]=nums1[index1++]; 
+         else nums3[index3++]= nums2[index2++];
+        }
+        if(index2==n){
+         for(int i=index3;i<nums3.length;i++){
+          nums3[i]= nums1[index1++];
+         }
+        }
+        else{
+         for(int i=index3;i<nums3.length;i++){
+          nums3[i]= nums2[index2++];
+         }
+        }
+        for(int i=0;i<nums1.length;i++){
+         nums1[i]= nums3[i];
+        }
+        
+    }
+}
