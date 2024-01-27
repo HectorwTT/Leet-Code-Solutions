@@ -1,0 +1,21 @@
+class Solution {
+    public int countSegments(String s) {
+      s=s.trim();
+      List<String> strings = new ArrayList<>();
+      String string="";
+      for(int i=0;i<s.length();i++){
+        char ch= s.charAt(i);
+        if(ch!=' '){
+         string+=ch;
+        }else{
+         if(!string.equals("")){
+             strings.add(string);
+             string="";
+         }
+         else string="";
+        }
+        if(i==s.length()-1)strings.add(string);
+      }
+      return strings.size();
+    }
+}
