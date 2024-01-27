@@ -1,0 +1,25 @@
+class Solution {
+    public int[] relativeSortArray(int[] arr1, int[] arr2) {
+       List<Integer> itemsNotInArr2=Arrays.stream(arr1).boxed().sorted()
+                                          .collect(Collectors.toList());
+       List<Integer> result= new ArrayList<>();
+       HashMap<Integer,Integer> map1= new HashMap<>();
+       for(int i=0;i<arr1.length;i++){
+        if(!map1.containsKey(arr1[i]))map1.put(arr1[i],1);
+        else map1.replace(arr1[i],map1.get(arr1[i])+1);
+       } 
+       for(int i=0;i<arr2.length;i++){
+         int key=arr2[i];
+         int count= map1.get(key);
+         int num=0;
+         while(num<count){
+          result.add(key);
+          num++;
+         }
+         itemsNotInArr2=itemsNotInArr2.stream().filter(n->n!=key).collect(Collectors.toList());
+       } 
+       itemsNotInArr2.sort(null);
+       result.addAll(itemsNotInArr2);
+       return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
