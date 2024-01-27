@@ -1,0 +1,24 @@
+class Solution {
+    public int findPaths(int m, int n, int maxMove, int startRow, int startColumn) {
+       int memo[][][] = new int[m][n][maxMove+1];
+       int mod=(int) Math.pow(10,9)+7;
+       return  topDown(m,n,maxMove,startRow,startColumn,memo,mod)%mod;
+    }
+    public int  topDown(int m,int n,int rest,int i,int j,int memo[][][],int mod)
+    {
+        if (i>=m || j>=n || i<0 || j<0 ) return 1;
+           if (m-i-1>rest && i>rest && n-j-1>rest && j>rest) return memo[i][j][rest]=0; 
+        if (rest<=0) return 0;
+        if (memo[i][j][rest]!=0) return memo[i][j][rest];
+        int ret=0;
+        ret+=topDown(m,n,rest-1,i-1,j,memo,mod);
+        ret=ret%mod;
+        ret+=topDown(m,n,rest-1,i+1,j,memo,mod);
+         ret=ret%mod;
+        ret+=topDown(m,n,rest-1,i,j-1,memo,mod);
+         ret=ret%mod;
+        ret+=topDown(m,n,rest-1,i,j+1,memo,mod);
+         ret=ret%mod;
+        return memo[i][j][rest]=ret;
+    }
+}
