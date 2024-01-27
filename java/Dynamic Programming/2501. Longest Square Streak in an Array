@@ -1,0 +1,26 @@
+class Solution {
+    public int longestSquareStreak(int[] arr) {
+     int [] lengths= new int[arr.length];
+     Arrays.sort(arr);
+     HashMap<Integer,Integer> map= new HashMap<>();
+     for(int i=0;i<lengths.length;i++)lengths[i]=1;
+     int max= lengths[0];
+     for(int i=0;i<arr.length;i++){
+       double squareroot= Math.pow(arr[i],0.5);
+       double squarerootceil= Math.ceil(squareroot);
+       if(squareroot==squarerootceil){
+         int squarerootint= (int)squareroot;
+         if(map.containsKey(squarerootint)){
+          int last= map.get(squarerootint);
+          lengths[i]=lengths[last]+1;
+          max=Math.max(max,lengths[i]);
+         }
+       }
+      
+       if(!map.containsKey(arr[i]))map.put(arr[i],i);
+       else map.replace(arr[i],i);
+     }
+     if(max<2)return -1;
+     return max; 
+    }
+}
