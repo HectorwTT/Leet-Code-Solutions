@@ -1,0 +1,42 @@
+class Solution {
+    public int uniqueMorseRepresentations(String[] words) {
+       HashMap<Character,String> morseCodes= new HashMap<>();
+       List<String> result= new ArrayList<>();
+       morseCodes.put('a',".-");
+       morseCodes.put('b',"-...");
+       morseCodes.put('c',"-.-.");
+       morseCodes.put('d',"-..");
+       morseCodes.put('e',".");
+       morseCodes.put('f',"..-.");
+       morseCodes.put('g',"--.");
+       morseCodes.put('h',"....");
+        morseCodes.put('i',"..");
+       morseCodes.put('j',".---");
+       morseCodes.put('k',"-.-");
+       morseCodes.put('l',".-..");
+       morseCodes.put('m',"--");
+       morseCodes.put('n',"-.");
+       morseCodes.put('o',"---");
+       morseCodes.put('p',".--.");
+       morseCodes.put('q',"--.-");
+       morseCodes.put('r',".-.");
+       morseCodes.put('s',"...");
+       morseCodes.put('t',"-");
+       morseCodes.put('u',"..-");
+       morseCodes.put('v',"...-");
+       morseCodes.put('w',".--");
+       morseCodes.put('x',"-..-");
+       morseCodes.put('y',"-.--");
+       morseCodes.put('z',"--..");
+       for(int i=0;i<words.length;i++){
+        String word= words[i];
+        String string="";
+        for(int j=0;j<word.length();j++){
+         char ch= word.charAt(j);
+         string+=morseCodes.get(ch);
+        }
+        if(!result.contains(string))result.add(string);
+       }
+       return result.size();
+    }
+}
