@@ -1,0 +1,16 @@
+class Solution {
+    public int[] arrayRankTransform(int[] arr) {
+      int [] arrClone = arr.clone();
+      int [] result= new int[arr.length];
+      Arrays.sort(arrClone);
+      HashMap<Integer,Integer> map = new HashMap<>();
+      int rank=1;
+      for(int i=0;i<arrClone.length;i++){
+        if(!map.containsKey(arrClone[i]))map.put(arrClone[i],rank++);
+      }
+      for(int i=0;i<arr.length;i++){
+        result[i]= map.get(arr[i]);
+      }
+      return result;
+    }
+}
