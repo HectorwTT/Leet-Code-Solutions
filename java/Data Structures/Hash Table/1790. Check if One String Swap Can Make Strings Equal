@@ -1,0 +1,23 @@
+class Solution {
+    public boolean areAlmostEqual(String s1, String s2) {
+     int numDifferent=0;
+     HashMap<Character,Integer> s1map= new HashMap<>();
+     HashMap<Character,Integer> s2map= new HashMap<>();
+     for(int i=0;i<s1.length();i++){
+      if(s1.charAt(i)!=s2.charAt(i)){
+        numDifferent++;
+        if(!s1map.containsKey(s1.charAt(i)))s1map.put(s1.charAt(i),1);
+        else s1map.replace(s1.charAt(i),s1map.get(s1.charAt(i))+1);
+        if(!s2map.containsKey(s2.charAt(i)))s2map.put(s2.charAt(i),1);
+        else s2map.replace(s2.charAt(i),s2map.get(s2.charAt(i))+1);
+      }
+     }
+     if(numDifferent!=2 && numDifferent!=0) return false;
+     for(Character key:s1map.keySet()){
+      if(!s2map.containsKey(key)) return false;
+      if(s2map.get(key)!=s1map.get(key))return false;
+     }
+     return true;
+
+    }
+}
