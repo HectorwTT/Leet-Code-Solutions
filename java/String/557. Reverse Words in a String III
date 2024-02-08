@@ -1,0 +1,11 @@
+class Solution {
+    public String reverseWords(String s) {
+        String [] swords= s.split(" ");
+        for(int i=0;i<swords.length;i++){
+         StringBuffer sb= new StringBuffer(swords[i]);
+         sb.reverse();
+         swords[i]= sb.toString();
+        }
+        return String.join(" ",swords);
+    }
+}
