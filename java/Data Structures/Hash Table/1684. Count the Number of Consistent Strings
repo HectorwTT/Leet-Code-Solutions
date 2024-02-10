@@ -1,0 +1,27 @@
+class Solution {
+    public int countConsistentStrings(String allowed, String[] words) {
+       int total=0;
+       HashMap<Character,Integer> map1= getCounts(allowed);
+       for(int i=0;i<words.length;i++){
+        HashMap<Character,Integer> map2=getCounts(words[i]);
+        if(appearsInAllowed(map1,map2))total++;
+       } 
+       return total;
+    }
+    public HashMap<Character,Integer> getCounts(String word){
+     HashMap<Character,Integer> map = new HashMap<>();
+     for(int i=0;i<word.length();i++){
+      char ch = word.charAt(i);
+      if(map.containsKey(ch)) map.replace(ch,map.get(ch)+1);
+      else map.put(ch,1);
+     }
+     return map;
+    }
+    public boolean appearsInAllowed(HashMap<Character,Integer> map1,HashMap<Character,Integer> map2){
+     
+     for(Character key:map2.keySet()){
+         if(!map1.containsKey(key)) return false;
+     }
+     return true;
+    }
+}
