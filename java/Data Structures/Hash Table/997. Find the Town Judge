@@ -1,0 +1,31 @@
+class Solution {
+    public int findJudge(int n, int[][] trust) {
+        HashMap<Integer,List<Integer>> map= new HashMap<>();
+        int number=0;
+        int numberTrust=0;
+        for(int i=0;i<trust.length;i++){
+          if(!map.containsKey(trust[i][0])){
+            List<Integer> list= new ArrayList<>();
+            list.add(trust[i][1]);
+            map.put(trust[i][0],list);
+          }else {
+             List<Integer> list= map.get(trust[i][0]);
+            list.add(trust[i][1]);
+            map.replace(trust[i][0],list);
+          }
+        }
+        for(int i=1;i<=n;i++){
+         if(!map.containsKey(i)){
+             number=i;
+             break;
+         }
+        }
+        for(Integer key:map.keySet()){
+         List<Integer> list = map.get(key);
+         if(list.contains(number))numberTrust++;
+        }
+    
+        if(numberTrust==n-1) return number;
+        else return -1;
+    }
+}
