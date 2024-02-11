@@ -1,0 +1,24 @@
+class Solution {
+    public boolean checkRecord(String s) {
+        int numberAbsent=0;
+        int numberOfConsecutiveLates=0;
+        char prev= s.charAt(0);
+
+        if(prev=='A')numberAbsent=1;
+        if(prev=='L')numberOfConsecutiveLates=1;
+        for(int i=1;i<s.length();i++){
+         char curr=s.charAt(i);
+         if(curr=='A'){
+             numberAbsent++;
+             if(numberAbsent>=2) return false;
+         }
+         if(curr=='L'){
+            if(prev=='L')numberOfConsecutiveLates++;
+            else numberOfConsecutiveLates=1;
+            if(numberOfConsecutiveLates==3)return false;
+         }
+         prev=curr;
+        }
+        return true;
+    }
+}
