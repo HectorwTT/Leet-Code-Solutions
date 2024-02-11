@@ -1,0 +1,23 @@
+class Solution {
+    public boolean areNumbersAscending(String s) {
+        List<Integer> result= new ArrayList<>();
+        String[] words= s.split(" ");
+        
+         for(int i=0;i<words.length;i++){
+          try{
+           int val= Integer.parseInt(words[i]);
+           result.add(val);
+          }
+          catch(Exception e){
+           continue;
+          }
+         }
+        System.out.println(result);
+        for(int i=1;i<result.size();i++){
+          int prev= result.get(i-1);
+          int curr= result.get(i);
+          if(curr<=prev)return false;
+        }
+        return true;
+    }
+}
