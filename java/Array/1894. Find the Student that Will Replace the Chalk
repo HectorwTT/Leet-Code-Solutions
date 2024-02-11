@@ -1,0 +1,15 @@
+class Solution {
+    public int chalkReplacer(int[] chalk, int k) {
+        long sum= 0;
+        long mod=0;
+        long leftover=0;
+        for(int i=0;i<chalk.length;i++) sum+=chalk[i];
+        mod= k%sum;
+        leftover= mod;
+        for(int i=0;i<chalk.length;i++){
+         leftover-= chalk[i];
+         if(leftover<0) return i;
+        }
+        return -1;
+    }
+}
