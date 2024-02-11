@@ -1,0 +1,11 @@
+class Solution {
+    public boolean checkString(String s) {
+     for(int i=0;i<s.length();i++){
+        char ch= s.charAt(i);
+        if(ch=='a'){
+            if(s.substring(0,i).indexOf(""+'b')!=-1)return false;
+        }
+     }
+     return true;   
+    }
+}
