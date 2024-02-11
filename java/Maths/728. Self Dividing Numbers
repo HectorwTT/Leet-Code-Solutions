@@ -1,0 +1,17 @@
+class Solution {
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        List<Integer> result=new ArrayList<>();
+        for(int i=left;i<=right;i++){
+         String nums= ""+i;
+         int total=0;
+         for(int j=0;j<nums.length();j++){
+             char ch=nums.charAt(j);
+             int number= ch-48;
+             if(number==0 || i%number!=0) break;
+             else total++;
+         }
+         if(total==nums.length())result.add(i);
+        }
+        return result;
+    }
+}
