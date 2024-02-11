@@ -1,0 +1,21 @@
+class Solution {
+    public int maxFrequencyElements(int[] nums) {
+        int maxFrequency=1;
+        HashMap<Integer,Integer> map= new HashMap<>();
+        int total=0;
+        for(int i=0;i<nums.length;i++){
+          if(!map.containsKey(nums[i]))map.put(nums[i],1);
+          else{
+            int frequency= map.get(nums[i])+1;
+            map.replace(nums[i],frequency);
+            if(frequency>maxFrequency)maxFrequency=frequency;
+          }
+        }
+        System.out.println(map);
+        System.out.println(maxFrequency);
+        for(Integer key:map.keySet()){
+         if(map.get(key)== maxFrequency)total+=maxFrequency;
+        }
+        return total;
+    }
+}
