@@ -1,0 +1,29 @@
+class Solution {
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        HashMap<Integer,List<Integer>> map = new HashMap<>();
+        List<Integer> result= new ArrayList<>();
+        int index=0;
+        int [] differences=new int [arr.length];
+        for(int i=0;i<arr.length;i++){
+         differences[i]= Math.abs(arr[i]-x);
+         if(!map.containsKey(differences[i])){
+            List<Integer> list= new ArrayList<>();
+            list.add(arr[i]);
+            map.put(differences[i],list);
+         }else{
+             List<Integer> list= map.get(differences[i]);
+             list.add(arr[i]);
+             map.replace(differences[i],list);
+         }
+        }
+        Arrays.sort(differences);
+        result.add(map.get(differences[0]).get(index++));
+        for(int i=1;i<differences.length;i++){
+         if(result.size()==k) break;
+         if(differences[i-1]!=differences[i])index=0;
+         result.add(map.get(differences[i]).get(index++));    
+        }
+        result.sort(null);
+        return result;
+    }
+}
