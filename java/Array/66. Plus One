@@ -1,0 +1,19 @@
+class Solution {
+    public int[] plusOne(int[] digits) {
+       int carryover=1;
+       for(int i=digits.length-1;i>=0;i--){
+        int number= digits[i]+carryover;
+        if(number==10){
+           digits[i]=0;
+           
+        }else{
+           digits[i]= number;
+           return digits;
+        }
+       }
+       int [] newDigits= new int[digits.length+1];
+       newDigits[0]=1;
+       for(int i=1;i<newDigits.length;i++) newDigits[i]= digits[i-1];
+       return newDigits;
+    }
+}
