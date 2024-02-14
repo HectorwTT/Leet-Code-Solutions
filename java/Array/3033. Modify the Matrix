@@ -1,0 +1,27 @@
+class Solution {
+    public int[][] modifiedMatrix(int[][] matrix) {
+        HashMap<Integer,Integer> maxInColumns= new HashMap<>();
+        int columns= matrix[0].length;
+        List<List<Integer>> minusOneCoordinates= new ArrayList<>();
+        for(int j=0;j<columns;j++){
+            int max=-2;
+         for(int i=0;i<matrix.length;i++){
+          if(matrix[i][j]>max)max= matrix[i][j];
+          if(matrix[i][j]==-1){
+              List<Integer> list= new ArrayList<>();
+              list.add(i);
+              list.add(j);
+              minusOneCoordinates.add(list);
+          }
+         }
+         maxInColumns.put(j,max);
+        }
+        for(int i=0;i<minusOneCoordinates.size();i++){
+          List<Integer> list= minusOneCoordinates.get(i);
+          int x= list.get(0);
+          int y= list.get(1);
+          matrix[x][y]= maxInColumns.get(y);
+        }
+        return matrix;
+    }
+}
