@@ -1,0 +1,62 @@
+class Solution {
+    public List<Integer> addToArrayForm(int[] num, int k) {
+        List<Integer> result= new ArrayList<>();
+        List<Integer> list= new ArrayList<>();
+        int carryover=0;
+        int index1=num.length-1;
+        String kString=""+k;
+        int index2= kString.length()-1;
+        while(index1>=0 && index2>=0){
+          int numToAdd= kString.charAt(index2--)-48;
+          int number= num[index1--]+ numToAdd+carryover;
+          if(number>=10){
+              number-=10;
+              carryover=1;
+              result.add(number);
+          }else{
+              result.add(number);
+              carryover=0;
+          }
+        }
+        if(index1==-1){
+            while(index2>=0){
+                  int numToAdd= kString.charAt(index2--)-48;
+               int number=  numToAdd+carryover;
+               if(number>=10){
+                   number-=10;
+                   carryover=1;
+                   list.add(number);
+               }else{
+                   list.add(number);
+                   carryover=0;
+               }
+            }
+        }else{
+               while(index1>=0){
+                int numToAdd=num[index1--];
+                int number=  numToAdd+carryover;
+                if(number>=10){
+                   number-=10;
+                   carryover=1;
+                   list.add(number);
+                }else{
+                   list.add(number);
+                   carryover=0;
+                }
+            }
+        }
+        Collections.reverse(result);
+        Collections.reverse(list);
+        list.addAll(result);
+        result= list;
+        if(carryover==1){
+            List<Integer> one= new ArrayList<>();
+            one.add(1);
+            one.addAll(result);
+            result=one;
+        }
+      
+        return result;
+
+    }
+}
