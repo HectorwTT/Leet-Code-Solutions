@@ -1,0 +1,24 @@
+class Solution {
+    public int distributeCandies(int[] candyType) {
+        HashMap<Integer,Integer> map= new HashMap<>();
+        int total=0;
+        int numOfTypes=0;
+        for(int i=0;i<candyType.length;i++){
+         if(!map.containsKey(candyType[i])) map.put(candyType[i],1);
+         else map.replace(candyType[i],map.get(candyType[i])+1);
+        }
+        if(map.size()==1)return 1;
+        while(total<=candyType.length/2){
+          for(Integer key:map.keySet()){
+          if(total== candyType.length/2)return total;
+          else{
+           total++;
+           map.replace(key,map.get(key)-1);
+          }
+        }
+         if(total== map.size())return total;
+        }
+        return total;
+        
+    }
+}
