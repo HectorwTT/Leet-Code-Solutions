@@ -1,0 +1,44 @@
+class Solution {
+    public String[] findWords(String[] words) {
+        List<Character> firstRow= new ArrayList<>();
+        List<Character> secondRow= new ArrayList<>();
+        List<Character> thirdRow= new ArrayList<>();
+        List<String> result= new ArrayList<>();
+        String firstChars="qwertyuiop";
+        String secondChars="asdfghjkl";
+        String thirdChars="zxcvbnm";
+        setList(firstRow,firstChars);
+        setList(secondRow,secondChars);
+        setList(thirdRow,thirdChars);
+        for(int i=0;i<words.length;i++){
+         String word= words[i].toLowerCase();
+         int totalInFirst=0;
+         int totalInSecond=0;
+         int totalInThird=0;
+         HashMap<Character,Integer> map = new HashMap<>();
+         for(int j=0;j<word.length();j++){
+            char ch= word.charAt(j);
+            if(!map.containsKey(ch))map.put(ch,1);
+            else map.replace(ch,map.get(ch)+1);
+         }
+         for(Character key: map.keySet()){
+             if(firstRow.contains(key))totalInFirst++;
+             if(secondRow.contains(key))totalInSecond++;
+             if(thirdRow.contains(key))totalInThird++;
+         }
+         if(map.size()== totalInFirst ||map.size()==totalInSecond || map.size()==totalInThird) 
+            result.add(words[i]);
+        }
+        String[] wordsArr= new String[result.size()];
+        for(int i=0;i<result.size();i++){
+          wordsArr[i]= (String)result.get(i);
+        }
+        return wordsArr;
+    }
+    public void setList(List<Character> row,String chars){
+        for(int i=0;i<chars.length();i++){
+            row.add(chars.charAt(i));
+        }
+        return ;
+    }
+}
