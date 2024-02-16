@@ -1,0 +1,38 @@
+class Solution {
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        //sort the array O(logN * N)
+        Arrays.sort(arr);
+        
+        List<Integer> counts = new ArrayList<Integer>();
+        
+        //iterate through incrementing count of each type of integer.
+        int i = 0;
+        while(i < arr.length){
+            int count = 1;
+			//iterate until we find the next distinct int
+            while(i < arr.length - 1 && arr[i] == arr[i+1]){
+                    count++;
+                    i++;
+                }
+            //add total amount of distinct integer as element to counts
+            counts.add(count);
+            i++;
+        }
+        
+		//sort counts allowing us to use our greedy heuristic
+        Collections.sort(counts);
+        
+        int result = counts.size();
+        i = 0;
+		//iterate through counts reducing k by the count of that distinct integer which is guaranteed to be the smallest distinct int left
+        while(i < counts.size() && k > 0 && k >= counts.get(i)){
+                k = k - counts.get(i);
+                result--;
+                i++;
+           
+        }
+        
+        return result;
+        
+    }
+}
