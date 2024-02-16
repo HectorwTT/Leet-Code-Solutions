@@ -1,0 +1,43 @@
+class Solution {
+    public int[][] kClosest(int[][] points, int k) {
+        double [] distances= new double[points.length];
+        HashMap<Double,List<Integer>> map= new HashMap<>();
+        int [][] result= new int[k][2];
+        int index=0;
+        for(int i=0;i<points.length;i++){
+            int x= points[i][0];
+            int y= points[i][1];
+            double xdistance= Math.pow(x,2);
+            double ydistance= Math.pow(y,2);
+            double distance= Math.pow((xdistance +ydistance),0.5);
+            distances[i]= distance;
+            if(!map.containsKey(distance)){
+             List<Integer> xandy= new ArrayList<>();
+             xandy.add(x);
+             xandy.add(y);
+             map.put(distance,xandy);
+            }else{
+             List<Integer> xandy= map.get(distance);
+             xandy.add(x);
+             xandy.add(y);
+             map.replace(distance,xandy);  
+            }
+        }
+        Arrays.sort(distances);
+        for(int i=0;i<distances.length;i++){
+          List<Integer> xandy= map.get(distances[i]);
+          int x= xandy.get(0);
+          int y=xandy.get(1);
+          result[index][0]=x;
+          result[index++][1]=y;
+          if(xandy.size()>2){
+            xandy.remove(0);
+            xandy.remove(1);
+            map.replace(distances[i],xandy);
+          }
+         
+          if(index==k)break;
+        }
+        return result;
+    }
+}
