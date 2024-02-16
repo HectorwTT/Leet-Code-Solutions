@@ -1,0 +1,20 @@
+class Solution {
+    public String capitalizeTitle(String title) {
+        String [] words= title.split(" ");
+        for(int i=0;i<words.length;i++){
+         String word= words[i];
+         String newWord="";
+         if(word.length()<=2){
+             newWord= word.toLowerCase();
+         }else{
+             String first= word.substring(0,1);
+             first=first.toUpperCase();
+             String rest= word.substring(1);
+             rest=rest.toLowerCase();
+             newWord= first+rest;
+         }
+         words[i]= newWord;
+        }
+        return String.join(" ",words);
+    }
+}
