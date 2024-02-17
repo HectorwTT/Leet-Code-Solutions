@@ -1,0 +1,15 @@
+class Solution {
+    public int[] sumZero(int n) {
+        int [] result= new int[n];
+        int index=0;
+        if(n%2==1)index=1;
+        int number= n/2;
+        while(index<result.length && number>0){
+         result[index++]=number;
+         result[index++]=-1*number;
+         number--;
+        }
+        Arrays.sort(result);
+        return result;
+    }
+}
