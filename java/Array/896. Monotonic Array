@@ -1,0 +1,11 @@
+class Solution {
+    public boolean isMonotonic(int[] nums) {
+        int [] nums1= nums.clone();
+        Arrays.sort(nums1);
+        if(Arrays.equals(nums,nums1)) return true;
+        for(int i=1;i<nums.length;i++){
+            if(nums[i]>nums[i-1])return false;
+        }
+        return true;
+    }
+}
