@@ -1,0 +1,11 @@
+class Solution {
+    public int minLength(String s) {
+     boolean hasBoth=true;
+     while(hasBoth){
+         if(s.indexOf("AB")!=-1) s=s.replace("AB","");
+         if(s.indexOf("CD")!=-1)s=s.replace("CD","");
+         hasBoth= (s.indexOf("AB")!=-1)||(s.indexOf("CD")!=-1);
+     }   
+     return s.length();
+    }
+}
