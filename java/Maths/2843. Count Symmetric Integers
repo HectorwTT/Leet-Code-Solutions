@@ -1,0 +1,24 @@
+class Solution {
+    public int countSymmetricIntegers(int low, int high) {
+       int total=0;
+       for(int i=low;i<=high;i++){
+         String numString= ""+i;
+         if(numString.length()%2==1)continue;
+         int mid= numString.length()/2;
+         String firstHalf=numString.substring(0,mid);
+         String lastHalf= numString.substring(mid);
+         int firstSum=0;
+         int lastSum=0;
+         for(int j=0;j<firstHalf.length();j++){
+            char ch1=firstHalf.charAt(j);
+            char ch2= lastHalf.charAt(j);
+            int num1= ch1-48;
+            int num2=ch2-48;
+            firstSum+=num1;
+            lastSum+=num2;
+         }
+         if(firstSum== lastSum)total++;
+       } 
+       return total;
+    }
+}
