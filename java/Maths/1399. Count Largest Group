@@ -1,0 +1,30 @@
+class Solution {
+    public int countLargestGroup(int n) {
+        HashMap <Integer,List<Integer>> map = new HashMap<>();
+        int maxSize=1;
+        int total=0;
+        for(int i=1;i<=n;i++){
+         int number=i;
+         int sum=0;
+         while(number>0){
+          int mod=number%10;
+          number/=10;
+          sum+=mod;
+         }
+         if(!map.containsKey(sum)){
+            List<Integer> numbers= new ArrayList<>();
+            numbers.add(number);
+            map.put(sum,numbers);
+         }else{
+            List<Integer> numbers= map.get(sum);
+            numbers.add(number);
+            map.replace(sum,numbers);
+            if(numbers.size()>maxSize)maxSize= numbers.size();
+         }
+        }
+        for(Integer key:map.keySet()){
+            if(map.get(key).size()==maxSize)total++;
+        }
+        return total;
+    }
+}
