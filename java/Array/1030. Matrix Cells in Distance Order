@@ -1,0 +1,51 @@
+class Solution {
+    public int[][] allCellsDistOrder(int rows, int cols, int rCenter, int cCenter) {
+        int [][] distance= new int [rows][cols];
+        int[][] result= new int [rows*cols][2];
+        HashMap<Integer,List<List<Integer>>> map = new HashMap<>();
+        int row=0;
+        int column=0;
+        int index=0;
+        for(int i=0;i<rows;i++){
+         for(int j=0;j<cols;j++){
+           distance[i][j]= Math.abs(i-rCenter)+Math.abs(j-cCenter);
+         }
+        }
+        int [] distances= new int [rows * cols];
+        for(int i=0;i<distances.length;i++){
+          if(column==cols){
+              row++;
+              column=0;
+          }
+          distances[i]=distance[row][column];
+          if(!map.containsKey(distance[row][column])){
+              List<List<Integer>> pairs= new ArrayList<>();
+              List<Integer> pair = new ArrayList<>();
+              pair.add(row);
+              pair.add(column);
+              pairs.add(pair);
+              map.put(distance[row][column++],pairs);
+          }else{
+              List<List<Integer>> pairs= map.get(distance[row][column]);
+              List<Integer> pair= new ArrayList<>();
+              pair.add(row);
+              pair.add(column);
+              pairs.add(pair);
+              map.replace(distance[row][column++],pairs);
+          }
+        }
+        Arrays.sort(distances);
+        result[0][0]= rCenter;
+        result[0][1]= cCenter;
+        for(int i=1;i<distances.length;i++){
+          if(distances[i]!=distances[i-1]) index=0;
+          List<List<Integer>> pairs = map.get(distances[i]);
+          List<Integer> pair= pairs.get(index++);
+          row= pair.get(0);
+          column= pair.get(1);
+          result[i][0]=row;
+          result[i][1]=column;
+        }
+        return result;
+    }
+}
