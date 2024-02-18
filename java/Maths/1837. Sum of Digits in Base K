@@ -1,0 +1,18 @@
+class Solution {
+    public int sumBase(int n, int k) {
+        String baseKString="";
+        int number=n;
+        int total=0;
+        while(number>0){
+         int mod= number%k;
+         baseKString=mod+baseKString;
+         number/=k;
+        }
+        for(int i=0;i<baseKString.length();i++){
+            char ch= baseKString.charAt(i);
+            int value= ch-48;
+            total+=value;
+        }
+        return total;
+    }
+}
