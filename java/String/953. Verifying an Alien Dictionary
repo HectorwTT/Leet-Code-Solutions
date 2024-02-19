@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isAlienSorted(String[] words, String order) {
+     for(int i=1;i<words.length;i++){
+        String current= words[i];
+        String previous= words[i-1];
+        if(current.equals(previous))continue;
+        if(previous.indexOf(current)!=-1)return false;
+        if(current.length()>previous.length()){
+         String padded=" ".repeat(current.length()-previous.length());
+         previous+=padded;
+        }
+        if(previous.length()>current.length()){
+         String padded= " ".repeat(previous.length()-current.length());
+         current+=previous;
+        }
+        for(int j=0;j<previous.length();j++){
+            char ch1=previous.charAt(j);
+            char ch2= current.charAt(j);
+            if(ch1==ch2)continue;
+            if(ch1==' ' || ch2==' ') break;
+            if(order.indexOf(ch1)> order.indexOf(ch2))return false;
+            else break;
+        }
+     }
+     return true;
+    }
+}
