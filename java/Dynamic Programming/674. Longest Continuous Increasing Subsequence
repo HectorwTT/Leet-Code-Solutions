@@ -1,0 +1,14 @@
+class Solution {
+    public int findLengthOfLCIS(int[] nums) {
+        int [] subsequences= new int[nums.length];
+        subsequences[subsequences.length-1]=1;
+        int maxLength=1;
+        for(int i=subsequences.length-2;i>=0;i--){
+          if(nums[i]<nums[i+1]){
+              subsequences[i]=subsequences[i+1]+1;
+              if(maxLength<subsequences[i])maxLength=subsequences[i];
+          }else subsequences[i]=1;
+        }
+        return maxLength;
+    }
+}
