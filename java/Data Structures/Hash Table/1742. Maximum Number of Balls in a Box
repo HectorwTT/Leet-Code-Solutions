@@ -1,0 +1,30 @@
+class Solution {
+    public int countBalls(int lowLimit, int highLimit) {
+        HashMap<Integer,List<Integer>> map= new HashMap<>();
+        int max=0;
+        for(int i=lowLimit;i<=highLimit;i++){
+         int sum=0;
+         String iString= ""+i;
+         for(int j=0;j<iString.length();j++){
+            char ch= iString.charAt(j);
+            int val= ch-48;
+            sum+=val;
+         }
+         if(!map.containsKey(sum)){
+            List <Integer> list= new ArrayList<>();
+            list.add(i);
+            map.put(sum,list);
+         }else{
+           List<Integer> list= map.get(sum);
+           list.add(i);
+           map.replace(sum,list);
+         }
+        }
+        for(Integer key:map.keySet()){
+          int size= map.get(key).size();
+          if(size>max)max=size;
+        }
+        return max;
+
+    }
+}
