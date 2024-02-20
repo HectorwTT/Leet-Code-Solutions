@@ -1,0 +1,42 @@
+class Solution {
+    public int[] kWeakestRows(int[][] mat, int k) {
+        HashMap<Integer,Integer> map= new HashMap<>();
+        HashMap<Integer,List<Integer>> map1= new HashMap<>();
+        int []result= new int[k];
+        for(int i=0;i<mat.length;i++){
+          int numOfSoldiers=0;
+         for(int j=0;j<mat[i].length;j++){
+            if(mat[i][j]==1)numOfSoldiers++;
+         }
+         map.put(i,numOfSoldiers);
+        }
+        int [] counts= new int[map.size()];
+        int index=0;
+        for(Integer key: map.keySet()){
+         int count= map.get(key);
+         counts[index++]= count;
+         if(!map1.containsKey(count)){
+          List<Integer> list= new ArrayList<>();
+          list.add(key);
+          map1.put(count,list);
+         }else{
+           List<Integer> list= map1.get(count);
+           list.add(key);
+           map1.replace(count,list);
+         }
+        }
+        Arrays.sort(counts);
+        int number=0;
+        index=0;
+        int index1=0;
+        while(number<=k && index< counts.length){
+          if(index>0) if(counts[index]!= counts[index-1])index1=0;
+          List<Integer> list= map1.get(counts[index]);
+          list.sort(null);
+          if(number==k || index== counts.length)return result;
+          result[number++]= list.get(index1++);
+          index++;
+        }
+        return result;
+    }
+}
