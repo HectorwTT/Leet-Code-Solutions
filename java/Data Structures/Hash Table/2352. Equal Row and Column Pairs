@@ -1,0 +1,24 @@
+class Solution {
+    public int equalPairs(int[][] grid) {
+        int total=0;
+        HashMap<String,Integer> rowsMap= new HashMap<>();
+        for(int i=0;i<grid.length;i++){
+         int []arr= grid[i];
+         String num="";
+         for(int j=0;j<arr.length;j++){
+          num+=arr[j]+" ";
+         }
+         if(!rowsMap.containsKey(num))rowsMap.put(num,1);
+         else rowsMap.replace(num,rowsMap.get(num)+1);
+        }
+        for(int j=0;j<grid[0].length;j++){
+         String num="";
+         for(int i=0;i<grid.length;i++){
+            num+=grid[i][j]+" ";
+         }
+         if(rowsMap.containsKey(num))total+= rowsMap.get(num);
+        }
+        return total;
+
+    }
+}
