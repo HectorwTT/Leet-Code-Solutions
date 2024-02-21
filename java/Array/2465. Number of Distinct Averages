@@ -1,0 +1,17 @@
+class Solution {
+    public int distinctAverages(int[] nums) {
+     Arrays.sort(nums);
+     int left=0;
+     int right=nums.length-1;
+     List<Double> averages= new ArrayList<>();
+     while(left<right){
+        double min= nums[left];
+        double max= nums[right];
+        double average= (min+max)/2;
+        if(!averages.contains(average)) averages.add(average);
+        left++;
+        right--;
+     }
+     return averages.size();
+    }
+}
