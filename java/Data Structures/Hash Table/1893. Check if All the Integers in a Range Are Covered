@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isCovered(int[][] ranges, int left, int right) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     int total=0;
+     for(int i=0;i<ranges.length;i++){
+        int start= ranges[i][0];
+        int end= ranges[i][1];
+        if(!map.containsKey(start))map.put(start,end);
+        else{
+            if(end>map.get(start))map.replace(start,end);
+        }
+     }
+     for(int i=left;i<=right;i++){
+        boolean isCovered= false;
+     for(Integer start: map.keySet()){
+        int end = map.get(start);
+        if(i>=start && i<=end){
+            isCovered=true;
+            break;
+        }
+        
+     }
+      if(!isCovered)return false;
+     }
+     return true;
+    }
+}
