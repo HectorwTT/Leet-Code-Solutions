@@ -1,0 +1,40 @@
+class Solution {
+    public int[] sortEvenOdd(int[] nums) {
+      if(nums.length==1)return nums;
+      int evenIndex=0;
+      int oddIndex=1;
+      int evenListIndex=1;
+      int oddListIndex=0;
+      List<Integer> evens= new ArrayList<>();
+      List<Integer> odds= new ArrayList<>();
+      for(int i=0;i<nums.length;i++){
+        if(i%2==0) evens.add(nums[i]);
+        else odds.add(nums[i]);
+      }  
+      evens.sort(null);
+      odds.sort(null);
+      nums[evenIndex]=evens.get(0);
+      nums[oddIndex]=odds.get(odds.size()-1);
+      evenIndex+=2;
+      oddIndex+=2;
+      oddListIndex= odds.size()-2;
+      while(evenIndex<nums.length && oddIndex<nums.length){
+       int even= evens.get(evenListIndex++);
+       int odd= odds.get(oddListIndex--);
+       nums[evenIndex]=even;
+       nums[oddIndex]=odd;
+       evenIndex+=2;
+       oddIndex+=2;
+      }
+      while(oddIndex<nums.length){
+        nums[oddIndex]=odds.get(oddListIndex--);
+        oddIndex+=2;
+      }
+       while(evenIndex<nums.length){
+        nums[evenIndex]=evens.get(evenListIndex++);
+        evenIndex+=2;
+      }
+
+      return nums;
+    }
+}
