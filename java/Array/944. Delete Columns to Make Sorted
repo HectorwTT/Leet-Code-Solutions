@@ -1,0 +1,24 @@
+class Solution {
+    public int minDeletionSize(String[] strs) {
+        int total=0;
+        String word= strs[0];
+        int numChars= word.length();
+        if(strs.length==1)return 0;
+        if(strs.length==2 && word.length()==1 && word.charAt(0)<strs[1].charAt(0)) return 0;
+        char[][] chars= new char[strs.length][numChars];
+        for(int i=0;i<strs.length;i++){
+         char[] arr= strs[i].toCharArray();
+         chars[i]= arr;
+        }
+        for(int j=0;j<chars[0].length;j++){
+         
+         for(int i=1;i<chars.length;i++){
+          if(chars[i][j]< chars[i-1][j]){
+            total++;
+            break;
+          }  
+         }
+        }
+        return total;
+    }
+}
