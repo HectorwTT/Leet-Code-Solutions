@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isPrefixString(String s, String[] words) {
+       String substring= words[0];
+       if(s.indexOf(substring)==-1)return false;
+       if(substring.equals(s))return true;
+       for(int i=1;i<words.length;i++){
+        substring+= words[i];
+        if(s.equals(substring))return true;
+        if(s.indexOf(words[i])==-1)return false;
+
+       }
+       return substring.equals(s); 
+    }
+}
