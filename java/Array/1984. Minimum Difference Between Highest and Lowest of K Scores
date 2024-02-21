@@ -1,0 +1,13 @@
+class Solution {
+    public int minimumDifference(int[] nums, int k) {
+       Arrays.sort(nums);
+       int min=(int)Math.pow(10,5)+1;
+       for(int i=0;i<nums.length;i++){
+        int iPlusK= i+k-1;
+        if(iPlusK>nums.length-1)return min;
+        int diff= nums[iPlusK]-nums[i];
+        min= Math.min(diff,min);
+       } 
+       return min;
+    }
+}
