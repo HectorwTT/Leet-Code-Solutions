@@ -1,0 +1,16 @@
+class Solution {
+    public int numUniqueEmails(String[] emails) {
+       HashMap<String,Integer> map= new HashMap<>();
+       for(int i=0;i<emails.length;i++){
+         String[] names= emails[i].split("@");
+         String localName= names[0];
+         String domain= names[1];
+         int index=localName.indexOf("+");
+         if(index!=-1)localName= localName.substring(0,index);
+         localName=localName.replace(".","");
+         String email= localName+"@"+domain;
+         if(!map.containsKey(email))map.put(email,1);
+       }
+       return map.size();
+    }
+}
