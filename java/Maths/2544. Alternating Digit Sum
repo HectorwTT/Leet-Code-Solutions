@@ -1,0 +1,15 @@
+class Solution {
+    public int alternateDigitSum(int n) {
+        int total=0;
+        String number=""+n;
+        boolean isPlusSign=false;
+        for(int i=0;i<number.length();i++){
+         char ch= number.charAt(i);
+         int value= ch-48;
+         isPlusSign=!isPlusSign;
+         if(!isPlusSign)value*=-1;
+         total+=value;
+        }
+        return total;
+    }
+}
