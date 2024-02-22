@@ -1,0 +1,37 @@
+class Solution {
+    public List<String> commonChars(String[] words) {
+     HashMap<Character,Integer> map = new HashMap<>();
+     List<String> result= new ArrayList<>();
+     for(int i=0;i<words.length;i++){
+        String word= words[i];
+        HashMap<Character,Integer> currentMap= new HashMap<>();
+        for(int j=0;j<word.length();j++){
+         char ch= word.charAt(j);
+         if(!currentMap.containsKey(ch))currentMap.put(ch,1);
+         else currentMap.replace(ch,currentMap.get(ch)+1);
+        }
+        if(map.size()==0){
+         for(Character key:currentMap.keySet()){
+             map.put(key,currentMap.get(key));
+         }
+        }else{
+          for(Character key:map.keySet()){
+           if(!currentMap.containsKey(key)){
+            map.replace(key,0);
+           }
+           else if(currentMap.get(key)<map.get(key))map.replace(key,currentMap.get(key));
+          }
+        }
+     }
+     for(Character key :map.keySet()){
+        if(map.get(key)!=0){
+            int count= map.get(key);
+            while(count>0){
+                result.add(""+key);
+                count--;
+            }
+        }
+     }
+     return result;   
+    }
+}
