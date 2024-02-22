@@ -1,0 +1,17 @@
+class Solution {
+    public int countTriples(int n) {
+     int total=0;
+     for(int c=1;c<=n;c++ ){
+        int cSquared= (int)Math.pow(c,2);
+        for(int a=1;a<c;a++){
+         int aSquared= (int)Math.pow(a,2);
+         double bsqrt=Math.sqrt(cSquared-aSquared);
+         if(Math.ceil(bsqrt)==bsqrt){
+          int b= (int)bsqrt;
+          if(b>=a && b<=c)total+=2;
+         }
+        }
+     }
+     return total;   
+    }
+}
