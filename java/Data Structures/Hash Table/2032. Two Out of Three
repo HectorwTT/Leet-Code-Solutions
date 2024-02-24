@@ -1,0 +1,28 @@
+class Solution {
+    public List<Integer> twoOutOfThree(int[] nums1, int[] nums2, int[] nums3) {
+     List<Integer> result= new ArrayList<>();
+     HashMap<Integer,Integer> map1 = getMap(nums1);
+     HashMap<Integer,Integer> map2=   getMap(nums2);
+     HashMap<Integer,Integer> map3= getMap(nums3);
+     for(Integer key:map1.keySet()){
+        if(map2.containsKey(key)){
+            if(!result.contains(key))result.add(key);
+        }else{
+            if(!result.contains(key) && map3.containsKey(key)) result.add(key);
+        }
+     }
+      for(Integer key:map2.keySet()){
+        if(map3.containsKey(key)){
+           if(!result.contains(key)) result.add(key);
+        }
+     }
+     return result;
+    }
+    HashMap<Integer,Integer> getMap(int [] array){
+     HashMap<Integer,Integer> map= new HashMap<>();
+     for(int i=0;i<array.length;i++){
+        if(!map.containsKey(array[i])) map.put(array[i],1);
+     }
+     return map;
+    }
+}
