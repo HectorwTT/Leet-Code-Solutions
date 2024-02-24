@@ -1,0 +1,13 @@
+class Solution {
+    public int[] shuffle(int[] nums, int n) {
+        int ypointer=n;
+        int xpointer=0;
+        int index=0;
+        int [] result= new int[nums.length];
+        while(index<nums.length){
+         result[index++]=nums[xpointer++];
+         result[index++]= nums[ypointer++];
+        }
+        return result;
+    }
+}
