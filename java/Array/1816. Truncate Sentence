@@ -1,0 +1,13 @@
+class Solution {
+    public String truncateSentence(String s, int k) {
+        String [] words = s.split(" ");
+        int total=0;
+        String result="";
+        int index=0;
+        while(total<k){
+          result+=words[index++]+" ";
+          total++;
+        }
+        return result.trim();
+    }
+}
