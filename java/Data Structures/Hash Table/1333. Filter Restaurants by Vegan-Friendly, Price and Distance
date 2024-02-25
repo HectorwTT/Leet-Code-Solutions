@@ -1,0 +1,36 @@
+class Solution {
+    public List<Integer> filterRestaurants(int[][] restaurants, int veganFriendly, int maxPrice, int maxDistance) {
+        List<Integer> result= new ArrayList<>();
+        HashMap<Integer,List<Integer>>map = new HashMap<>();
+        int[] ratings;
+        for(int i=0;i<restaurants.length;i++){
+          if(((veganFriendly==1 && restaurants[i][2]==1)||(veganFriendly==0))
+              && restaurants[i][3]<=maxPrice 
+              && restaurants[i][4] <=maxDistance){
+            if(!map.containsKey(restaurants[i][1])){
+             List<Integer> ids= new ArrayList<>();
+             ids.add(restaurants[i][0]);
+             map.put(restaurants[i][1],ids);
+            }else{
+             List<Integer> ids= map.get(restaurants[i][1]);
+             ids.add(restaurants[i][0]);
+             map.put(restaurants[i][1],ids);
+            }
+          }
+        }
+        ratings= new int[map.size()];
+        int index=0;
+        for(Integer key:map.keySet()){
+         ratings[index++]= key;
+        }
+        System.out.println(map);
+        Arrays.sort(ratings);
+        for(int i=ratings.length-1;i>=0;i--){
+          List<Integer> ids= map.get(ratings[i]);
+          ids.sort(null);
+          Collections.reverse(ids);
+          result.addAll(ids);
+        }
+        return result;
+    }
+}
