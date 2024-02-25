@@ -1,0 +1,18 @@
+class Solution {
+    public int[] numberGame(int[] nums) {
+        int [] result= new int [nums.length];
+        Arrays.sort(nums);
+        if(nums.length==1)return nums;
+        int index=0;
+        int resultIndex=0;
+        while(index<nums.length){
+         int aliceNumber= nums[index++];
+         if(index==nums.length) break;
+         int bobNumber= nums[index++];
+         result[resultIndex++]= bobNumber;
+         if(resultIndex== result.length)break;
+         result[resultIndex++]= aliceNumber;
+        }
+        return result;
+    }
+}
