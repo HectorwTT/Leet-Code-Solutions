@@ -1,0 +1,20 @@
+class Solution {
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+      int [] durations = new int[releaseTimes.length];
+      int longestTime= releaseTimes[0];
+      List<Character> slowestChars= new ArrayList<>();
+      durations[0]= longestTime;
+      for(int i=1;i<durations.length;i++){
+        durations[i]= releaseTimes[i]-releaseTimes[i-1];
+        if(durations[i]>longestTime)longestTime=durations[i];
+      }  
+      for(int i=0;i<keysPressed.length();i++){
+        System.out.print(durations[i]+" ");
+        if(durations[i]==longestTime){
+         slowestChars.add(keysPressed.charAt(i));
+        }
+      }
+      slowestChars.sort(null);
+      return slowestChars.get(slowestChars.size()-1);
+    }
+}
