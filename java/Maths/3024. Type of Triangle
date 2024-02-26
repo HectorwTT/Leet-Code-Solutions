@@ -1,0 +1,46 @@
+class Solution {
+    public String triangleType(int[] nums) {
+     HashMap<Integer,List<Integer>> map = new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+        if(!map.containsKey(nums[i])){
+            List<Integer> list= new ArrayList<>();
+            list.add(nums[i]);
+            map.put(nums[i],list);
+        }else{
+            List<Integer> list= map.get(nums[i]);
+            list.add(nums[i]);
+            map.replace(nums[i],list);
+        }
+
+     }
+     if(map.size()==1) return "equilateral";
+     else{
+        List<Integer> sides= new ArrayList<>();
+        for(Integer key: map.keySet() ){
+         sides.addAll(map.get(key));
+        }
+        sides.sort(null);
+        int sideA=0;
+        int sideB=0;
+        int sideC=0;
+        for(int i=0;i<3;i++){
+            sideA= sides.get(i);
+            if(i==0){
+                sideB=sides.get(1);
+                sideC= sides.get(2);
+            } else if(i==1){
+                sideB=sides.get(0);
+                sideC=sides.get(2);
+            }else{
+                sideB=sides.get(0);
+                sideC=sides.get(1);
+            }
+        }
+        if(sideA<sideB+sideC && sideB<sideA+sideC && sideC<sideA+sideB){
+         if(map.size()==3) return "scalene";
+         else return "isosceles";
+        }
+        else return "none";
+     }
+    }
+}
