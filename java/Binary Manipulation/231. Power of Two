@@ -1,0 +1,6 @@
+class Solution {
+    public boolean isPowerOfTwo(int n) {
+     int number= n & n-1;
+     return number==0 && n>0;
+    }
+}
