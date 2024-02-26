@@ -1,0 +1,13 @@
+class Solution {
+    public double angleClock(int hour, int minutes) {
+        
+        double totalDegreesByMinuteHand= 6 * minutes;
+        double totalDegreesByHourHand=  0.5 * minutes;
+        if(hour<12)totalDegreesByHourHand+= 30 *hour;
+        double degreesSeparating =0;
+        if(totalDegreesByHourHand< totalDegreesByMinuteHand)
+          degreesSeparating= totalDegreesByMinuteHand-totalDegreesByHourHand;
+        else degreesSeparating= totalDegreesByHourHand-totalDegreesByMinuteHand;
+        return Math.min(360-degreesSeparating,degreesSeparating);
+    }
+}
