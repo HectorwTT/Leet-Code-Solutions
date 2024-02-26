@@ -1,0 +1,13 @@
+class Solution {
+    public boolean isPowerOfFour(int n) {
+       if(n<=0)return false;
+       double squareRootN= Math.pow(n,0.5);
+       double squareRootN1= Math.ceil(squareRootN);
+       if(squareRootN1!=squareRootN)return false;
+       else{
+        int n1= (int)squareRootN1;
+        int number= n & n-1;
+        return number==0;
+       }
+    }
+}
