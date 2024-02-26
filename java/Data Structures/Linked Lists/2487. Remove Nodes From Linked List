@@ -1,0 +1,41 @@
+class Solution {
+    public ListNode removeNodes(ListNode head) {
+        List<Integer> list= new ArrayList<>();
+        ListNode current= head;
+        ListNode result=null;
+        ListNode resultCurrent= null;
+        while(current!=null){
+         list.add(current.val);
+         current=current.next;
+        }
+        int[] largerElements= getNextLarger(list);
+        current=head;
+        int index=0;
+        while(current!=null){
+         if(largerElements[index++]==-1){
+             if(result==null){
+                result= new ListNode(current.val);
+                resultCurrent=result;
+             }else{
+                 resultCurrent.next= new ListNode(current.val);
+                 resultCurrent= resultCurrent.next;
+             }
+         }
+         current=current.next;
+        }
+        return result;
+    }
+    public int[] getNextLarger(List<Integer> list) {
+     int n = list.size();
+     int[] result = new int[n];
+     Stack<Integer> stack = new Stack<>();
+     for (int i = n-1; i>= 0; i--) {
+      while (!stack.isEmpty() && list.get(i)>= stack.peek()) {
+         stack.pop();
+      }
+      result[i] = stack.isEmpty() ? -1 : stack.peek();
+      stack.push(list.get(i));
+     }   
+     return result;
+    }
+}
