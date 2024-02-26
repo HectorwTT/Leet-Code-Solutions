@@ -1,0 +1,22 @@
+class Solution {
+    public int countElements(int[] nums) {
+     int n = nums.length;
+     int[] result = new int[n];
+     int total=0;
+     Arrays.sort(nums);
+     HashMap<Integer,Integer> smallerNums= new HashMap<>();
+     Stack<Integer> stack = new Stack<>();
+     for (int i = n-1; i>= 0; i--) {
+      while (!stack.isEmpty() && nums[i] >= stack.peek()) {
+         stack.pop();
+      }
+      result[i] = stack.isEmpty() ? (int)Math.pow(-10,5)-1 : stack.peek();
+      stack.push(nums[i]);
+     }
+     for(int i=0;i<result.length;i++){
+      if(!smallerNums.containsKey(result[i]))smallerNums.put(result[i],nums[i]);
+      if(smallerNums.containsKey(nums[i]) && result[i]!=(int)Math.pow(-10,5)-1)total++;
+     }
+     return total;
+    }
+}
