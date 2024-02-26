@@ -1,0 +1,18 @@
+class Solution {
+    public String replaceDigits(String s) {
+     String result="";
+     for(int i=0;i<s.length();i++){
+        char ch= s.charAt(i);
+        if(i%2==0){
+         result+=ch;
+         continue;
+        }
+        int val= ch-48;
+        char prev= s.charAt(i-1);
+        int prevVal= prev+val;
+        char newCh=(char)prevVal;
+        result+=newCh;
+     }   
+     return result;
+    }
+}
