@@ -1,0 +1,24 @@
+class Solution {
+    public String[] getFolderNames(String[] names) {
+        HashMap<String,Integer> map= new HashMap<>();
+        String [] result= new String [names.length];
+        for(int i=0;i<result.length;i++){
+         String name= names[i];
+         if(!map.containsKey(name)){
+            map.put(name,1);
+            result[i]= name;
+         }else{
+            int version = map.get(name);
+            String newName = name+"("+version+")";
+            while(map.containsKey(newName)){
+             version++;
+             newName= name+"("+version+")";
+            }
+            map.put(newName,1);
+            map.replace(name,version);
+            result[i]=newName;
+         }
+        }
+        return result;
+    }
+}
