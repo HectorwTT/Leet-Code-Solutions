@@ -1,0 +1,23 @@
+class Solution {
+    public int getLucky(String s, int k) {
+        int number=0;
+        String sNumber="";
+        int count=0;
+        for(int i=0;i<s.length();i++){
+         char ch= s.charAt(i);
+         int chval= ch-97 +1;
+         sNumber+=chval;
+        }
+        while(count<k){
+         int newValue=0;
+         for(int i=0;i<sNumber.length();i++){
+          char ch= sNumber.charAt(i);
+          int chval= ch-48;
+          newValue+=chval;
+         }
+         sNumber=""+newValue;
+         count++;
+        }
+        return Integer.parseInt(sNumber);
+    }
+}
