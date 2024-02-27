@@ -1,0 +1,32 @@
+class Solution {
+    private static final char slash    = '/',
+                              asterisk = '*'; 
+    public List<String> removeComments(String[] source) {
+        List<String> uncommentedSource = new ArrayList<>();
+        StringBuilder uncommentedLine = new StringBuilder();
+        boolean isBlockCodeComment = false;
+        for (String commentedLine : source) {
+            char[] line = commentedLine.toCharArray();
+            int length = line.length;
+            for (int index = 0; index < length; ++index)
+                if (!isBlockCodeComment && line[index] == slash && index + 1 < length && line[index + 1] == asterisk) {
+                    isBlockCodeComment = true;
+                    index++;
+                }
+                else if (isBlockCodeComment && line[index] == asterisk && index + 1 < length && line[index + 1] == slash) {
+                    isBlockCodeComment = false;
+                    index++;
+                }
+                else if (!isBlockCodeComment && line[index] == slash && index + 1 < length && line[index + 1] == slash) 
+                    break;
+                else if (!isBlockCodeComment)
+                    uncommentedLine.append(line[index]);
+            
+            if (!isBlockCodeComment && uncommentedLine.length() != 0) {
+                uncommentedSource.add(uncommentedLine.toString());
+                uncommentedLine.setLength(0);   
+            }   
+        }
+        return uncommentedSource;
+    }
+}
