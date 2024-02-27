@@ -1,0 +1,20 @@
+class Solution {
+    public int matrixSum(int[][] nums) {
+      int score=0;
+      int column= nums[0].length-1;
+      for(int i=0;i<nums.length;i++){
+        int [] arr= nums[i];
+        Arrays.sort(arr);
+      }  
+      while(column>=0){
+        int max1=-2;
+        for(int i=0;i<nums.length;i++){
+         int max2= nums[i][column];
+         max1=Math.max(max1,max2);
+        }
+        score+=max1;
+        column--;
+      }
+     return score;
+    }
+}
