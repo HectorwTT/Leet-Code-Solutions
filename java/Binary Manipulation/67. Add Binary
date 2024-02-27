@@ -1,0 +1,40 @@
+class Solution {
+    public String addBinary(String a, String b) {
+        int carryover=0;
+        int max= Math.max(a.length(),b.length());
+        int numOfZeroes= 0;
+        String result="";
+        if(a.length()==max){
+            numOfZeroes= max-b.length();
+            String zeroes="0".repeat(numOfZeroes);
+            b=zeroes+b;
+        }else{
+            numOfZeroes= max-a.length();
+            String zeroes="0".repeat(numOfZeroes);
+            a=zeroes+a;
+        }
+        for(int i= max-1;i>=0;i--){
+         char aCh= a.charAt(i);
+         char bCh= b.charAt(i);
+         if(aCh=='1' && bCh=='1'){
+            if(carryover==1)result="1"+result;
+            else {
+                carryover=1;
+                result="0"+result;
+            }
+         }else{
+            if(aCh=='0' && bCh=='0'){
+             if(carryover==1){
+                 result="1"+result;
+                 carryover=0;
+             }else result="0"+result;
+            }else{
+              if(carryover==1)result="0"+result;
+              else result="1"+result;
+            }
+         }
+        }
+        if(carryover==1) result="1"+result;
+        return result;
+    }
+}
