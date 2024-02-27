@@ -1,0 +1,22 @@
+class Solution {
+    public int[] distinctDifferenceArray(int[] nums) {
+     int [] diff= new int [nums.length];
+     HashMap<Integer,Integer> prefixes= new HashMap<>();
+     HashMap<Integer,Integer> suffixes= new HashMap<>();
+     int [] prefixArray= new int[nums.length];
+     int [] suffixArray= new int[nums.length];
+     for(int i=0;i<nums.length;i++){
+      if(!prefixes.containsKey(nums[i]))prefixes.put(nums[i],1);
+       prefixArray[i]= prefixes.size();
+     }
+     for(int i=nums.length-1;i>=0;i--){
+      if(!suffixes.containsKey(nums[i]))suffixes.put(nums[i],1);
+      suffixArray[i]=suffixes.size();
+     }
+     for(int i=0;i<diff.length;i++){
+        if(i==diff.length-1)diff[i]= prefixArray[i];
+        else diff[i]= prefixArray[i]-suffixArray[i+1];
+     }
+     return diff;
+    }
+}
