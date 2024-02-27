@@ -1,0 +1,21 @@
+class Solution {
+    public boolean isHappy(int n) {
+        int number=n;
+        HashMap<Integer,Integer> map= new HashMap<>();
+        map.put(number,1);
+        while(number!=1){
+         String nstr=""+number;
+         int value=0;
+         for(int i=0;i<nstr.length();i++){
+          char ch= nstr.charAt(i);
+          int val= ch-48;
+          int valSquared= (int)Math.pow(val,2);
+          value+=valSquared;
+         }
+         number=value;
+         if(map.containsKey(number))return false;
+         map.put(number,1);
+        }
+        return true;
+    }
+}
