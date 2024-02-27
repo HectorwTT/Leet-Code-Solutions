@@ -1,0 +1,37 @@
+class Solution {
+    public boolean canThreePartsEqualSum(int[] arr) {
+      HashMap<Integer,Integer> map= new HashMap<>();
+      int [] sums= new int[arr.length];
+      int total=0;
+      for(int i=0;i<arr.length;i++){
+        total+=arr[i];
+        sums[i]=total;
+        if(!map.containsKey(sums[i]))map.put(sums[i],i);
+        else map.replace(sums[i],i);
+      }
+      if(total==0 && map.size()==1)return true;
+      int firstZeroIndex=-1;
+      int secondZeroIndex=-1;
+      int thirdZeroIndex=-1;
+      for(int i=0;i<sums.length;i++){
+       int sum= sums[i];
+       if(map.containsKey(2*sum) && map.containsKey(3 * sum)){
+           int thirdPart= map.get(3*sum);
+            int secondPart= map.get(2*sum);
+           if(secondPart>i && thirdPart>i && thirdPart>secondPart){
+            if(thirdPart==sums.length-1) return true;
+           }
+       }
+       if(sums[i]==0){
+           if(firstZeroIndex==-1)firstZeroIndex=i;
+           else if(secondZeroIndex==-1)secondZeroIndex=i;
+           else if(thirdZeroIndex==-1)thirdZeroIndex=i;
+           if(firstZeroIndex!=-1 && secondZeroIndex!=-1  
+              && secondZeroIndex>firstZeroIndex && thirdZeroIndex>secondZeroIndex
+              && (thirdZeroIndex==arr.length-1 || sums[arr.length-1]==0)) return true;
+       }
+      }
+      
+      return false;  
+    }
+}
