@@ -1,0 +1,17 @@
+class Solution {
+    public int countPrimeSetBits(int left, int right) {
+     int total=0;
+     for(int i=left;i<=right;i++){
+       int countOnes= Integer.bitCount(i);
+       if(countOnes==1)continue;
+       if(isPrime(countOnes))total++;
+     }
+     return total;
+    }
+    boolean isPrime(int number){
+      for(int i=2;i<number;i++){
+        if(number%i==0) return false;
+      }
+      return true;
+    }
+}
