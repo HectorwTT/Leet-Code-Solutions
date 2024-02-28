@@ -1,0 +1,16 @@
+class Solution {
+    public int[] evenOddBit(int n) {
+     int [] result= new int[2];
+     String binary=Integer.toBinaryString(n);
+     int even=0;
+     int odd=0;
+     for(int i=binary.length()-1;i>=0;i--){
+      int index= binary.length()-1-i;
+      if(index%2==0 && binary.charAt(i)=='1')even++;
+      if(index%2==1 && binary.charAt(i)=='1')odd++;
+     }
+     result[0]=even;
+     result[1]=odd;
+     return result;
+    }
+}
