@@ -1,0 +1,19 @@
+class Solution {
+    public int missingInteger(int[] nums) {
+     int x=nums[0]+1;
+     HashMap<Integer,Integer> map= new HashMap<>();
+     int sum= nums[0];
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i]))map.put(nums[i],1);
+     }
+     for(int i=1;i<nums.length;i++){
+      if(nums[i]!=nums[i-1]+1){
+        x= sum;
+        while(map.containsKey(x))x++;
+        return x;
+      }else sum+=nums[i];
+     }
+     if(sum!= nums[0]) return sum;
+     return x;   
+    }
+}
