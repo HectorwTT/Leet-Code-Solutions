@@ -1,0 +1,28 @@
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+     HashMap<Integer,Integer> map = new HashMap<>();
+     List<Integer> ids= new ArrayList<>();
+     int [][] result;
+     for(int i=0;i<nums1.length;i++){
+        int id= nums1[i][0];
+        int value= nums1[i][1];
+        map.put(id,value);
+        ids.add(id);
+     }
+     for(int i=0;i<nums2.length;i++){
+        int id= nums2[i][0];
+        int value= nums2[i][1];
+        if(!map.containsKey(id))map.put(id,value);
+        else map.replace(id,map.get(id)+value);
+        if(!ids.contains(id)) ids.add(id);
+     }
+     ids.sort(null);
+     result= new int[map.size()][2];
+     for(int i=0;i<ids.size();i++){
+      int id=ids.get(i);
+      result[i][0]=id;
+      result[i][1]= map.get(id);
+     }
+     return result;
+    }
+}
