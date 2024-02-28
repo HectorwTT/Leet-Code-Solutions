@@ -1,0 +1,51 @@
+class Solution {
+    public int findBottomLeftValue(TreeNode root) {
+        HashMap<Integer,List<Integer>> tree= getRestOfTree(1,root);
+        int size= tree.size();
+        List<Integer> lastRow= tree.get(size);
+        return lastRow.get(0);
+    }
+    public HashMap<Integer,List<Integer>> getRestOfTree(int level,TreeNode t){
+     int value= t.val;
+     List<Integer> root= new ArrayList<>();
+     root.add(value);
+     HashMap<Integer,List<Integer>> tree= new HashMap<>();
+     tree.put(level,root);
+     if(t.left ==null && t.right== null){
+       return tree;
+     }else{
+      int nextlevel =level+1;
+      if(t.left==null){
+         HashMap<Integer,List<Integer>> rightSubtree= getRestOfTree(nextlevel,t.right);
+         tree.putAll(rightSubtree);
+         return tree;
+      }else if(t.right==null){
+          HashMap<Integer,List<Integer>> leftSubtree= getRestOfTree(nextlevel,t.left);
+         tree.putAll(leftSubtree);
+         return tree;
+      }else{
+         HashMap<Integer,List<Integer>> leftSubtree= getRestOfTree(nextlevel, t.left);
+         HashMap<Integer,List<Integer>> rightSubtree= getRestOfTree(nextlevel, t.right);
+         HashMap<Integer,List<Integer>> restSubtree = new HashMap<>();
+         for(Integer key:leftSubtree.keySet()){
+           if(rightSubtree.containsKey(key)){
+             List<Integer> rightSubtreeList = rightSubtree.get(key);
+             List<Integer> leftSubtreeList= leftSubtree.get(key);
+             leftSubtreeList.addAll(rightSubtreeList);
+             leftSubtree.replace(key,leftSubtreeList);
+           }
+         }
+         for(Integer key:rightSubtree.keySet()){
+            if(!leftSubtree.containsKey(key)){
+               List<Integer> rightSubtreeList= rightSubtree.get(key);
+               restSubtree.put(key,rightSubtreeList);
+            }
+         }
+         tree.putAll(leftSubtree);
+         tree.putAll(restSubtree);
+         
+         return tree;
+      }
+      }
+   }
+}
