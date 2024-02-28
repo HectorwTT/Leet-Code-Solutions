@@ -1,0 +1,15 @@
+class Solution {
+    public int minOperations(List<Integer> nums, int k) {
+       HashMap<Integer,Integer> map= new HashMap<>();
+       int numOfOperations=0;
+       for(int i=1;i<=k;i++){
+         map.put(i,1);
+       } 
+       for(int i=nums.size()-1;i>=0;i--){
+         if(map.containsKey(nums.get(i)))map.remove(nums.get(i));
+         numOfOperations++;
+         if(map.size()==0)break;
+       }
+       return numOfOperations;
+    }
+}
