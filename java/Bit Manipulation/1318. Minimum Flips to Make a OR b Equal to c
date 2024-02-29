@@ -1,0 +1,47 @@
+class Solution {
+    public int minFlips(int a, int b, int c) {
+       String aBinary= Integer.toBinaryString(a);
+       String bBinary=Integer.toBinaryString(b);
+       String cBinary=Integer.toBinaryString(c);
+       int total=0;
+       if(aBinary.length()<bBinary.length()){
+         String zeroes="0".repeat(bBinary.length()-aBinary.length());
+         aBinary=zeroes+aBinary;
+       }
+       if(bBinary.length()<aBinary.length()){
+         String zeroes="0".repeat(aBinary.length()-bBinary.length());
+         bBinary=zeroes+bBinary;
+       }
+       if(aBinary.length()<cBinary.length()){
+         String zeroes="0".repeat(cBinary.length()-aBinary.length());
+         aBinary=zeroes+aBinary;
+       }
+       if(cBinary.length()<aBinary.length()){
+          String zeroes="0".repeat(aBinary.length()-cBinary.length());
+         cBinary=zeroes+cBinary;
+       }
+
+        if(bBinary.length()<cBinary.length()){
+         String zeroes="0".repeat(cBinary.length()-bBinary.length());
+         bBinary=zeroes+bBinary;
+       }
+       if(cBinary.length()<bBinary.length()){
+          String zeroes="0".repeat(bBinary.length()-cBinary.length());
+         cBinary=zeroes+cBinary;
+       }
+       for(int i= aBinary.length()-1;i>=0;i--){
+        char cCh= cBinary.charAt(i);
+        char aCh=aBinary.charAt(i);
+        char bCh=bBinary.charAt(i);
+        if(cCh=='1'){
+          if(aCh=='0' && bCh=='0')total++;
+
+        }
+        else if(cCh=='0'){
+         if(aCh=='1')total++;
+         if(bCh=='1')total++;
+        }
+       }
+       return total;
+    }
+}
