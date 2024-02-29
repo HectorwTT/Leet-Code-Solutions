@@ -1,0 +1,36 @@
+class Solution {
+    public int diagonalPrime(int[][] nums) {
+     List<Integer> diagonalOne= new ArrayList<>();
+     List<Integer> diagonalTwo= new ArrayList<>();
+     HashMap<Integer,Integer> map= new HashMap<>();
+     int maxPrime= 0;
+     int row=0;
+     int column= nums[row].length-1;
+     while(row<nums.length && column>=0){
+      int number=nums[row++][column--];
+      if(isPrime(number) && !map.containsKey(number)){
+        map.put(number,1);
+        if(number>maxPrime)maxPrime=number;
+      }
+     }
+     row= 0;
+     column=0;
+     while(row<nums.length && column<nums[0].length){
+       int number= nums[row++][column++];
+       if(isPrime(number) && !map.containsKey(number)){
+           map.put(number,1);
+           if(number>maxPrime)maxPrime=number;
+       }
+     }
+     return maxPrime;
+    }
+    boolean isPrime(int number){
+     if(number==1) return false;
+     if (number==2) return true;
+     for(int i=2;i*i<=number;i++){
+      if(number%i==0) return false;
+     }
+      return true;
+    }
+    
+}
