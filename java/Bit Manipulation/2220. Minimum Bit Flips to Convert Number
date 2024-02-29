@@ -1,0 +1,21 @@
+class Solution {
+    public int minBitFlips(int start, int goal) {
+        String startBinary= Integer.toBinaryString(start);
+        String endBinary= Integer.toBinaryString(goal);
+        int total=0;
+        if(startBinary.length()<endBinary.length()) {
+         String zeroes= "0".repeat(endBinary.length()-startBinary.length());
+         startBinary=zeroes+startBinary;
+        }
+        if(endBinary.length()<startBinary.length()){
+         String zeroes= "0".repeat(startBinary.length()-endBinary.length());
+         endBinary=zeroes+endBinary;
+        }
+        for(int i=0;i<endBinary.length();i++){
+         char endCh= endBinary.charAt(i);
+         char startCh= startBinary.charAt(i);
+         if(startCh!=endCh)total++;
+        }
+        return total;
+    }
+}
