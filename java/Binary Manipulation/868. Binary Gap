@@ -1,0 +1,21 @@
+class Solution {
+    public int binaryGap(int n) {
+        int onesCount= Integer.bitCount(n);
+        if(onesCount==1)return 0;
+        String binary = Integer.toBinaryString(n);
+        HashMap<Character,Integer> map= new HashMap<>();
+        int maxDistance=0;
+        for(int i=0;i<binary.length();i++){
+          char ch= binary.charAt(i);
+          if(ch=='1'){
+            if(!map.containsKey('1'))map.put('1',i);
+            else{
+             int distance= i-map.get('1');
+             if(distance>maxDistance)maxDistance=distance;
+             map.replace('1',i);
+            }
+          }
+        }
+        return maxDistance;
+    }
+}
