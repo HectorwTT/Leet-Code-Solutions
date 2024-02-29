@@ -1,0 +1,38 @@
+class Solution {
+    public int getKth(int lo, int hi, int k) {
+       HashMap<Integer,List<Integer>> map = new HashMap<>();
+       int count=0;
+       List<Integer>powers= new ArrayList<>();
+       for(int i=lo;i<=hi;i++){
+        int number=i;
+        int power=0;
+        while(number!=1){
+            if(number%2==0)number/=2;
+            else number=(3*number)+1;
+            power++;
+        }
+        if(!map.containsKey(power)){
+         List<Integer> list= new ArrayList<>();
+         list.add(i);
+         map.put(power,list);
+        }else{
+          List<Integer> list= map.get(power);
+          list.add(i);
+          map.replace(power,list);
+        }
+        if(!powers.contains(power))powers.add(power);
+       }
+       powers.sort(null);
+       for(int i=0;i<powers.size();i++){
+         int power= powers.get(i);
+         List<Integer> list= map.get(power);
+         list.sort(null);
+         for(int j=0;j<list.size();j++){
+            int number= list.get(j);
+            count++;
+            if(count==k)return number;
+         }
+       }
+       return -1;   
+    }
+}
