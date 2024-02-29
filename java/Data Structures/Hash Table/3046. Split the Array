@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPossibleToSplit(int[] nums) {
+       HashMap<Integer,Integer> map = new HashMap<>();
+       List<Integer> uniques= new ArrayList<>();
+       List<Integer> duplicates= new ArrayList<>();
+       List<Integer> splitdups= new ArrayList<>();
+       for(int i=0;i<nums.length;i++){
+        if(!map.containsKey(nums[i]))map.put(nums[i],1);
+        else map.replace(nums[i],map.get(nums[i])+1);
+       } 
+       for(Integer key:map.keySet()){
+        if(map.get(key)>2)return false;
+        if(map.get(key)==2)duplicates.add(key);
+        if(map.get(key)==1)uniques.add(key);
+       }
+       
+       return duplicates.size()+uniques.size()/2==nums.length/2;
+    }
+}
