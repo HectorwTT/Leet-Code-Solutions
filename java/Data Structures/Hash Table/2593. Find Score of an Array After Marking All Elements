@@ -1,0 +1,43 @@
+class Solution {
+    public long findScore(int[] nums) {
+     long total=0;
+     HashMap<Integer,List<Integer>> map= new HashMap<>();
+     List<Integer> list= new ArrayList<>();
+     boolean[] hasBeenRemoved= new boolean[nums.length];
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i])){
+          List<Integer> indexes= new ArrayList<>();
+          indexes.add(i);
+          map.put(nums[i],indexes);
+      }else{
+          List<Integer> indexes= map.get(nums[i]);
+          indexes.add(i);
+          map.replace(nums[i],indexes);
+      }
+      list.add(nums[i]);
+     }
+     list.sort(null);
+     for(int i=0;i<list.size();i++){
+         int number= list.get(i);
+         List<Integer> indexes= map.get(number);
+         int index= indexes.remove(0);
+         if(hasBeenRemoved[index]==true)continue;
+         if(index==0){
+             hasBeenRemoved[index]=true;
+             if(nums.length>1)hasBeenRemoved[index+1]=true;
+         }else if(index==nums.length-1){
+             hasBeenRemoved[index]=true;
+             hasBeenRemoved[index-1]=true;
+         }else{
+            hasBeenRemoved[index]=true;
+            hasBeenRemoved[index-1]=true;
+            hasBeenRemoved[index+1]=true;
+         }
+         total+= 1L *number;
+         if(indexes.size()>0){
+          map.replace(number,indexes);
+         }else map.remove(number);
+     }
+     return total;
+    }
+}
