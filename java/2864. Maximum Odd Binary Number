@@ -1,0 +1,21 @@
+class Solution {
+    public String maximumOddBinaryNumber(String s) {
+     int numOfOnes=0;
+     for(int i=0;i<s.length();i++){
+        if(s.charAt(i)=='1')numOfOnes++;
+     }
+     if(numOfOnes==0) return s;
+     else{
+        String result="1";
+        numOfOnes--;
+        String ones="";
+        while( numOfOnes!=0){
+          ones+="1";
+          numOfOnes--;
+        }
+        String zeroes= "0".repeat(s.length()-ones.length()-1);
+        result=ones+zeroes+result;
+        return result;
+     }
+    }
+}
