@@ -1,0 +1,36 @@
+class Solution {
+    public ListNode doubleIt(ListNode head) {
+        Stack<Integer> stack= new Stack<>();
+        Stack<Integer> result= new Stack<>();
+        int carryover=0;
+        ListNode current= head;
+        ListNode newHead=null;
+        while(current!=null){
+         stack.push(current.val);
+         current=current.next;
+        }
+        while(!stack.isEmpty()){
+         int number= stack.pop()*2;
+         if(carryover==1)number+=1;
+         if(number>=10){
+             result.push(number-10);
+             carryover=1;
+         }else{
+            result.push(number);
+            carryover=0;
+         }
+        }
+        if(carryover==1) result.push(1);
+        while(!result.isEmpty()){
+          int number= result.pop();
+          if(newHead==null){
+              newHead=new ListNode(number);
+              current=newHead;
+          }else{
+              current.next= new ListNode(number);
+              current=current.next;
+          }
+        }
+        return newHead;
+    }
+}
