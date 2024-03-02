@@ -1,0 +1,23 @@
+class Solution {
+    public int maximumCostSubstring(String s, String chars, int[] vals) {
+     int max=0;
+     int [] cost= new int[s.length()];
+     for(int i=0;i<s.length();i++){
+      char ch= s.charAt(i);
+      int chIndexInChars=chars.indexOf(""+ch);
+      if(chIndexInChars==-1)cost[i]=ch-96;
+      else cost[i]= vals[chIndexInChars];
+     }   
+     int total=0;
+     int prevTotal=0;
+     for(int i=0;i<cost.length;i++){
+      total+=cost[i];
+      if(total>max)max=total;
+      if(total<0){
+        total=0;
+        prevTotal=0;
+      }else prevTotal=total;
+     }
+     return max;
+    }
+}
