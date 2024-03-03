@@ -1,0 +1,35 @@
+class Solution {
+    public ListNode oddEvenList(ListNode head) {
+     int count=0;
+     List<Integer> odds= new ArrayList<>();
+     List<Integer> evens= new ArrayList<>();
+     ListNode result=null;
+     ListNode current= head;
+     int oddsIndex=0;
+     int evensIndex=0;
+     while(current!=null){
+      count++;
+      if(count%2==1)odds.add(current.val);
+      else evens.add(current.val);
+      current=current.next;
+     }
+     count=1;
+     int size=odds.size()+evens.size();
+     System.out.println(odds);
+     System.out.println(evens);
+     while(oddsIndex<odds.size()){
+      if(result==null){
+        result= new ListNode(odds.get(oddsIndex++));
+        current=result;
+      }else{
+          current.next=new ListNode(odds.get(oddsIndex++));
+          current=current.next;
+      }
+     }
+     while(evensIndex<evens.size()){
+        current.next=new ListNode(evens.get(evensIndex++));
+        current=current.next;
+     }
+     return result;
+    }
+}
