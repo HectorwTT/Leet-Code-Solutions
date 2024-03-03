@@ -1,0 +1,8 @@
+class Solution {
+    public int accountBalanceAfterPurchase(int purchaseAmount) {
+        int roundedAmount=0;
+        if(purchaseAmount%10>=5)roundedAmount= purchaseAmount+(10-(purchaseAmount%10));
+        else roundedAmount=purchaseAmount-(purchaseAmount%10);
+        return 100-roundedAmount;
+    }
+}
