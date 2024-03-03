@@ -1,0 +1,18 @@
+class Solution {
+    public String removeDigit(String number, char digit) {
+        List<Integer> indexes= new ArrayList<>();
+        String result="";
+        String max=" ";
+        for(int i=0;i<number.length();i++){
+         if(number.charAt(i)==digit)indexes.add(i);
+        }
+        for(int i=0;i<indexes.size();i++){
+         int index= indexes.get(i);
+         String numSubstring="";
+         if(index==number.length()-1){numSubstring= number.substring(0,index);}
+         else{ numSubstring=number.substring(0,index)+number.substring(index+1);}
+         if(max.compareTo(numSubstring)<0)max=numSubstring;
+        }
+        return String.valueOf(max);
+    }
+}
