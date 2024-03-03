@@ -1,0 +1,19 @@
+class Solution {
+    public int minMaxDifference(int num) {
+     int max=9;
+     int min=0;
+     String number= ""+num;
+     min=number.charAt(0)-48;
+     for(int i=0;i<number.length();i++){
+       char ch=number.charAt(i);
+       int chValue= ch-48;
+       if(chValue!=9){
+        max=chValue;
+        break;
+       }
+     }
+     String maxNumber= number.replaceAll(""+max,"9");
+     String minNumber=number.replaceAll(""+min,"0");
+     return Integer.parseInt(maxNumber)-Integer.parseInt(minNumber);
+    }
+}
