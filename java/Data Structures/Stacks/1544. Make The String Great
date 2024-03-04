@@ -1,0 +1,21 @@
+class Solution {
+    public String makeGood(String s) {
+     Stack<Character> stack= new Stack<>();
+     String result="";
+     for(int i=0;i<s.length();i++){
+      char ch= s.charAt(i);
+      if(stack.isEmpty())stack.push(ch);
+      else{
+       char previous= stack.peek();
+       int chValue= ch;
+       int previousValue=previous;
+       if(chValue== previousValue+32 ||chValue==previousValue-32)stack.pop();
+       else stack.push(ch);
+      }
+     }
+     while(!stack.isEmpty()){
+      result=stack.pop()+result;
+     }
+     return result;
+    }
+}
