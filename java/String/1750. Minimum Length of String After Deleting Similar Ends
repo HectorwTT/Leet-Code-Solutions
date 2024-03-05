@@ -1,0 +1,36 @@
+class Solution {
+    public int minimumLength(String s) {
+     int left=0;
+     int right= s.length()-1;
+     char leftCh= s.charAt(left);
+     char rightCh=s.charAt(right);
+     int previousLeft=left;
+     int previousRight=right;
+     if(s.length()==1)return 1;
+     char nextLeftCh= s.charAt(left+1);
+      char nextRightCh=s.charAt(right-1);
+     while(leftCh==rightCh && left<right){
+      if(left+1==s.length())break;
+      if(right-1==-1)break;
+      if(previousLeft!=left) nextLeftCh= s.charAt(left+1);
+      if(previousRight!=right) nextRightCh=s.charAt(right-1);
+      if(nextLeftCh==leftCh){
+        left++;
+        continue;
+      }
+      if(nextRightCh==rightCh){
+          right--;
+          continue;
+      }
+      previousLeft=left;
+      left++;
+      previousRight=right;
+      right--;
+      leftCh= s.charAt(left);
+      rightCh=s.charAt(right);
+      if(left==right)return 1;
+     }
+     if(left>=right)return 0;
+     else return right-left+1;
+    }
+}
