@@ -1,0 +1,25 @@
+class Solution {
+    public int diagonalSum(int[][] mat) {
+        List<Integer> primary= new ArrayList<>();
+        List<Integer> secondary= new ArrayList<>();
+        HashMap<List<Integer>,Integer> map= new HashMap<>();
+        for(int i=0;i<mat.length;i++){
+         primary.add(mat[i][i]);
+         List<Integer> list= new ArrayList<>();
+         list.add(i);
+         list.add(i);
+         map.put(list,1);
+        }
+        for(int i=0;i<mat.length;i++){
+         List<Integer> list= new ArrayList<>();
+         list.add(i);
+         list.add(mat[0].length-1-i);
+         if(!map.containsKey(list)){
+             secondary.add(mat[i][mat[0].length-1-i]);
+             map.put(list,1);
+         }
+        }
+        return primary.stream().mapToInt(i->i.intValue()).sum()
+             +secondary.stream().mapToInt(i->i.intValue()).sum();
+    }
+}
