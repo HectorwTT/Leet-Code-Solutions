@@ -1,0 +1,52 @@
+class Solution {
+    public int minSwaps(String s) {
+     List<Integer> oneIndexes1=new ArrayList<>();
+     List<Integer> zeroIndexes1= new ArrayList<>();
+     List<Integer> oneIndexes2= new ArrayList<>();
+     List<Integer> zeroIndexes2= new ArrayList<>();
+     char one='1';
+     char zero='0';
+     String alternatingStartWithOne=""+one;
+     String alternatingStartWithZero=""+zero;
+     char previous=one;
+     for(int i=1;i<s.length();i++){
+      if(previous=='1'){
+       alternatingStartWithOne+='0';
+       previous='0';
+      }else{
+        alternatingStartWithOne+='1';
+        previous='1';
+      }
+     }
+     previous=zero;
+      for(int i=1;i<s.length();i++){
+      if(previous=='1'){
+       alternatingStartWithZero+='0';
+       previous='0';
+      }else{
+        alternatingStartWithZero+='1';
+        previous='1';
+      }
+     }
+     for(int i=0;i<alternatingStartWithOne.length();i++){
+      char alternatingCh=alternatingStartWithOne.charAt(i);
+      char sCh=s.charAt(i);
+      if(alternatingCh!=sCh){
+        if(sCh=='1') oneIndexes1.add(i);
+        else zeroIndexes1.add(i);
+      }
+     }
+     for(int i=0;i<alternatingStartWithZero.length();i++){
+      char alternatingCh=alternatingStartWithZero.charAt(i);
+      char sCh=s.charAt(i);
+      if(alternatingCh!=sCh){
+        if(sCh=='1') oneIndexes2.add(i);
+        else zeroIndexes2.add(i);
+      }  
+     }
+     if(oneIndexes1.size()!= zeroIndexes1.size() && oneIndexes2.size()!= zeroIndexes2.size())return -1;
+     else if(oneIndexes1.size()!= zeroIndexes1.size())return oneIndexes2.size();
+     else if(oneIndexes2.size()!=zeroIndexes2.size())return oneIndexes1.size();
+     else return Math.min(oneIndexes1.size(),oneIndexes2.size());
+    }
+}
