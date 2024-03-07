@@ -1,0 +1,22 @@
+class Solution {
+    public int[] findIndices(int[] nums, int indexDifference, int valueDifference) {
+        int [] result=new int[2];
+        result[0]=-1;
+        result[1]=-1;
+        for(int i=0;i<nums.length;i++){
+         int left=i;
+         int right= nums.length-1;
+         while(left<=right){
+          if(Math.abs(left-right)>=indexDifference){
+           if(Math.abs(nums[left]-nums[right])>=valueDifference){
+            result[0]=left;
+            result[1]=right;
+            break;
+           }
+          }
+          right--;
+         }
+        }
+        return result;
+    }
+}
