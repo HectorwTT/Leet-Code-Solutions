@@ -1,0 +1,12 @@
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int left=0;
+        int right=0;
+        String result="";
+        while(left<word1.length() || right<word2.length()){
+         if(left<word1.length())result+=word1.charAt(left++);
+         if(right<word2.length())result+=word2.charAt(right++);
+        }
+        return result;
+    }
+}
