@@ -1,0 +1,16 @@
+public class Solution {
+    public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+      ListNode currentA=headA;
+      ListNode currentB=headB;
+      HashMap<ListNode,Integer> map = new HashMap<>();
+      while(currentA!=null ){
+        map.put(currentA,1);
+        currentA=currentA.next;
+      }
+      while(currentB!=null){
+        if(map.containsKey(currentB))return currentB;
+        else currentB=currentB.next;
+      }
+      return null;
+    }
+}
