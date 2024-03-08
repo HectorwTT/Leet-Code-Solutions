@@ -1,0 +1,29 @@
+class Solution {
+    public String reorderSpaces(String text) {
+     int numOfSpaces=0;
+     int numOfWords=0;
+     String result="";
+     for(int i=0;i<text.length();i++){
+        char ch= text.charAt(i);
+        if(ch==' ') numOfSpaces++;
+     }
+     String[] words= text.split(" ");
+     List<String> newWords=new ArrayList<>();
+     if(words.length==1)return text;
+     for(int i=0;i<words.length;i++){
+        if(words[i].equals(""))continue;
+        else{
+          numOfWords++;
+          newWords.add(words[i]);
+        }
+     }
+     if(numOfWords==1) return text.trim()+" ".repeat(numOfSpaces);
+     int numSpacesBetweenWords= numOfSpaces/(numOfWords-1);
+     for(int i=0;i<newWords.size();i++){
+      result+=(String)newWords.get(i);
+      if(i< newWords.size()-1)result+=" ".repeat(numSpacesBetweenWords);
+     }
+     String spaces=" ".repeat(numOfSpaces%(numOfWords-1));
+     return result+=spaces;
+    }
+}
