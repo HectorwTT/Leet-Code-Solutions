@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isStrictlyPalindromic(int n) {
+     int base=2;
+     while(base<=n-2){
+      if(!isPalindrome(numberToBase(n,base++))) return false;
+     }
+     return true;
+    }
+    public boolean isPalindrome(String n){
+     StringBuffer sb= new StringBuffer(n);
+     sb.reverse();
+     return n.equals(sb.toString());
+    }
+    public String numberToBase(int n,int base){
+     String result="";
+     while(n!=0){
+      int mod= n%base;
+      result=mod+result;
+      n/=base;
+     }
+     return result;
+    } 
+}
