@@ -1,0 +1,17 @@
+class Solution {
+    public long findTheArrayConcVal(int[] nums) {
+     int left=0;
+     int right= nums.length-1;
+     long total=0;
+     while(left<=right){
+      int number1=nums[left];
+      int number2= nums[right];
+      String number= number1+""+number2;
+      if(left==right)number=""+number1;
+      total+=Long.parseLong(number);
+      left++;
+      right--;
+     }  
+     return total;
+    }
+}
