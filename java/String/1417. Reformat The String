@@ -1,0 +1,35 @@
+class Solution {
+    public String reformat(String s) {
+     List<Character> numbers=new ArrayList<>();
+     List<Character>letters= new ArrayList<>();
+     String result="";
+     int index1=0;
+     int index2=0;
+     List<Character> larger= new ArrayList<>();
+     List<Character> smaller= new ArrayList<>();
+     for(int i=0;i<s.length();i++){
+      char ch = s.charAt(i);
+      if(ch>=48 && ch<=57)numbers.add(ch);
+      else letters.add(ch);
+     }
+     if(Math.abs(numbers.size()-letters.size())>=2)return"";
+     if(numbers.size()>=letters.size()){
+      larger=numbers;
+      smaller=letters;
+     }else{
+       larger=letters;
+       smaller=numbers;
+     }
+     while(index1<larger.size()|| index2<smaller.size()){
+      if(index1<larger.size())result+=larger.get(index1++);
+      if(index2<smaller.size())result+=smaller.get(index2++);
+     }
+     for(int i=1;i<result.length();i++){
+      char previous= result.charAt(i-1);
+      char current= result.charAt(i);
+      if(previous>=48 && previous <=57 &&current>=48 && current<=57)return"";
+      if(previous>=97 && previous <=122 &&current>=97 && current<=122) return "";
+     }
+     return result;
+    }
+}
