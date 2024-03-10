@@ -1,0 +1,19 @@
+class Solution {
+    public int captureForts(int[] forts) {
+     int max=0;
+     int number=0;
+     boolean canStartCount=false;
+     int prev=0;
+     for(int i=0;i<forts.length;i++){
+      if(forts[i]==1 || forts[i]==-1){
+       if(max<number ){
+        if((prev==-1 && forts[i]==1)||(prev==1 && forts[i]==-1))max=number;
+       }
+       number=0;
+       canStartCount=true;
+       prev=forts[i];
+      }else if(canStartCount)number++;
+     }
+     return max;
+    }
+}
