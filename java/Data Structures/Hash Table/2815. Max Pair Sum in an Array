@@ -1,0 +1,33 @@
+class Solution {
+    public int maxSum(int[] nums) {
+     HashMap<Integer,List<Integer>> map= new HashMap<>();
+     int max=-1;
+     for(int i=0;i<nums.length;i++){
+      String number= ""+nums[i];
+      char maxDigit= number.charAt(0);
+      for(int j=1;j<number.length();j++){
+        if(number.charAt(j)>maxDigit)maxDigit=number.charAt(j);
+      }
+      int digit= maxDigit-48;
+      if(!map.containsKey(digit)){
+        List<Integer> list= new ArrayList<>();
+        list.add(nums[i]);
+        map.put(digit,list);
+      }else{
+        List<Integer> list= map.get(digit);
+        list.add(nums[i]);
+        map.replace(digit,list);
+      }
+     }
+     for(Integer key:map.keySet()){
+      List<Integer> list= map.get(key);
+      list.sort(null);
+      int sum=0;
+      if(list.size()>=2){
+        sum= list.get(list.size()-1)+list.get(list.size()-2);
+        if(sum>max)max=sum;
+      }
+     } 
+     return max;
+    }
+}
