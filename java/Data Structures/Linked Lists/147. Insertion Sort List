@@ -1,0 +1,33 @@
+class Solution {
+    public ListNode insertionSortList(ListNode head) {
+      int size=0;
+      ListNode current= head;
+      List<Integer> list= new ArrayList<>();
+      while(current!=null){
+       size++;
+       list.add(current.val);
+       current=current.next;
+      }
+      int [] arr= list.stream().mapToInt(Integer::intValue).toArray();
+      insertionSort(arr);
+      ListNode result=new ListNode(arr[0]);
+      ListNode resultCurrent=result;
+      for(int i=1;i<arr.length;i++){
+        resultCurrent.next=new ListNode(arr[i]);
+        resultCurrent=resultCurrent.next;
+      }
+      return result;
+    }
+    public void insertionSort(int array[]) {  
+     int n = array.length;  
+     for (int j = 1; j < n; j++) {  
+        int key = array[j];  
+        int i = j-1;  
+        while ( (i > -1) && ( array [i] > key ) ) {  
+         array [i+1] = array [i];  
+         i--;  
+        }  
+        array[i+1] = key;  
+     }  
+    }  
+}
