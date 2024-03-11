@@ -1,0 +1,22 @@
+class Solution {
+    public int maximumNumberOfStringPairs(String[] words) {
+     HashMap<String,Integer> map= new HashMap<>();
+     HashMap<List<String>,Integer> map1= new HashMap<>();
+     for(int i=0;i<words.length;i++){
+      String word= words[i];
+      StringBuffer sb= new StringBuffer(word);
+      sb.reverse();
+      String newWord= sb.toString();
+      if(map.containsKey(newWord) ){
+       List<String> list= new ArrayList<>();
+       list.add(newWord);
+       list.add(word);
+       list.sort(null);
+       if(!map1.containsKey(list))map1.put(list,1);
+      }
+      if(!map.containsKey(word))map.put(word,1);
+
+     }
+     return map1.size();
+    }
+}
