@@ -1,0 +1,26 @@
+class Solution {
+    public String bestHand(int[] ranks, char[] suits) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     HashMap<Character,Integer> map1= new HashMap<>();
+     String best="High Card";
+     for(int i=0;i<suits.length;i++){
+      if(!map1.containsKey(suits[i]))map1.put(suits[i],1);
+      else map1.replace(suits[i],map1.get(suits[i])+1);
+     }
+     for(Character key: map1.keySet()){
+        if(map1.get(key)==5)return "Flush";
+     }
+     for(int i=0;i<ranks.length;i++){
+      if(!map.containsKey(ranks[i]))map.put(ranks[i],1);
+      else map.replace(ranks[i],map.get(ranks[i])+1); 
+     }
+     for(Integer key: map.keySet()){
+      if(map.get(key)>=3){
+       best= "Three of a Kind";
+       break;
+      }
+      if(map.get(key)==2)best= "Pair";
+     }
+     return best;
+    }
+}
