@@ -1,0 +1,30 @@
+class Solution {
+    public String oddString(String[] words) {
+     String result="";
+     HashMap<List<Integer>,List<String>> map= new HashMap<>();
+     for(int i=0;i<words.length;i++){
+      char previous=words[i].charAt(0);
+      List<Integer> list= new ArrayList<>();
+      for(int j=1;j<words[i].length();j++){
+        char current=words[i].charAt(j);
+        int difference= current-previous;
+        list.add(difference);
+        previous=current;
+      }
+      if(!map.containsKey(list)){
+        List<String> list1= new ArrayList<>();
+        list1.add(words[i]);
+        map.put(list,list1);
+      }
+      else{
+        List<String> list1= map.get(list);
+        list1.add(words[i]);
+        map.replace(list,list1);
+      }
+     }
+     for(List<Integer> list: map.keySet()){
+      if(map.get(list).size()==1)return map.get(list).get(0);
+     } 
+     return "";
+    }
+}
