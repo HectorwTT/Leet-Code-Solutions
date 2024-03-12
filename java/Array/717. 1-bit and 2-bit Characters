@@ -1,0 +1,27 @@
+class Solution {
+    public boolean isOneBitCharacter(int[] bits) {
+      int index=0;
+      List<String> chars= new ArrayList<>();
+      boolean [] processed= new boolean[bits.length];
+      if(bits[0]==0){
+        index=1;
+        processed[0]=true;
+      }  
+      for(int i=index;i<bits.length;i++){
+       if(i==bits.length-1){
+        if(processed[i])return false;
+        else return true;
+       }
+       if(processed[i])continue;
+       if(bits[i]==0){
+        processed[i]=true;
+       }else{
+         int current= bits[i];
+         int next= bits[i+1];
+         processed[i]=true;
+         processed[i+1]=true;
+       }
+      }
+      return true;
+    }
+}
