@@ -1,0 +1,23 @@
+class Solution {
+    public int minimumBoxes(int[] apple, int[] capacity) {
+     int min=0;
+     Arrays.sort(apple);
+     Arrays.sort(capacity);
+     int index=apple.length-1;
+     for(int i=capacity.length-1;i>=0;i--){
+      int numApples= capacity[i];
+      while(numApples!=0){
+       if(index==-1)break;
+       if(apple[index]<=numApples)numApples-=apple[index--];
+       else{
+        apple[index]-=numApples;
+        numApples=0;
+       }
+      }
+      min++;
+      if(index==-1)break;
+      
+     }  
+     return min; 
+    }
+}
