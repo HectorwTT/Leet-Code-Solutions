@@ -1,0 +1,24 @@
+class Solution {
+    public int countBeautifulPairs(int[] nums) {
+     int total=0;
+     for(int i=0;i<nums.length;i++){
+      String number1= ""+nums[i];
+      for(int j=i+1;j<nums.length;j++){
+        String number2=""+nums[j];
+        char first= number1.charAt(0);
+        char last= number2.charAt(number2.length()-1);
+        int digit1= first-48;
+        int digit2= last-48;
+        if(isCoPrime(digit1,digit2))total++;
+      }
+     }
+     return total;
+    }
+    public boolean isCoPrime(int digit1,int digit2){
+      int max= Math.max(digit1,digit2);
+      for(int i=2;i<=max;i++){
+       if(digit1%i==0 && digit2%i==0) return false;
+      }
+      return true;
+    }
+}
