@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isSumEqual(String firstWord, String secondWord, String targetWord) {
+      String firstNumber="";
+      String secondNumber="";
+      String targetNumber="";
+      for(int i=0;i<firstWord.length();i++){
+        char ch=firstWord.charAt(i);
+        int number= ch-97;
+        firstNumber+=number;
+      }
+      for(int i=0;i<secondWord.length();i++){
+        char ch=secondWord.charAt(i);
+        int number= ch-97;
+        secondNumber+=number;
+      }
+      for(int i=0;i<targetWord.length();i++){
+        char ch=targetWord.charAt(i);
+        int number= ch-97;
+        targetNumber+=number;
+      }
+      return Integer.parseInt(firstNumber)+Integer.parseInt(secondNumber)== Integer.parseInt(targetNumber);
+    }
+}
