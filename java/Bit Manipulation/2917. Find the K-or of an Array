@@ -1,0 +1,29 @@
+class Solution {
+ public int findKOr(int[] nums, int k) {
+  Arrays.sort(nums);
+  int max= nums[nums.length-1];
+  String maxToBinary=Integer.toBinaryString(max);
+  List<Integer> list= new ArrayList<>();
+  for(int i=0;i<maxToBinary.length();i++)list.add(i);
+  String kOrBinary=""; 
+  HashMap<Integer,Integer> map= new HashMap<>();
+  for(int i=0;i<nums.length;i++){
+   String binary= Integer.toBinaryString(nums[i]);
+   for(int j=binary.length()-1;j>=0;j--){
+    char ch= binary.charAt(j);
+    int bit= ch-48;
+    if(bit==0)continue;
+    if(!map.containsKey(binary.length()-1-j))map.put(binary.length()-1-j,1);
+    else map.replace(binary.length()-1-j,map.get(binary.length()-1-j)+1);
+   }
+  }
+  for(int i=0;i<list.size();i++){
+   if(!map.containsKey(maxToBinary.length()-1-i))kOrBinary+="0";
+   else{
+    if(map.get(maxToBinary.length()-1-i)>=k)kOrBinary+="1";
+    else kOrBinary+="0";
+   }
+  }
+  return Integer.parseInt(kOrBinary,2);
+ }
+}
