@@ -1,0 +1,32 @@
+class Solution {
+    public int maximumSum(int[] nums) {
+      HashMap<Integer,List<Integer>> map= new HashMap<>();
+      int maxSum=-1;
+      for(int i=0;i<nums.length;i++){
+        int digitSum=0;
+        int number=nums[i];
+        while(number!=0){
+         digitSum+=number%10;
+         number/=10;
+        }
+        if(!map.containsKey(digitSum)){
+         List<Integer> digitSums= new ArrayList<>();
+         digitSums.add(nums[i]);
+         map.put(digitSum,digitSums);
+        }else{
+          List<Integer> digitSums= map.get(digitSum);
+          digitSums.add(nums[i]);
+          map.replace(digitSum,digitSums);
+        }
+      }  
+      for(Integer key:map.keySet()){
+        List<Integer> digitSums= map.get(key);    
+        if(digitSums.size()>=2){
+          digitSums.sort(null);
+          int sum= digitSums.get(digitSums.size()-1)+digitSums.get(digitSums.size()-2);
+          if(sum>maxSum)maxSum=sum;
+        }
+      }
+      return maxSum;
+    }
+}
