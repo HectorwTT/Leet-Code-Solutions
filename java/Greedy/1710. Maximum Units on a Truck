@@ -1,0 +1,38 @@
+class Solution {
+    public int maximumUnits(int[][] boxTypes, int truckSize) {
+     int numOfBoxes=0;
+     int maxUnits=0;
+     List<Integer> units= new ArrayList<>();
+     HashMap<Integer,List<Integer>> map= new HashMap<>();
+     for(int i=0;i<boxTypes.length;i++){
+      if(!map.containsKey(boxTypes[i][1])){
+       List<Integer> boxes= new ArrayList<>();
+       boxes.add(boxTypes[i][0]);
+       map.put(boxTypes[i][1],boxes);
+      }else{
+        List<Integer> boxes= map.get(boxTypes[i][1]);
+        boxes.add(boxTypes[i][0]);
+        map.replace(boxTypes[i][1],boxes);
+      }
+      if(!units.contains(boxTypes[i][1]))units.add(boxTypes[i][1]);
+     }
+      units.sort(null);
+      for(int i=units.size()-1;i>=0;i--){
+        int unit= units.get(i);
+        List<Integer> boxes= map.get(unit);
+        boxes.sort(null);
+        for(int j=0;j<boxes.size();j++){
+          if(boxes.get(j)+numOfBoxes>truckSize){
+            int leftOver= truckSize- numOfBoxes;
+            int unitsToAdd= leftOver * unit;
+            maxUnits+=unitsToAdd;
+            return maxUnits;
+          }else{
+            numOfBoxes+=boxes.get(j);
+            maxUnits+=boxes.get(j)* unit;
+          }
+        }
+      }
+     return maxUnits;   
+    }
+}
