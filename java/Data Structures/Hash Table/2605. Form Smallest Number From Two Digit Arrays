@@ -1,0 +1,19 @@
+class Solution {
+ public int minNumber(int[] nums1, int[] nums2) {
+  HashMap<Integer,Integer> map= new HashMap<>();
+  Arrays.sort(nums1);
+  Arrays.sort(nums2);
+  for(int i=0;i<nums2.length;i++){
+    if(!map.containsKey(nums2[i]))map.put(nums2[i],1);
+  }
+  int min=Math.min(Integer.parseInt(nums1[0]+""+nums2[0]),
+                      Integer.parseInt(nums2[0]+""+nums1[0]));
+  for(int i=0;i<nums1.length;i++){
+   if(map.containsKey(nums1[i])){
+    min= nums1[i];
+    return min;
+   }
+  }
+  return min;
+ }
+}
