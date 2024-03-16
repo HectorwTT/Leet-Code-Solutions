@@ -1,0 +1,19 @@
+ int length=1;
+      String number=""+s.charAt(0);
+      String newNumber="";
+      for(int i=1;i<s.length();i++){
+        if(number.length()==k){
+            int numberDigitSum=0;
+            for(int j=0;j<number.length();j++){
+              char ch= number.charAt(j);
+              int chval= ch-48;
+              numberDigitSum+=chval;
+            }
+            newNumber+=numberDigitSum;
+            number=""+s.charAt(i);
+            length=1;
+        }else{
+            number+=s.charAt(i);
+            length++;
+        }
+      }
