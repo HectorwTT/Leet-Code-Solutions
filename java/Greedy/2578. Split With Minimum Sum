@@ -1,0 +1,23 @@
+class Solution {
+    public int splitNum(int num) {
+     List<Integer> nums= new ArrayList<>();
+     int index=nums.size()-1;
+     while(num!=0){
+       nums.add(num%10);
+       num/=10;
+     }
+     Collections.reverse(nums);
+     nums.sort(null);
+     int index1= 0;
+     int index2=1;
+     String num1="";
+     String num2="";
+     while(index1<nums.size() || index2<nums.size()){
+      if(index1<nums.size())num1+=nums.get(index1);
+      if(index2<nums.size())num2+=nums.get(index2);
+      index1+=2;
+      index2+=2;
+     }
+     return Integer.parseInt(num1)+Integer.parseInt(num2);
+    }
+}
