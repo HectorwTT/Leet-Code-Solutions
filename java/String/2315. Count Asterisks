@@ -1,0 +1,25 @@
+class Solution {
+    public int countAsterisks(String s) {
+     int total=0;
+     List<String> words= new ArrayList<>();
+     String word="";
+     for(int i=0;i<s.length();i++){
+      char ch= s.charAt(i);
+      if(ch=='|'){
+        words.add(word);
+        word="";
+      }else word+=ch;
+     }   
+     if(!word.equals(""))words.add(word);
+     for(int i=0;i<words.size();i++){
+       word= words.get(i);
+       if(i%2==0){
+        for(int j=0;j<word.length();j++){
+         char ch= word.charAt(j);
+         if(ch=='*')total++;
+        }
+       }
+     }
+     return total;
+    }
+}
