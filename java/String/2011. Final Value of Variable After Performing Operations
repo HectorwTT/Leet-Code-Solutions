@@ -1,0 +1,11 @@
+class Solution {
+    public int finalValueAfterOperations(String[] operations) {
+       int x=0;
+       for(int i=0;i<operations.length;i++){
+        String operation= operations[i];
+        if(operation.equals("--X") || operation.equals("X--"))x--;
+        else x++;
+       } 
+       return x;
+    }
+}
