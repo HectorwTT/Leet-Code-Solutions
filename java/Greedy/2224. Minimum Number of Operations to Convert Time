@@ -1,0 +1,27 @@
+class Solution {
+    public int convertTime(String current, String correct) {
+     int min=0;
+     int currentHours=Integer.parseInt(current.substring(0,current.indexOf(":")));
+     int correctHours=Integer.parseInt(correct.substring(0,correct.indexOf(":")));
+     
+     int currentMins=Integer.parseInt(current.substring(current.indexOf(":")+1));
+     int correctMins= Integer.parseInt(correct.substring(correct.indexOf(":")+1));
+     int currentTime= (currentHours *60) + currentMins;
+     int correctTime=(correctHours*60)+correctMins;
+     int diffMins=correctTime-currentTime;
+     if(diffMins/60>=1){
+        min+=diffMins/60;
+        diffMins%=60;
+     }
+     if(diffMins/15>=1){
+        min+=diffMins/15;
+        diffMins%=15;
+     }
+     if(diffMins/5>=1){
+        min+=diffMins/5;
+        diffMins%=5;
+     }
+     if(diffMins>=1)min+=diffMins;
+     return min;
+    }
+}
