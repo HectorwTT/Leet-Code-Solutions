@@ -1,0 +1,19 @@
+class Solution {
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+        ListNode current2= list2;
+        ListNode current1=list1;
+        ListNode previous=current1;
+        int index=0;
+        while(current2.next!=null){
+            current2=current2.next;
+        } 
+        while(index<=b){
+         if(index<a)previous=current1;
+         current1= current1.next;
+         index++;
+        }
+        previous.next=list2;
+        current2.next=current1;
+        return list1;
+    }
+}
