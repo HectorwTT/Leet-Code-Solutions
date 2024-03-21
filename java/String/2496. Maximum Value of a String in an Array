@@ -1,0 +1,16 @@
+class Solution {
+    public int maximumValue(String[] strs) {
+     int max=(int)Double.NEGATIVE_INFINITY;
+     for(int i=0;i<strs.length;i++){
+      try{
+        int number= Integer.parseInt(strs[i]);
+        if(max<number)max=number;
+      }
+      catch(Exception e){
+        int number= strs[i].length();
+        if(max<number)max=number;
+      }
+     }
+     return max;
+    }
+}
