@@ -1,0 +1,17 @@
+class Solution {
+    public boolean isPalindrome(ListNode head) {
+      Stack<Integer> stack= new Stack<>();
+      ListNode current = head;
+      while(current!=null){
+       stack.push(current.val);
+       current=current.next;
+      }  
+      current=head;
+      while(!stack.isEmpty() && current!=null){
+        int number= stack.pop();
+        if(number!=current.val)return false;
+        current=current.next;
+      }
+      return true;
+    }
+}
