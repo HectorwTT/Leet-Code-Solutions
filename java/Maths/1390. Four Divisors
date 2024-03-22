@@ -1,0 +1,23 @@
+class Solution {
+    public int sumFourDivisors(int[] nums) {
+       List<List<Integer>> list= new ArrayList<>();
+       int sum=0;
+       for(int i=0;i<nums.length;i++){
+        int number=nums[i];
+        List<Integer> list1= new ArrayList<>();
+        for(int j=1;j<=Math.sqrt(number);j++){
+            if(number%j==0){
+                int divisor1= number/j;
+                list1.add(divisor1);
+                if(divisor1!=j)list1.add(j);
+            }
+        }
+        if(list1.size()==4)list.add(list1);
+       }
+       for(int i=0;i<list.size();i++){
+        List<Integer> list1= list.get(i);
+        sum+= list1.stream().mapToInt(n->n).sum();
+       }
+       return sum;
+    }
+}
