@@ -1,0 +1,29 @@
+class Solution {
+    public int minimumSum(int[] nums) {
+     int[] minimumsToLeft= new int[nums.length];
+     int[]minimumsToRight= new int[nums.length];
+     int min=-1;
+     minimumsToLeft[0]= (int)Math.pow(10,8);
+     minimumsToRight[nums.length-1]= (int)Math.pow(10,8);
+     if(nums[0]<nums[1])minimumsToLeft[1]=nums[0];
+     else minimumsToLeft[1]= minimumsToLeft[0];
+     if(nums[nums.length-1]<nums[nums.length-2])minimumsToRight[nums.length-2]=nums[nums.length-1];
+     else minimumsToRight[nums.length-2]=minimumsToRight[nums.length-1];
+     for(int i=2;i<nums.length;i++){
+        minimumsToLeft[i]= Math.min(nums[i-1],minimumsToLeft[i-1]);
+     }   
+     for(int i=nums.length-3;i>=0;i-- ){
+        minimumsToRight[i]=Math.min(nums[i+1],minimumsToRight[i+1]);
+     }
+     for(int i=1;i<nums.length-1;i++){
+      if(minimumsToLeft[i]<nums[i]&& minimumsToRight[i]<nums[i]){
+        int sum= minimumsToLeft[i]+minimumsToRight[i]+nums[i];
+        if(min==-1)min=sum;
+        else{
+            if(min>sum)min=sum;
+        }
+      }
+     }
+     return min;
+    }
+}
