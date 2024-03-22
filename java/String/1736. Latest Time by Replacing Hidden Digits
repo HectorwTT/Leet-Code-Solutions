@@ -1,0 +1,24 @@
+class Solution {
+    public String maximumTime(String time) {
+      String result="";
+      for(int i=0;i<time.length();i++){
+        char ch=time.charAt(i);
+        if((ch>=48 && ch<=57) || ch==':')result+=ch;
+        else{
+         if(i==0){
+            if(time.charAt(1)>=52 && time.charAt(1)<=57)result+='1';
+            else result+='2';
+         }else if(i==1){
+            if(result.charAt(i-1)=='0')result+='9';
+            else if(result.charAt(i-1)=='1')result+='9';
+            else if(result.charAt(i-1)=='2')result+='3';
+         }else if(i==3){
+            result+='5';
+         }else{
+            result+='9';
+         }
+        }
+      }
+      return result;  
+    }
+}
