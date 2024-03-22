@@ -1,0 +1,13 @@
+class Solution {
+    public int sumCounts(List<Integer> nums) {
+     int total=0;
+     for(int i=0;i<nums.size();i++){
+      HashMap<Integer,Integer> map=new HashMap<>();
+      for(int j=i;j<nums.size();j++){
+       if(!map.containsKey(nums.get(j)))map.put(nums.get(j),1);
+       total+=(int)Math.pow(map.size(),2);
+      }
+     }
+     return total;    
+    }
+}
