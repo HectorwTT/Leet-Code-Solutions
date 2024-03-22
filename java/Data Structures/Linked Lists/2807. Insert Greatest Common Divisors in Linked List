@@ -1,0 +1,26 @@
+class Solution {
+    public ListNode insertGreatestCommonDivisors(ListNode head) {
+     ListNode current=head;
+     ListNode previous=current;
+     ListNode result=head;
+     ListNode resultCurrent=result;
+     while(current!=null){
+      previous=current;
+      current=current.next;
+      if(current==null)continue;
+      int gcd=getGCD(previous.val,current.val);
+      resultCurrent.next=new ListNode(gcd);
+      resultCurrent.next.next=new ListNode(current.val);
+      resultCurrent=resultCurrent.next.next;
+     }
+     return result; 
+    }
+    public int getGCD(int a, int b){
+     while (b != 0) {
+        int t = a;
+        a = b;
+        b = t % b;
+     }
+     return a;
+    }
+}
