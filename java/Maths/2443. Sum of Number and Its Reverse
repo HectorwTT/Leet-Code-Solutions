@@ -1,0 +1,13 @@
+class Solution {
+    public boolean sumOfNumberAndReverse(int num) {
+        for(int i=0;i<=num;i++){
+         String number= ""+i;
+         StringBuffer sb= new StringBuffer(number);
+         sb.reverse();
+         int num1= Integer.parseInt(number);
+         int reverse= Integer.parseInt(sb.toString());
+         if(num1+reverse==num)return true;
+        }
+        return false;
+    }
+}
