@@ -1,0 +1,84 @@
+class Solution {
+    public String largestTimeFromDigits(int[] arr) {
+     String result="";
+     Arrays.sort(arr);
+     HashMap<Integer,Integer> map= new HashMap<>();
+     HashMap<Integer,Integer> map1= new HashMap<>();
+     boolean [] processed= new boolean[arr.length];
+     List<Integer> minutes= new ArrayList<>();
+     for(int i=0;i<arr.length;i++){
+      if(!map.containsKey(arr[i]))map.put(arr[i],i);
+      if(!map1.containsKey(arr[i]))map1.put(arr[i],1);
+      else map1.replace(arr[i],map1.get(arr[i])+1);
+     }   
+     System.out.println(map);
+     System.out.println(map1);
+     if(map1.size()==1){
+      if(arr[0]>2)return "";
+     }
+     if(map1.size()==2){
+      if(map1.get(arr[0])==3 && arr[0]>2)return "";
+      if(map1.get(arr[3])==3 && arr[3]>3 && arr[0]>=2) return "";
+      if(map1.get(arr[0])==2 && map1.get(arr[3])==2 && arr[0]>2 && arr[3]>3)return "";
+     }
+     if(map.containsKey(2)){
+      result+="2";
+      processed[map.get(2)]=true;
+      if(map.containsKey(3)){
+        result+="3:";
+        processed[map.get(3)]=true;
+      }else if(map1.get(2)>1){
+        result+="2:";
+        for(int i= map.get(2);i<arr.length;i++){
+            if(!processed[i]){
+                processed[i]=true;
+                break;
+            }
+        }
+      }else if(map.containsKey(1)){
+        if(arr[2]>5&& arr[3]>5){
+         result="1"+arr[3]+":2"+arr[2];
+         return result;
+        }
+        result+="1:";
+        processed[map.get(1)]=true;
+      }
+      else if(map.containsKey(0)){
+        if(arr[2]>5&& arr[3]>5){
+         result="0"+arr[3]+":2"+arr[2];
+         return result;
+        }
+        else{
+         result+="0:";
+         processed[0]=true;
+        }
+      }
+     }else if(map.containsKey(1)){
+        result+="1";
+        if(arr[arr.length-1]!=1)result+=arr[arr.length-1]+":";
+        else result+=arr[arr.length-2]+":";
+        processed[map.get(1)]=true;
+        if(arr[arr.length-1]!=1)processed[arr.length-1]=true;
+        else processed[arr.length-2]=true;
+     }else if(map.containsKey(0)){
+        result+="0";
+        result+=arr[arr.length-1]+":";
+        processed[0]=true;
+        processed[arr.length-1]=true;
+     }
+     for(int i=0;i<4;i++){
+        if(!processed[i] )minutes.add(arr[i]);
+     }
+     System.out.println(minutes);
+     if(minutes.get(0)>5)return "";
+     if(minutes.get(1)<6){
+      result+=minutes.get(1);
+      result+=minutes.get(0);
+     }else{
+        result+=minutes.get(0);
+        result+=minutes.get(1);
+     }
+     if(result.indexOf(":")==-1)return "";
+     return result;
+    }
+}
