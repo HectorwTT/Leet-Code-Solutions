@@ -1,0 +1,8 @@
+class Solution {
+    public boolean checkTree(TreeNode root) {
+        int leftValue= root.left.val;
+        int rightValue= root.right.val;
+        int rootValue=root.val;
+        return rootValue==leftValue+rightValue;
+    }
+}
