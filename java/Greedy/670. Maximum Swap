@@ -1,41 +1,29 @@
 class Solution {
     public int maximumSwap(int num) {
-     HashMap<Integer,Integer> map= new HashMap<>();
+     List<Integer> list= new ArrayList<>();
      String number=""+num;
-     List<Integer> digits= new ArrayList<>();
-     List<Integer> numbers= new ArrayList<>();
      for(int i=0;i<number.length();i++){
       int digit= number.charAt(i)-48;
-      if(!map.containsKey(digit)){
-        digits.add(digit);
-        map.put(digit,i);
-      }
-     } 
-     digits.sort(null);
-     int minIndex=-1;
-     int maxIndex=-1;
-     for(int i=0;i<digits.size();i++){
-      int digit=digits.get(i);
-      minIndex= map.get(digit);
       int max=digit;
-      for(int j=minIndex+1;j<number.length();j++){
+      int maxIndex=i;
+      for(int j=i+1;j<number.length();j++){
         int digit1= number.charAt(j)-48;
         if(digit1>=max){
             max=digit1;
             maxIndex=j;
         }
       }
-      char[] numChars= number.toCharArray();
-      if(maxIndex==-1)continue;
-      char tmp1= numChars[minIndex];
+      if(maxIndex==i)continue;
+      char [] numChars= number.toCharArray();
+      char tmp1= numChars[i];
       char tmp2= numChars[maxIndex];
-      numChars[minIndex]=tmp2;
+      numChars[i]= tmp2;
       numChars[maxIndex]=tmp1;
-      String newNumber=String.valueOf(numChars);
-      numbers.add(Integer.parseInt(newNumber));
+      String newNumber= String.valueOf(numChars);
+      list.add(Integer.parseInt(newNumber));
      }
-     if(maxIndex==-1)return num;
-     numbers.sort(null);
-     return Math.max(numbers.get(numbers.size()-1),num);
+     if(list.size()==0)return num;
+     list.sort(null);
+     return Math.max(list.get(list.size()-1),num);
     }
 }
