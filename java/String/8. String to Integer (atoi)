@@ -1,49 +1,45 @@
 class Solution {
     public int myAtoi(String s) {
-       String number="";
-       s=s.trim();
-       for(int i=0;i<s.length();i++){
-         if(s.charAt(i)=='-' || s.charAt(i)=='+'
-          ||(s.charAt(i)>=48 && s.charAt(i)<=57))number+=s.charAt(i);
-         else break;
-       }
-       String prefix="";
-       String newNumber="";
-       String number1="";
-       boolean hasFoundDigit=false;
-       for(int i=number.length()-1;i>=0;i--){
-        if(number.charAt(i)>=48 && number.charAt(i)<=57)hasFoundDigit=true;
-        if(hasFoundDigit)number1= number.charAt(i)+number1;
-       }
-       hasFoundDigit=false;
-       for(int i=0;i<number1.length();i++){
-        if(number.charAt(i)>=48 && number.charAt(i)<=57)hasFoundDigit=true;
-        if(hasFoundDigit && (number.charAt(i)=='+' || number.charAt(i)=='-'))break;
-        if(number1.charAt(i)=='-'|| number1.charAt(i)=='+') prefix+=s.charAt(i);
-        else newNumber+=s.charAt(i);
-       }
-       long value= 0;
-       int prefixPlus=0;
-       int prefixMinus=0;
-       for(int i=0;i<prefix.length();i++){
-        if(prefix.charAt(i)=='-')prefixMinus++;
-        else prefixPlus++;
-       }
-       if(prefixMinus >1 || prefixPlus>1 ||(prefixMinus>=1 && prefixPlus>=1))return (int)value;
-       if(newNumber.equals(""))return (int)value;
-       int min = (int)Math.pow(-2,31);
-       int max= (int)Math.pow(2,31);
-       try{
-        if(prefixMinus==1){
+     s=s.trim();
+     String number="";
+     boolean hasFoundDigits=false;
+     for(int i=0;i<s.length();i++){
+      if(s.charAt(i)>=48 && s.charAt(i)<=57)hasFoundDigits=true;
+      if(hasFoundDigits && (s.charAt(i)<48 || s.charAt(i)>57))break;
+      if(s.charAt(i)=='+'|| s.charAt(i)=='-'
+         ||(s.charAt(i)>=48 && s.charAt(i)<=57)) number+=s.charAt(i);
+      else break;
+     }
+     long value=0;
+     if(number.equals(""))return (int)value;    
+     int numberOfPlus=0;
+     int numberOfMinus=0;
+     String number1= "";
+     int index=-1;
+     for(int i=0;i<number.length();i++){
+      if(number.charAt(i)=='+')numberOfPlus++;
+      if(number.charAt(i)=='-')numberOfMinus++;
+      if(number.charAt(i)>=48 && number.charAt(i)<=57){
+        index=i;
+        break;
+      }
+     }
+     if(numberOfPlus>1 || numberOfMinus>1 ||(numberOfPlus>=1 && numberOfMinus>=1)) return(int)value;
+     if(index==-1)return (int)value;
+     number1=number.substring(index);
+     int min = (int)Math.pow(-2,31);
+     int max= (int)Math.pow(2,31);
+     try{
+      if(numberOfMinus==1){
          if(number.indexOf("-")!=0)return (int)value;
-         value=-1*Long.parseLong(newNumber);
-        }else value = Long.parseLong(newNumber);
+         value=-1*Long.parseLong(number1);
+        }else value = Long.parseLong(number1);
         if(value<min)value= min;
         if(value>max)value=max;
         return (int)value;
-       }catch(Exception e){
-         if(prefixMinus==1)return min;
+     }catch(Exception e){
+         if(numberOfMinus==1)return min;
          else return max;
-       }
+     }
     }
 }
