@@ -1,0 +1,31 @@
+class Solution {
+    public int maximumLengthSubstring(String s) {
+     int max=0;
+     for(int i=0;i<s.length();i++){
+      int count=0;
+      for(int j=i+1;j<=s.length();j++){
+        String substring="";
+        if(j==s.length())substring=s.substring(i);
+        else substring= s.substring(i,j);
+        HashMap<Character,Integer> map= new HashMap<>();
+        for(int k=0;k<substring.length();k++){
+         char ch=substring.charAt(k);
+         if(!map.containsKey(ch))map.put(ch,1);
+         else map.replace(ch,map.get(ch)+1);
+        }
+        boolean hasFoundAtMostTwo=true;
+        for(Character key: map.keySet()){
+         if(map.get(key)>2){
+            hasFoundAtMostTwo=false;
+            break;
+         }
+        }
+        if(hasFoundAtMostTwo){
+          count=substring.length();
+          if(count>max)max=count;
+        }
+      }
+     }
+     return max;   
+    }
+}
