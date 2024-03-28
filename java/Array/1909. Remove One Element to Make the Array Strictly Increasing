@@ -1,0 +1,21 @@
+class Solution {
+    public boolean canBeIncreasing(int[] sequence) {
+     int negativeInfinity= (int)Double.NEGATIVE_INFINITY;
+     if(sequence.length==1) return true;
+     for(int i=0;i<sequence.length;i++){
+      int current= sequence[i];
+      sequence[i]= negativeInfinity;
+      int [] newsequence1 = Arrays.stream(sequence)
+                           .filter(j->j!=negativeInfinity)
+                           .toArray();
+      int [] newsequence2 = Arrays.stream(sequence)
+                           .filter(j->j!=negativeInfinity)
+                           .distinct()
+                           .sorted()
+                           .toArray();
+      if(Arrays.equals(newsequence1,newsequence2)) return true;
+      sequence[i]=current;
+     }
+     return false;   
+    }
+}
