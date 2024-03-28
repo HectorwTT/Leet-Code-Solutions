@@ -1,0 +1,22 @@
+class Solution {
+    public int minimumRecolors(String blocks, int k) {
+       String newBlocks = blocks;
+       int min=101;
+       if(blocks.indexOf("B".repeat(k))!=-1)return 0;
+       for(int i=0;i<blocks.length();i++){
+        for(int j=i+1;j<=blocks.length();j++){
+         String substring="";
+         if(j==blocks.length())substring= blocks.substring(i);
+         else substring= blocks.substring(i,j);
+         if(substring.length()!=k)continue;
+         int count=0;
+         for(int l=0;l<substring.length();l++){
+          char ch=substring.charAt(l);
+          if(ch=='W')count++;
+         }
+         if(count<min)min=count;
+        }
+       }
+       return min; 
+    }
+}
