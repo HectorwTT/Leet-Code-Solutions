@@ -1,21 +1,21 @@
 class Solution {
-    public boolean canBeIncreasing(int[] sequence) {
-     int negativeInfinity= (int)Double.NEGATIVE_INFINITY;
-     if(sequence.length==1) return true;
-     for(int i=0;i<sequence.length;i++){
-      int current= sequence[i];
-      sequence[i]= negativeInfinity;
-      int [] newsequence1 = Arrays.stream(sequence)
-                           .filter(j->j!=negativeInfinity)
-                           .toArray();
-      int [] newsequence2 = Arrays.stream(sequence)
-                           .filter(j->j!=negativeInfinity)
-                           .distinct()
-                           .sorted()
-                           .toArray();
-      if(Arrays.equals(newsequence1,newsequence2)) return true;
-      sequence[i]=current;
-     }
-     return false;   
+    public boolean canBeIncreasing(int[] nums) {
+      int[] fromLeft= new int[nums.length];
+      int[] fromRight= new int[nums.length];
+      fromLeft[0]=1;
+      fromRight[nums.length-1]=1;
+      for(int i=1;i<nums.length;i++){
+        if(nums[i]>nums[i-1])fromLeft[i]=fromLeft[i-1]+1;
+      } 
+      for(int i=nums.length-2;i>=0;i--){
+        if(nums[i]<nums[i+1])fromRight[i]=fromRight[i+1]+1;
+      }
+      for(int i=0;i<nums.length;i++){
+       if(i==0 && fromRight[1]==nums.length-1)return true;
+       if(i==nums.length-1 && fromLeft[i-1]==nums.length-1)return true;
+       if(i>0 && i<nums.length-1 &&
+       fromLeft[i-1]+fromRight[i+1]==nums.length-1 && nums[i-1]<nums[i+1])return true;
+      }
+      return false;
     }
 }
