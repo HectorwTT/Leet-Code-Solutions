@@ -1,0 +1,44 @@
+class Solution {
+    public int longestAlternatingSubarray(int[] nums, int threshold) {
+        int r = 0;
+        int count = 0;
+        boolean isEvenFound = false;
+        int maxCount = 0;
+
+        while (r < nums.length) {
+            if (nums[r] <= threshold && nums[r] % 2 == 0) {
+                ++r;
+                ++count;
+                if (!isEvenFound) {
+                    count = 1;
+                }
+            } else if (isEvenFound) {
+                if (count > maxCount)
+                    maxCount = count;
+                count = 0;
+                isEvenFound = false;
+                continue;
+            } else {
+                ++r;
+                continue;
+            }
+
+            if (r < nums.length && nums[r] <= threshold && nums[r] % 2 == 1) {
+                ++r;
+                ++count;
+                if (!isEvenFound) {
+                    isEvenFound = true;
+                    count = 2;
+                }
+            } else if (isEvenFound) {
+                if (count > maxCount)
+                    maxCount = count;
+                count = 0;
+                isEvenFound = false;
+                continue;
+            }
+        }
+
+        return maxCount > count ? maxCount : count;
+    }
+}
