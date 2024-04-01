@@ -1,0 +1,20 @@
+class Solution {
+    public int edgeScore(int[] edges) {
+     HashMap<Integer,Long> map= new HashMap<>();
+     long maxScore=0;
+     List<Integer> nodesWithMaxScore= new ArrayList<>();
+     for(int i=0;i<edges.length;i++){
+      long iLong=i;
+      if(!map.containsKey(edges[i]))map.put(edges[i],iLong);
+      else map.replace(edges[i],map.get(edges[i])+iLong);  
+      if(maxScore<map.get(edges[i]))maxScore=map.get(edges[i]);
+     }
+     System.out.println(map);
+     for(Integer key:map.keySet()){
+      if(maxScore==map.get(key))nodesWithMaxScore.add(key);
+     }
+     nodesWithMaxScore.sort(null);
+     if(nodesWithMaxScore.size()==0)return 0;
+     return nodesWithMaxScore.get(0);
+    }
+}
