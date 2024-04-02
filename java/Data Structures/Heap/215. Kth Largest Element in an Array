@@ -1,0 +1,19 @@
+class Solution {
+    public int findKthLargest(int[] nums, int k) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i]))map.put(nums[i],1);
+      else map.replace(nums[i],map.get(nums[i])+1);
+     }
+     PriorityQueue <Integer>maxHeap= new PriorityQueue<>((a,b)->b-a);
+     maxHeap.addAll(map.keySet());
+     int count=0;
+     int number=0;
+     while(count<k){
+      number= maxHeap.remove();  
+      int numCount=map.get(number);
+      count+=numCount;
+     }
+     return number;
+    }
+}
