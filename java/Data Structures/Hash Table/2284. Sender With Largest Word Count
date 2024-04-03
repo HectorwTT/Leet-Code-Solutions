@@ -11,15 +11,10 @@ class Solution {
         }
         if(maxCount<map.get(senders[i]))maxCount=map.get(senders[i]);
       }
-      PriorityQueue<String> maxHeap= new PriorityQueue<>((a, b) -> 
-    ((map.get(b) - map.get(a) != 0)) ? (map.get(b) - map.get(a)):
-     (b.compareTo(a)));
-     
-     maxHeap.addAll(map.keySet());
-     System.out.println(maxHeap);
-     while(!maxHeap.isEmpty()){
-      result.add(maxHeap.remove());
-     }
-      return result.get(0);  
+      for(String key:map.keySet()){
+        if(maxCount== map.get(key))result.add(key);
+      }
+      result.sort(null);
+      return result.get(result.size()-1);  
     }
 }
