@@ -1,0 +1,21 @@
+class Solution {
+    public String kthLargestNumber(String[] nums, int k) {
+      HashMap<String,Integer> map= new HashMap<>();
+      for(int i=0;i<nums.length;i++){
+        if(!map.containsKey(nums[i]))map.put(nums[i],1);
+        else map.replace(nums[i],map.get(nums[i])+1);
+      }
+      PriorityQueue <String> maxHeap= new PriorityQueue<> ((a, b) -> 
+    ((b.length() - a.length()) != 0) ? (b.length() - a.length()):
+     (b.compareTo(a)));
+      maxHeap.addAll(map.keySet());
+      int count=0;
+      String number="";
+      while(count<k){
+       number=maxHeap.remove();
+       int numCount= map.get(number);
+       count+=numCount;
+      } 
+      return number;
+    }
+}
