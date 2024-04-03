@@ -1,0 +1,16 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+       PriorityQueue<Integer> maxHeap= new PriorityQueue<>((a,b)->b-a);
+       long total=0;
+       for(int i=0;i<gifts.length;i++)maxHeap.offer(gifts[i]);
+       int count=0;
+       while(count<k){
+        int newGift= maxHeap.remove();
+        int newGiftSquareRoot= (int)Math.pow(newGift,0.5);
+        maxHeap.offer(newGiftSquareRoot);
+        count++;
+       } 
+       while(!maxHeap.isEmpty())total+=1L * maxHeap.remove();
+       return total;
+    }
+}
