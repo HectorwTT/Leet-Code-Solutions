@@ -1,0 +1,26 @@
+class Solution {
+    public int minSteps(String s, String t) {
+     HashMap<Character,Integer> sMap= new HashMap<>();
+     HashMap<Character,Integer> tMap= new HashMap<>();
+     int total=0;
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(!sMap.containsKey(ch))sMap.put(ch,1);
+      else sMap.replace(ch,sMap.get(ch)+1);
+     }   
+      for(int i=0;i<t.length();i++){
+      char ch=t.charAt(i);
+      if(!tMap.containsKey(ch))tMap.put(ch,1);
+      else tMap.replace(ch,tMap.get(ch)+1);
+     }   
+     for(Character key:sMap.keySet()){
+      if(!tMap.containsKey(key))total+=sMap.get(key);
+      else if(sMap.get(key)<tMap.get(key))total+=(tMap.get(key)-sMap.get(key));
+     }
+     for(Character key:tMap.keySet()){
+      if(!sMap.containsKey(key))total+=tMap.get(key);
+      else if(tMap.get(key)<sMap.get(key))total+=(sMap.get(key)-tMap.get(key));
+     }
+     return total;
+    }
+}
