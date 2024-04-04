@@ -1,0 +1,13 @@
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+     return getSum(root,root.left) + getSum(root,root.right);  
+    }
+    public int getSum(TreeNode parent,TreeNode child){
+     if(child==null)return 0;
+     else if(parent.left!= child) return getSum(child,child.left)+getSum(child,child.right);
+     else {
+        if(child.left==null && child.right==null)return child.val;
+        else return getSum(child,child.left)+getSum(child,child.right);
+     }
+    }
+}
