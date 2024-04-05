@@ -1,0 +1,28 @@
+class Solution {
+    public int findCenter(int[][] edges) {
+      HashMap<Integer,List<Integer>> map= new HashMap<>();
+      for(int i=0;i<edges.length;i++){
+        if(!map.containsKey(edges[i][0])){
+          List<Integer> list= new ArrayList<>();
+          list.add(edges[i][1]);
+          map.put(edges[i][0],list);
+        }else{
+          List<Integer> list= map.get(edges[i][0]);
+          list.add(edges[i][1]);
+          map.replace(edges[i][0],list);
+          if(list.size()==edges.length)return edges[i][0];
+        }
+        if(!map.containsKey(edges[i][1])){
+         List<Integer> list= new ArrayList<>();
+         list.add(edges[i][0]);
+         map.put(edges[i][1],list);
+        }else{
+          List<Integer> list= map.get(edges[i][1]);
+          list.add(edges[i][0]);
+          map.replace(edges[i][1],list);
+          if(list.size()==edges.length)return edges[i][1];
+        }
+      }
+      return -1;
+    }
+}
