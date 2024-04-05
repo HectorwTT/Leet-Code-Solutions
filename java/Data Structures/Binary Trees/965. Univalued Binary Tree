@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isUnivalTree(TreeNode root) {
+      Queue<TreeNode>tree= new LinkedList<>();
+      tree.offer(root);
+      List<Integer> list= new ArrayList<>();
+      while(!tree.isEmpty()){
+       TreeNode node= tree.poll();
+       if(node.left!= null)tree.offer(node.left);
+       if(node.right!=null)tree.offer(node.right);
+       if(!list.contains(node.val))list.add(node.val);
+      }
+      return list.size()==1;  
+    }
+}
