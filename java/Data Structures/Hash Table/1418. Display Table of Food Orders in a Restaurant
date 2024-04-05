@@ -1,0 +1,49 @@
+class Solution {
+    public List<List<String>> displayTable(List<List<String>> orders) {
+       List<List<String>> result= new ArrayList<>();
+       HashMap<Integer,HashMap<String,Integer>> tables= new HashMap<>();
+       List<String> dishes= new ArrayList<>();
+       List<Integer> listOfTables= new ArrayList<>();
+       for(int i=0;i<orders.size();i++){
+        List<String> order=orders.get(i);
+        int table=Integer.parseInt(order.get(1));
+        String dish= order.get(2);
+        if(!dishes.contains(dish))dishes.add(dish);
+        if(!listOfTables.contains(table))listOfTables.add(table);
+        if(!tables.containsKey(table)){
+         HashMap<String,Integer> tableOrder= new HashMap<>();
+         tableOrder.put(dish,1);
+         tables.put(table,tableOrder);
+        }else{
+          HashMap<String,Integer> tableOrder= tables.get(table);
+          if(!tableOrder.containsKey(dish))tableOrder.put(dish,1);
+          else tableOrder.replace(dish,tableOrder.get(dish)+1);
+          tables.replace(table,tableOrder);
+        }
+       }
+       dishes.sort(null);
+       listOfTables.sort(null);
+       List<String> firstRow= new ArrayList<>();
+       firstRow.add("Table");
+       for(int i=0;i<dishes.size();i++)firstRow.add(dishes.get(i));
+       result.add(firstRow);
+       for(int i=0;i<listOfTables.size();i++){
+        int table=listOfTables.get(i);
+        List<String> orderForTableI= new ArrayList<>();
+        orderForTableI.add(""+table);
+        HashMap<String,Integer> tableOrder= tables.get(table);
+        for(int j=0;j<dishes.size();j++){
+         String dish= dishes.get(j);
+         if(!tableOrder.containsKey(dish)){
+          orderForTableI.add("0");
+         }else{
+          int numberOfDishes= tableOrder.get(dish);
+          orderForTableI.add(""+numberOfDishes);
+         }
+        }
+        result.add(orderForTableI);
+       }
+       return result;
+
+    }
+}
