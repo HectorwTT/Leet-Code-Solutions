@@ -1,0 +1,11 @@
+public class Solution {
+    public int reverseBits(int n) {
+     String binary= Integer.toBinaryString(n);
+     int numOfZeroes= 32-binary.length();
+     binary= "0".repeat(numOfZeroes)+binary;
+     StringBuffer sb= new StringBuffer(binary);
+     sb.reverse();
+     String reverse= sb.toString();
+     return (int)Long.parseLong(reverse,2);
+    }
+}
