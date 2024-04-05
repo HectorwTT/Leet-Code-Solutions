@@ -1,0 +1,16 @@
+class Solution {
+    public int maxDepth(Node root) {
+     if(root==null)return 0;
+     else if(root.children.size()==0)return 1;
+     else{
+        List<Node> children= root.children;
+        int max= 1+maxDepth(children.get(0));
+        for(int i=1;i<children.size();i++){
+          Node child= children.get(i);
+          int depth= 1+maxDepth(child);
+          if(max<depth)max=depth;
+        }
+        return max;
+     }
+    }
+}
