@@ -1,0 +1,50 @@
+class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+     List<TreeNode> pPath= getPath(p,root);
+     List<TreeNode> qPath= getPath(q,root);
+     List<TreeNode> biggerList;
+     if(qPath.contains(p) && pPath.contains(p)) return p;
+     if(qPath.contains(q) &&pPath.contains(q)) return q;
+     if(pPath.size()>qPath.size()) biggerList= pPath;
+     else biggerList= qPath;
+     for(int i=biggerList.size()-1;i>=0;i--){
+      TreeNode current= biggerList.get(i);
+      if(pPath.contains(current) && qPath.contains(current)) return current;
+     }
+     return null;
+    }
+    public List<TreeNode> getPath(TreeNode target,TreeNode root){
+     List<TreeNode> result= new ArrayList<>();
+     if(root==null)return new ArrayList<>();
+     else if(target==root){
+        result.add(root);
+        return result;
+     }else if(root.left==null){
+        List<TreeNode>rightPath= getPath(target,root.right);
+        if(rightPath.contains(target)){
+         result.add(root);
+         result.addAll(rightPath);
+         return result;
+        }else return new ArrayList<>();
+     }else if(root.right==null){
+        List<TreeNode> leftPath=getPath(target,root.left);
+        if(leftPath.contains(target)){
+         result.add(root);
+         result.addAll(leftPath);
+         return result;
+        }else return new ArrayList<>();
+     }else {
+        List<TreeNode> leftPath= getPath(target,root.left);
+        List<TreeNode> rightPath= getPath(target,root.right);
+        if(leftPath.contains(target)){
+            result.add(root);
+            result.addAll(leftPath);
+            return result;
+        }else if(rightPath.contains(target)){
+            result.add(root);
+            result.addAll(rightPath);
+            return result;
+        }else return new ArrayList<>();
+     }
+    }
+}
