@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> postorder(Node root) {
+     List<Integer> result= new ArrayList<>();
+     if(root==null)return result;
+     else if(root.children.size()==0){
+        result.add(root.val);
+        return result;
+     }else{
+        List<Node> children= root.children;
+        List<Integer> pOrder= new ArrayList<>();
+        for(int i=0;i<children.size();i++){
+         Node child= children.get(i);
+         List<Integer> list= postorder(child);
+         pOrder.addAll(list);
+        } 
+        result.addAll(pOrder);
+        result.add(root.val);
+        return result;
+     }
+    }
+}
