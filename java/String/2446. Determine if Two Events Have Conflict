@@ -1,0 +1,19 @@
+class Solution {
+    public boolean haveConflict(String[] event1, String[] event2) {
+      String starthours1=event1[0].substring(0,event1[0].indexOf(":"));
+      String startminutes1=event1[0].substring(event1[0].indexOf(":")+1);
+      String starthours2=event2[0].substring(0,event2[0].indexOf(":"));
+      String startminutes2= event2[0].substring(event2[0].indexOf(":")+1);
+      String endhours1=event1[1].substring(0,event1[1].indexOf(":"));
+      String endminutes1=event1[1].substring(event1[1].indexOf(":")+1);
+      String endhours2=event2[1].substring(0,event2[1].indexOf(":"));
+      String endminutes2= event2[1].substring(event2[1].indexOf(":")+1);
+      int starttime1= Integer.parseInt(starthours1)*60+Integer.parseInt(startminutes1);
+      int starttime2= Integer.parseInt(starthours2)*60+Integer.parseInt(startminutes2);
+      int endtime1= Integer.parseInt(endhours1)*60+Integer.parseInt(endminutes1);
+      int endtime2= Integer.parseInt(endhours2)*60+Integer.parseInt(endminutes2);
+      return (starttime2>= starttime1 && (starttime2<=endtime1 || endtime2<=endtime1) )
+             ||(starttime1>=starttime2 && (starttime1<=endtime2 ||endtime1<=endtime2));
+
+    }
+}
