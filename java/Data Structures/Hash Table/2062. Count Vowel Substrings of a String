@@ -1,0 +1,21 @@
+class Solution {
+    public int countVowelSubstrings(String word) {
+     int total=0;
+     
+     for(int i=0;i<word.length();i++){
+        for(int j=i+1;j<=word.length();j++){
+         String substring= word.substring(i,j);
+         HashMap<Character,Integer> map= new HashMap<>();
+         for(int k=0;k<substring.length();k++){
+            char ch= substring.charAt(k);
+            if(!map.containsKey(ch))map.put(ch,1);
+            else map.replace(ch,map.get(ch)+1);
+         }
+         if(map.size()==5 && map.containsKey('a') 
+            && map.containsKey('e')&& map.containsKey('i')
+            && map.containsKey('o') && map.containsKey('u')) total++;
+        }
+     }
+     return total;  
+    }
+}
