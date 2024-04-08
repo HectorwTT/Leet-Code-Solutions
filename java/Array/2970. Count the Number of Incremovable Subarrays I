@@ -5,10 +5,10 @@ class Solution {
       for(int i=0;i<nums.length;i++){
         for(int j=i;j<nums.length;j++){
          numsClone[j]=-1;
-         int []list1=Arrays.stream(numsClone).filter(n->n!=-1).toArray();
-         int[] list2= Arrays.stream(numsClone).filter(n->n!=-1).distinct().toArray();
-         Arrays.sort(list2);
-         if(Arrays.equals(list1,list2) ||list1.length<=1)total++;
+         int [] array1=Arrays.stream(numsClone).filter(n->n!=-1).toArray();
+         int [] array2= Arrays.stream(numsClone).filter(n->n!=-1).distinct().toArray();
+         Arrays.sort(array2);
+         if(Arrays.equals(array1,array2) || array1.length<=1)total++;
         }
         numsClone=nums.clone();
       } 
