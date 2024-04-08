@@ -4,24 +4,15 @@ class Solution {
       for(int i=0;i<nums.length-1;i++){
         List<Integer> list= new ArrayList<>();
         list.add(nums[i]);
+        if(nums[i+1]!=nums[i]+1)continue;
         for(int j=i+1;j<nums.length;j++){
-          list.add(nums[j]);
-          boolean isAlternating=true;
-          int first= list.get(0);
-          int second=list.get(1);
-          if(second-first!=1)continue;
-           for(int k=0;k<list.size()-1;k+=2){
-            if(list.get(k)!=first || list.get(k+1)!=second){
-                isAlternating=false;
-                break;
-            }
-           }
-           if(list.size()%2==1){
-            if(list.get(list.size()-1)!=first)isAlternating=false;
-           }
-          if(isAlternating){
-            if(max<list.size())max=list.size();
+          if(list.size()%2==0){
+           if(nums[j]!=nums[i] || nums[j]!=nums[j-1]-1)break;
+          }else{
+            if(nums[j]!=nums[i]+1 || nums[j]!=nums[j-1]+1)break;
           }
+          list.add(nums[j]);
+          if(max<list.size())max=list.size();
         }
       }
       return max;  
