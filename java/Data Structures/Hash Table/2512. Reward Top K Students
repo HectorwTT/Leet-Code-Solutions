@@ -1,0 +1,35 @@
+class Solution {
+    public List<Integer> topStudents(String[] positive_feedback, String[] negative_feedback, String[] report, int[] student_id, int k) {
+     List<Integer> result= new ArrayList<>(); 
+     HashMap<Integer,Integer> scores= new HashMap<>();
+     HashMap<String,Integer> positiveMap= new HashMap<>();
+     HashMap<String,Integer> negativeMap= new HashMap<>();
+     PriorityQueue <Integer> maxHeap= new PriorityQueue<> 
+    ((a, b) -> 
+    ((scores.get(b) - scores.get(a)) != 0) ? (scores.get(b)- scores.get(a)):
+     (a-b));
+     for(int i=0;i<positive_feedback.length;i++){
+        if(!positiveMap.containsKey(positive_feedback[i]))positiveMap.put(positive_feedback[i],1);
+     }
+    for(int i=0;i<negative_feedback.length;i++){
+        if(!negativeMap.containsKey(negative_feedback[i]))negativeMap.put(negative_feedback[i],1);
+     }
+     for(int i=0;i<student_id.length;i++){
+       String student_report= report[i];
+       int score=0;
+       String [] words= student_report.split(" ");
+       for(int j=0;j<words.length;j++){
+        if(positiveMap.containsKey(words[j]))score+=3;
+        if(negativeMap.containsKey(words[j]))score--;
+       }
+       scores.put(student_id[i],score);
+       maxHeap.offer(student_id[i]);
+     }
+     int count=0;
+     while(count<k){
+      result.add(maxHeap.remove());
+      count++;
+     }
+     return result;
+    }
+}
