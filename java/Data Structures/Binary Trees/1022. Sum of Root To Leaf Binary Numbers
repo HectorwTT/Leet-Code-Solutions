@@ -1,0 +1,19 @@
+List<String> paths= new ArrayList<>();
+     if(root==null)return paths;
+     else if(root.left==null && root.right==null){
+       path+=root.val;
+       paths.add(path);
+       return paths;
+     }else if(root.left==null){
+       path+=root.val;
+       return getPaths(root.right,path);
+     }else if(root.right==null){
+        path+=root.val;
+        return getPaths(root.left,path);
+     }else{
+        path+=root.val;
+        List<String> leftPath= getPaths(root.left,path);
+        List<String>rightPath=getPaths(root.right,path);
+        leftPath.addAll(rightPath);
+        return leftPath;
+     }
