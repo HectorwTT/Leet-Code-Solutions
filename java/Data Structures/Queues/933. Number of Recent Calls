@@ -1,0 +1,10 @@
+class RecentCounter {
+    private List<Integer> list;
+    public RecentCounter() {
+     list= new ArrayList<>();
+    }    
+    public int ping(int t) {
+     list.add(t);
+     return (int)list.stream().filter(n->n>=t-3000).count();
+    }
+}
