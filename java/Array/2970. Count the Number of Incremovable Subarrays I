@@ -1,0 +1,17 @@
+class Solution {
+    public int incremovableSubarrayCount(int[] nums) {
+      int total=0;
+      int [] numsClone= nums.clone();
+      for(int i=0;i<nums.length;i++){
+        for(int j=i;j<nums.length;j++){
+         numsClone[j]=-1;
+         int []list1=Arrays.stream(numsClone).filter(n->n!=-1).toArray();
+         int[] list2= Arrays.stream(numsClone).filter(n->n!=-1).distinct().toArray();
+         Arrays.sort(list2);
+         if(Arrays.equals(list1,list2) ||list1.length<=1)total++;
+        }
+        numsClone=nums.clone();
+      } 
+      return total++;  
+    }
+}
