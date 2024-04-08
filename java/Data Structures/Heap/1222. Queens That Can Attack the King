@@ -1,0 +1,148 @@
+class Solution {
+    public List<List<Integer>> queensAttacktheKing(int[][] queens, int[] king) {
+      PriorityQueue<Integer> heapNorth= new PriorityQueue<>();
+      PriorityQueue<Integer> heapSouth= new PriorityQueue<>();
+      PriorityQueue<Integer> heapEast= new PriorityQueue<>();
+      PriorityQueue<Integer> heapWest= new PriorityQueue<>();
+      PriorityQueue<Double> heapNorthEast= new PriorityQueue<>();
+      PriorityQueue<Double> heapNorthWest= new PriorityQueue<>();
+      PriorityQueue<Double> heapSouthEast= new PriorityQueue<>();
+      PriorityQueue<Double> heapSouthWest= new PriorityQueue<>();
+       HashMap<Integer,Integer> mapNorth = new HashMap<>();
+      HashMap<Integer,Integer> mapWest = new HashMap<>();
+      HashMap<Integer,Integer> mapSouth = new HashMap<>();
+      HashMap<Integer,Integer> mapEast = new HashMap<>();
+      HashMap<Double,Integer> mapNorthEast = new HashMap<>();
+      HashMap<Double,Integer> mapNorthWest = new HashMap<>();
+      HashMap<Double,Integer> mapSouthEast = new HashMap<>();
+      HashMap<Double,Integer> mapSouthWest = new HashMap<>();
+      List<List<Integer>>result= new ArrayList<>();
+      for(int i=0;i<queens.length;i++){
+        int queenRow= queens[i][0];
+        int queenColumn= queens[i][1];
+        int kingRow= king[0];
+        int kingColumn= king[1];
+        double queenRowDouble= queenRow;
+        double queenColumnDouble= queenColumn;
+        double kingRowDouble= kingRow;
+        double kingColumnDouble= kingColumn;
+        if(queenRow==kingRow){
+          if(queenColumn>kingColumn){
+            int distance= queenColumn-kingColumn;
+            heapEast.offer(distance);
+            mapEast.put(distance,i);
+          }
+          else {
+            int distance=kingColumn-queenColumn;
+            heapWest.offer(distance);
+            mapWest.put(distance,i);
+          }
+        }
+        if(queenColumn==kingColumn){
+            if(queenRow<kingRow){
+             int distance=kingRow-queenRow;
+             heapNorth.offer(distance);
+             mapNorth.put(distance,i);
+            }
+            else{
+                int distance= queenRow-kingRow;
+                heapSouth.offer(distance);
+                mapSouth.put(distance,i);
+            }
+        }
+        if(kingRowDouble!=queenRowDouble){
+         double gradient= (queenRowDouble-kingRowDouble)/(queenColumnDouble-kingColumnDouble);
+          double squared=Math.pow(queenRowDouble-kingRowDouble,2)
+                          +Math.pow(queenColumnDouble-kingColumnDouble,2);
+            double distance= Math.pow(squared,0.5);
+         if(gradient==1.0){
+            if(queenRowDouble-kingRowDouble>0 
+               && queenColumnDouble-kingColumnDouble>0){
+                heapNorthEast.offer(distance);
+                mapNorthEast.put(distance,i);
+               }
+            else{
+                heapSouthWest.offer(distance);
+                mapSouthWest.put(distance,i);
+            } 
+         }
+         if(gradient==-1.0){
+            if(queenColumnDouble>kingColumnDouble){
+                heapSouthEast.offer(distance);
+                mapSouthEast.put(distance,i);
+            }
+            else{
+                heapNorthWest.offer(distance);
+                mapNorthWest.put(distance,i);
+            }
+         }
+        }
+      }
+      if(!heapNorth.isEmpty()){
+        int shortest= heapNorth.remove();
+        int first= mapNorth.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapSouth.isEmpty()){
+        int shortest= heapSouth.remove();
+        int first= mapSouth.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+
+      }
+      if(!heapEast.isEmpty()){
+        int shortest= heapEast.remove();
+        int first= mapEast.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapWest.isEmpty()){
+        int shortest= heapWest.remove();
+        int first= mapWest.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapNorthEast.isEmpty()){
+        double shortest= heapNorthEast.remove();
+        int first= mapNorthEast.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapSouthWest.isEmpty()){
+        double shortest= heapSouthWest.remove();
+        int first= mapSouthWest.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapNorthWest.isEmpty()){
+        double shortest= heapNorthWest.remove();
+        int first= mapNorthWest.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      if(!heapSouthEast.isEmpty()){
+        double shortest= heapSouthEast.remove();
+        int first= mapSouthEast.get(shortest);
+        List<Integer> coordinates= new ArrayList<>();
+        coordinates.add(queens[first][0]);
+        coordinates.add(queens[first][1]);
+        result.add(coordinates);
+      }
+      return result;
+    }
+}
