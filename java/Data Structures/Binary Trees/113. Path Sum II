@@ -1,0 +1,44 @@
+class Solution {
+    public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+       List<List<Integer>> result= new ArrayList<>();
+       List<String> paths= getPath(root,""); 
+       for(int i=0;i<paths.size();i++){
+        String path=paths.get(i);
+        int sum=0;
+        String[] arr= path.split("P");
+        List<Integer> list= new ArrayList<>();
+        for(int j=0;j<arr.length;j++){
+          if(arr[j].equals(""))continue;
+          int number= Integer.parseInt(arr[j]);
+          sum+=number;
+          list.add(number);
+        }
+        if(sum==targetSum)result.add(list);
+       }
+       return result;
+    }
+    List<String> getPath(TreeNode root,String path){
+     List<String> result= new ArrayList<>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+      path+="P"+root.val;
+      result.add(path);
+      return result;
+     }else if(root.left==null){
+       path+="P"+root.val;
+       result= getPath(root.right,path);
+       return result;
+     }else if(root.right==null){
+        path+="P"+root.val;
+        result= getPath(root.left,path);
+        return result;
+     }else{
+        path+="P"+root.val;
+        List<String> leftPath= getPath(root.left,path);
+        List<String>rightPath=getPath(root.right,path);
+        result.addAll(leftPath);
+        result.addAll(rightPath);
+        return result;
+     }
+    }
+}
