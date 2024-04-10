@@ -1,0 +1,68 @@
+class Solution {
+    public TreeNode replaceValueInTree(TreeNode root) {
+      HashMap<TreeNode,Integer> map = new HashMap<>();
+      HashMap<TreeNode,TreeNode> parents= new HashMap<>();
+      HashMap<TreeNode,Integer> processed = new HashMap<>();
+      List<List<TreeNode>> list= getLevelOrderTraversal(root);
+      for(int i=1;i<list.size();i++){
+        List<TreeNode> nodes= list.get(i);
+        int sum= getSum(nodes);
+        for(int j=0;j<nodes.size();j++){
+         TreeNode node= nodes.get(j);
+         TreeNode parent;
+         if(i==1)parent=root;
+         else parent= parents.get(node);
+          if(node.left!=null)parents.put(node.left,node);
+         if(node.right!=null)parents.put(node.right,node);
+         if(!processed.containsKey(node))processed.put(node,1);
+         else continue;
+         if(parent ==null)continue;
+         int leftSum= 0;
+         int rightSum=0;
+         if(parent.left!=null)leftSum=parent.left.val;
+         if(parent.right!=null)rightSum=parent.right.val;
+         int rest = sum-(leftSum+rightSum);
+         map.put(node,rest);
+        
+         if(parent.left==node && parent.right!=null){
+           map.put(parent.right,rest);
+           processed.put(parent.right,1);
+         }
+         if(parent.right==node && parent.left!=null){
+            map.put(parent.left,rest);
+            processed.put(parent.left,1);
+         }
+        }
+      }
+      map.put(root,0);
+      for(TreeNode key :map.keySet()){
+        key.val= map.get(key);
+      }
+      return list.get(0).get(0);  
+    }
+    public List<List<TreeNode>> getLevelOrderTraversal(TreeNode root){
+     List<List<TreeNode>> result= new ArrayList<>();
+     Queue<TreeNode> queue= new LinkedList<>();
+     queue.offer(root);
+     while(!queue.isEmpty()){
+        int size= queue.size();
+        List<TreeNode> list= new ArrayList<>();
+        for(int i=0;i<size;i++){
+            TreeNode node= queue.poll();
+            if(node.left!=null)queue.offer(node.left);
+            if(node.right!=null)queue.offer(node.right);
+            list.add(node);
+        }
+        result.add(list);
+     }
+     return result;
+    }
+    public int getSum(List<TreeNode> list){
+     int total=0;
+     for(int i=0;i<list.size();i++){
+        TreeNode node= list.get(i);
+        total+=node.val;
+     }
+     return total;
+    }
+}
