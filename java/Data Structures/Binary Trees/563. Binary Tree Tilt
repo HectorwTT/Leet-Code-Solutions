@@ -1,0 +1,59 @@
+class Solution {
+    public int findTilt(TreeNode root) {
+      List<TreeNode> postOrderT= getPostOrderTraversal(root);  
+      HashMap<TreeNode,Integer> tilts= getTilts(postOrderT);
+      int sum=0;
+      for(TreeNode key:tilts.keySet()){
+        sum+=tilts.get(key);
+      }
+      return sum;
+    }
+    public HashMap<TreeNode,Integer> getTilts(List<TreeNode>postOrderT){
+     HashMap<TreeNode,Integer> map= new HashMap<>();
+     for(int i=0;i<postOrderT.size();i++){
+        TreeNode node= postOrderT.get(i);
+        List<TreeNode> leftChildren = getPostOrderTraversal(node.left);
+        List<TreeNode> rightChildren= getPostOrderTraversal(node.right);
+        int leftTotal=0;
+        int rightTotal=0;
+        if(leftChildren.size()!=0)leftTotal= getSum(leftChildren);
+        if(rightChildren.size()!=0)rightTotal=getSum(rightChildren);    
+        int diff= Math.abs(leftTotal-rightTotal);
+        map.put(node,diff);
+     }
+     return map;
+    }
+    public int getSum(List<TreeNode> nodes){
+     int total=0;
+     for(int i=0;i<nodes.size();i++){
+      TreeNode node= nodes.get(i);
+      total+=node.val;
+     }
+     return total;
+    }
+    public List<TreeNode> getPostOrderTraversal(TreeNode root){
+     List<TreeNode> result= new ArrayList<>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+        result.add(root);
+        return result;
+     }else if(root.left==null){
+        List<TreeNode> rightChildren= getPostOrderTraversal(root.right);
+        result.addAll(rightChildren);
+        result.add(root);
+        return result;
+     }else if(root.right==null){
+        List<TreeNode> leftChildren= getPostOrderTraversal(root.left);
+        result.addAll(leftChildren);
+        result.add(root);
+        return result;
+     }else{
+        List<TreeNode> leftChildren=getPostOrderTraversal(root.left);
+        List<TreeNode> rightChildren=getPostOrderTraversal(root.right);
+        result.addAll(leftChildren);
+        result.addAll(rightChildren);
+        result.add(root);
+        return result;
+     }
+    }
+}
