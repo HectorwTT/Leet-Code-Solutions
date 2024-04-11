@@ -1,0 +1,17 @@
+class Solution {
+    public int nearestValidPoint(int x, int y, int[][] points) {
+        int minIndex=-1;
+        int minDistance= (int)Math.pow(10,4)+1;
+        for(int i=0;i<points.length;i++){
+          int xpoint= points[i][0];
+          int ypoint=points[i][1];
+          if(xpoint!=x && ypoint!=y)continue;
+          int manhattan= Math.abs(x-xpoint)+Math.abs(y-ypoint);
+          if(manhattan<minDistance){
+            minIndex=i;
+            minDistance=manhattan;
+          }
+        }
+        return minIndex;
+    }
+}
