@@ -1,5 +1,18 @@
 class Solution {
     public boolean isBoomerang(int[][] points) {
-        return !((points[0][0]-points[1][0])*(points[0][1]-points[2][1])==(points[0][0]-points[2][0])*(points[0][1]-points[1][1]));
+       int numOfDistinct=3;
+       if(points[0][0]== points[1][0] && points[0][1]==points[1][1])numOfDistinct--;
+       if(points[1][0]==points[2][0] && points[1][1]==points[2][1])numOfDistinct--; 
+       if(points[0][0]== points[1][0] && points[0][0]==points[2][0])return false;
+       if(points[0][1]== points[1][1] && points[0][1]==points[2][1])return false;
+       double firstx=points[0][0];
+       double secondx= points[1][0];
+       double thirdx=points[2][0];
+       double firsty= points[0][1];
+       double secondy=points[1][1];
+       double thirdy=points[2][1];
+       double gradient1= (secondy-firsty)/(secondx-firstx);
+       double gradient2= (thirdy-secondy)/(thirdx-secondx);
+       return gradient1 != gradient2 && numOfDistinct==3; 
     }
 }
