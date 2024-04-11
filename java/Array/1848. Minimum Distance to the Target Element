@@ -1,0 +1,22 @@
+class Solution {
+    public int getMinDistance(int[] nums, int target, int start) {
+        HashMap<Integer,List<Integer>> map= new HashMap<>();
+        for(int i=0;i<nums.length;i++){
+         if(!map.containsKey(nums[i])){
+            List<Integer> list= new ArrayList<>();
+            list.add(i);
+            map.put(nums[i],list);
+         }else{
+            List<Integer> list= map.get(nums[i]);
+            list.add(i);
+            map.replace(nums[i],list);
+         }
+        }
+        List<Integer> list= map.get(target);
+        int min=(int)Math.pow(10,5)+1;
+        for(int i=0;i<list.size();i++){
+            if(Math.abs(list.get(i)-start)<min)min=Math.abs(list.get(i)-start);
+        }
+        return min;
+    }
+}
