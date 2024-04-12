@@ -1,0 +1,17 @@
+var maximumBags = function(capacity, rocks, additionalRocks) {
+ let total=0;
+ const list= [];
+ for(let i=0;i<rocks.length;i++){
+  if(rocks[i]==capacity[i])total++;
+  else list.push(capacity[i]-rocks[i]);
+ }   
+ list.sort(function(a,b){return a-b});
+ for(let i=0;i<list.length;i++){
+  if(additionalRocks<list[i])break;
+  else{
+   total++;
+   additionalRocks-=list[i];
+  }
+ }
+ return total;   
+};
