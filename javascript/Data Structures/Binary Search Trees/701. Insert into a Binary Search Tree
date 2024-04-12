@@ -1,0 +1,14 @@
+var insertIntoBST = function(root, val) {
+ if(root==null) return new TreeNode(val);
+ let key= new TreeNode(val);
+ let current= root;
+ let previous = current;
+ while(current !=null){
+  previous=current;
+  if(current.val>key.val) current= current.left;
+  else current= current.right;
+ }
+ if(previous.val>key.val) previous.left= key;
+ else previous.right=key;
+ return root;  
+};
