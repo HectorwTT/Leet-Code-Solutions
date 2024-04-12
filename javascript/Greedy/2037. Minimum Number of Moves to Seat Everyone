@@ -1,0 +1,9 @@
+var minMovesToSeat = function(seats, students) {
+   let total=0;
+   seats.sort(function(a, b){return a - b});
+   students.sort(function(a, b){return a - b});
+   for(let i=0;i<students.length;i++){
+    total+=Math.abs(seats[i]-students[i]);
+   }
+   return total;
+};
