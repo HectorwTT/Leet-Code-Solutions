@@ -1,0 +1,48 @@
+class Solution {
+    public boolean validTicTacToe(String[] board) {
+       int numberOfX=0;
+       int numberOfO=0;
+       int numberOfSpaces=0;
+       char[][] result= new char[3][3];
+       int numberOfHorizontalXXX=0;
+       int numberOfHorizontalOOO=0;
+       int numberOfVerticalXXX=0;
+       int numberOfVerticalOOO=0;
+       int numberOfDiagonalXXX=0;
+       int numberOfDiagonalOOO=0;
+       for(int i=0;i<board.length;i++){
+        String row= board[i];
+        if(row.equals("XXX"))numberOfHorizontalXXX++;
+        if(row.equals("OOO"))numberOfHorizontalOOO++;
+        for(int j=0;j<row.length();j++){
+         char ch= row.charAt(j);
+         result[i][j]=ch;
+         if(ch=='X')numberOfX++;
+         else if(ch=='O')numberOfO++;
+         else numberOfSpaces++;
+        }
+       }
+       for(int j=0;j<3;j++){
+        if(result[0][j]=='X'&& result[1][j]=='X' && result[2][j]=='X')numberOfVerticalXXX++;
+        if(result[0][j]=='O'&& result[1][j]=='O'&& result[2][j]=='O')numberOfVerticalOOO++;
+       }
+       if(result[0][0]=='X' && result[1][1]=='X' && result[2][2]=='X')numberOfDiagonalXXX++;
+       if(result[0][0]=='O' && result[1][1]=='O' && result[2][2]=='O')numberOfDiagonalOOO++;
+       if(result[2][0]=='X' && result[1][1]=='X' && result[0][2]=='X')numberOfDiagonalXXX++;
+       if(result[2][0]=='O' && result[1][1]=='O' && result[0][2]=='O')numberOfDiagonalOOO++;
+       if(numberOfHorizontalXXX==1 && numberOfX<=numberOfO)return false;
+       if(numberOfVerticalXXX==1 && numberOfX<=numberOfO)return false;
+       if(numberOfDiagonalXXX==1 && numberOfX<=numberOfO)return false;
+       if(numberOfHorizontalOOO==1 && numberOfX>numberOfO)return false;
+       if(numberOfVerticalOOO==1 && numberOfX>numberOfO)return false;
+       if(numberOfDiagonalOOO==1 && numberOfX>numberOfO)return false;
+       if(numberOfHorizontalXXX>=1 && numberOfHorizontalOOO>=1)return false;
+       if(numberOfVerticalXXX>=1 && numberOfVerticalOOO>=1)return false;
+       if(numberOfDiagonalXXX>=1 && numberOfDiagonalOOO>=1)return false;
+       if(numberOfX<numberOfO)return false;
+       else{
+        if(numberOfX-numberOfO>=2)return false;
+       }
+       return true;
+    }
+}
