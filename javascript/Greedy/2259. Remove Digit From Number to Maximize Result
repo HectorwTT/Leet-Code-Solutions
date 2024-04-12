@@ -1,0 +1,16 @@
+var removeDigit = function(number, digit) {
+    var result="";
+    var max= "";
+    const indexes= [];
+    for(let i=0;i<number.length;i++){
+        if(number.charAt(i)==digit)indexes.push(i);
+    }
+    for(let i=0;i<indexes.length;i++){
+      var index= indexes[i];
+      var numSubstring="";
+      if(index==number.length-1)numSubstring= number.substring(0,index);
+      else numSubstring=number.substring(0,index)+number.substring(index+1);
+      if(max.localeCompare(numSubstring)<0)max=numSubstring;
+    }
+    return max;
+};
