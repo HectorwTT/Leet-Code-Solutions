@@ -1,0 +1,18 @@
+var isHappy = function(n) {
+   let number=n;
+   const map= new Map();
+   map.set(number,1);
+   while(number!=1){
+    var nstr=""+number;
+    let value=0;
+    for(let i=0;i<nstr.length;i++){
+     let val= nstr.charAt(i);
+     let valSquared= Math.pow(val,2);
+     value+=valSquared;
+    }
+    number=value;
+    if(map.has(number))return false;
+    map.set(number,1);
+   }
+   return true;
+};
