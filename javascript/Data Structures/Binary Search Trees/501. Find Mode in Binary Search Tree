@@ -1,0 +1,53 @@
+var findMode = function(root) {
+ const result=[];
+ const inorderArray= inorderTraversal(root);    
+ const counts= new Map();
+ let maxCount=0;
+ for(let i=0;i<inorderArray.length;i++){
+  let number= inorderArray[i];
+  if(!counts.has(number))counts.set(number,1);
+  else counts.set(number,counts.get(number)+1);
+ }
+ for(const key of counts.keys()){
+  let count = counts.get(key);
+  if(maxCount<count) maxCount=count;
+
+ }
+ for(const key of counts.keys()){
+  if(maxCount==counts.get(key))result.push(key);
+ }
+ return result;
+};
+var inorderTraversal=function(root){
+ if(root==null)return [];
+ else if (root.left==null && root.right==null) {
+  const rootlist = [];
+  rootlist.push(root.val);
+  return rootlist;
+ }else{
+   if(root.left==null){
+    const result = [];
+    result.push(root.val);
+    const rightlist = inorderTraversal(root.right);
+    for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+    return result;
+   }else if(root.right==null){
+     const result = [];
+     const leftlist = inorderTraversal(root.left);
+     for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+     result.push(root.val);
+     return result;
+    }else{
+      let leftlist=[];
+      let rightlist=[];
+      if(root.left!=null)leftlist=inorderTraversal(root.left);  
+      if (root.right!=null)
+        rightlist= inorderTraversal(root.right);
+        const result = [];
+        for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+        result.push(root.val);
+        for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+        return result;
+    }
+} 
+};
