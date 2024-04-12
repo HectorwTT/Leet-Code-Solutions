@@ -1,0 +1,81 @@
+var findFrequentTreeSum = function(root) {
+ if(root==null)return new int[0];
+ const frequencies= new Map();
+ const sumsTree= getSums(root);
+ const listOfNumbers= inorderTraversal(sumsTree);
+ const mostFrequent= [];
+ for(let i=0;i<listOfNumbers.length;i++){
+  let number= listOfNumbers[i];
+  if(!frequencies.has(number))frequencies.set(number,1);
+  else frequencies.set(number,frequencies.get(number)+1);
+ }
+ let maxfrequency=0;
+ for(const frequency of frequencies.values())if(maxfrequency<frequency)maxfrequency=frequency; 
+ for(const key of frequencies.keys()){
+  let value= frequencies.get(key);
+  if(value==maxfrequency)mostFrequent.push(key);
+ }
+ mostFrequent.sort(function(a,b){return a-b});
+ return mostFrequent;    
+};
+var getSums=function( t){
+ let sums=new Map();
+ if(t==null)return null;
+ else if(t.left ==null && t.right==null){
+  sums= new TreeNode(t.val);
+  return sums;
+ }else if(t.left==null){
+  const rightSums= getSums(t.right);
+  let sum=t.val + rightSums.val;
+  sums= new TreeNode(sum);
+  sums.right=rightSums;
+  return sums;
+ }else if(t.right==null){
+  const leftSums= getSums(t.left);
+  let sum=t.val+leftSums.val;
+  sums= new TreeNode(sum);
+  sums.left=leftSums;
+  return sums;
+ }else{
+    const leftSums= getSums(t.left);
+    const rightSums= getSums(t.right);
+    let sum= t.val+leftSums.val+rightSums.val;
+    sums= new TreeNode(sum);
+    sums.left=leftSums;
+    sums.right= rightSums;
+    return sums;
+ }
+};
+var inorderTraversal=function(root) {
+ if(root==null)return new [];
+ else if (root.left==null && root.right==null) {
+  const rootlist = [];
+  rootlist.push(root.val);
+  return rootlist;
+ }else {
+  if(root.left==null){
+    const result = [];
+    result.push(root.val);
+    const rightlist = inorderTraversal(root.right);
+    for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+    return result;
+  }else if (root.right==null){
+    const result = [];
+    const leftlist = inorderTraversal(root.left);
+    for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+    result.push(root.val);
+    return result;
+ }else{
+    let leftlist=[];
+    let rightlist=[];
+    if(root.left!=null)leftlist=inorderTraversal(root.left);  
+    if(root.right!=null)
+      rightlist= inorderTraversal(root.right);
+      const result = [];
+      for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+      result.push(root.val);
+      for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+   return result;
+  }
+} 
+};
