@@ -1,0 +1,11 @@
+var hasPathSum = function(root, targetSum) {
+ if(root==null) return false;
+ else if(root.left==null && root.right==null)return root.val== targetSum;
+ else{
+  let value=root.val;
+  let restOfTotal= targetSum-value;
+  if(root.left==null)return hasPathSum(root.right,restOfTotal);
+  else if(root.right==null)return hasPathSum(root.left,restOfTotal);
+  else return hasPathSum(root.left,restOfTotal) ||hasPathSum(root.right,restOfTotal);
+ }   
+};
