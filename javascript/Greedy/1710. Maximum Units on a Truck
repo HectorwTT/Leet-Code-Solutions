@@ -1,0 +1,36 @@
+var maximumUnits = function(boxTypes, truckSize) {
+ let numOfBoxes=0;
+ let maxUnits=0;
+ const units= [];
+ const map= new Map();
+ for(let i=0;i<boxTypes.length;i++){
+  if(!map.has(boxTypes[i][1])){
+    const boxes= [];
+    boxes.push(boxTypes[i][0]);
+    map.set(boxTypes[i][1],boxes);
+  }else{
+    const boxes= map.get(boxTypes[i][1]);
+    boxes.push(boxTypes[i][0]);
+    map.set(boxTypes[i][1],boxes);
+  }
+  if(units.indexOf(boxTypes[i][1])==-1)units.push(boxTypes[i][1]);
+ }
+ units.sort(function(a,b){return a-b});
+ for(let i=units.length-1;i>=0;i--){
+  let unit= units[i];
+  const boxes= map.get(unit);
+  boxes.sort(function(a,b){return a-b});
+  for(let j=0;j<boxes.length;j++){
+   if(boxes[j]+numOfBoxes>truckSize){
+    let leftOver= truckSize- numOfBoxes;
+    let unitsToAdd= leftOver * unit;
+    maxUnits+=unitsToAdd;
+    return maxUnits;
+   }else{
+     numOfBoxes+=boxes[j];
+     maxUnits+=boxes[j]* unit;
+    }
+  }
+  }
+ return maxUnits;    
+};
