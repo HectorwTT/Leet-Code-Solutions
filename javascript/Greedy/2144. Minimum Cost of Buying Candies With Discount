@@ -1,0 +1,15 @@
+var minimumCost = function(cost) {
+ let total=0;
+ cost.sort(function(a,b){return a-b});
+ let index1=cost.length-1;
+ let index2= index1-1;
+ let index3= index2-1;
+ while(index1>=0){
+  if(index1>=0 && index2>=0)total+=cost[index1]+cost[index2];
+  if(index1>=0 && index2<0)total+=cost[index1];
+  index1=index3-1;
+  index2=index1-1;
+  index3=index2-1;
+  }  
+  return total; 
+};
