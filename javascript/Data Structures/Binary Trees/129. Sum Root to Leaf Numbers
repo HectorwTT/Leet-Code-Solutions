@@ -1,0 +1,33 @@
+var sumNumbers = function(root) {
+ let total=0;
+ const paths= getPaths(root,"");
+ for(let i=0;i<paths.length;i++){
+  let path= paths[i];
+  total+=parseInt(path);
+ }  
+ return total;  
+};
+var getPaths=function(root,path){
+ const paths= [];
+ if(root==null)return paths;
+ else if(root.left==null && root.right==null){
+  path+=root.val;
+  paths.push(path);
+  return paths;
+ }else if(root.left==null){
+   path+=root.val;
+   paths.push(path);
+   return getPaths(root.right,path);
+ }else if(root.right==null){
+  path+=root.val;
+  paths.push(path);
+  return getPaths(root.left,path);
+ }else{
+  path+=root.val;
+  const leftPath= getPaths(root.left,path);
+  const rightPath=getPaths(root.right,path);
+  for(let i=0;i<leftPath.length;i++)paths.push(leftPath[i]);
+  for(let i=0;i<rightPath.length;i++)paths.push(rightPath[i]);
+  return paths;
+ }   
+};
