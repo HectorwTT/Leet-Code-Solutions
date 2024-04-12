@@ -1,0 +1,33 @@
+var preorderTraversal = function(root) {
+ if(root==null)return [];
+ else if (root.left==null && root.right==null) {
+  const rootlist = [];
+  rootlist.push(root.val);
+  return rootlist;
+ }else{
+  if(root.left==null){
+   const result = [];
+   result.push(root.val);
+   const rightlist = preorderTraversal(root.right);
+   for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+   return result;
+  }else if (root.right==null){
+    const result = [];
+    const leftlist = preorderTraversal(root.left);
+    result.push(root.val);
+    for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+    return result;
+   }else{
+     let leftlist=[];
+     let rightlist=[];
+     if(root.left!=null)leftlist=preorderTraversal(root.left);  
+     if (root.right!=null)
+      rightlist= preorderTraversal(root.right);
+      const result = [];
+      result.push(root.val);
+      for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+      for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+      return result;
+    }
+}   
+};
