@@ -1,0 +1,10 @@
+var hasCycle = function(head) {
+  const map= new Map();
+  var current=head;
+  while(current!=null){
+   if(map.has(current))return true;
+   else map.set(current,1);
+   current=current.next;
+  }
+  return false;  
+};
