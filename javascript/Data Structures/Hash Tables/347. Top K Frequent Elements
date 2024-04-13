@@ -1,0 +1,33 @@
+var topKFrequent = function(nums, k) {
+ const frequencies= new Map();
+ const frequenciesGrouped= new Map();
+ const resultsList= [];
+ for(let i=0;i<nums.length;i++){
+  let number= nums[i];
+  if(frequencies.has(number))frequencies.set(number,frequencies.get(number)+1);
+  else frequencies.set(number,1);
+ }
+ let maxFrequency=0;
+ for(const key of frequencies.keys()){
+  let frequency= frequencies.get(key);
+  if(frequency>maxFrequency) maxFrequency= frequency;
+  if(frequenciesGrouped.has(frequency)){
+   const frequenciesList= frequenciesGrouped.get(frequency);
+   frequenciesList.push(key);
+   frequenciesGrouped.set(frequency,frequenciesList);
+  }else{
+    const frequenciesList= [];
+    frequenciesList.push(key);
+    frequenciesGrouped.set(frequency,frequenciesList);
+  }
+ }
+ while(resultsList.length<k){
+  const frequenciesList= frequenciesGrouped.get(maxFrequency);
+  if(frequenciesGrouped.has(maxFrequency)){
+    for(let i=0;i<frequenciesList.length;i++)resultsList.push(frequenciesList[i]);
+  }
+  maxFrequency--;
+ }
+ while(resultsList.length>k)resultsList.pop();
+ return resultsList;
+};
