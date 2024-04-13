@@ -1,0 +1,21 @@
+var numTeams = function(rating) {
+ let total=0;
+ for(let i=0;i<rating.length;i++){
+  let first=rating[i];
+  for(let j=i+1;j<rating.length;j++){
+   let next= rating[j];
+   if(next==first) continue;
+   if(next>first){
+    for(let k=j+1;k<rating.length;k++){
+      if(rating[k]>next)total++;
+    }
+   }
+   if(next<first){
+    for(let k=j+1;k<rating.length;k++){
+     if(rating[k]<next)total++;
+    }
+   }
+  }
+ } 
+ return total;   
+};
