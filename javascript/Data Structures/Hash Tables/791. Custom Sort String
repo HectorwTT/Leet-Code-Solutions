@@ -1,0 +1,20 @@
+var customSortString = function(order, s) {
+ let newstr ="";
+ for(let i=0;i<order.length;i++){
+  let c = order.charAt(i);
+  let slength= s.length;
+  if(s.indexOf(""+c)!=-1){
+    s = s.replaceAll(""+c,"");
+    let count= slength-s.length;
+    var str ="";
+    let number=0;
+    while(number<count){
+     str+=""+c;
+     number++;
+    }
+     newstr +=str;
+  }
+ }
+ newstr +=s;
+ return newstr;     
+};
