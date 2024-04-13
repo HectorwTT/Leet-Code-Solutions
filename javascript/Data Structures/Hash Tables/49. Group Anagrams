@@ -1,0 +1,26 @@
+var groupAnagrams = function(strs) {
+ const anagrams = [];
+ const listOfAnagrams= new Map();
+ for(let i=0;i<strs.length;i++){
+  let word=strs[i];
+  wordchars=[];
+  for(let j=0;j<word.length;j++)wordchars.push(word.charCodeAt(j));
+  wordchars.sort(function(a,b){return a-b});
+  let sortedword="";
+  for(let j=0;j<wordchars.length;j++)sortedword+=String.fromCharCode(wordchars[j]);
+  if(!listOfAnagrams.has(sortedword)){
+   const words= [];
+   words.push(word);
+   listOfAnagrams.set(sortedword,words);       
+  }else{
+    const words= listOfAnagrams.get(sortedword);
+    words.push(word);
+    listOfAnagrams.set(sortedword,words);
+   }                
+ }
+ for(const key of listOfAnagrams.keys()){
+  const words= listOfAnagrams.get(key);
+  anagrams.push(words);
+ }
+ return anagrams;   
+};
