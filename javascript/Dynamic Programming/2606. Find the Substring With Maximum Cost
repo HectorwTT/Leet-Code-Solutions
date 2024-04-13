@@ -1,0 +1,21 @@
+var maximumCostSubstring = function(s, chars, vals) {
+ let max=0;
+ const cost= [];
+ cost.length=s.length;
+ let total=0;
+ let prevTotal=0;
+ for(let i=0;i<s.length;i++){
+  let ch= s.charAt(i);
+  let val= s.charCodeAt(i);
+  let chIndexInChars=chars.indexOf(""+ch);
+  if(chIndexInChars==-1)cost[i]=val-96;
+  else cost[i]= vals[chIndexInChars];
+  total+=cost[i];
+  if(total>max)max=total;
+  if(total<0){
+   total=0;
+   prevTotal=0;
+  }else prevTotal=total;
+ }
+ return max;  
+};
