@@ -1,0 +1,36 @@
+var getKth = function(lo, hi, k) {
+ const map = new Map();
+ let count=0;
+ const powers= [];
+ for(let i=lo;i<=hi;i++){
+  let number=i;
+  let power=0;
+  while(number!=1){
+   if(number%2==0)number/=2;
+   else number=(3*number)+1;
+   power++;
+  }
+  if(!map.has(power)){
+   const list= [];
+   list.push(i);
+   map.set(power,list);
+  }else{
+   const list= map.get(power);
+   list.push(i);
+   map.set(power,list);
+  }
+  if(powers.indexOf(power)==-1)powers.push(power);
+ }
+ powers.sort(function(a,b){return a-b});
+ for(let i=0;i<powers.length;i++){
+  let power= powers[i];
+  const list= map.get(power);
+  list.sort(function(a,b){return a-b});
+  for(let j=0;j<list.length;j++){
+   let number= list[j];
+   count++;
+   if(count==k)return number;
+  }
+ }
+ return -1;      
+};
