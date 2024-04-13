@@ -1,0 +1,20 @@
+var stoneGame = function(piles) {
+ let leftPointer=0;
+ let rightPointer=piles.length-1;
+ let aliceStones=0;
+ let bobStones=0;
+ while(leftPointer<rightPointer){
+  if(piles[leftPointer]<piles[rightPointer]){
+    aliceStones+=piles[rightPointer];
+    bobStones+=piles[leftPointer];
+    leftPointer++;
+    rightPointer--;
+  }else{
+    aliceStones+=piles[leftPointer];
+    bobStones+=piles[rightPointer];
+    leftPointer++;
+    rightPointer--;
+  }
+ }
+ return aliceStones>bobStones;
+};
