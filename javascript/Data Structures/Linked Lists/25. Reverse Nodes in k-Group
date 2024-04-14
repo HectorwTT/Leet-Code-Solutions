@@ -1,0 +1,38 @@
+var reverseKGroup = function(head, k) {
+ let current= head;
+ let result=null;
+ let resultCurrent=null;
+ const nodes= [];
+ let count=0;
+ while(current !=null){
+  while(count<k){
+   nodes.push(current.val);
+   current=current.next;
+   if(current==null)break;
+   count++;
+   }
+  if(nodes.length%k!=0) break;
+  if(result==null){
+    result= new ListNode(nodes.pop());
+    resultCurrent= result;
+    resultCurrent.next= null;
+  }
+  while(nodes.length!=0){
+   const newnode= new ListNode(nodes.pop());
+   resultCurrent.next= newnode;
+   resultCurrent = resultCurrent.next;
+  }
+  count=0;
+ }
+ const newNodes=[];
+ if(nodes.length<k){
+  while(nodes.length!=0)newNodes.push(nodes.pop());
+ }
+ while(newNodes.length!=0){
+  const newnode= new ListNode(newNodes.pop());
+  console.log(result.val);
+  resultCurrent.next= newnode;
+  resultCurrent = resultCurrent.next;
+  }    
+  return result;   
+};
