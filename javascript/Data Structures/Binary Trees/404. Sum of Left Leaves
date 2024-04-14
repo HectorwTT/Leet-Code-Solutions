@@ -1,0 +1,12 @@
+var sumOfLeftLeaves = function(root) {
+ return getSum(root,root.left) + getSum(root,root.right);  
+};
+
+var getSum=function(parent, child){
+ if(child==null)return 0;
+ else if(parent.left!= child) return getSum(child,child.left)+getSum(child,child.right);
+ else{
+  if(child.left==null && child.right==null)return child.val;
+  else return getSum(child,child.left)+getSum(child,child.right);
+ }
+}
