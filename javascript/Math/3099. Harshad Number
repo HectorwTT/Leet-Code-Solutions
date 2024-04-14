@@ -1,0 +1,11 @@
+var sumOfTheDigitsOfHarshadNumber = function(x) {
+ let sum=0;
+ let y=x;
+ while(x!=0){
+  let mod=x%10;
+  sum+=mod;
+  x=Math.floor(x/10);
+ }
+ if(y%sum==0)return sum;
+ else return -1;      
+};
