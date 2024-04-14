@@ -1,0 +1,10 @@
+var climbStairs = function(n) {
+ if(n==0) return 0;
+ if(n==1) return 1;
+ const numOfSteps= [];
+ numOfSteps.length=n;
+ numOfSteps[0]=1;
+ numOfSteps[1]=2;
+ for(let i=2;i<numOfSteps.length;i++)numOfSteps[i]= numOfSteps[i-1] + numOfSteps[i-2];
+ return numOfSteps[n-1];
+};
