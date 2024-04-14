@@ -1,0 +1,17 @@
+var checkSubarraySum = function(nums, k) {
+ const map = new Map();
+ map.set(0, -1);
+ let sum = 0;
+ const prefixSums=[];
+ prefixSums.length=nums.length;
+ for(let i = 0; i < nums.length; i++){
+  sum += nums[i];
+  prefixSums[i]=sum;
+  if(!map.has(prefixSums[i]%k))map.set(prefixSums[i]%k,i);
+ }
+ for(let i=0;i<nums.length;i++){
+  let mod= prefixSums[i]%k;
+  if(i-map.get(mod)>=2)return true;
+ }
+ return false;   
+};
