@@ -1,0 +1,25 @@
+var postorderTraversal = function(root) {
+   const result=[];
+   if(root==null)return result;
+   else if(root.left==null && root.right==null){
+    result.push(root.val);
+    return result;
+   }else if(root.left==null){
+    let rightTraversal= postorderTraversal(root.right);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    result.push(root.val);
+    return result;
+   }else if(root.right==null){
+    let leftTraversal=postorderTraversal(root.left);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    result.push(root.val);
+    return result;
+   }else{
+    let leftTraversal=postorderTraversal(root.left);
+    let rightTraversal=postorderTraversal(root.right);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    result.push(root.val);
+    return result;
+   }
+};
