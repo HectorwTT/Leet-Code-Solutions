@@ -1,0 +1,10 @@
+var findDuplicates = function(nums) {
+ const duplicates= new Map();
+ const numbers= [];
+ for(let i=0;i<nums.length;i++){
+  let number=nums[i];
+  if(!duplicates.has(number))duplicates.set(number,i);
+  else numbers.push(number);
+ }
+ return numbers;   
+};
