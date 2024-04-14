@@ -1,0 +1,20 @@
+var longestPalindrome = function(s) {
+ const counts= new Map();
+ let total=0;
+ let maxOdd=0;
+ for(let i=0;i<s.length;i++){
+  var ch= s.charAt(i);
+  if(!counts.has(ch))counts.set(ch,1);
+  else counts.set(ch,counts.get(ch)+1);
+ }
+ for(const key of counts.keys()){
+  let count= counts.get(key);
+  if(count %2==0)total+=count;
+  else{
+   maxOdd=1;
+   total+= count-1;
+  }
+ }
+ total+=maxOdd;
+ return total;   
+};
