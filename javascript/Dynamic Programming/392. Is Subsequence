@@ -1,0 +1,13 @@
+var isSubsequence = function(s, t) {
+ let index=0;
+ if(s.length==0) return true;
+ for(let i=0;i<t.length;i++){
+  var tch = t.charAt(i);
+  var sch= s.charAt(index);
+  if(tch==sch){
+    if(index==s.length-1)return true;
+    index++;
+  }
+ }
+ return false;
+};
