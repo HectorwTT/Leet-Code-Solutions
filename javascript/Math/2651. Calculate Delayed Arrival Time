@@ -1,0 +1,6 @@
+var findDelayedArrivalTime = function(arrivalTime, delayedTime) {
+ let newTime= arrivalTime+delayedTime;
+ if(newTime<24)return newTime;
+ else if(newTime==24)return 0;
+ else return newTime%24;    
+};
