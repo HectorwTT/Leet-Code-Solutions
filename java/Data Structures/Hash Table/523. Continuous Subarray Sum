@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkSubarraySum(int[] nums, int k) {
+    Map<Integer, Integer> map = new HashMap<>();
+	map.put(0, -1);
+	int sum = 0;
+    int[] prefixSums= new int[nums.length];
+	for(int i = 0; i < nums.length; i++){
+	 sum += nums[i];
+     prefixSums[i]=sum;
+	 if(!map.containsKey(prefixSums[i]%k))map.put(prefixSums[i]%k,i);
+	}
+    for(int i=0;i<nums.length;i++){
+     int mod= prefixSums[i]%k;
+     if(i-map.get(mod)>=2)return true;
+    }
+    return false;
+    }
+}
