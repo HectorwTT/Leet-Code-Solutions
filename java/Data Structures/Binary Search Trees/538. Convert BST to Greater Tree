@@ -1,0 +1,54 @@
+class Solution {
+    public TreeNode convertBST(TreeNode root) {
+     if(root==null)return root;
+     List<TreeNode> inOrderT= getInOrderTraversal(root);  
+      List<TreeNode> result= new ArrayList<>();
+      int rootIndex=0;
+      int sum=getTotal(inOrderT);
+      int prefixSum=0;
+      for(int i=0;i<inOrderT.size();i++){
+        TreeNode node= inOrderT.get(i);
+        prefixSum+=node.val;
+        int sumOfGreater= sum-prefixSum;
+        int newValue=node.val+sumOfGreater;
+        TreeNode newNode= node;
+        newNode.val=newValue;
+        result.add(newNode);
+        if(node==root)rootIndex=i;
+      }
+      return result.get(rootIndex);   
+    }
+    public int getTotal(List<TreeNode> list){
+        int total=0;
+        for(int i=0;i<list.size();i++){
+            int value=list.get(i).val;
+            total+=value;
+        }
+        return total;
+    }
+    public List<TreeNode> getInOrderTraversal(TreeNode root){
+     List<TreeNode>result= new ArrayList<>();
+     if(root==null)return new ArrayList<>();
+     else if(root.left==null && root.right==null){
+        result.add(root);
+        return result;
+     }else if(root.left==null){
+        result.add(root);
+        List<TreeNode> rightChildren= getInOrderTraversal(root.right);
+        result.addAll(rightChildren);
+        return result;
+     }else if(root.right==null){
+        List<TreeNode> leftChildren= getInOrderTraversal(root.left);
+        result.addAll(leftChildren);
+        result.add(root);
+        return result;
+     }else{
+        List<TreeNode>leftChildren=getInOrderTraversal(root.left);
+        List<TreeNode>rightChildren=getInOrderTraversal(root.right);
+        result.addAll(leftChildren);
+        result.add(root);
+        result.addAll(rightChildren);
+        return result;
+     }
+    }
+}
