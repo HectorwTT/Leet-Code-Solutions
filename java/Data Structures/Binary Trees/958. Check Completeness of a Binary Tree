@@ -1,0 +1,43 @@
+class Solution {
+    public boolean isCompleteTree(TreeNode root) {
+     List<List<TreeNode>> tree= getLevelOrderTraversal(root);
+     for(int i=1;i<tree.size();i++){
+      List<TreeNode> nodes= tree.get(i);
+      if(i<tree.size()-1){
+        if(nodes.size()!=(int)Math.pow(2,i))return false;
+      }else{
+        List<TreeNode> parents= tree.get(i-1);
+        boolean hasFoundNull= false;
+        for(int j=0;j<parents.size();j++){
+         TreeNode parent= parents.get(j);
+         if(parent.left==null) hasFoundNull=true;
+         else{
+            if(hasFoundNull)return false;
+         }
+         if(parent.right==null)hasFoundNull=true;
+         else{
+            if(hasFoundNull)return false;
+         }
+        } 
+      }      
+     }
+     return true;
+    }
+    public List<List<TreeNode>> getLevelOrderTraversal(TreeNode root){
+     List<List<TreeNode>> result= new ArrayList<>();
+     Queue<TreeNode> queue= new LinkedList<>();
+     queue.offer(root);
+     while(!queue.isEmpty()){
+      int size= queue.size();
+      List<TreeNode> nodes= new ArrayList<>();
+      for(int i=0;i<size;i++){
+        TreeNode node= queue.poll();
+        if(node.left!=null)queue.offer(node.left);
+        if(node.right!=null)queue.offer(node.right);
+        nodes.add(node);
+      }
+      result.add(nodes);
+     }
+     return result;
+    }
+}
