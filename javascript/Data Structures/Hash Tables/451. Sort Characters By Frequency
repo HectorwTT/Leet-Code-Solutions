@@ -1,0 +1,39 @@
+var frequencySort = function(s) {
+ const map= new Map();
+ const list= [];
+ const map1= new Map();
+ var newString="";
+  for(let i=0;i<s.length;i++){
+  ch= s.charAt(i);
+  if(!map.has(ch))map.set(ch,1);
+  else map.set(ch,map.get(ch)+1);
+ }
+ for(const key of map.keys()){
+  let number= map.get(key);
+  if(list.indexOf(number)==-1)list.push(number);
+  if(!map1.has(number)){
+   const chars= [];
+   chars.push(key);
+   map1.set(number,chars);
+  }else{
+    const chars= map1.get(number);
+    chars.push(key);
+    map1.set(number,chars);
+  }
+ }
+ list.sort(function(a,b){return a-b});
+ for(let i=list.length-1;i>=0;i--){
+  let number= list[i];
+  const chars =map1.get(number);
+  for(let j=0;j<chars.length;j++){
+   var ch= ""+chars[j];
+   let count=0;
+   while(count<number){
+    newString+=ch;
+    count++;
+   }
+  
+  }
+ }
+ return newString; 
+};
