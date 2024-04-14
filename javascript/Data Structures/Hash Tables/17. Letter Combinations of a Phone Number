@@ -1,0 +1,64 @@
+var letterCombinations = function(digits) {
+ if(digits=="") return [];
+ else{
+  const letters = new Map();
+  const two= [];
+  two.push("a");
+  two.push("b");
+  two.push("c");
+  const three=[];
+  three.push("d");
+  three.push("e");
+  three.push("f");
+  const four= [];
+  four.push("g");
+  four.push("h");
+  four.push("i");
+  const five= [];
+  five.push("j");
+  five.push("k");
+  five.push("l");
+  const six= [];
+  six.push("m");
+  six.push("n");
+  six.push("o");
+  const seven= [];
+  seven.push("p");
+  seven.push("q");
+  seven.push("r");
+  seven.push("s");
+  const eight= [];
+  eight.push("t");
+  eight.push("u");
+  eight.push("v"); 
+  const nine= [];
+  nine.push("w");
+  nine.push("x");
+  nine.push("y");
+  nine.push("z");
+  letters.set('2',two);
+  letters.set('3',three);
+  letters.set('4',four);
+  letters.set('5',five);
+  letters.set('6',six);
+  letters.set('7',seven);
+  letters.set('8',eight);
+  letters.set('9',nine);
+  if(digits.length==1) return letters.get(digits.charAt(0));
+  else{
+   var first= digits.charAt(0);
+   const combos=letters.get(first);
+   const result = [];
+   for(let i=0;i<combos.length;i++){
+    var digit=combos[i];
+     let combos1 =letterCombinations(digits.substring(1));
+     for(let j=0;j<combos1.length;j++){
+      var combination1=combos1[j];
+      var newcombo=digit+combination1;
+      result.push(newcombo);
+      }
+   }
+    return result;
+    }
+}  
+};
