@@ -1,0 +1,16 @@
+class Solution {
+    public List<List<String>> suggestedProducts(String[] products, String searchWord) {
+      List<List<String>> result= new ArrayList<>();
+      Arrays.sort(products);
+      for(int i=1;i<=searchWord.length();i++){
+        String word= searchWord.substring(0,i);
+        List<String> words= new ArrayList<>();
+        for(int j=0;j<products.length;j++){
+         if(products[j].indexOf(word)==0)words.add(products[j]);
+         if(words.size()==3)break;
+        }
+        result.add(words);
+      }  
+      return result;
+    }
+}
