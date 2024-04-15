@@ -1,0 +1,28 @@
+class Solution {
+    public int getImportance(List<Employee> employees, int id) {
+     HashMap<Integer,Integer> importances= new HashMap<>();
+     HashMap<Integer,List<Integer>> map= new HashMap<>();
+     Queue<Integer> queue= new LinkedList<>();
+     int total=0;
+     for(int i=0;i<employees.size();i++){
+      Employee employee= employees.get(i);
+      importances.put(employee.id,employee.importance);
+      map.put(employee.id,employee.subordinates);
+     }
+     queue.offer(id);
+     while(!queue.isEmpty()){
+      int size=queue.size();
+      for(int i=0;i<size;i++){
+        int current= queue.poll();
+        total+=importances.get(current);
+        List<Integer> ids= map.get(current);
+        if(ids.size()!=0){
+            for(int j=0;j<ids.size();j++){
+              queue.offer(ids.get(j));
+            }
+        }
+      }
+     }
+     return total;   
+    }
+}
