@@ -1,0 +1,47 @@
+class Solution {
+    public void recoverTree(TreeNode root) {
+     List<TreeNode> inorder= getInOrderTraversal(root);
+     List<Integer> list1= new ArrayList<>();
+     List<Integer> list2= new ArrayList<>();
+     HashMap<Integer,TreeNode> map= new HashMap<>();
+     for(int i=0;i<inorder.size();i++){
+      int number= inorder.get(i).val;
+      list1.add(number);
+      list2.add(number);
+      map.put(number,inorder.get(i));
+     }   
+     list2.sort(null);
+     for(int i=0;i<list2.size();i++){
+      int number2= list2.get(i);
+      int number1=list1.get(i);
+      if(number1!= number2){
+        TreeNode node1= inorder.get(i);
+        TreeNode node2= map.get(number2);
+        node2.val=number1;
+        node1.val=number2;
+      }
+     }
+     return;
+    }
+    public List<TreeNode> getInOrderTraversal(TreeNode root){
+     List<TreeNode> result= new ArrayList<>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+      result.add(root);
+      return result;
+     }else if(root.left==null){
+      result.add(root);
+      result.addAll(getInOrderTraversal(root.right));
+      return result;
+     }else if (root.right==null){
+      result.addAll(getInOrderTraversal(root.left));
+      result.add(root);
+      return result;
+     }else{
+      result.addAll(getInOrderTraversal(root.left));
+      result.add(root);
+      result.addAll(getInOrderTraversal(root.right));
+      return result;
+     }
+    }
+}
