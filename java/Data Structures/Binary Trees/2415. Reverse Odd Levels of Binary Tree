@@ -1,0 +1,39 @@
+class Solution {
+    public TreeNode reverseOddLevels(TreeNode root) {
+     List<List<TreeNode>> lOrderList= getLevelOrderTraversal(root);
+     for(int i=0;i<lOrderList.size();i++){
+        List<TreeNode> nodes= lOrderList.get(i);
+        List<TreeNode> nodesClone=nodes;
+        if(i%2==1){
+         int left=0;
+         int right= nodes.size()-1;
+         while(left<right){
+          TreeNode node= nodes.get(left++);
+          TreeNode reverseNode=nodes.get(right--);
+          int number1= node.val;
+          int number2=reverseNode.val;
+          node.val=number2;
+          reverseNode.val=number1;
+         }
+        }
+     }
+     return root;   
+    }
+    public List<List<TreeNode>> getLevelOrderTraversal(TreeNode root){
+     List<List<TreeNode>> result= new ArrayList<>();
+     Queue<TreeNode> queue= new LinkedList<>();
+     queue.offer(root);
+     while(!queue.isEmpty()){
+        int size= queue.size();
+        List<TreeNode> list= new ArrayList<>();
+        for(int i=0;i<size;i++){
+            TreeNode node= queue.poll();
+            if(node.left!=null)queue.offer(node.left);
+            if(node.right!=null)queue.offer(node.right);
+            list.add(node);
+        }
+        result.add(list);
+     }
+     return result;
+    }
+}
