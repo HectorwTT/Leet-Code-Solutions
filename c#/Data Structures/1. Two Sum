@@ -1,0 +1,19 @@
+public class Solution {
+    public int[] TwoSum(int[] nums, int target) {
+      Dictionary<int,int> map= new Dictionary<int,int>(); 
+      for(int i=0;i<nums.Length;i++){
+        int curr= nums[i];
+        int other= target-curr;
+        if(map.ContainsKey(other)){
+         int [] result= new int[2];
+         result[0]=map[other];
+         result[1]=i;
+         return result;
+        }else{
+         if(map.ContainsKey(curr))map[curr]=i;
+         else map.Add(curr,i);
+        }
+      } 
+      return null;
+    }
+}
