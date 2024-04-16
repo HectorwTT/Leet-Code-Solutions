@@ -1,0 +1,42 @@
+class Solution {
+    public int sumEvenGrandparent(TreeNode root) {
+     List<List<TreeNode>> levelOrderT=getLevelOrderTraversal(root);
+     int total=0;
+     HashMap<TreeNode,TreeNode> parents= new HashMap<>();
+     for(int i=0;i<levelOrderT.size()-1;i++){
+      List<TreeNode> nodes= levelOrderT.get(i);
+      for(int j=0;j<nodes.size();j++){
+        TreeNode node=nodes.get(j);
+        if(node.left!=null)parents.put(node.left,node);
+        if(node.right!=null)parents.put(node.right,node);
+      }
+     }
+     for(int i=2;i<levelOrderT.size();i++){
+      List<TreeNode> nodes=levelOrderT.get(i);
+      for(int j=0;j<nodes.size();j++){
+        TreeNode node= nodes.get(j);
+        TreeNode parent= parents.get(node);
+        TreeNode grandparent=parents.get(parent);
+        if(grandparent.val%2==0)total+=node.val;
+      }
+     }
+     return total;
+    }
+    public List<List<TreeNode>> getLevelOrderTraversal(TreeNode root){
+     List<List<TreeNode>> result= new ArrayList<>();
+     Queue<TreeNode> queue = new LinkedList<>();
+     queue.offer(root);
+     while(!queue.isEmpty()){
+      int size=queue.size();
+      List<TreeNode> nodes= new ArrayList<>();
+      for(int i=0;i<size;i++){
+        TreeNode node= queue.poll();
+        if(node.left!= null)queue.offer(node.left);
+        if(node.right!=null)queue.offer(node.right);
+        nodes.add(node);
+      }
+      result.add(nodes);
+     }
+     return result;
+    }
+}
