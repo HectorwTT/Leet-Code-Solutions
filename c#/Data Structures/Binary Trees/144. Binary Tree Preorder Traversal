@@ -1,0 +1,40 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public IList<int> PreorderTraversal(TreeNode root) {
+     IList<int> result= new List<int>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+      result.Add(root.val);
+      return result;
+     }else if(root.left==null){
+       result.Add(root.val);
+       IList<int> RightInPreorder= PreorderTraversal(root.right);
+       foreach(var value in RightInPreorder)result.Add(value);
+       return result;
+     }else if(root.right==null){
+       result.Add(root.val);
+       IList<int> LeftInPreorder= PreorderTraversal(root.left);
+       foreach(var value in LeftInPreorder)result.Add(value);
+       return result;
+     }else{
+       result.Add(root.val);
+       IList<int> LeftInPreorder= PreorderTraversal(root.left);
+       foreach(var value in LeftInPreorder)result.Add(value);
+       IList<int> RightInPreorder= PreorderTraversal(root.right);
+       foreach(var value in RightInPreorder)result.Add(value);
+       return result; 
+     }
+    }
+}
