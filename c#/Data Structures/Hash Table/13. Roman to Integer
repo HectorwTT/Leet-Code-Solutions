@@ -1,0 +1,26 @@
+public class Solution {
+    public int RomanToInt(string s) {
+     int number = 0;
+     Dictionary <char,int> values = new Dictionary<char,int>();
+     values.Add('I',1);
+     values.Add('V',5);
+     values.Add('X',10);
+     values.Add('L',50);
+     values.Add('C',100);
+     values.Add('D',500);
+     values.Add('M',1000);
+     int pointer= s.Length-1;
+     int sum =0;
+     int curr=0;
+     int previous =0;
+     while(pointer >=0){
+      char numeral = s[pointer];
+      curr = values[numeral];
+      if(curr < previous) curr = -1*curr;
+      sum += curr;
+      previous = curr;
+      pointer = pointer -1;
+     }
+     return sum;  
+    }
+}
