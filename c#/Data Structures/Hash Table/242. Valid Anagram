@@ -1,0 +1,25 @@
+public class Solution {
+    public bool IsAnagram(string s, string t) {
+      Dictionary<char,int> smap= new Dictionary<char,int>();
+      Dictionary<char,int> tmap= new Dictionary<char,int>();
+      for(int i=0;i<s.Length;i++){
+        char ch= s[i];
+        if(!smap.ContainsKey(ch))smap.Add(ch,1);
+        else smap[ch]=smap[ch]+1;
+      }  
+      for(int i=0;i<t.Length;i++){
+        char ch=t[i];
+        if(!tmap.ContainsKey(ch))tmap.Add(ch,1);
+        else tmap[ch]=tmap[ch]+1;
+      }
+      foreach(var (key,value) in smap){
+        if(!tmap.ContainsKey(key))return false;
+        if(tmap[key]!=smap[key])return false;
+      }
+      foreach(var(key,value) in tmap){
+        if(!smap.ContainsKey(key))return false;
+        if(smap[key]!=tmap[key])return false;
+      }
+      return true;
+    }
+}
