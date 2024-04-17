@@ -1,0 +1,16 @@
+public class Solution {
+    public ListNode GetIntersectionNode(ListNode headA, ListNode headB) {
+     ListNode currentA=headA;
+      ListNode currentB=headB;
+      Dictionary<ListNode,int> map = new Dictionary<ListNode,int>();
+      while(currentA!=null ){
+        map.Add(currentA,1);
+        currentA=currentA.next;
+      }
+      while(currentB!=null){
+        if(map.ContainsKey(currentB))return currentB;
+        else currentB=currentB.next;
+      }
+      return null;  
+    }
+}
