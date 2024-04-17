@@ -1,0 +1,23 @@
+var isAnagram = function(s, t) {
+ const smap= new Map();
+ const tmap= new Map();
+ for(let i=0;i<s.length;i++){
+  let ch=s.charAt(i);
+  if(!smap.has(ch))smap.set(ch,1);
+  else smap.set(ch,smap.get(ch)+1);
+ } 
+ for(let i=0;i<t.length;i++){
+  let ch=t.charAt(i);
+  if(!tmap.has(ch))tmap.set(ch,1);
+  else tmap.set(ch,tmap.get(ch)+1);
+ }
+ for(const key of smap.keys()){
+    if(!tmap.has(key))return false;
+    if(tmap.get(key)!=smap.get(key))return false;
+ }
+ for(const key of tmap.keys()){
+    if(!smap.has(key))return false;
+    if(smap.get(key)!=tmap.get(key))return false;
+ }
+ return true;
+};
