@@ -1,0 +1,48 @@
+public class Solution {
+    public string IntToRoman(int num) {
+     Dictionary <int,string> values = new Dictionary<int,string>();
+     values.Add(0,"");
+     values.Add(1,"I");
+     values.Add(2,"II");
+     values.Add(3,"III");
+     values.Add(4,"IV");
+     values.Add(5,"V");
+     values.Add(6,"VI");
+     values.Add(7,"VII");
+     values.Add(8,"VIII");
+     values.Add(9,"IX");
+     values.Add(10,"X");
+     values.Add(20,"XX");
+     values.Add(30,"XXX");
+     values.Add(40,"XL");
+     values.Add(50,"L");
+     values.Add(60,"LX");
+     values.Add(70,"LXX");
+     values.Add(80,"LXXX");
+     values.Add(90,"XC");
+     values.Add(100,"C");
+     values.Add(200,"CC");
+     values.Add(300,"CCC");
+     values.Add(400,"CD");
+     values.Add(500,"D");
+     values.Add(600,"DC");
+     values.Add(700,"DCC");
+     values.Add(800,"DCCC");
+     values.Add(900,"CM");
+     values.Add(1000,"M");
+     values.Add(2000,"MM");
+     values.Add(3000,"MMM");
+     values.Add(4000,"MMMM");
+     int power =0;
+     string str ="";
+     while(num!=0){
+      int mod = num% 10;
+      int number = mod *(int)Math.Pow(10,power);
+      string ch = values[number];
+      str = ch +str;
+      power++;
+      num /=10;   
+     } 
+    return str;   
+    }
+}
