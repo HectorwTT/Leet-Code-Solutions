@@ -1,0 +1,12 @@
+public class Solution {
+    public ListNode DetectCycle(ListNode head) {
+      Dictionary<ListNode,int> map= new Dictionary<ListNode,int>();
+      ListNode current=head;
+      while(current!=null){
+        if(map.ContainsKey(current))return current;
+        map.Add(current,1);
+        current=current.next;
+      }  
+      return null;
+    }
+}
