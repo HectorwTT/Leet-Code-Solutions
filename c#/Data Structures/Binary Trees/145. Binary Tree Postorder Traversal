@@ -1,0 +1,27 @@
+public class Solution {
+    public IList<int> PostorderTraversal(TreeNode root) {
+      IList<int> result= new List<int>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+      result.Add(root.val);
+      return result;
+     }else if(root.left==null){
+       IList<int> RightInPreorder= PostorderTraversal(root.right);
+       foreach(var value in RightInPreorder)result.Add(value);
+       result.Add(root.val);
+       return result;
+     }else if(root.right==null){
+       IList<int> LeftInPreorder= PostorderTraversal(root.left);
+       foreach(var value in LeftInPreorder)result.Add(value);
+       result.Add(root.val);
+       return result;
+     }else{
+       IList<int> LeftInPreorder= PostorderTraversal(root.left);
+       foreach(var value in LeftInPreorder)result.Add(value);
+       IList<int> RightInPreorder= PostorderTraversal(root.right);
+       foreach(var value in RightInPreorder)result.Add(value);
+       result.Add(root.val);
+       return result; 
+     }  
+    }
+}
