@@ -1,0 +1,21 @@
+public class Solution {
+    public int FirstUniqChar(string s) {
+      int index=s.Length-1;
+      Dictionary<char,int> map= new Dictionary<char,int>();
+      for(int i=index;i>=0;i--){
+        char ch= s[i];
+        if(!map.ContainsKey(ch))map.Add(ch,1);
+        else map[ch]=map[ch]+1;
+      }  
+      int minIndex=-1;
+      foreach(var(key,value)in map){
+        if(value==1){
+         if(minIndex==-1)minIndex= s.IndexOf(""+key);
+         else{
+            if(s.IndexOf(""+key)<minIndex)minIndex=s.IndexOf(""+key);
+         }
+        }
+      }
+      return minIndex;
+    }
+}
