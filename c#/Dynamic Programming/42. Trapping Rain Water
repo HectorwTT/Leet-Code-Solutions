@@ -1,0 +1,24 @@
+public class Solution {
+    public int Trap(int[] height) {
+     int totalWater = 0;
+     int leftPointer = 0;
+     int rightPointer = height.Length - 1;
+     int leftBound = 0;
+     int rightBound = 0;
+     int[] water= new int[height.Length];
+     while(leftPointer<rightPointer){
+       if(height[leftPointer]<=
+         height[rightPointer]){
+          leftBound= Math.Max(height[leftPointer],
+                   leftBound);
+          totalWater+= leftBound-height[leftPointer];
+          leftPointer++;        
+         }else{
+          rightBound=Math.Max(height[rightPointer],rightBound);
+          totalWater+=rightBound-height[rightPointer];
+          rightPointer--; 
+         }
+     }
+     return totalWater;   
+    }
+}
