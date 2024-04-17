@@ -1,0 +1,46 @@
+var intToRoman = function(num) {
+ const values = new Map();
+ values.set(0,"");
+ values.set(1,"I");
+ values.set(2,"II");
+ values.set(3,"III");
+ values.set(4,"IV");
+ values.set(5,"V"); 
+ values.set(6,"VI");
+ values.set(7,"VII");
+ values.set(8,"VIII");
+ values.set(9,"IX");
+ values.set(10,"X");
+ values.set(20,"XX");
+ values.set(30,"XXX");
+ values.set(40,"XL");
+ values.set(50,"L"); 
+ values.set(60,"LX");
+ values.set(70,"LXX");
+ values.set(80,"LXXX");
+ values.set(90,"XC");
+ values.set(100,"C");
+ values.set(200,"CC");
+ values.set(300,"CCC");
+ values.set(400,"CD");
+ values.set(500,"D"); 
+ values.set(600,"DC");
+ values.set(700,"DCC");
+ values.set(800,"DCCC");
+ values.set(900,"CM");
+ values.set(1000,"M");
+ values.set(2000,"MM");
+ values.set(3000,"MMM");
+ values.set(4000,"MMMM");
+ let power =0;
+ let str ="";
+ while(num!=0){
+  let mod = num% 10;
+  let number = mod * Math.pow(10,power);
+  let  ch = values.get(number);
+  str = ch +str;
+  power++;
+  num=Math.floor(num/10);      
+ } 
+ return str;  
+};
