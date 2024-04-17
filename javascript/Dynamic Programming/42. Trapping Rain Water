@@ -1,0 +1,21 @@
+var trap = function(height) {
+ var totalWater = 0;
+ var leftPointer = 0;
+ var rightPointer = height.length - 1;
+ var leftBound = 0;
+ var rightBound = 0;
+ const water= [];
+ water.length=height.length;
+ while(leftPointer<rightPointer){
+  if(height[leftPointer]<=height[rightPointer]){
+    leftBound= Math.max(height[leftPointer],leftBound);
+    totalWater+= leftBound-height[leftPointer];
+    leftPointer++;        
+  }else{
+    rightBound=Math.max(height[rightPointer],rightBound);
+    totalWater+=rightBound-height[rightPointer];
+    rightPointer--; 
+  }
+ }
+ return totalWater;  
+};
