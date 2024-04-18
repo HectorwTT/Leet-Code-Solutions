@@ -1,0 +1,43 @@
+var averageOfSubtree = function(root) {
+ if(root==null)return 0;
+ else if(root.left==null && root.right==null)return 1;   
+ else if(root.left==null){
+  let sum = root.val +getSum(root.right);
+  let count= getCount(root.right)+1;
+  let average = Math.floor(sum/count);
+  if(average==root.val)return 1+averageOfSubtree(root.right);
+  else return averageOfSubtree(root.right);
+ }else if(root.right==null){
+   let sum= root.val+getSum(root.left);
+   let count=getCount(root.left)+1;
+   let average= Math.floor(sum/count);
+   if(average==root.val)return 1+averageOfSubtree(root.left);
+   else return averageOfSubtree(root.left);
+ }else{
+   let leftSum= getSum(root.left);
+   let rightSum=getSum(root.right);
+   let leftCount=getCount(root.left);
+   let rightCount=getCount(root.right);
+   let sum=leftSum+rightSum+root.val;
+   let count=leftCount+rightCount+1;
+   let average= Math.floor(sum/count);
+   if(average==root.val)return 1+averageOfSubtree(root.left)+averageOfSubtree(root.right);
+   else return averageOfSubtree(root.left)+averageOfSubtree(root.right);
+ }  
+};
+
+var getSum=function(root){
+ if(root==null)return 0;
+ else if(root.left==null && root.right==null)return root.val;
+ else if(root.left==null)return root.val+ getSum(root.right);
+ else if(root.right==null)return root.val+getSum(root.left);
+ else return root.val+getSum(root.left)+getSum(root.right);
+};
+
+var getCount=function(root){
+ if(root==null)return 0;
+ else if(root.left==null && root.right==null)return 1;
+ else if(root.left==null)return 1+getCount(root.right);
+ else if(root.right==null)return 1+getCount(root.left);
+ else return 1+getCount(root.left)+getCount(root.right);
+};
