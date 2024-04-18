@@ -1,0 +1,43 @@
+var kthSmallest = function(root, k) {
+ const treeInOrder=inorderTraversal(root);
+ for(let i=0;i<treeInOrder.length;i++){
+  let number = treeInOrder[i];
+  let position=i+1;
+  if(position==k) return number;
+ }
+ return -1;
+};
+
+const inorderTraversal= function(root) {
+ if(root==null)return [];
+ if (root.left==null && root.right==null){
+  const rootlist = [];
+  rootlist.push(root.val);
+  return rootlist;
+ }else {
+    if(root.left==null){
+     const result = [];
+     result.push(root.val);
+     const rightlist = inorderTraversal(root.right);
+     for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+     return result;
+    }
+    else if (root.right==null){
+     const result = [];
+     const leftlist = inorderTraversal(root.left);
+     for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+     result.push(root.val);
+     return result;
+    }else{
+     let leftlist=[];
+     let rightlist=[];
+     if(root.left!=null)leftlist=inorderTraversal(root.left);  
+     if (root.right!=null)rightlist= inorderTraversal(root.right);
+     const result = [];
+     for(let i=0;i<leftlist.length;i++)result.push(leftlist[i]);
+     result.push(root.val);
+     for(let i=0;i<rightlist.length;i++)result.push(rightlist[i]);
+     return result;
+    }
+    }   
+};
