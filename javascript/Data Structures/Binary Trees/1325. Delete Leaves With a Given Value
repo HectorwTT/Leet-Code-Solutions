@@ -1,0 +1,28 @@
+var removeLeafNodes = function(root, target) {
+ return deleteNodes(root,target);      
+};
+      
+var deleteNodes=function(root,target){
+ if(root==null)return null;
+ else if(root.left==null && root.right==null){
+  if(root.val==target)root=null;
+  return root;
+ }else if(root.left==null){
+   if(deleteNodes(root.right,target)==null){
+    root.right=null;
+    if(root.val==target)root=null;
+   }
+  return root;
+ }else if(root.right==null){
+   if(deleteNodes(root.left,target)==null){
+    root.left=null;
+    if(root.val==target)root=null;
+   }
+   return root;
+ }else{
+  if(deleteNodes(root.left,target)==null)root.left=null;
+  if(deleteNodes(root.right,target)==null)root.right=null;
+  if(root.left==null && root.right==null)if(root.val==target)root=null;
+  return root;
+ }
+};
