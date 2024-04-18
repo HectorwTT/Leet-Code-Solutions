@@ -1,0 +1,30 @@
+public class Solution {
+    public TreeNode RemoveLeafNodes(TreeNode root, int target) {
+     return DeleteNodes(root,target);
+    }
+    public TreeNode DeleteNodes(TreeNode root,int target){
+     if(root==null)return null;
+     else if(root.left==null && root.right==null && root.val==target){
+        root=null;
+        return root;
+     }     
+     else if(root.left==null){
+      if(DeleteNodes(root.right,target)==null){
+       root.right=null;
+       if(root.val==target)root=null;
+      }
+      return root;
+     }else if(root.right==null){
+       if(DeleteNodes(root.left,target)==null){
+        root.left=null;
+        if(root.val==target)root=null;
+        }
+        return root;
+     }else{
+        if(DeleteNodes(root.left,target)==null)root.left=null;
+        if(DeleteNodes(root.right,target)==null)root.right=null;
+        if(root.right==null && root.left==null)if(root.val==target)root=null;
+        return root;
+     }
+    }
+}
