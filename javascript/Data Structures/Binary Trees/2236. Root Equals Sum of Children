@@ -1,0 +1,6 @@
+var checkTree = function(root) {
+ let leftValue= root.left.val;
+ let rightValue= root.right.val;
+ let rootValue=root.val;
+ return rootValue==leftValue+rightValue;   
+};
