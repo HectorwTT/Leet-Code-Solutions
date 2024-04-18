@@ -1,0 +1,21 @@
+class Solution {
+    public boolean checkZeroOnes(String s) {
+      int maxNumOfOnes=0;
+      int maxNumOfZeroes=0;
+      int numOfOnes=0;
+      int numOfZeroes=0;
+      for(int i=0;i<s.length();i++){
+        char ch=s.charAt(i);
+        if(ch=='1'){
+         numOfZeroes=0;
+         numOfOnes++;
+         if(maxNumOfOnes<numOfOnes)maxNumOfOnes=numOfOnes;
+        }else{
+          numOfOnes=0;
+          numOfZeroes++;
+          if(maxNumOfZeroes<numOfZeroes)maxNumOfZeroes=numOfZeroes;
+        }
+      }
+      return maxNumOfOnes>maxNumOfZeroes;  
+    }
+}
