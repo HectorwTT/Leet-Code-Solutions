@@ -1,0 +1,45 @@
+public class Solution {
+    public int AverageOfSubtree(TreeNode root) {
+     if(root==null)return 0;
+     else if(root.left==null && root.right==null)return 1;   
+     else if(root.left==null){
+        int sum = root.val +GetSum(root.right);
+        int count= GetCount(root.right)+1;
+        int average = sum/count;
+        if(average==root.val)return 1+AverageOfSubtree(root.right);
+        else return AverageOfSubtree(root.right);
+     }else if(root.right==null){
+        int sum= root.val+GetSum(root.left);
+        int count=GetCount(root.left)+1;
+        int average= sum/count;
+        if(average==root.val)return 1+AverageOfSubtree(root.left);
+        else return AverageOfSubtree(root.left);
+     }else{
+        int leftSum= GetSum(root.left);
+        int rightSum=GetSum(root.right);
+        int leftCount=GetCount(root.left);
+        int rightCount=GetCount(root.right);
+        int sum=leftSum+rightSum+root.val;
+        int count=leftCount+rightCount+1;
+        int average= sum/count;
+        if(average==root.val)return 1+AverageOfSubtree(root.left)+AverageOfSubtree(root.right);
+        else return AverageOfSubtree(root.left)+AverageOfSubtree(root.right);
+     }  
+    }
+
+     public int GetSum(TreeNode root){
+     if(root==null)return 0;
+     else if(root.left==null && root.right==null)return root.val;
+     else if(root.left==null)return root.val+ GetSum(root.right);
+     else if(root.right==null)return root.val+GetSum(root.left);
+     else return root.val+GetSum(root.left)+GetSum(root.right);
+    }
+
+    public int GetCount(TreeNode root){
+     if(root==null)return 0;
+     else if(root.left==null && root.right==null)return 1;
+     else if(root.left==null)return 1+GetCount(root.right);
+     else if(root.right==null)return 1+GetCount(root.left);
+     else return 1+GetCount(root.left)+GetCount(root.right);
+    }
+}
