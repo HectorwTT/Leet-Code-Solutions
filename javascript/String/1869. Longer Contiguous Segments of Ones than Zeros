@@ -1,0 +1,19 @@
+var checkZeroOnes = function(s) {
+ let maxNumOfOnes=0;
+ let maxNumOfZeroes=0;
+ let numOfOnes=0;
+ let numOfZeroes=0;
+ for(let i=0;i<s.length;i++){
+  var ch=s.charAt(i);
+  if(ch=='1'){
+   numOfZeroes=0;
+   numOfOnes++;
+   if(maxNumOfOnes<numOfOnes)maxNumOfOnes=numOfOnes;
+  }else{
+   numOfOnes=0;
+   numOfZeroes++;
+   if(maxNumOfZeroes<numOfZeroes)maxNumOfZeroes=numOfZeroes;
+   }
+ }
+ return maxNumOfOnes>maxNumOfZeroes;  
+};
