@@ -1,0 +1,25 @@
+public class Solution {
+    public int GoodNodes(TreeNode root) {
+      return GetCountOfGoodNodes(root,root.val); 
+    }
+    public int GetCountOfGoodNodes(TreeNode root,int val){
+     int count=0;
+     if(root==null)return 0;
+     else if(root.left==null && root.right==null){
+      if(root.val<val)return 0;
+      else return 1;
+     }else if(root.left==null){
+        if(root.val<val)return GetCountOfGoodNodes(root.right,val);
+        else return 1+ GetCountOfGoodNodes(root.right,root.val);
+     }else if(root.right==null){
+        if(root.val<val)return GetCountOfGoodNodes(root.left,val);
+        else return 1+GetCountOfGoodNodes(root.left,root.val);
+     }else{
+        int max=Math.Max(root.val,val);
+        int leftCount= GetCountOfGoodNodes(root.left,max);
+        int rightCount=GetCountOfGoodNodes(root.right,max);
+        if(max==root.val)return 1+leftCount+rightCount;
+        else return leftCount+rightCount;
+     }
+    }
+}
