@@ -1,0 +1,30 @@
+class Solution {
+    public String shiftingLetters(String s, int[][] shifts) {
+      String result="";
+      char []word=s.toCharArray();
+      String previousWord="";
+      int [] prefixShifts= new int[s.length()];
+      for(int i=0;i<shifts.length;i++){
+        int start=shifts[i][0];
+        int end=shifts[i][1];
+        int direction=shifts[i][2];
+        int number=0;
+        if(direction==1) number=1;
+        else number=-1;
+         for(int j=start;j<=end;j++){
+          prefixShifts[j]+=number;
+         }
+      }
+      for(int i=0;i<word.length;i++){
+          char ch= word[i];
+          int chval=ch+prefixShifts[i];
+          if(chval>122)chval=((chval-123)%26)+97;
+          if(chval<97)chval=123-((97-chval)%26);
+          if(chval>122)chval=(chval-123)+97;
+          if(chval<97)chval=123-(97-chval)&26;
+          word[i]=(char)chval;
+      }
+      result=String.valueOf(word);  
+      return result;
+    }
+}
