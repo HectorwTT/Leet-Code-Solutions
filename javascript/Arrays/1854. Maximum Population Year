@@ -1,0 +1,21 @@
+var maximumPopulation = function(logs) {
+ const countsByYear= new Map();
+ let max=0;
+ const years= [];
+ for(let i=0;i<logs.length;i++){
+  let yob= logs[i][0];
+  let yod= logs[i][1];
+  for(let j=yob;j<yod;j++){
+   if(!countsByYear.has(j))countsByYear.set(j,1);
+   else countsByYear.set(j,countsByYear.get(j)+1);
+   if(countsByYear.get(j)>max)max=countsByYear.get(j);
+   years.push(j);  
+  }
+ }
+  years.sort();
+  for(let i=0;i<years.length;i++){
+   let year= years[i];
+   if(countsByYear.get(year)==max)return year;
+  }  
+  return -1;  
+};
