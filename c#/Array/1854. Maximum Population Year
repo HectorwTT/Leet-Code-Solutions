@@ -1,0 +1,25 @@
+public class Solution {
+    public int MaximumPopulation(int[][] logs) {
+     int max=0;
+     int lastYear= 0;
+     int firstYear=2051;
+     int [] prefixSums;
+     for(int i=0;i<logs.Length;i++){
+      if(logs[i][1]>lastYear)lastYear=logs[i][1];
+      if(logs[i][0]<firstYear)firstYear= logs[i][0];
+     }
+     prefixSums= new int[lastYear+1];
+     for(int i=0;i<logs.Length;i++){
+      int birth=logs[i][0];
+      int death=logs[i][1];
+      for(int j=birth;j<death;j++){
+       prefixSums[j]++;
+       if(max<prefixSums[j])max=prefixSums[j];
+      }
+     }
+     for(int i=firstYear;i<lastYear;i++){
+       if(prefixSums[i]==max)return i;
+     }
+     return -1;   
+    }
+}
