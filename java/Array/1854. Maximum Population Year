@@ -1,0 +1,23 @@
+class Solution {
+    public int maximumPopulation(int[][] logs) {
+      HashMap<Integer,Integer> countsByYear= new HashMap<>();
+      int max=0;
+      List<Integer> years= new ArrayList<>();
+      for(int i=0;i<logs.length;i++){
+        int yob= logs[i][0];
+        int yod= logs[i][1];
+        for(int j=yob;j<yod;j++){
+         if(!countsByYear.containsKey(j))countsByYear.put(j,1);
+         else countsByYear.replace(j,countsByYear.get(j)+1);
+         if(countsByYear.get(j)>max)max=countsByYear.get(j);
+         years.add(j);  
+        }
+      }
+      years.sort(null);
+      for(int i=0;i<years.size();i++){
+        int year= years.get(i);
+        if(countsByYear.get(year)==max)return year;
+      }  
+      return -1;
+    }
+}
