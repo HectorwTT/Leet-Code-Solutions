@@ -1,0 +1,43 @@
+var validPath = function(n, edges, source, destination) {
+ const map = new Map();
+ if(source==destination)return true;
+ for(let i=0;i<edges.length;i++){
+  if(!map.has(edges[i][0])){
+   const list= [];
+   list.push(edges[i][1]);
+   map.set(edges[i][0],list);
+  }else{
+   const list= map.get(edges[i][0]);
+   list.push(edges[i][1]);
+   map.set(edges[i][0],list);
+  }
+  if(!map.has(edges[i][1])){
+   const list= [];
+   list.push(edges[i][0]);
+   map.set(edges[i][1],list);
+  }else{
+   const list= map.get(edges[i][1]);
+   list.push(edges[i][0]);
+   map.set(edges[i][1],list);  
+ }
+ }  
+ const visited= [];
+ visited.length=n;
+ const vertices= [];
+ vertices.push(source);
+ visited[source]=true;
+ while(vertices.length!=0){
+  let vertex=vertices.shift();
+  if(!map.has(vertex))continue;
+  const sourceEdges= map.get(vertex);
+  for(let i=0;i<sourceEdges.length;i++){
+   let sourceEdge= sourceEdges[i];
+   if(sourceEdge==destination)return true;
+   if(!visited[sourceEdge]){
+    vertices.push(sourceEdge);
+    visited[sourceEdge]=true;
+   }
+  }
+ }
+ return false;  
+};
