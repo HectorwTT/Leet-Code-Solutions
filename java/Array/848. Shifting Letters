@@ -1,0 +1,21 @@
+class Solution {
+    public String shiftingLetters(String s, int[] shifts) {
+      long [] prefixSums= new long[shifts.length];
+      long total=0;
+      char [] word=s.toCharArray();
+      for(int i=prefixSums.length-1;i>=0;i--){
+        total+=shifts[i];
+        prefixSums[i]=total;
+      }
+      for(int i=0;i<s.length();i++){
+        char ch=word[i];
+        long chval=ch+prefixSums[i];
+        if(chval>122)chval=((chval-123)%26)+97;
+        if(chval<97)chval=123-((97-chval)%26);
+        if(chval>122)chval=(chval-123)+97;
+        if(chval<97)chval=123-(97-chval)&26;
+        word[i]=(char)chval;
+      } 
+      return String.valueOf(word);     
+    }
+}
