@@ -1,0 +1,17 @@
+var maxArea = function(height) {
+ let maxArea= -1;
+ let leftPointer=0;
+ let rightPointer=height.length-1;
+ while(leftPointer<rightPointer){
+  if(height[leftPointer]<height[rightPointer]){
+   let area= height[leftPointer]*(rightPointer-leftPointer);
+   if(area>maxArea)maxArea=area; 
+   leftPointer++;
+  }else{
+    let area=height[rightPointer]*(rightPointer-leftPointer);
+    if(area>maxArea)maxArea=area;
+    rightPointer--;
+  }
+ }   
+ return maxArea;   
+};
