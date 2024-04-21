@@ -1,0 +1,15 @@
+class Solution {
+    public int maxConsecutive(int bottom, int top, int[] special) {
+     int max =0;
+     Arrays.sort(special);
+     int firstDiff=special[0]-bottom;
+     int lastDiff=top-special[special.length-1];
+     max=Math.max(firstDiff,lastDiff);   
+     for(int i=1;i<special.length;i++){
+        int prev= special[i-1];
+        int curr=special[i];
+        if(curr-prev-1>max)max=curr-prev-1;
+     }
+     return max;       
+    }
+}
