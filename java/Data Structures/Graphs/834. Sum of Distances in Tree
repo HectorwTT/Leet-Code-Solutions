@@ -1,0 +1,75 @@
+class Solution {
+    public int nodeSum;
+    public HashMap<Integer , Integer> children;
+    
+    public int findDistance(HashMap<Integer , ArrayList<Integer>> tree , int currNode , int parent, boolean visited[]){
+        
+        if(visited[currNode]) return 0;
+        
+        int curr = parent+1;
+        nodeSum += curr;
+        visited[currNode] = true;
+        int childNodes = 1;
+        
+        for(int child : tree.get(currNode)){
+            childNodes += findDistance(tree , child , curr , visited);
+        }
+        
+        children.put(currNode , childNodes);
+        
+        return childNodes;
+    }
+    
+    public int[] sumOfDistancesInTree(int n, int[][] edges) {
+        HashMap<Integer , ArrayList<Integer>> tree = new HashMap<>();
+        
+        children = new HashMap<>();
+        
+        for(int i = 0 ; i < n ; i++){
+            tree.put(i , new ArrayList<>());
+        }
+        
+        for(int edge[] : edges){
+            tree.get(edge[0]).add(edge[1]);
+            tree.get(edge[1]).add(edge[0]);
+        }
+        
+        boolean visited[] = new boolean [n];
+        int ans[] = new int [n];
+        
+        findDistance(tree , 0 , -1 , visited);
+        ans[0] = nodeSum;
+        
+        Queue<int []> q = new LinkedList<>();
+  
+        int pair[] = {0 , 0};
+        q.add(pair);
+        
+        visited = new boolean [n];  
+        
+        while(!q.isEmpty()){
+            int currVertex[] = q.remove();
+            
+            if(visited[currVertex[0]]) continue;
+            
+            visited[currVertex[0]] = true;
+            
+            if(currVertex[0] != 0){
+                int currChildren = children.get(currVertex[0]);
+
+                int parentChildren = n - 1 - currChildren;
+
+                ans[currVertex[0]] = ans[currVertex[1]] + parentChildren - (currChildren - 1);
+            }
+            
+            for(int nextGen : tree.get(currVertex[0])){
+                if(!visited[nextGen]){
+                    int nextGenPair[] = {nextGen , currVertex[0]};
+                    q.add(nextGenPair);
+                }
+            }
+        }
+        
+        return ans;
+    }
+}
