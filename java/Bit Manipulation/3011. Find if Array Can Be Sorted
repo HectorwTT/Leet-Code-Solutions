@@ -1,0 +1,19 @@
+class Solution {
+    public boolean canSortArray(int[] nums) {
+      int [] numsClone=nums.clone();
+      Arrays.sort(nums);
+      int start=0;
+      for(int i=1;i<numsClone.length;i++){
+        int curr=numsClone[i];
+        int prev=numsClone[i-1];
+        int bitCountCurr=Integer.bitCount(curr);
+        int bitCountPrev=Integer.bitCount(prev);
+        if(bitCountCurr!=bitCountPrev){
+         Arrays.sort(numsClone,start,i);
+         start=i;   
+        }
+      }
+      Arrays.sort(numsClone,start,numsClone.length);
+      return Arrays.equals(nums,numsClone);  
+    }
+}
