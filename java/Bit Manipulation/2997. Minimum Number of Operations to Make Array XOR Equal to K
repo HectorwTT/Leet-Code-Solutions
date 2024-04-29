@@ -1,0 +1,25 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+      int xorNums=0;
+      int total=0;
+      for(int i=0;i<nums.length;i++) xorNums^=nums[i];
+      String kBinary=Integer.toBinaryString(k);
+      String xorNumsBinary=Integer.toBinaryString(xorNums);
+      if(kBinary.length()<xorNumsBinary.length()){
+        int numOfZeroes=xorNumsBinary.length()-kBinary.length();
+        String zeroes="0".repeat(numOfZeroes);
+        kBinary=zeroes+kBinary;
+      }
+      if(xorNumsBinary.length()<kBinary.length()){
+        int numOfZeroes=kBinary.length()-xorNumsBinary.length();
+        String zeroes="0".repeat(numOfZeroes);
+        xorNumsBinary=zeroes+xorNumsBinary;
+      }
+      for(int i=0;i<kBinary.length();i++){
+        char ch1=kBinary.charAt(i);
+        char ch2=xorNumsBinary.charAt(i);
+        if(ch1!=ch2)total++;
+      }
+      return total;
+    }
+}
