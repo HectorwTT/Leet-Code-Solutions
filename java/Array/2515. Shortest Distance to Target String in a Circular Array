@@ -1,0 +1,27 @@
+class Solution {
+    public int closetTarget(String[] words, String target, int startIndex) {
+      boolean isThere=false;
+      for(int i=0;i<words.length;i++){
+        if(words[i].equals(target)){
+            isThere=true;
+            break;
+        }
+      }
+      if(!isThere)return -1;
+      int left=startIndex;
+      int right=startIndex;
+      int leftCount=0;
+      int rightCount=0;
+      while(!words[left].equals(target)){
+       left--;
+       leftCount++;
+       if(left==-1)left=words.length-1;
+      } 
+      while(!words[right].equals(target)){
+       right++;
+       rightCount++;
+       if(right==words.length)right=0;
+      }  
+      return Math.min(leftCount,rightCount); 
+    }
+}
