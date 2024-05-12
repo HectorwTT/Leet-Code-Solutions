@@ -1,0 +1,21 @@
+class Solution {
+    public int[][] largestLocal(int[][] grid) {
+     int [][] maxLocal=new int[grid.length-2][grid.length-2];
+     int index=0;
+     for(int squarerow=0;squarerow<grid.length-2;squarerow++){
+      for(int squarecolumn=0;squarecolumn<grid.length-2;squarecolumn++){
+       int max=grid[squarerow][squarecolumn]; 
+       for(int i=squarerow;i<squarerow+3;i++){
+        for(int j=squarecolumn;j<squarecolumn+3;j++){
+          max=Math.max(max,grid[i][j]);
+          }
+       }
+       int row=index/maxLocal.length;
+       int column=index%maxLocal.length;
+       maxLocal[row][column]=max;
+       index++;
+      }
+     }
+     return maxLocal;
+    }
+}
