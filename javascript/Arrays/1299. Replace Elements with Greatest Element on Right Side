@@ -1,0 +1,15 @@
+var replaceElements = function(arr) {
+     const result= [];
+     for(let i=0;i<arr.length;i++){
+      let max=0;  
+      if(i==arr.length-1)result.push(-1);
+      else{
+        max=arr[i+1];
+        for(let j=i+1;j<arr.length;j++){
+         max=Math.max(arr[j],max);
+        }
+        result.push(max);
+      } 
+     }
+     return result;   
+};
