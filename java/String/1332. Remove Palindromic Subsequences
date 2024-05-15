@@ -1,0 +1,8 @@
+class Solution {
+    public int removePalindromeSub(String s) {
+      StringBuffer sb= new StringBuffer(s);
+      String s1= sb.reverse().toString();
+      if(s1.equals(s))return 1;
+      else return 2;  
+    }
+}
