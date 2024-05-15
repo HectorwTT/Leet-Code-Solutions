@@ -1,0 +1,16 @@
+class Solution {
+    public List<Integer> minSubsequence(int[] nums) {
+     Arrays.sort(nums);
+     int sum=Arrays.stream(nums).sum();
+     int rest=sum;
+     int index=nums.length-1;
+     int total=0;
+     List<Integer> result= new ArrayList<>();
+     while(total<=rest){
+      result.add(nums[index]);
+      total+=nums[index--];
+      rest=sum-total; 
+     }   
+     return result;
+    }
+}
