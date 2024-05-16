@@ -1,0 +1,53 @@
+class Solution {
+    public int maxProfit(int[] prices) {
+     if(prices.length==1)return 0;
+     int [] profitsFromFront= new int[prices.length];
+     int [] profitsFromBehind= new int[prices.length];
+     List<Integer> maxIndexes= new ArrayList<>();
+     int min=prices[0];
+     int max=prices[prices.length-1];
+     int lastMaxIndex=-1;
+     HashMap<Integer,Integer> nextMinIndexes= new HashMap<>();
+     HashMap<Integer,Integer> extraProfits=new HashMap<>();
+     if(prices[0]>prices[1])maxIndexes.add(0);
+     for(int i=1;i<prices.length-1;i++){
+      min=Math.min(prices[i],min);  
+      if(prices[i-1]<=prices[i] && prices[i]>=prices[i+1]){
+        maxIndexes.add(i);
+        profitsFromFront[i]=prices[i]-min;
+        lastMaxIndex=i;
+      }
+      if(prices[i-1]>=prices[i] && prices[i+1]>=prices[i]){
+       if(lastMaxIndex!=-1)nextMinIndexes.put(lastMaxIndex,i);
+       extraProfits.put(i,0);
+      }
+     }
+     if(prices[prices.length-1]>prices[prices.length-2]){
+        maxIndexes.add(prices.length-1);
+        profitsFromFront[prices.length-1]=prices[prices.length-1]-min;
+     } 
+     int maxExtraProfit=0;
+     for(int i=prices.length-2;i>=1;i--){
+      max=Math.max(max,prices[i]);
+      if(extraProfits.containsKey(i)){
+        profitsFromBehind[i]=max-prices[i];  
+        maxExtraProfit=Math.max(maxExtraProfit,profitsFromBehind[i]);
+        extraProfits.replace(i,maxExtraProfit);
+      }  
+     }
+     if(prices[0]<prices[1]){
+       profitsFromBehind[0]=max-prices[0]; 
+     }     
+     int maxProfit=0;
+     for(int i=0;i<maxIndexes.size();i++){
+      int maxIndex=maxIndexes.get(i);
+      int profit=profitsFromFront[maxIndex];   
+      if(nextMinIndexes.containsKey(maxIndex)){
+      int nextMinIndex=nextMinIndexes.get(maxIndex);
+      profit+=extraProfits.get(nextMinIndex);   
+     }
+     maxProfit=Math.max(profit,maxProfit);
+    }
+    return maxProfit;
+    }
+}
