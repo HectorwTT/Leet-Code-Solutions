@@ -1,0 +1,12 @@
+class Solution {
+    public int minOperations(String[] logs) {
+       Stack<String> stack= new Stack<>();
+       for(int i=0;i<logs.length;i++){
+        String folder= logs[i];
+        if(folder.equals("../")){
+            if(!stack.isEmpty())stack.pop();
+        }else if( !folder.equals("./"))stack.push(folder);
+       }
+       return stack.size();
+    }
+}
