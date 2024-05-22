@@ -1,0 +1,33 @@
+class Solution {
+    public int[] sortJumbled(int[] mapping, int[] nums){
+       int [] result= new int[nums.length];
+       HashMap<Integer,Integer> map= new HashMap<>();
+       HashMap<Integer,Integer> map1= new HashMap<>();
+       PriorityQueue <Integer> maxHeap= new PriorityQueue<> ((a, b) -> 
+        ((map.get(b)-map.get(a)) != 0) ? (map.get(b) - map.get(a)):
+         (map1.get(b)-map1.get(a)));
+       List<Integer> numbers= new ArrayList<>();
+       for(int i=0;i<nums.length;i++){
+        int number= nums[i];
+        String numVal= ""+number;
+        String newNumVal="";
+        for(int j=0;j<numVal.length();j++){
+          char ch= numVal.charAt(j);
+          int chval=ch-48;
+          int mappedDigit=mapping[chval];  
+          newNumVal+=mappedDigit;
+        }
+        int newNumber=Integer.parseInt(newNumVal);
+        if(!map.containsKey(number))map.put(number,newNumber);
+        if(!map1.containsKey(number))map1.put(number,i);
+        else map1.replace(number,i);
+        maxHeap.offer(number);    
+        }
+       
+       int index=nums.length-1;
+       while(!maxHeap.isEmpty()){
+        result[index--]=maxHeap.remove();
+       }
+       return result;
+    }
+}
