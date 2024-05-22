@@ -1,0 +1,10 @@
+var minOperations = function(logs) {
+ const stack= [];
+ for(let i=0;i<logs.length;i++){
+  let folder= logs[i];
+  if(folder=="../"){
+   if(stack.length!=0)stack.pop();
+  }else if(folder!="./")stack.push(folder);
+ }
+ return stack.length;  
+};
