@@ -1,0 +1,12 @@
+class Solution {
+    public int scoreOfString(String s) {
+      int total=0;
+      for(int i=1;i<s.length();i++){
+        int current=s.charAt(i);
+        int previous=s.charAt(i-1);
+        int abs=Math.abs(current-previous);
+        total+=abs;
+      }
+      return total;  
+    }
+}
