@@ -1,0 +1,33 @@
+public class Solution {
+    public int[] CountBits(int n) {
+        int[]numberOfOnes=new int[n+1];
+        if(n==0)return numberOfOnes;
+        numberOfOnes[0]=0;
+        numberOfOnes[1]=1;
+        if(n==1)return numberOfOnes;
+        numberOfOnes[2]=1;
+        int lastPowerOfTwo=2;
+        for(int i=3;i<numberOfOnes.Length;i++){
+            if(isPowerOfTwo(i)){
+                numberOfOnes[i]=1;
+                lastPowerOfTwo=i;
+            }
+            else{
+                numberOfOnes[i]=numberOfOnes[lastPowerOfTwo]+
+                                 numberOfOnes[i-lastPowerOfTwo];
+            }
+        }
+        return numberOfOnes;   
+    }
+
+    public bool isPowerOfTwo(int n){
+        if(n<=2) return true;
+        if(n%2==1) return false;
+        if(n>2){
+            if((n/2)==2 && (n%2==0)) return true; 
+            else return isPowerOfTwo(n/2);
+        }
+        return false;
+    }
+
+}
