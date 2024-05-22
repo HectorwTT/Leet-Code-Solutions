@@ -1,0 +1,10 @@
+var scoreOfString = function(s) {
+ let total=0;
+ for(let i=1;i<s.length;i++){
+  let current=s.charCodeAt(i);
+  let previous=s.charCodeAt(i-1);
+  let abs=Math.abs(current-previous);
+  total+=abs;
+ }
+ return total;     
+};
