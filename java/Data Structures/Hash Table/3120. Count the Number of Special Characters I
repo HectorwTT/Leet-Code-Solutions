@@ -1,0 +1,24 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+      HashMap<Character,Integer> map= new HashMap<>(); 
+      HashMap<Character,Integer> map1= new HashMap<>();   
+      HashMap<Character,Character>result= new HashMap<>();
+      for(int i=0;i<word.length();i++){
+       char ch=word.charAt(i);
+       if(ch<=122 && ch>=97){
+        if(!map.containsKey(ch))map.put(ch,1);
+        int chval=ch;
+        chval-=32;
+        char newCh=(char)chval;
+        if(map1.containsKey(newCh))result.put(ch,newCh);
+       }else{
+        if(!map1.containsKey(ch))map1.put(ch,1);
+        int chval=ch;
+        chval+=32;
+        char newCh=(char)chval;
+        if(map.containsKey(newCh))result.put(newCh,ch);
+       }  
+      }
+      return result.size();
+    }
+}
