@@ -1,0 +1,40 @@
+class Solution {
+    public boolean canBeEqual(String s1, String s2) {
+      if(s1.equals(s2))return true;
+      char [] s1chars=s1.toCharArray();
+      char [] s2chars=s2.toCharArray();
+      char s1tmp1=s1chars[0];
+      char s1tmp2=s1chars[2];
+      char s1tmp3=s1chars[1];
+      char s1tmp4=s1chars[3];
+      s1chars[0]=s1tmp2;
+      s1chars[2]=s1tmp1;
+      if(String.valueOf(s1chars).equals(s2))return true;
+      s1chars[1]=s1tmp4;
+      s1chars[3]=s1tmp3;
+      if(String.valueOf(s1chars).equals(s2))return true;
+      s1chars[0]=s1tmp1;
+      s1chars[2]=s1tmp2;
+      if(String.valueOf(s1chars).equals(s2))return true;
+      s1chars[0]=s1tmp2;
+      s1chars[2]=s1tmp1;
+      char s2tmp1=s2chars[0];
+      char s2tmp2=s2chars[2];
+      char s2tmp3=s2chars[1];
+      char s2tmp4=s2chars[3];
+      s2chars[0]=s2tmp2;
+      s2chars[2]=s2tmp1;
+      if(String.valueOf(s2chars).equals(s1))return true;
+      s2chars[1]=s2tmp4;
+      s2chars[3]=s2tmp3;
+            if(String.valueOf(s2chars).equals(s1))return true;
+
+      s2chars[0]=s2tmp1;
+      s2chars[2]=s2tmp2;
+            if(String.valueOf(s2chars).equals(s1))return true;
+
+      s2chars[0]=s2tmp2;
+      s2chars[2]=s2tmp1; 
+      return String.valueOf(s1chars).equals(s2) ||String.valueOf(s2chars).equals(s1);
+    }
+}
