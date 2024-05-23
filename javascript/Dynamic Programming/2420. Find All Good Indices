@@ -1,0 +1,21 @@
+var goodIndices = function(nums, k) {
+ const result= [];
+ const fromFront= [];
+ const fromBehind= [];
+ fromFront.length=nums.length;
+ fromBehind.length=nums.length;
+ fromFront[0]=1;
+ for(let i=1;i<nums.length;i++){
+  if(nums[i]<=nums[i-1])fromFront[i]=fromFront[i-1]+1;
+  else fromFront[i]=1;
+ }  
+ fromBehind[nums.length-1]=1;
+ for(let i=nums.length-2;i>=0;i--){
+  if(nums[i]<=nums[i+1])fromBehind[i]=fromBehind[i+1]+1;
+  else fromBehind[i]=1; 
+ }
+ for(let i=1;i<nums.length-1;i++){
+  if(fromFront[i-1]>=k && fromBehind[i+1]>=k)result.push(i);
+ }
+ return result;  
+};
