@@ -1,0 +1,21 @@
+class Solution {
+    public List<Integer> goodIndices(int[] nums, int k) {
+      List<Integer> result= new ArrayList<>();
+      int [] fromFront= new int[nums.length];
+      int [] fromBehind= new int[nums.length];
+      fromFront[0]=1;
+      for(int i=1;i<nums.length;i++){
+        if(nums[i]<=nums[i-1])fromFront[i]=fromFront[i-1]+1;
+        else fromFront[i]=1;
+      }  
+      fromBehind[nums.length-1]=1;
+      for(int i=nums.length-2;i>=0;i--){
+       if(nums[i]<=nums[i+1])fromBehind[i]=fromBehind[i+1]+1;
+       else fromBehind[i]=1; 
+      }
+      for(int i=1;i<nums.length-1;i++){
+       if(fromFront[i-1]>=k && fromBehind[i+1]>=k)result.add(i);
+      }
+      return result;
+    }
+}
