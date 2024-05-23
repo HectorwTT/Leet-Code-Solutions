@@ -1,0 +1,16 @@
+class Solution {
+    public int findPermutationDifference(String s, String t) {
+     HashMap<Character,Integer> tmap= new HashMap<>();
+     int total=0;
+     for(int i=0;i<t.length();i++){
+       char ch=t.charAt(i);
+       if(!tmap.containsKey(ch)) tmap.put(ch,i);
+     }
+     for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       int tIndex=tmap.get(ch);
+       total+=Math.abs(tIndex-i); 
+     }
+     return total;
+    }
+}
