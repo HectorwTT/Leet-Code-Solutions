@@ -1,0 +1,23 @@
+var isValid = function(word) {
+ let numberOfVowels=0;
+ let numberOfLowerCase=0;
+ let numberOfUpperCase=0;
+ let numberOfConsonants=0;
+ let numberOfDigits=0;
+ for(let i=0;i<word.length;i++){
+  let ch=word.charAt(i);
+  let chval=word.charCodeAt(i);
+  if((chval>=97 && chval<=122)|| (chval>=65 && chval<=90)){
+   if(ch>=97 && ch<=122)numberOfLowerCase++;
+   else numberOfUpperCase++;
+   if((ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+       ||(ch=='A'||ch=='E'|| ch=='I'||ch=='O'||ch=='U'))numberOfVowels++;
+   else numberOfConsonants++;     
+  }
+  if(chval>=48 && chval<=57)numberOfDigits++;
+ }
+ return numberOfVowels>=1
+        && numberOfConsonants>=1 
+        && (word.length-numberOfDigits-numberOfUpperCase-numberOfLowerCase==0)
+        && word.length>=3;    
+};
