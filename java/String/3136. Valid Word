@@ -1,0 +1,24 @@
+class Solution {
+    public boolean isValid(String word) {
+      int numberOfVowels=0;
+      int numberOfLowerCase=0;
+      int numberOfUpperCase=0;
+      int numberOfConsonants=0;
+      int numberOfDigits=0;
+      for(int i=0;i<word.length();i++){
+        char ch=word.charAt(i);
+        if((ch>=97 && ch<=122)|| (ch>=65 && ch<=90)){
+           if(ch>=97 && ch<=122)numberOfLowerCase++;
+           else numberOfUpperCase++;
+           if((ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+               ||(ch=='A'||ch=='E'|| ch=='I'||ch=='O'||ch=='U'))numberOfVowels++;
+           else numberOfConsonants++;     
+        }
+        if(ch>=48 && ch<=57)numberOfDigits++;
+      }
+      return numberOfVowels>=1
+             && numberOfConsonants>=1 
+             && (word.length()-numberOfDigits-numberOfUpperCase-numberOfLowerCase==0)
+             && word.length()>=3;  
+    }
+}
