@@ -1,0 +1,20 @@
+public class Solution {
+    public int[] DiStringMatch(string s) {
+     int i=0;
+     int d=s.Length;
+     int [] result=new int[s.Length+1];
+     for(int col=0;col<s.Length;col++){
+      char ch=s[col];
+      if(ch=='I'){
+       result[col]=i;
+       i++; 
+      }else{
+        result[col]=d;
+        d--;
+      }   
+     }
+     if(s[s.Length-1]=='I')result[s.Length]=result[s.Length-1]+1;
+     else result[s.Length]=result[s.Length-1]-1;
+     return result;      
+    }
+}
