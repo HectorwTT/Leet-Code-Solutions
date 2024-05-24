@@ -1,0 +1,12 @@
+var judgeCircle = function(moves) {
+ let x=0;
+ let y=0;
+ for(let i=0;i<moves.length;i++){
+  var ch= moves.charAt(i);
+  if(ch=='U')y++;
+  else if(ch=='D')y--;
+  else if(ch=='L')x--;
+  else x++; 
+ }
+ return x==0 && y==0;    
+};
