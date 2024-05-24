@@ -1,0 +1,25 @@
+var furthestDistanceFromOrigin = function(moves) {
+ var moves1="";
+ var moves2="";
+ let total1=0;
+ let total2=0;
+ for(let i=0;i<moves.length;i++){
+  var ch=moves.charAt(i);
+  if(ch=='_'){
+   moves1+="R";
+   moves2+="L";
+  }else{
+   moves1+=ch;
+   moves2+=ch;  
+  }
+ }
+ for(let i=0;i<moves.length;i++){
+  var ch1=moves1.charAt(i);
+  var ch2=moves2.charAt(i);
+  if(ch1=='L')total1--;
+  else total1++;
+  if(ch2=='L')total2--;
+  else total2++;
+ }
+ return Math.max(Math.abs(total1),Math.abs(total2));  
+};
