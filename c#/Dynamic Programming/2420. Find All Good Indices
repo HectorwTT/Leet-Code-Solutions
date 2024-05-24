@@ -1,0 +1,21 @@
+public class Solution {
+    public IList<int> GoodIndices(int[] nums, int k) {
+      IList<int> result= new List<int>();
+      int [] fromFront= new int[nums.Length];
+      int [] fromBehind= new int[nums.Length];
+      fromFront[0]=1;
+      for(int i=1;i<nums.Length;i++){
+        if(nums[i]<=nums[i-1])fromFront[i]=fromFront[i-1]+1;
+        else fromFront[i]=1;
+      }  
+      fromBehind[nums.Length-1]=1;
+      for(int i=nums.Length-2;i>=0;i--){
+       if(nums[i]<=nums[i+1])fromBehind[i]=fromBehind[i+1]+1;
+       else fromBehind[i]=1; 
+      }
+      for(int i=1;i<nums.Length-1;i++){
+       if(fromFront[i-1]>=k && fromBehind[i+1]>=k)result.Add(i);
+      }
+      return result;   
+    }
+}
