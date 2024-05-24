@@ -1,0 +1,9 @@
+var countSeniors = function(details) {
+ let total=0;
+ for(let i=0;i<details.length;i++){
+  var ageString=details[i].substring(11,13);
+  let age=parseInt(ageString);
+  if(age>60)total++;
+ }
+ return total;   
+};
