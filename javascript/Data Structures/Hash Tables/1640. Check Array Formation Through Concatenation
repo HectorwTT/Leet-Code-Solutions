@@ -1,0 +1,24 @@
+var canFormArray = function(arr, pieces) {
+ const piecesMap= new Map();
+ let index=0;
+ for(let i=0;i<pieces.length;i++){
+  for(let j=0;j<pieces[i].length;j++){
+   let number=pieces[i][j];
+   piecesMap.set(number,i);  
+  }   
+ }
+ let startColumn=0;
+ let column=0;
+ if(!piecesMap.has(arr[0]))return false;
+ for(let i=1;i<arr.length;i++){
+  if(!piecesMap.has(arr[i]))   return false;
+  let currentRow=piecesMap.get(arr[i]);
+  let previousRow=piecesMap.get(arr[i-1]);
+   if(previousRow!=currentRow){
+    if(i-startColumn!=pieces[previousRow].length)return false;
+     startColumn=i;
+   }
+   if(arr[i]!=pieces[currentRow][i-startColumn])return false;
+ }
+ return true;   
+};
