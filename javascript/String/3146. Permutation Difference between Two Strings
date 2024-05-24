@@ -1,0 +1,14 @@
+var findPermutationDifference = function(s, t) {
+ const tmap= new Map();
+ let total=0;
+ for(let i=0;i<t.length;i++){
+  var ch=t.charAt(i);
+  if(!tmap.has(ch))tmap.set(ch,i);
+ }
+ for(let i=0;i<s.length;i++){
+  var ch=s.charAt(i);
+  let tIndex=tmap.get(ch);
+  total+=Math.abs(tIndex-i); 
+ }
+ return total;   
+};
