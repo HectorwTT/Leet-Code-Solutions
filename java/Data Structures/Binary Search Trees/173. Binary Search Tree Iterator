@@ -1,0 +1,43 @@
+class BSTIterator {
+    private int pointer;
+    private List<Integer> list;
+    public BSTIterator(TreeNode root) {
+     pointer=0;   
+     list=getList(root);
+    }
+    private List<Integer> getList(TreeNode root){
+     List<Integer> result=new ArrayList<>();
+     if(root==null)return result;
+     else if(root.left==null && root.right==null){
+      result.add(root.val);
+      return result;  
+     }else if(root.left==null){
+       result.add(root.val);
+       result.addAll(getList(root.right)); 
+       return result;
+     }else if(root.right==null){
+        result.addAll(getList(root.left));
+        result.add(root.val);
+        return result;
+     }else{
+       result.addAll(getList(root.left));
+       result.add(root.val);
+       result.addAll(getList(root.right));
+       return result; 
+     }  
+    } 
+    public int next() {
+     return list.get(pointer++);  
+    }
+    
+    public boolean hasNext() {
+     return pointer!=list.size();   
+    }
+}
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator obj = new BSTIterator(root);
+ * int param_1 = obj.next();
+ * boolean param_2 = obj.hasNext();
+ */
