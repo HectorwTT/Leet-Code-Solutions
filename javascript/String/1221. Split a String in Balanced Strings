@@ -1,0 +1,16 @@
+var balancedStringSplit = function(s) {
+ let total=0;
+ let numOfL=0;
+ let numOfR=0;  
+ for(let i=0;i<s.length;i++){ 
+  var ch=s.charAt(i);
+  if(ch=='L')numOfL++;
+  else numOfR++;
+  if(numOfL==numOfR){
+   numOfL=0;
+   numOfR=0; 
+   total++;
+  }  
+ }
+ return total;
+};
