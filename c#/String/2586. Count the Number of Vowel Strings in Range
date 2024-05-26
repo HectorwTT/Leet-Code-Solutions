@@ -1,0 +1,13 @@
+public class Solution {
+    public int VowelStrings(string[] words, int left, int right) {
+     int total=0;
+     for(int i=left;i<=right;i++){
+      String word=words[i];
+      char first=word[0];
+      char last=word[word.Length-1];
+      if((first=='a'||first=='e' ||first=='i' ||first=='o' ||first=='u')
+         &&(last=='a'||last=='e' ||last=='i' ||last=='o' ||last=='u'))total++;
+     }
+     return total;    
+    }
+}
