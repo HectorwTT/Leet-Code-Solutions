@@ -1,0 +1,27 @@
+class Solution {
+    public List<Integer> goodDaysToRobBank(int[] security, int time) {
+      List<Integer> result= new ArrayList<>();
+      List<Integer> resultWithZero= new ArrayList<>();
+      int [] fromFront= new int[security.length];
+      int [] fromBehind= new int[security.length];
+      fromFront[0]=1;
+      resultWithZero.add(0);
+      for(int i=1;i<security.length;i++){
+        if(security[i]<=security[i-1])fromFront[i]=fromFront[i-1]+1;
+        else fromFront[i]=1;
+        resultWithZero.add(i);
+      }  
+      fromBehind[security.length-1]=1;
+      for(int i=security.length-2;i>=0;i--){
+       if(security[i]<=security[i+1])fromBehind[i]=fromBehind[i+1]+1;
+       else fromBehind[i]=1; 
+      }
+      for(int i=1;i<security.length-1;i++){
+       if(fromFront[i-1]>=time && fromBehind[i+1]>=time 
+          && security[i]<=security[i-1] 
+          && security[i]<=security[i+1])result.add(i);
+      }
+      if(time==0)return resultWithZero;
+      else return result;   
+    }
+}
