@@ -1,0 +1,25 @@
+var goodDaysToRobBank = function(security, time) {
+ const result= [];
+ const resultWithZero=[];
+ const fromFront= [];
+ const fromBehind= [];
+ fromFront[0]=1;
+ resultWithZero.push(0);
+ for(let i=1;i<security.length;i++){
+  if(security[i]<=security[i-1])fromFront[i]=fromFront[i-1]+1;
+  else fromFront[i]=1;
+  resultWithZero.push(i);
+ }  
+ fromBehind[security.length-1]=1;
+ for(let i=security.length-2;i>=0;i--){
+  if(security[i]<=security[i+1])fromBehind[i]=fromBehind[i+1]+1;
+  else fromBehind[i]=1; 
+ }
+ for(let i=1;i<security.length-1;i++){
+  if(fromFront[i-1]>=time  &&
+     fromBehind[i+1]>=time
+     && security[i]<=security[i-1] && security[i]<=security[i+1])result.push(i);
+  }
+ if(time==0) return resultWithZero; 
+ else return result;        
+};
