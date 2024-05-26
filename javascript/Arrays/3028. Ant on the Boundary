@@ -1,0 +1,9 @@
+var returnToBoundaryCount = function(nums) {
+ let total=0;
+ let numOfTimes=0;
+ for(let i=0;i<nums.length;i++){
+  total+=nums[i];
+  if(total==0) numOfTimes++;
+ }
+ return numOfTimes;   
+};
