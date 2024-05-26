@@ -1,0 +1,11 @@
+var vowelStrings = function(words, left, right) {
+ let total=0;
+ for(let i=left;i<=right;i++){
+  var word=words[i];
+  var first=word.charAt(0);
+  var last=word.charAt(word.length-1);
+  if((first=='a'||first=='e' ||first=='i' ||first=='o' ||first=='u')
+    &&(last=='a'||last=='e' ||last=='i' ||last=='o' ||last=='u'))total++;
+ }
+ return total;    
+};
