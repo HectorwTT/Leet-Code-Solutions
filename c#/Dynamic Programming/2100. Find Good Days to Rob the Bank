@@ -1,0 +1,27 @@
+public class Solution {
+    public IList<int> GoodDaysToRobBank(int[] security, int time) {
+      IList<int> result= new List<int>();
+      IList<int> resultWithZero=new List<int>();
+      int [] fromFront= new int[security.Length];
+      int [] fromBehind= new int[security.Length];
+      fromFront[0]=1;
+      resultWithZero.Add(0);
+      for(int i=1;i<security.Length;i++){
+        if(security[i]<=security[i-1])fromFront[i]=fromFront[i-1]+1;
+        else fromFront[i]=1;
+        resultWithZero.Add(i);
+      }  
+      fromBehind[security.Length-1]=1;
+      for(int i=security.Length-2;i>=0;i--){
+       if(security[i]<=security[i+1])fromBehind[i]=fromBehind[i+1]+1;
+       else fromBehind[i]=1; 
+      }
+      for(int i=1;i<security.Length-1;i++){
+       if(fromFront[i-1]>=time  &&
+        fromBehind[i+1]>=time
+        && security[i]<=security[i-1] && security[i]<=security[i+1])result.Add(i);
+      }
+      if(time==0) return resultWithZero; 
+      else return result;     
+    }
+}
