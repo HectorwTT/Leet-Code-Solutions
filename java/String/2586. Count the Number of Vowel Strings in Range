@@ -1,0 +1,13 @@
+class Solution {
+    public int vowelStrings(String[] words, int left, int right) {
+     int total=0;
+     for(int i=left;i<=right;i++){
+      String word=words[i];
+      char first=word.charAt(0);
+      char last=word.charAt(word.length()-1);
+      if((first=='a'||first=='e' ||first=='i' ||first=='o' ||first=='u')
+         &&(last=='a'||last=='e' ||last=='i' ||last=='o' ||last=='u'))total++;
+     }
+     return total;     
+    }
+}
