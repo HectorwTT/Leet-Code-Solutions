@@ -1,0 +1,14 @@
+class NumArray {
+    private int [] nums;
+    public NumArray(int[] nums) {
+      this.nums=nums.clone();  
+    }
+    
+    public int sumRange(int left, int right) {
+     int total=0;
+     for(int i=left;i<=right  && i<nums.length;i++){
+      total+=nums[i];  
+     }
+     return total;
+    }
+}
