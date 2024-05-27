@@ -1,0 +1,38 @@
+class Solution {
+    public boolean containsPattern(int[] arr, int m, int k) {
+      HashMap<List<Integer>,Integer> map= new HashMap<>();
+      HashMap<List<Integer>,List<Integer>> map1= new HashMap<>();
+      for(int i=0;i<arr.length;i++){
+       List<Integer> list= new ArrayList<>(); 
+       for(int j=i;j<arr.length && j<i+m;j++){
+        list.add(arr[j]);
+       } 
+       if(!map.containsKey(list))map.put(list,1);
+       else map.replace(list,map.get(list)+1);
+       if(!map1.containsKey(list)){
+        List<Integer> list1= new ArrayList<>();
+        list1.add(i);
+        map1.put(list,list1);
+       }else{
+         List<Integer> list1=map1.get(list);
+         if(i-list1.get(list1.size()-1)<m)continue;
+         list1.add(i);
+         map1.replace(list,list1); 
+       }
+      }
+      for(List<Integer> key:map.keySet()){
+       if(map.get(key)>=k){
+        List<Integer>indexes=map1.get(key);
+        int count=0;
+        for(int i=1;i<indexes.size();i++){
+         if(indexes.get(i)-indexes.get(i-1)==m) {
+            count++;  
+            if(count==k-1)break;}
+         else count=0;
+        }
+        if(count>=k-1)return true;
+       }
+      }
+      return false;  
+    }
+}
