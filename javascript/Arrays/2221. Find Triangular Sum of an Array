@@ -1,0 +1,11 @@
+var triangularSum = function(nums) {
+ if(nums.length==1)return nums[0];
+ else{
+  const newNums=[];
+  newNums.length=nums.length-1;
+  for(let i=0;i<newNums.length;i++){
+   newNums[i]=(nums[i]+nums[i+1])%10;
+  }  
+  return triangularSum(newNums);
+ }   
+};
