@@ -1,0 +1,20 @@
+var findLatestTime = function(s) {
+ var result="";
+ for(let i=0;i<s.length;i++){
+  var ch=s.charAt(i);
+  if(ch!='?')result+=ch;
+  else{
+   if(i==0){
+    var chNextVal=s.charCodeAt(1);
+    if(s.charAt(1)=='?')result+='1';
+    else if(chNextVal>49)result+='0';
+    else result+='1';
+   }else if(i==1){
+     if(result.charAt(0)=='0')result+='9';
+     else result+='1';
+   }else if(i==3)result+='5';
+     else result+='9'; 
+   }
+ }
+ return result;    
+};
