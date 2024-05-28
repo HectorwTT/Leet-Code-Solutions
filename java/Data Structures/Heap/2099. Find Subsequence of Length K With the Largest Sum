@@ -1,0 +1,31 @@
+class Solution {
+    public int[] maxSubsequence(int[] nums, int k) {
+     int [] result= new int[k];
+     HashMap<Integer,Integer> map= new HashMap<>();
+     HashMap<Integer,Integer> map1= new HashMap<>();
+     PriorityQueue <Integer> maxHeap= new PriorityQueue<> ((a, b) -> 
+        (b-a != 0) ? (b-a):
+         (map.get(b)-map.get(a)));
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i]))map.put(nums[i],i);
+      else map.replace(nums[i],i);
+      maxHeap.offer(nums[i]);
+     }
+     int index=0;
+     int count=0;
+     while(count<k){
+      int number=maxHeap.poll();
+      if(!map1.containsKey(number))map1.put(number,1);
+      else map1.replace(number,map1.get(number)+1);
+      count++;
+     }
+     for(int i=0;i<nums.length &&  index<k;i++){
+      if(map1.containsKey(nums[i])){
+       map1.replace(nums[i],map1.get(nums[i])-1);
+       if(map1.get(nums[i])==0)map1.remove(nums[i]);
+       result[index++]=nums[i]; 
+      }
+     }
+     return result; 
+    }
+}
