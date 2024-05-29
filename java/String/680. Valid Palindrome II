@@ -1,0 +1,19 @@
+class Solution {
+    public boolean validPalindrome(String s) {
+     int left=0;
+     int right=s.length()-1;
+     while(left<=right){
+      if(s.charAt(left)!=s.charAt(right)){
+       String leftSubstring=s.substring(left,right);
+       String rightSubstring=s.substring(left+1,right+1);
+       StringBuffer leftSb= new StringBuffer(leftSubstring);
+       StringBuffer rightSb= new StringBuffer(rightSubstring);
+       return leftSb.reverse().toString().equals(leftSubstring)
+       || rightSb.reverse().toString().equals(rightSubstring);
+      }        
+      left++;
+      right--;
+     }
+     return true;   
+    }
+}
