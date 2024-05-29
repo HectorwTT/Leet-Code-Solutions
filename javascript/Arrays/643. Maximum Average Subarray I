@@ -1,0 +1,17 @@
+var findMaxAverage = function(nums, k) {
+ let max=-1*Math.pow(10,4)-1;
+ const prefixSums= [];
+ prefixSums.length=nums.length;
+ let total=0.0;
+ for(let i=0;i<prefixSums.length;i++){
+  total+=nums[i];  
+  prefixSums[i]=total;
+ } 
+ for(let i=0;i<=nums.length-k;i++){
+  var sum=prefixSums[i+k-1];
+  if(i!=0)sum-=prefixSums[i-1];
+  let average=sum/k;
+  max=Math.max(average,max);
+ }
+ return max;   
+};
