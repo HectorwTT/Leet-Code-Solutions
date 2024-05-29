@@ -1,0 +1,18 @@
+class Solution {
+    public double findMaxAverage(int[] nums, int k) {
+     double max=-1*Math.pow(10,4)-1;
+     double [] prefixSums= new double[nums.length];
+     double total=0.0;
+     for(int i=0;i<prefixSums.length;i++){
+      total+=nums[i];  
+      prefixSums[i]=total;
+     } 
+     for(int i=0;i<=nums.length-k;i++){
+      double sum=prefixSums[i+k-1];
+      if(i!=0)sum-=prefixSums[i-1];
+      double average=sum/k;
+      max=Math.max(average,max);
+     }
+     return max;
+    }
+}
