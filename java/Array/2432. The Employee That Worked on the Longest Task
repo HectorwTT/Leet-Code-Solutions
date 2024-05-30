@@ -1,0 +1,24 @@
+class Solution {
+    public int hardestWorker(int n, int[][] logs) {
+     int id=0; 
+     int max=-1;
+     HashMap<Integer,List<Integer>>map= new HashMap<>();
+     for(int i=0;i<logs.length;i++){
+      int time=logs[i][1]-0;
+      if(i>0)time=logs[i][1]-logs[i-1][1];
+      if(time>max)max=time;
+      if(!map.containsKey(time)){
+        List<Integer> ids=new ArrayList<>();
+        ids.add(logs[i][0]);
+        map.put(time,ids);
+      }else{
+        List<Integer> ids=map.get(time);
+        ids.add(logs[i][0]);
+        map.replace(time,ids);
+      }
+     }
+     List<Integer> ids=map.get(max);
+     ids.sort(null);
+     return ids.get(0);   
+    }
+}
