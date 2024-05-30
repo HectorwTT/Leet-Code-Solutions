@@ -1,0 +1,23 @@
+public class Solution {
+    public int NumTeams(int[] rating) {
+     int total=0;
+     for(int i=0;i<rating.Length;i++){
+      int first=rating[i];
+      for(int j=i+1;j<rating.Length;j++){
+       int next= rating[j];
+       if(next == first) continue;
+       if(next>first){
+        for(int k=j+1;k<rating.Length;k++){
+         if(rating[k]>next)total++;
+        }
+       }
+       if(next<first){
+        for(int k=j+1;k<rating.Length;k++){
+         if(rating[k]<next)total++;
+        }
+       }
+      }
+     } 
+     return total;   
+    }
+}
