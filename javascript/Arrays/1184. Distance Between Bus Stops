@@ -1,0 +1,23 @@
+var distanceBetweenBusStops = function(distance, start, destination) {
+ let forwardTotal=0;
+ let backwardTotal=0;
+ for(let i=start;i<distance.length;i++){
+  if(i==destination)break;
+  forwardTotal+=distance[i];  
+ }
+ if(start>destination){
+  for(let i=0;i<destination;i++){
+   forwardTotal+=distance[i]; 
+  }  
+ }
+ for(let i=start-1;i>=0;i--){
+  backwardTotal+=distance[i];  
+  if(i==destination)break;
+ }  
+ if(start<destination){
+  for(let i=distance.length-1;i>=destination;i--){
+   backwardTotal+=distance[i]; 
+  }
+ }
+ return Math.min(forwardTotal,backwardTotal);    
+};
