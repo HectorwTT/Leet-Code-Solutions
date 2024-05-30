@@ -1,0 +1,22 @@
+public class Solution {
+    public bool StoneGame(int[] piles) {
+     int leftPointer=0;
+     int rightPointer=piles.Length-1;
+     int aliceStones=0;
+     int bobStones=0;
+     while(leftPointer<rightPointer){
+      if(piles[leftPointer]<piles[rightPointer]){
+          aliceStones+=piles[rightPointer];
+          bobStones+=piles[leftPointer];
+          leftPointer++;
+          rightPointer--;
+      }else{
+        aliceStones+=piles[leftPointer];
+        bobStones+=piles[rightPointer];
+        leftPointer++;
+        rightPointer--;
+      }
+     }
+     return aliceStones>bobStones;   
+    }
+}
