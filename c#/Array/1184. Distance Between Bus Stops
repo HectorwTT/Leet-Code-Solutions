@@ -1,0 +1,26 @@
+public class Solution {
+    public int DistanceBetweenBusStops(int[] distance, int start, int destination) {
+     int forwardTotal=0;
+     int backwardTotal=0;
+     for(int i=start;i<distance.Length;i++){
+      if(i==destination)break;
+      forwardTotal+=distance[i];  
+     }
+     if(start>destination){
+      for(int i=0;i<destination;i++){
+       forwardTotal+=distance[i]; 
+      }  
+     }
+     for(int i=start-1;i>=0;i--){
+      backwardTotal+=distance[i];  
+      if(i==destination)break;
+
+     }  
+     if(start<destination){
+      for(int i=distance.Length-1;i>=destination;i--){
+       backwardTotal+=distance[i]; 
+      }
+     }
+     return Math.Min(forwardTotal,backwardTotal);    
+    }
+}
