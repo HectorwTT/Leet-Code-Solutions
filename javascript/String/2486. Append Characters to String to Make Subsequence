@@ -1,0 +1,10 @@
+var appendCharacters = function(s, t) {
+ let sIndex=0;
+ let tIndex=0;
+ while(sIndex<s.length  &&tIndex<t.length){
+  if(s.charAt(sIndex)==t.charAt(tIndex))tIndex++;
+  sIndex++; 
+ }   
+ if(sIndex==s.length)return t.substring(tIndex).length;
+ else return 0;   
+};
