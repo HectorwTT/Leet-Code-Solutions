@@ -1,0 +1,10 @@
+var kItemsWithMaximumSum = function(numOnes, numZeros, numNegOnes, k) {
+ let maxSum=0;
+ if(k<numOnes) return k;
+ maxSum+=numOnes;
+ k-=numOnes;
+ if(k<numZeros) return maxSum;
+ k-=numZeros;
+ if(k<numNegOnes) return maxSum-k;
+ else return maxSum-numNegOnes;   
+};
