@@ -1,0 +1,18 @@
+var minNumberOfHours = function(initialEnergy, initialExperience, energy, experience) {
+ let hours=0;
+ let experienceTotal=initialExperience;    
+ let energyTotal= 1;
+ for(let i=0;i<energy.length;i++){
+  energyTotal+=energy[i];  
+ }
+ for(let i=0;i<experience.length;i++){
+  if(experienceTotal<=experience[i]){
+   let  target=experience[i]+1;
+   hours+=target-experienceTotal;
+   experienceTotal+=target-experienceTotal;
+  } 
+  experienceTotal+=experience[i];
+ }
+ if(energyTotal>initialEnergy)hours+=energyTotal-initialEnergy;
+ return hours;      
+};
