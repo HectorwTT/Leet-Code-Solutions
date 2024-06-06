@@ -1,0 +1,17 @@
+class Solution {
+    public int minNumberOfHours(int initialEnergy, int initialExperience, int[] energy, int[] experience) {
+     int hours=0;
+     int experienceTotal=initialExperience;    
+     int energyTotal= Arrays.stream(energy).sum()+1;
+     for(int i=0;i<experience.length;i++){
+      if(experienceTotal<=experience[i]){
+       int  target=experience[i]+1;
+       hours+=target-experienceTotal;
+       experienceTotal+=target-experienceTotal;
+      } 
+      experienceTotal+=experience[i];
+     }
+     if(energyTotal>initialEnergy)hours+=energyTotal-initialEnergy;
+     return hours;
+    }
+}
