@@ -1,0 +1,19 @@
+class Solution {
+    public int minimumRightShifts(List<Integer> nums) {
+     int pivot=0;
+     List<Integer> list=new ArrayList<>();
+     for(int i=1;i<nums.size();i++){
+      if(nums.get(i)<nums.get(i-1)){
+       pivot=i; 
+       break;
+      }
+     }
+     for(int i=pivot;i<nums.size();i++)list.add(nums.get(i));
+     for(int i=0;i<pivot;i++)list.add(nums.get(i));
+     nums.sort(null);
+     if(nums.equals(list)){
+      if(pivot==0)return 0;
+      else return nums.size()-pivot;  
+     }else return -1;
+    }
+}
