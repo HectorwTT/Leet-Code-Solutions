@@ -1,0 +1,9 @@
+public class Solution {
+    public int AddedInteger(int[] nums1, int[] nums2) {
+     int min1=nums1[0];
+     int min2=nums2[0];   
+     for(int i=1;i<nums1.Length;i++)min1=Math.Min(min1,nums1[i]); 
+     for(int i=1;i<nums2.Length;i++)min2=Math.Min(min2,nums2[i]);   
+     return min2-min1; 
+    }
+}
