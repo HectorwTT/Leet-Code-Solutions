@@ -1,0 +1,17 @@
+class Solution {
+    public int duplicateNumbersXOR(int[] nums) {
+     HashMap<Integer,Integer> map= new HashMap<>();
+     int xor=0;
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i]))map.put(nums[i],1);
+      else map.replace(nums[i],map.get(nums[i])+1);  
+     }   
+     for(Integer key:map.keySet()){
+      if(map.get(key)==2){
+       if(xor==0)xor=key;
+       else xor^=key; 
+      }  
+     }
+     return xor;
+    }
+}
