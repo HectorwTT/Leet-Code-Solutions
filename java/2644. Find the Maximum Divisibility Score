@@ -1,0 +1,25 @@
+class Solution {
+    public int maxDivScore(int[] nums, int[] divisors) {
+     int max=0;
+     HashMap<Integer,List<Integer>> map=new HashMap<>();   
+     for(int i=0;i<divisors.length;i++){
+      int total=0;  
+      for(int j=0;j<nums.length;j++){
+       if(nums[j]%divisors[i]==0)total++; 
+      }
+      if(max<total)max=total; 
+      if(!map.containsKey(total)){
+       List<Integer> list= new ArrayList<>();
+       list.add(divisors[i]);
+       map.put(total,list); 
+      }else{
+       List<Integer> list= map.get(total);
+       list.add(divisors[i]);
+       map.replace(total,list); 
+      }
+     }
+     List<Integer> list=map.get(max);
+     list.sort(null);
+     return list.get(0);   
+    }
+}
