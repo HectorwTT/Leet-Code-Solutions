@@ -1,0 +1,10 @@
+public class Solution {
+    public bool IsArraySpecial(int[] nums) {
+     for(int i=1;i<nums.Length;i++){
+      int curr= nums[i];
+      int previous= nums[i-1];
+      if(curr%2==previous%2)return false;  
+     }
+     return true;    
+    }
+}
