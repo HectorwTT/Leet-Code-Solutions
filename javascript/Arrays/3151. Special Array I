@@ -1,0 +1,8 @@
+var isArraySpecial = function(nums) {
+ for(let i=1;i<nums.length;i++){
+  let curr= nums[i];
+  let previous= nums[i-1];
+  if(curr%2==previous%2)return false;  
+ }
+ return true;     
+};
