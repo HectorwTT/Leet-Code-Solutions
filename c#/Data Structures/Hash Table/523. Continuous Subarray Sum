@@ -1,0 +1,18 @@
+public class Solution {
+    public bool CheckSubarraySum(int[] nums, int k) {
+     Dictionary<int, int> map = new Dictionary<int,int>();
+	   map[0]= -1;
+	   int sum = 0;
+     int[] prefixSums= new int[nums.Length];
+	   for(int i = 0; i < nums.Length; i++){
+	    sum += nums[i];
+      prefixSums[i]=sum;
+	    if(!map.ContainsKey(prefixSums[i]%k))map[prefixSums[i]%k]=i;
+	   }
+     for(int i=0;i<nums.Length;i++){
+      int mod= prefixSums[i]%k;
+      if(i-map[mod]>=2)return true;
+     }
+     return false;   
+    }
+}
