@@ -1,0 +1,32 @@
+class Solution {
+    public String replaceWords(List<String> dictionary, String sentence) {
+     dictionary.sort(null);
+     int index=0;
+     String previous= dictionary.get(0);
+     HashMap<String,Integer> map= new HashMap<>();
+     map.put(previous,1);
+     String[] words= sentence.split(" ");
+     String [] newwords= new String[words.length];
+     for(int i=1;i<dictionary.size();i++){
+      String word= dictionary.get(i);
+      if(word.indexOf(previous)!=0){
+       previous=dictionary.get(i);
+       index=i;
+       if(!map.containsKey(word) ) map.put(word,i);
+      }      
+     } 
+     for(int i=0;i<words.length;i++){
+      String word= words[i];
+      int min= word.length();
+      for(int j=0;j<=min;j++){
+       String prefix= word.substring(0,j);
+       if(map.containsKey(prefix)){
+        newwords[i]=prefix;
+        break;
+       }        
+      }
+      if(newwords[i]== null)newwords[i]= words[i];
+      }   
+      return String.join(" ",newwords);
+    }
+}
