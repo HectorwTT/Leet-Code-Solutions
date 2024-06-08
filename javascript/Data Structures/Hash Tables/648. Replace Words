@@ -1,0 +1,31 @@
+var replaceWords = function(dictionary, sentence) {
+ dictionary.sort();
+ let index=0;
+ let previous= dictionary[0];
+ const map= new Map();
+ map.set(previous,1);
+ const words= sentence.split(" ");
+ const newwords=[];
+ newwords.length=words.length;
+ for(let i=1;i<dictionary.length;i++){
+  var word= dictionary[i];
+  if(word.indexOf(previous)!=0){
+    previous=dictionary[i];
+    index=i;
+    if(!map.has(word)) map.set(word,i);
+  }      
+ } 
+ for(let i=0;i<words.length;i++){
+  var word= words[i];
+  let min= word.length;
+  for(let j=0;j<=min;j++){
+   var prefix= word.substring(0,j);
+   if(map.has(prefix)){
+    newwords[i]=prefix;
+    break;
+   }        
+  }
+  if(newwords[i]== null)newwords[i]= words[i];
+ }   
+ return newwords.join(" ");   
+};
