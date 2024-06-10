@@ -1,0 +1,33 @@
+class Solution {
+    public int numMatchingSubseq(String s, String[] words) {
+     int total=0;
+     HashMap<String,Integer> map= new HashMap<>();
+     HashMap<String,Integer> map1= new HashMap<>();
+     for(int i=0;i<words.length;i++){
+      if(map1.containsKey(words[i])) continue;
+      else if(map.containsKey(words[i]))total++;
+      else{
+       if(isSubsequence(words[i],s)){
+        total++;
+        map.put(words[i],1);
+       }else{
+        map1.put(words[i],1);
+       }
+      }  
+     }
+     return total;     
+    }
+    public boolean isSubsequence(String s, String t) {
+        int index=0;
+        if(s.length()==0) return true;
+        for(int i=0;i<t.length();i++){
+            int tch = t.charAt(i);
+            int sch= s.charAt(index);
+            if(tch==sch) {
+                if(index==s.length()-1)return true;
+                index++;
+            }
+        }
+        return false;
+    }
+}
