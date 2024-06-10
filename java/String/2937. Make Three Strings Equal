@@ -1,0 +1,12 @@
+class Solution {
+    public int findMinimumOperations(String s1, String s2, String s3) {
+      int index=0;
+      while(index<s1.length() && index<s2.length() && index<s3.length() &&
+            s1.charAt(index)==s2.charAt(index) 
+            && s1.charAt(index)==s3.charAt(index)){
+       index++; 
+      }
+      if(index==0)return -1;
+      else return s1.length()-index + s2.length()-index+s3.length()-index;  
+    }
+}
