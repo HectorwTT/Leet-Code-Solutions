@@ -1,0 +1,31 @@
+var numMatchingSubseq = function(s, words) {
+ let total=0;
+ const map= new Map();
+ const map1=new Map();
+ for(let i=0;i<words.length;i++){
+  if(map1.has(words[i])) continue;
+  else if(map.has(words[i]))total++;
+  else{
+   if(isSubsequence(words[i],s)){
+    total++;
+    map.set(words[i],1);
+   }else{
+    map1.set(words[i],1);
+   }
+  }  
+ }
+ return total;     
+};
+var isSubsequence=function(s, t) {
+ let index=0;
+ if(s.length==0) return true;
+ for(let i=0;i<t.length;i++){
+  var tch = t.charAt(i);
+  var sch= s.charAt(index);
+  if(tch==sch){
+   if(index==s.length-1)return true;
+   index++;
+  }
+ }
+ return false;
+};   
