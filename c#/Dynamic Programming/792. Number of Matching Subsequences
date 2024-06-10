@@ -1,0 +1,34 @@
+public class Solution {
+    public int NumMatchingSubseq(string s, string[] words) {
+     int total=0;
+     Dictionary<string,int> map= new Dictionary<string,int>();
+     Dictionary<string,int> map1= new Dictionary<string,int>();
+     for(int i=0;i<words.Length;i++){
+      if(map1.ContainsKey(words[i])) continue;
+      else if(map.ContainsKey(words[i]))total++;
+      else{
+       if(IsSubsequence(words[i],s)){
+        total++;
+        map[words[i]]=1;
+       }else{
+        map1[words[i]]=1;
+       }
+      }  
+     }
+     return total;     
+    }
+    public bool IsSubsequence(string s, string t) {
+     int index=0;
+     if(s.Length==0) return true;
+     for(int i=0;i<t.Length;i++){
+      char tch = t[i];
+      char sch= s[index];
+      if(tch==sch) {
+       if(index==s.Length-1)return true;
+       index++;
+      }
+     }
+     return false;
+    }   
+    
+}
