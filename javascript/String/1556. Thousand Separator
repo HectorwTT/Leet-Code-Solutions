@@ -1,0 +1,12 @@
+var thousandSeparator = function(n) {
+ var result="";
+ var numberOfDigits=0;
+ var nStr=""+n;
+ for(let i=nStr.length-1;i>=0;i--){
+  var ch=nStr.charAt(i);
+  numberOfDigits++;
+  if(numberOfDigits%3==1 && numberOfDigits!=1)result="."+result;
+  result=ch+result;
+ }
+ return result;    
+};
