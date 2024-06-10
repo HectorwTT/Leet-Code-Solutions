@@ -1,0 +1,10 @@
+public class Solution {
+    public int FindMinimumOperations(string s1, string s2, string s3) {
+     int index=0;
+     while(index<s1.Length && index<s2.Length && index<s3.Length &&
+            s1[index]==s2[index] 
+            && s1[index]==s3[index]) index++;      
+      if(index==0)return -1;
+      else return s1.Length-index + s2.Length-index+s3.Length-index;    
+    }
+}
