@@ -1,0 +1,14 @@
+public class Solution {
+    public string ThousandSeparator(int n) {
+     string result="";
+     int numberOfDigits=0;
+     string nStr=""+n;
+     for(int i=nStr.Length-1;i>=0;i--){
+      char ch=nStr[i];
+      numberOfDigits++;
+      if(numberOfDigits%3==1 && numberOfDigits!=1)result="."+result;
+      result=ch+result;
+     }
+      return result;     
+    }
+}
