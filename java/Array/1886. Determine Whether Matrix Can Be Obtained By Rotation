@@ -1,0 +1,29 @@
+class Solution {
+    public boolean findRotation(int[][] mat, int[][] target) {
+     int count=0;
+     int[][] matClone=mat.clone();
+     while(count<4){
+      int numEqual=0;  
+      matClone=getRotatedMatrix(matClone);
+      count++;
+      for(int i=0;i<matClone.length;i++  ){
+       for(int j=0;j<matClone[i].length;j++){
+        if(matClone[i][j]==target[i][j])numEqual++;
+       } 
+      }
+      if(numEqual==target.length*target[0].length)return true;
+     }
+     return false;    
+    }
+    public int[][] getRotatedMatrix(int[][] a) {
+     int [][]b = new int[a.length][a[0].length];
+     int numOfRows =a.length;
+     int numOfColumns = a[0].length;
+     for(int i=0;i<b.length;i++){
+      for(int j=0;j<b[0].length;j++){
+          b[i][j]=a[numOfRows-1-j][i];
+      }
+     }
+     return b;
+    }
+}
