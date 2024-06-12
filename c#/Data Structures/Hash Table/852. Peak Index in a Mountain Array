@@ -1,0 +1,11 @@
+public class Solution {
+    public int PeakIndexInMountainArray(int[] arr) {
+     int max= arr[0];
+     Dictionary<int,int> map= new Dictionary<int,int>();
+     for(int i=1;i<arr.Length;i++){
+      if(arr[i]>max)max=arr[i];
+      if(!map.ContainsKey(arr[i])) map[arr[i]]=i;
+     }   
+     return map[max];   
+    }
+}
