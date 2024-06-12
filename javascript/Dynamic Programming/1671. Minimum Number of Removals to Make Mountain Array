@@ -1,0 +1,26 @@
+var minimumMountainRemovals = function(sequence) {
+ const lengthsFromFront= [];
+ const lengthsFromBehind= [];
+ lengthsFromFront.length=sequence.length;
+ lengthsFromBehind.length=sequence.length;
+ let maxLength=1;
+ for(let i=0;i<lengthsFromFront.length;i++)lengthsFromFront[i]=1;
+ for(let i=0;i<lengthsFromBehind.length;i++)lengthsFromBehind[i]=1;
+  for(let i=0;i<sequence.length;i++){
+   for(let j=i-1;j>=0;j--){
+    if(sequence[j]<sequence[i] && lengthsFromFront[i]<=lengthsFromFront[j]) 
+     lengthsFromFront[i]=lengthsFromFront[j]+1;
+   }
+  }
+  for(let i=sequence.length-1;i>=0;i--){
+   for(let j=i+1;j<sequence.length;j++){
+    if(sequence[j]<sequence[i] && lengthsFromBehind[i]<=lengthsFromBehind[j]) 
+     lengthsFromBehind[i]=lengthsFromBehind[j]+1;
+   }
+  }
+  for(let i=0;i<sequence.length;i++){
+   if(lengthsFromFront[i]==1 ||  lengthsFromBehind[i]==1)continue;
+   maxLength=Math.max(maxLength,lengthsFromFront[i]+lengthsFromBehind[i]-1);          
+  }     
+  return sequence.length-maxLength;   
+};
