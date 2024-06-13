@@ -1,0 +1,27 @@
+public class Solution {
+    public int FindNumberOfLIS(int[] nums) {
+     int [] lengths=new int[nums.Length];
+     int [] counts=new int[nums.Length];
+     int result=0;   
+     int maxLength=1;
+     for(int i=0;i<nums.Length;i++){
+      lengths[i]=1;
+      counts[i]=1;  
+     }
+     for(int i=0;i<nums.Length;i++){
+      for(int j=i-1;j>=0;j--){
+       if(nums[j]<nums[i]){
+        if(lengths[i]<lengths[j]+1){
+         lengths[i]=lengths[j]+1; 
+         counts[i]=0;
+        }if(lengths[j]+1==lengths[i])counts[i]+=counts[j]; 
+      }
+      }
+      maxLength=Math.Max(maxLength,lengths[i]);  
+     }
+     for(int i=0;i<lengths.Length;i++){
+      if(lengths[i]==maxLength)result+=counts[i];
+     }
+     return result;   
+    }
+}
