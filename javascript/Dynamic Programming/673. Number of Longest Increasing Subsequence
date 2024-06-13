@@ -1,0 +1,28 @@
+var findNumberOfLIS = function(nums) {
+ const lengths=[];
+ const counts=[];
+ lengths.length=nums.length;
+ counts.length=nums.length;
+ let result=0;   
+ let maxLength=1;
+ for(let i=0;i<nums.length;i++){
+  lengths[i]=1;
+  counts[i]=1;  
+ }
+ for(let i=0;i<nums.length;i++){
+  for(let j=i-1;j>=0;j--){
+   if(nums[j]<nums[i]){
+    if(lengths[i]<lengths[j]+1){
+     lengths[i]=lengths[j]+1; 
+     counts[i]=0;
+    }
+    if(lengths[j]+1==lengths[i])counts[i]+=counts[j]; 
+   }
+  }
+  maxLength=Math.max(maxLength,lengths[i]);  
+ }
+ for(let i=0;i<lengths.length;i++){
+  if(lengths[i]==maxLength)result+=counts[i];
+ }
+ return result;      
+};
