@@ -1,0 +1,13 @@
+var decompressRLElist = function(nums) {
+ const result=[];
+ for(let i=1;i<nums.length;i+=2){
+  let freq=nums[i-1];
+  let value=nums[i];
+  let count=0;
+  while(count<freq){
+   result.push(value);
+   count++; 
+  }          
+ }
+ return result;   
+};
