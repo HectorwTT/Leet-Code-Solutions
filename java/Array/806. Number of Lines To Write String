@@ -1,0 +1,19 @@
+class Solution {
+    public int[] numberOfLines(int[] widths, String s) {
+     int [] result= new int[2]; 
+     int total=0;
+     int numOfPixels=0;
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      int letter=ch-97;
+      if(numOfPixels+widths[letter]>100){
+        total++;
+        numOfPixels=widths[letter];
+      }else numOfPixels+=widths[letter];
+     }
+     if(numOfPixels>0)total++;
+     result[0]=total;
+     result[1]=numOfPixels;
+     return result;     
+    }
+}
