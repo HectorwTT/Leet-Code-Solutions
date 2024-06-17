@@ -1,0 +1,18 @@
+var numberOfLines = function(widths, s) {
+ const result= [];
+ result.length=2; 
+ let total=0;
+ let numOfPixels=0;
+ for(let i=0;i<s.length;i++){
+  var ch=s.charCodeAt(i);
+  let letter=ch-97;
+  if(numOfPixels+widths[letter]>100){
+   total++;
+   numOfPixels=widths[letter];
+  }else numOfPixels+=widths[letter];
+ }
+ if(numOfPixels>0)total++;
+ result[0]=total;
+ result[1]=numOfPixels;
+ return result;   
+};
