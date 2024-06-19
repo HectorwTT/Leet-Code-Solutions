@@ -1,32 +1,48 @@
 class Solution {
-
-    public int maxProfitAssignment(
-        int[] difficulty,
-        int[] profit,
-        int[] worker
-    ) {
-        List<int[]> jobProfile = new ArrayList<>();
-        for (int i = 0; i < difficulty.length; i++) {
-            jobProfile.add(new int[] { difficulty[i], profit[i] });
-        }
-
-        // Sort both worker and jobProfile arrays
-        Arrays.sort(worker);
-        jobProfile.sort((a, b) -> Integer.compare(a[0], b[0]));
-
-        int netProfit = 0, maxProfit = 0, index = 0;
-        for (int i = 0; i < worker.length; i++) {
-            // While the index has not reached the end and worker can pick a job
-            // with greater difficulty move ahead.
-            while (
-                index < difficulty.length &&
-                worker[i] >= jobProfile.get(index)[0]
-            ) {
-                maxProfit = Math.max(maxProfit, jobProfile.get(index)[1]);
-                index++;
-            }
-            netProfit += maxProfit;
-        }
-        return netProfit;
+    public int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+     int total=0;
+     int [] maxProfits=new int[difficulty.length];
+     HashMap<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<difficulty.length;i++){
+      if(!map.containsKey(difficulty[i]))map.put(difficulty[i],profit[i]);
+      else{
+       if(map.get(difficulty[i])<profit[i])map.replace(difficulty[i],profit[i]); 
+      }  
+     }
+     Arrays.sort(difficulty);
+     int maxProfit=map.get(difficulty[0]);
+     maxProfits[0]=maxProfit;
+     for(int i=1;i<maxProfits.length;i++){
+      maxProfit=Math.max(maxProfit,map.get(difficulty[i]));
+      maxProfits[i]=maxProfit;
+     }
+     for(int i=0;i<worker.length;i++){
+      int ability=worker[i];
+      if(ability<difficulty[0])continue;  
+      if(ability>=difficulty[difficulty.length-1]){
+        total+=maxProfits[difficulty.length-1];
+        continue;
+      }
+      int left=0;
+      int right=worker.length-1;
+      int mid=0;
+      boolean foundValue=false;
+      while(left<=right){
+        mid=(left+right)/2;
+       if(difficulty[mid]==ability){
+        foundValue=true;
+        break;
+       }else if(difficulty[mid]>ability)right=mid-1;
+       else left=mid+1;
+      }
+      if(foundValue)total+=maxProfits[mid]; 
+      else if(difficulty[left]<ability && difficulty[right]<ability) {
+        int maxDifficulty=Math.max(difficulty[left],difficulty[right]);
+        if(maxDifficulty==difficulty[left])total+=maxProfits[left];
+        else total+=maxProfits[right];
+      }else if(difficulty[left]>ability)total+=maxProfits[right];
+      else total+=maxProfits[left];  
+     }
+     return total;      
     }
 }
