@@ -1,0 +1,25 @@
+class Solution {
+    public String breakPalindrome(String palindrome) {
+     String result="";
+     if(palindrome.length()==1)return result;
+     int numberOfAs=0;
+     int numberOfOther=0; 
+     int index=0;
+     int half=palindrome.length()/2;
+     for(int i=0;i<half;i++){
+      if(palindrome.charAt(i)=='a')numberOfAs++;
+      else{
+       if(numberOfOther==0)index=i;
+       numberOfOther++; 
+      }  
+     }
+     if(numberOfAs==half){
+       if(palindrome.length()%2==0) result=palindrome.substring(0,half)+"b";
+       else result=palindrome.substring(0,half+1)+palindrome.substring(half+1,palindrome.length()-1)+"b"; 
+     }else{
+      result=palindrome.substring(0,index)+"a";
+      if(index!=palindrome.length()-1)result+=palindrome.substring(index+1);
+     }
+     return result;       
+    }
+}
