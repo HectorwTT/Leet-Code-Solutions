@@ -1,0 +1,18 @@
+class Solution {
+    public String makeFancyString(String s) {
+     int numConsecutive=1;
+     StringBuilder sb=new StringBuilder(""+s.charAt(0));
+     for(int i=1;i<s.length();i++){
+      char current=s.charAt(i);
+      char previous=s.charAt(i-1);
+      if(current==previous){
+       numConsecutive++;
+      }else{
+       numConsecutive=1;
+       }
+      if(numConsecutive<3)sb.append(""+current);
+  
+     } 
+     return sb.toString();   
+    }
+}
