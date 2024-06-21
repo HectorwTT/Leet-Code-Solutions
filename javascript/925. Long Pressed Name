@@ -1,0 +1,33 @@
+var isLongPressedName = function(name, typed) {
+ return isSubsequence(name,typed) 
+      && getDistinctCharsInSequence(name)==(getDistinctCharsInSequence(typed));   
+};
+
+var isSubsequence=function(s,t) {
+ let index=0;
+ if(s.length==0) return true;
+ for(let i=0;i<t.length;i++){
+  var tch = t.charAt(i);
+  var sch= s.charAt(index);
+  if(tch==sch){
+   if(index==s.length-1)return true;
+   index++;
+  }
+ }
+ return false;
+};
+
+var getDistinctCharsInSequence = function(string){
+ let numConsecutive=1;
+ let result=""+string.charAt(0);
+ for(let i=1;i<string.length;i++){
+  var current=string.charAt(i);
+  var previous=string.charAt(i-1);
+  if(current==previous)numConsecutive++;
+  else{
+   numConsecutive=1;
+   result+=current;
+  } 
+ }
+ return result;  
+};    
