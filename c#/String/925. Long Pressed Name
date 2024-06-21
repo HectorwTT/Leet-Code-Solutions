@@ -1,0 +1,34 @@
+public class Solution {
+    public bool IsLongPressedName(string name, string typed) {
+      return IsSubsequence(name,typed) 
+      && GetDistinctCharsInSequence(name).Equals(GetDistinctCharsInSequence(typed));   
+    }
+    public bool IsSubsequence(string s, string t) {
+     int index=0;
+     if(s.Length==0) return true;
+     for(int i=0;i<t.Length;i++){
+      char tch = t[i];
+      char sch= s[index];
+      if(tch==sch){
+       if(index==s.Length-1)return true;
+       index++;
+      }
+     }
+     return false;
+    }
+
+    public string GetDistinctCharsInSequence(string str){
+     int numConsecutive=1;char first=str[0];
+     string result=""+first;
+     for(int i=1;i<str.Length;i++){
+      char current=str[i];
+      char previous=str[i-1];
+      if(current==previous)numConsecutive++;
+      else{
+       numConsecutive=1;
+       result+=current;
+      } 
+     }
+     return result;  
+    }    
+}
