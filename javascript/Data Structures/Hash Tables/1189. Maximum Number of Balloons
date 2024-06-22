@@ -1,0 +1,18 @@
+var maxNumberOfBalloons = function(text) {
+ const map=new Map();
+ for(let i=0;i<text.length;i++){
+  var ch=text.charAt(i);
+  if(!map.has(ch))map.set(ch,1);
+  else map.set(ch,map.get(ch)+1);
+ }   
+  if(!map.has('a')
+      || !map.has('b') 
+      || !map.has('l')
+      || !map.has('o')
+      || !map.has('n'))return 0;
+  let min=Math.min(Math.min(map.get('a'),map.get('b')),map.get('n'));  
+  let min1=Math.min(map.get('l'),map.get('o'));
+  if(min1%2!=0)min1=min1-1;
+  if( min1==1)return 0;
+  else return Math.min(min1/2,min);   
+};
