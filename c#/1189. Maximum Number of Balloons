@@ -1,0 +1,19 @@
+public class Solution {
+    public int MaxNumberOfBalloons(string text) {
+     Dictionary<char,int> map=new Dictionary<char,int>();
+     for(int i=0;i<text.Length;i++){
+      char ch=text[i];
+      if(!map.ContainsKey(ch))map[ch]=1;
+      else map[ch]=map[ch]+1;  
+     }
+     if(!map.ContainsKey('a')
+       || !map.ContainsKey('b') 
+       || !map.ContainsKey('l')
+       || !map.ContainsKey('o')
+       || !map.ContainsKey('n'))return 0; 
+       int min=Math.Min(Math.Min(map['a'],map['b']),map['n']);   
+       int min1=Math.Min(map['l'],map['o']);
+       if( min1==1)return 0;
+       else return Math.Min(min1/2,min);
+    }
+}
