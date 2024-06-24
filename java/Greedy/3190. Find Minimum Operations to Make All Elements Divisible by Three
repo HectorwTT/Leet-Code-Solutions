@@ -1,0 +1,12 @@
+class Solution {
+    public int minimumOperations(int[] nums) {
+     int total=0;
+     for(int i=0;i<nums.length;i++){
+      int prev=nums[i]/3;
+      int curr=prev+1;
+      if(nums[i]%3==0)continue;
+      total+=Math.min(nums[i]-prev,curr-prev);  
+     }
+     return total;   
+    }
+}
