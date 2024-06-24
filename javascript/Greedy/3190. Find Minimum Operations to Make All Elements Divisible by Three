@@ -1,0 +1,10 @@
+var minimumOperations = function(nums) {
+ let total=0;
+ for(let i=0;i<nums.length;i++){
+  let prev=nums[i]/3;
+  let curr=prev+1;
+  if(nums[i]%3==0)continue;
+  total+=Math.min(nums[i]-prev,curr-prev);  
+ }
+ return total;     
+};
