@@ -1,0 +1,17 @@
+class Solution {
+    public double minimumAverage(int[] nums) {
+     Arrays.sort(nums);
+     int left=0;
+     int right=nums.length-1;
+     List<Double> averages=new ArrayList<>();
+     int index=0;
+     while(left<=right){
+      double smaller=nums[left++];
+      double larger=nums[right--];
+      double average=(smaller+larger)/2;
+      averages.add(average);
+     }
+     averages.sort(null);
+     return averages.get(0);   
+    }
+}
