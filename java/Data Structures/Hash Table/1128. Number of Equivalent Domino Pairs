@@ -1,0 +1,18 @@
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+     HashMap<List<Integer>,Integer> map= new HashMap<>();
+     int total=0;
+     for(int i=0;i<dominoes.length;i++){
+      int [] arr=dominoes[i];
+      List<Integer> list=new ArrayList<>();
+      for(int j=0;j<arr.length;j++)list.add(arr[j]);
+      list.sort(null);
+      if(!map.containsKey(list))map.put(list,1);
+      else{
+        total+=map.get(list);
+        map.replace(list,map.get(list)+1);
+      }   
+     }
+     return total;   
+    }
+}
