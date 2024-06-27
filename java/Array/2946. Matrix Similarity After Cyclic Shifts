@@ -1,0 +1,35 @@
+class Solution {
+    public boolean areSimilar(int[][] mat, int k) {
+      int count=0;
+      int [][] matClone= new int[mat.length][mat[0].length];
+      for(int i=0;i<mat.length;i++){
+       for(int j=0;j<mat[i].length;j++){
+        matClone[i][j]=mat[i][j];
+       } 
+      }
+      while(count<k){
+       matClone=getNewArray(matClone);  
+       count++;
+      }
+      for(int i=0;i<matClone.length;i++){
+       for(int j=0;j<matClone[i].length;j++)if(matClone[i][j]!=mat[i][j])return false; 
+      }
+      return true;    
+    }
+
+    public int [] [] getNewArray(int [] [] matrix){
+     int [][] tmp=new int[matrix.length][matrix[0].length];
+     for(int i=0;i<matrix.length;i++){
+      for(int j=0;j<matrix[i].length;j++){
+       if(i%2==0){
+        if(j!=matrix[i].length-1)tmp[i][j]=matrix[i][j+1];
+        else tmp[i][j]=matrix[i][0];
+       }else{
+        if(j==0)tmp[i][j]=matrix[i][matrix[0].length-1];
+        else tmp[i][j]=matrix[i][j-1];
+       } 
+      }  
+     }
+     return tmp;   
+    }
+}
