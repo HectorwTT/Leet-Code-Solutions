@@ -1,0 +1,23 @@
+public class Solution {
+    public int IsWinner(int[] player1, int[] player2) {
+     int total1=player1[0];
+     int total2=player2[0];
+     if(player1.Length>1){
+      if(player1[0]!=10) total1+=player1[1];
+      else total1+=2*(player1[1]);
+     }   
+     if(player2.Length>1){
+      if(player2[0]!=10)total2+=player2[1];
+      else total2+=2*(player2[1]);
+     } 
+     for(int i=2;i<player1.Length;i++){
+      if(player1[i-1]==10 || player1[i-2]==10)total1+=2*(player1[i]);
+      else total1+=player1[i];
+      if(player2[i-1]==10 || player2[i-2]==10)total2+=2*(player2[i]);
+      else total2+=player2[i];
+     }
+     if(total1>total2)return 1;
+     else if(total2>total1) return 2;
+     else return 0;     
+    }
+}
