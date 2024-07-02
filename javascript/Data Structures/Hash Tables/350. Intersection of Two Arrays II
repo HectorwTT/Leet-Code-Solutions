@@ -1,0 +1,26 @@
+var intersect = function(nums1, nums2) {
+ const list= [];
+ const nums1map= new Map();
+ const nums2map= new Map();
+ for(let i=0;i<nums1.length;i++){
+  if(!nums1map.has(nums1[i])) nums1map.set(nums1[i],1);
+  else nums1map.set(nums1[i],nums1map.get(nums1[i])+1);
+ } 
+ for(let i=0;i<nums2.length;i++){
+  if(!nums2map.has(nums2[i])) nums2map.set(nums2[i],1);
+  else nums2map.set(nums2[i],nums2map.get(nums2[i])+1);
+ }
+ for(const key of nums1map.keys()){
+  if(nums2map.has(key)){
+   let num1count= nums1map.get(key);
+   let num2count= nums2map.get(key);
+   let mincount= Math.min(num1count,num2count);
+   let count=0;
+   while(count<mincount){
+    list.push(key);
+    count++;
+   }
+  }
+ }
+ return list;   
+};
