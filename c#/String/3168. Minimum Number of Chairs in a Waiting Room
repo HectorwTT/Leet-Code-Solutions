@@ -1,0 +1,12 @@
+public class Solution {
+    public int MinimumChairs(string s) {
+     int max=0;
+     int total=0;
+     for(int i=0;i<s.Length;i++){
+      if(s[i]=='E')total++;
+      else total--;
+      max=Math.Max(total,max);
+     }
+     return max;     
+    }
+}
