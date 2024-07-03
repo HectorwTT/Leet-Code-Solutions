@@ -1,0 +1,13 @@
+var passThePillow = function(n, time) {
+ let person=1;
+ let count=0;
+ let shouldIncrement=true;
+ while(count<time){
+  if(shouldIncrement)person++;
+  else person--;
+  if(person==1)shouldIncrement=true;
+  else if(person==n)shouldIncrement=false;
+  count++;
+ }
+ return person;    
+};
