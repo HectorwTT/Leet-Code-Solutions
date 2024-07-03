@@ -1,0 +1,15 @@
+class Solution {
+    public int numberOfChild(int n, int k) {
+     int child=0;
+     int count=0;
+     boolean shouldIncrement=true;
+     while(count<k){
+      if(shouldIncrement)child++;
+      else child--;
+      if(child==0)shouldIncrement=true;
+      else if(child==n-1)shouldIncrement=false;
+      count++;
+     }
+     return child;   
+    }
+}
