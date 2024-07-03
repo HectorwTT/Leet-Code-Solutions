@@ -1,0 +1,13 @@
+var numberOfChild = function(n, k) {
+ let child=0;
+ let count=0;
+ let shouldIncrement=true;
+ while(count<k){
+  if(shouldIncrement)child++;
+  else child--;
+  if(child==0)shouldIncrement=true;
+  else if(child==n-1)shouldIncrement=false;
+  count++;
+ }
+ return child;    
+};
