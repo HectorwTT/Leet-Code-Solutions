@@ -1,0 +1,20 @@
+class Solution {
+    public List<String> cellsInRange(String s) {
+     List<String> result= new ArrayList<>();
+     String first=s.substring(0,s.indexOf(":"));
+     String last=s.substring(s.indexOf(":")+1);
+     int c1=first.charAt(0);
+     int r1=Integer.parseInt(first.substring(1));
+     int c2=last.charAt(0);
+     int r2=Integer.parseInt(last.substring(1));
+     for(int row=r1;row<=r2;row++){
+      for(int col=c1;col<=c2;col++){
+        char letter=(char)col;
+        String cell=""+letter+row;
+        result.add(cell);
+      }  
+     }
+     result.sort(null);
+     return result;         
+    }
+}
