@@ -1,0 +1,27 @@
+public class Solution {
+    public int CountBinarySubstrings(string s) {
+     int [] numOfZeroes=new int[s.Length];
+     int [] numOfOnes=new int[s.Length];
+     int countOfZeroes=0;
+     int countOfOnes=0; 
+     int total=0;  
+     for(int i=0;i<s.Length;i++){
+      char bit=s[i];
+      if(bit=='1'){
+       countOfZeroes=0;
+       countOfOnes++;
+      }else{
+       countOfOnes=0;
+       countOfZeroes++;
+      }
+      if(countOfZeroes!=0) numOfZeroes[i]=countOfZeroes;
+      if(countOfOnes!=0)numOfOnes[i]=countOfOnes;
+      if(numOfZeroes[i]!=0){
+       if(i-countOfZeroes>=0 && numOfOnes[i-countOfZeroes]>=numOfZeroes[i]) total++; 
+      }else if(numOfOnes[i]!=0){
+        if(i-countOfOnes>=0 && numOfZeroes[i-countOfOnes]>=numOfOnes[i])total++;  
+      }else continue;
+     }
+    return total;          
+    }
+}
