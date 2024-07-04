@@ -1,0 +1,53 @@
+class Solution {
+    public int numRookCaptures(char[][] board) {
+      int total=0;
+      int rookRow=0;
+      int rookColumn=0;
+      int row=0;
+      int column=0;
+      for(int i=0;i<board.length;i++){
+       for(int j=0;j<board[i].length;j++){
+        if(board[i][j]=='R'){
+         rookRow=i;
+         rookColumn=j;
+         break;
+        }
+       } 
+      }
+      row=rookRow;
+      column=rookColumn;
+      while(row>=0){
+       if(board[row][rookColumn]=='p'){
+        total++;
+        break;
+       }  
+       else if(board[row][rookColumn]=='B')break;
+       row--;
+      }
+      row=rookRow;
+      while(row<=board.length-1){
+       if(board[row][rookColumn]=='p'){
+        total++;
+        break;
+       }else if(board[row][rookColumn]=='B')break; 
+       row++;
+      }
+      column=rookColumn;    
+      while(column>=0){
+       if(board[rookRow][column]=='p'){
+        total++;
+        break;
+       }else if(board[rookRow][column]=='B')break; 
+       column--;
+      }
+      column=rookColumn;
+      while(column<=board[0].length-1){
+       if(board[rookRow][column]=='p'){
+        total++;
+        break;
+       }else if(board[rookRow][column]=='B')break; 
+       column++;
+      }
+      return total;
+    }
+}
