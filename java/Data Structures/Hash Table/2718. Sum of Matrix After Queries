@@ -1,0 +1,26 @@
+class Solution {
+    public long matrixSumQueries(int n, int[][] queries) {
+     HashMap<Integer,Integer> seenRows=new HashMap<>();
+     HashMap<Integer,Integer> seenColumns=new HashMap<>();
+     long total=0;
+     for(int i=queries.length-1;i>=0;i--){
+      int type=queries[i][0];
+      if(type==0){
+       int row= queries[i][1];
+       if(seenRows.containsKey(row))continue;
+       seenRows.put(row,1); 
+        long value=1L*queries[i][2];
+        long number=1L*(n-seenColumns.size());
+        total+=value*number;              
+      }else{
+        int column=queries[i][1];
+        if(seenColumns.containsKey(column))continue;
+        seenColumns.put(column,1);
+         long value=1L*queries[i][2];
+         long number=1L*(n-seenRows.size());   
+         total+=value*number;          
+      }  
+     }
+    return total;      
+    }
+}
