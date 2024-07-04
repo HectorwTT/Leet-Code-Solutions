@@ -1,0 +1,24 @@
+class Solution {
+    public int minTimeToType(String word) {
+     char previous= 'a';
+     int min=0;
+     for(int i=0;i<word.length();i++){
+      char current= word.charAt(i);
+      int currentValue= current-97;
+      int previousValue=previous-97;
+      int clockwiseDiff=0;
+      int counterClockwiseDiff=0;
+      if(currentValue>=previousValue){
+       clockwiseDiff=currentValue-previousValue;
+       counterClockwiseDiff=26-clockwiseDiff; 
+      }else{
+       counterClockwiseDiff=previousValue-currentValue;
+       clockwiseDiff=26-counterClockwiseDiff; 
+      }
+      min+=Math.min(clockwiseDiff,counterClockwiseDiff);
+      min++;
+      previous=current;
+     }
+     return min;
+    }
+}
