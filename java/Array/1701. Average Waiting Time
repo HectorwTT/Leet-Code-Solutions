@@ -1,0 +1,20 @@
+class Solution {
+    public double averageWaitingTime(int[][] customers) {
+      List<Integer> waitingTimes= new ArrayList<>();
+      int  startTime=customers[0][0];
+      int endTime=0;
+      double total=0.0;
+      for(int i=0;i<customers.length;i++){
+        if(startTime>customers[i][0])endTime=startTime+customers[i][1];
+        else endTime=customers[i][0]+customers[i][1];
+        int waitingTime=endTime-customers[i][0];
+        waitingTimes.add(waitingTime);
+        startTime=endTime;
+      }
+      for(int i=0;i<waitingTimes.size();i++){
+       double time=waitingTimes.get(i);
+       total+=time; 
+      }
+      return total/waitingTimes.size();
+    }
+}
