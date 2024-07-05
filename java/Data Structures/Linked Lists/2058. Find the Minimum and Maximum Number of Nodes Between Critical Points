@@ -1,0 +1,30 @@
+class Solution {
+    public int[] nodesBetweenCriticalPoints(ListNode head) {
+      int [] result= new int[2]; 
+      result[0]=-1;
+      result[1]=-1;
+      int minDistance=(int)Double.POSITIVE_INFINITY;
+      int maxDistance=-1;
+      List<Integer> list=new ArrayList<>();
+      List<Integer> criticalPoints=new ArrayList<>();
+      ListNode current=head;
+      while(current!=null){
+        list.add(current.val);
+        current=current.next;
+      }
+      for(int i=1;i<list.size()-1;i++){
+       if((list.get(i)>list.get(i-1) && list.get(i)>list.get(i+1)) 
+            || (list.get(i)<list.get(i-1) && list.get(i)<list.get(i+1)))criticalPoints.add(i+1);
+      }
+      if(criticalPoints.size()<2)return result;
+      for(int i=1;i<criticalPoints.size();i++){
+       int diff=criticalPoints.get(i)-criticalPoints.get(i-1);
+       minDistance=Math.min(minDistance,diff);
+      }
+      maxDistance=criticalPoints.get(criticalPoints.size()-1)
+                  -criticalPoints.get(0);   
+      result[0]=minDistance;
+      result[1]=maxDistance;
+      return result;                
+    }
+}
