@@ -1,0 +1,16 @@
+class Solution {
+    public void duplicateZeros(int[] arr) {
+     List<Integer> list= new ArrayList<>();
+     int index=0;
+     while(list.size()<=arr.length && index<arr.length){ 
+      list.add(arr[index]);
+      if(arr[index]==0)list.add(0);
+      index++;  
+     }
+     index=0;
+     while(index<arr.length){
+      arr[index]=list.get(index++);  
+     }
+     return;
+    }
+}
