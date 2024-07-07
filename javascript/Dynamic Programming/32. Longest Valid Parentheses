@@ -1,0 +1,38 @@
+var longestValidParentheses = function(s) {
+ const lengths=[];
+ lengths.length=s.length;
+ let length=0;
+ let maxLength=0;
+ const indexes=[];
+ for(let i=0;i<s.length;i++){
+  var bracket=s.charAt(i);
+  if(bracket=='('){
+   indexes.push(i);
+   lengths[i]=0;  
+  }else{
+   if(indexes.length!=0){
+    let index=indexes.pop();
+    lengths[index]=(i-index)+1;
+   }
+   lengths[i]=0; 
+  }   
+ }
+ let index=0;
+ while(index<s.length){
+  var bracket=s.charAt(index);
+  if(bracket=='('){
+  if(lengths[index]==0){
+   index++;
+   length=0;
+  }else{
+    length+=lengths[index];
+    maxLength=Math.max(length,maxLength);
+    index+=lengths[index];
+  }         
+  }else{
+    index++;
+    length=0;
+  } 
+ }   
+ return maxLength;   
+};
