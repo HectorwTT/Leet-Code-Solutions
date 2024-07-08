@@ -1,0 +1,27 @@
+class Solution {
+    public int firstCompleteIndex(int[] arr, int[][] mat) {
+     HashMap<Integer,Integer> paintedRows=new HashMap<>();    
+     HashMap<Integer,Integer> paintedColumns=new HashMap<>();        
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     for(int i=0;i<mat.length;i++){
+      for(int j=0;j<mat[i].length;j++){
+       List<Integer> coordinates=new ArrayList<>();
+       coordinates.add(i);
+       coordinates.add(j);
+       map.put(mat[i][j],coordinates); 
+      }
+     }
+     for(int i=0;i<arr.length;i++){
+      List<Integer> coordinates=map.get(arr[i]);
+      int row=coordinates.get(0);
+      int column=coordinates.get(1);
+      if(!paintedRows.containsKey(row))paintedRows.put(row,1);
+      else paintedRows.replace(row,paintedRows.get(row)+1);
+      if(!paintedColumns.containsKey(column))paintedColumns.put(column,1);
+      else paintedColumns.replace(column,paintedColumns.get(column)+1);
+      if(paintedRows.get(row)==mat[row].length)return i;
+      if(paintedColumns.get(column)==mat.length)return i;
+     }
+     return -1; 
+    }
+}
