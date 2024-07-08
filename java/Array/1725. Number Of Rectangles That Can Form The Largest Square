@@ -1,0 +1,16 @@
+class Solution {
+    public int countGoodRectangles(int[][] rectangles) {
+     HashMap<Integer,Integer> map=new HashMap<>();
+     List<Integer> list= new ArrayList<>();
+     for(int i=0;i<rectangles.length;i++){
+      int maxLength=Math.min(rectangles[i][0],rectangles[i][1]);
+      if(map.containsKey(maxLength))map.replace(maxLength,map.get(maxLength)+1);
+      else{
+       list.add(maxLength);
+       map.put(maxLength,1); 
+      }
+     }
+     list.sort(null);
+     return map.get(list.get(list.size()-1));        
+    }
+}
