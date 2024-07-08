@@ -1,0 +1,25 @@
+class Solution {
+    public int[] circularGameLosers(int n, int k) {
+      List<Integer> list=new ArrayList<>();  
+      Map<Integer,Integer> receivers=new HashMap<>();         
+      receivers.put(1,1);
+      int turn=1;
+      int number=1;
+      while(true){
+       int next=(number+(turn*k))%n;
+       turn++;
+       number=next;
+       if(receivers.containsKey(number))break;
+       else receivers.put(number,1);       
+      }
+     if(receivers.containsKey(0)){
+      int nCount=receivers.get(0); 
+      receivers.remove(0);
+      if(!receivers.containsKey(n))receivers.put(n,1);
+     } 
+     for(int i=1;i<=n;i++){
+      if(!receivers.containsKey(i))list.add(i);  
+     }
+     return list.stream().mapToInt(i->i).sorted().toArray();  
+    }
+}
