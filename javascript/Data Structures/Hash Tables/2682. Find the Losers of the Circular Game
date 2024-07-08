@@ -1,0 +1,24 @@
+var circularGameLosers = function(n, k) {
+ const list=[];  
+ const receivers=new Map();         
+ receivers.set(1,1);
+ let turn=1;
+ let number=1;
+ while(true){
+  let next=(number+(turn*k))%n;
+  turn++;
+  number=next;
+  if(receivers.has(number))break;
+  else receivers.set(number,1);       
+ }
+ if(receivers.has(0)){
+  let nCount=receivers.get(0); 
+  receivers.delete(0);
+  if(!receivers.has(n))receivers.set(n,1);
+ } 
+ for(let i=1;i<=n;i++){
+  if(!receivers.has(i))list.push(i);  
+ }
+ list.sort(function(a, b){return a - b});
+ return list;    
+};
