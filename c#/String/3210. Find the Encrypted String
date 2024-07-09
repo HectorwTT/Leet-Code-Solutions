@@ -1,0 +1,11 @@
+public class Solution {
+    public string GetEncryptedString(string s, int k) {
+     string result="";
+     for(int i=0;i<s.Length;i++){
+      int newIndex=(i+k)%s.Length;
+      char ch=s[newIndex];
+      result+=ch;
+     }
+     return result;    
+    }
+}
