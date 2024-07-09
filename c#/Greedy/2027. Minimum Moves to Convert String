@@ -1,0 +1,13 @@
+public class Solution {
+    public int MinimumMoves(string s) {
+     int total=0;
+     int index=1;
+     for(int i=0;i<s.Length;i+=index){
+      if(s[i]=='X'){
+        index=3;
+        total++;
+      }else index=1;  
+     }
+     return total;    
+    }
+}
