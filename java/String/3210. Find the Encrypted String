@@ -1,0 +1,11 @@
+class Solution {
+    public String getEncryptedString(String s, int k) {
+     String result="";
+     for(int i=0;i<s.length();i++){
+      int newIndex=(i+k)%s.length();
+      char ch=s.charAt(newIndex);
+      result+=ch;
+     }
+     return result;  
+    }
+}
