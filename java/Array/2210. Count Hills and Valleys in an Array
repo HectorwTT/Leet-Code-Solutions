@@ -1,0 +1,38 @@
+class Solution {
+    public int countHillValley(int[] nums) {
+     int total=0;   
+     int max=-1;
+     int min=-1;
+     int [] prevNonEqual=new  int[nums.length];
+     int [] nextNonEqual= new int[nums.length];
+     Stack<Integer> nextNonEqualStack=new Stack<>();
+     Stack<Integer> prevNonEqualStack= new Stack<>();
+     for (int i = nums.length-1; i>= 0; i--) {
+      while (!nextNonEqualStack.isEmpty() && nums[i] == nextNonEqualStack.peek())nextNonEqualStack.pop();
+      nextNonEqual[i] = nextNonEqualStack.isEmpty() ? (int)Double.POSITIVE_INFINITY : nextNonEqualStack.peek();
+      nextNonEqualStack.push(nums[i]);
+     } 
+     for (int i = 0;i<nums.length; i++) {
+      while (!prevNonEqualStack.isEmpty() && nums[i] == prevNonEqualStack.peek())prevNonEqualStack.pop();
+      prevNonEqual[i] = prevNonEqualStack.isEmpty() ? (int)Double.POSITIVE_INFINITY : prevNonEqualStack.peek();
+      prevNonEqualStack.push(nums[i]);
+     }
+     for(int i=1;i<nums.length-1;i++){
+      if(prevNonEqual[i]==(int)Double.POSITIVE_INFINITY
+          || nextNonEqual[i]==(int)Double.POSITIVE_INFINITY)continue;           
+      if(prevNonEqual[i]<nums[i] && nextNonEqual[i]<nums[i]){
+        if(max==-1){
+         total++;
+         max=nums[i];
+        }
+      }else max=-1;
+      if(prevNonEqual[i]>nums[i] && nextNonEqual[i]>nums[i]){
+        if(min==-1){
+          total++;
+          min=nums[i];
+        }
+      }else  min=-1;       
+     }
+     return total;        
+    }
+}
