@@ -1,0 +1,11 @@
+var countGoodRectangles = function(rectangles) {
+ const map=new Map();
+ let maxLength=0;
+ for(let i=0;i<rectangles.length;i++){
+  let maxPossibleLength=Math.min(rectangles[i][0],rectangles[i][1]);
+  if(map.has(maxPossibleLength))map.set(maxPossibleLength,map.get(maxPossibleLength)+1);
+  else  map.set(maxPossibleLength,1);  
+  maxLength=Math.max(maxPossibleLength,maxLength);     
+ }
+ return map.get(maxLength);     
+};
