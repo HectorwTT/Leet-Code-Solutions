@@ -1,0 +1,11 @@
+var minimumMoves = function(s) {
+ let total=0;
+ let index=1;
+ for(let i=0;i<s.length;i+=index){
+  if(s.charAt(i)=='X'){
+   index=3;
+   total++;
+  }else index=1;  
+ }
+ return total;            
+};
