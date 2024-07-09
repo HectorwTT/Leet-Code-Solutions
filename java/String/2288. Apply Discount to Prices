@@ -1,0 +1,21 @@
+class Solution {
+    public String discountPrices(String sentence, int discount) {
+      String [] words=sentence.split(" ");
+      for(int i=0;i<words.length;i++){
+       if(words[i].length()<2)continue;
+       char first=words[i].charAt(0);
+       char second=words[i].charAt(1);
+       if(first=='$' && (second<=57 && second>=48)){
+        String word=words[i];
+        String amount=word.substring(1);
+        if(amount.indexOf("$")!=-1)continue;
+        long count=amount.chars().filter(ch->ch>=97 && ch<=122).count();
+        if(count>=1)continue;
+        double price=Double.parseDouble(amount);
+        double newPrice=price-(price*(discount/100.0));
+        words[i]="$"+String.format("%.2f",newPrice);
+       }else continue; 
+      }
+      return String.join(" ",words);     
+    }
+}
