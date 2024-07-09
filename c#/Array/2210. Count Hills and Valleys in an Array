@@ -1,0 +1,36 @@
+public class Solution {
+    public int CountHillValley(int[] nums) {
+     int total=0;   
+     int max=-1;
+     int min=-1;
+     int [] prevNonEqual=new  int[nums.Length];
+     int [] nextNonEqual= new int[nums.Length];
+     prevNonEqual[0]=101;
+     nextNonEqual[nextNonEqual.Length-1]=101;
+     for (int i = nums.Length-2; i>= 0; i--) {
+      if(nums[i]==nums[i+1])nextNonEqual[i]=nextNonEqual[i+1];
+      else nextNonEqual[i]=nums[i+1];
+     } 
+     for (int i = 1;i<nums.Length; i++) {
+      if(nums[i]==nums[i-1])prevNonEqual[i]=prevNonEqual[i-1];
+      else prevNonEqual[i]=nums[i-1];
+     }
+     for(int i=1;i<nums.Length-1;i++){ 
+      if(prevNonEqual[i]==101 
+          || nextNonEqual[i]==101 )continue;              
+      if(prevNonEqual[i]<nums[i] && nextNonEqual[i]<nums[i]){
+        if(max==-1){
+         total++;
+         max=nums[i];
+        }
+      }else max=-1;
+      if(prevNonEqual[i]>nums[i] && nextNonEqual[i]>nums[i]){
+        if(min==-1){
+          total++;
+          min=nums[i];
+        }
+      }else min=-1;       
+     }
+     return total;       
+    }
+}
