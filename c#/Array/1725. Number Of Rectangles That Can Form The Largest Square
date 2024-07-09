@@ -1,0 +1,13 @@
+public class Solution {
+    public int CountGoodRectangles(int[][] rectangles) {
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     int maxLength=0;
+     for(int i=0;i<rectangles.Length;i++){
+      int maxPossibleLength=Math.Min(rectangles[i][0],rectangles[i][1]);
+      if(map.ContainsKey(maxPossibleLength))map[maxPossibleLength]=map[maxPossibleLength]+1;
+      else  map[maxPossibleLength]=1;  
+      maxLength=Math.Max(maxPossibleLength,maxLength);     
+     }
+     return map[maxLength];     
+    }
+}
