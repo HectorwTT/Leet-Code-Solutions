@@ -1,0 +1,13 @@
+public class Solution {
+    public int MaxHeightOfTriangle(int red, int blue) {
+     if(red==1 && blue==1)return 1;
+     else if(red==1 || blue==1)  return 2;
+     else return Math.Max(GetHeight(red,blue,1),GetHeight(blue,red,1));   
+    }
+    public int GetHeight(int odd,int even,int height){
+     if(height%2==0 &&  even<height)return  height-1;
+     else if(height%2==1 && odd<height) return height-1;
+     else if(height%2==0) return GetHeight(odd,even-height,height+1);
+     else return GetHeight(odd-height,even,height+1);   
+    }       
+}
