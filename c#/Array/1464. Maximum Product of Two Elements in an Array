@@ -1,0 +1,12 @@
+public class Solution {
+    public int MaxProduct(int[] nums) {
+     int max=0;
+     for(int i=0;i<nums.Length;i++){
+      for(int j=i+1;j<nums.Length;j++){
+       int product = (nums[i]-1)* (nums[j]-1);
+       if(product>max)max=product;
+      }
+     }
+     return max;   
+    }
+}
