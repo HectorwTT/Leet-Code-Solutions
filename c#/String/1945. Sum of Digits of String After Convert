@@ -1,0 +1,23 @@
+public class Solution {
+    public int GetLucky(string s, int k) {
+     string sNumber="";
+     int count=1;
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      int chVal=ch-96;
+      sNumber+=chVal; 
+     }
+     int number=0;
+     while(count<=k){
+       number=0; 
+       for(int i=0;i<sNumber.Length;i++){
+        char ch=sNumber[i];
+        int chVal=ch-48;
+        number+=chVal;
+       }
+       sNumber=""+number;
+       count++; 
+     }
+     return number;  
+    }
+}
