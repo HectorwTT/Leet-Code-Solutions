@@ -1,0 +1,20 @@
+var getLucky = function(s, k) {
+ let sNumber="";
+ let count=0;
+ for(let i=0;i<s.length;i++){
+  var chCode=s.charCodeAt(i);
+  var chVal=chCode-96;
+  sNumber+=chVal; 
+ }
+ while(count<k){
+  let number=0;  
+  for(let i=0;i<sNumber.length;i++){
+   var chCode=sNumber.charCodeAt(i);
+   var digit=chCode-48;
+   number+=digit; 
+  }
+  sNumber=""+number;
+  count++;  
+ }
+ return sNumber;          
+};
