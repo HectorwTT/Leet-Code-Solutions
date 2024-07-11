@@ -1,0 +1,35 @@
+class Solution {
+    public String lastNonEmptyString(String s) {
+     String result="";
+     HashMap<Character,Integer> map=new HashMap<>();
+     HashMap<Character,Integer> indexes=new HashMap<>();
+     HashMap<Integer,List<Character>> map1=new HashMap<>();
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(!map.containsKey(ch))map.put(ch,1);
+      else map.replace(ch,map.get(ch)+1); 
+      if(!indexes.containsKey(ch))indexes.put(ch,i);
+      else indexes.replace(ch,i);  
+     }
+     int max=0;
+     for(Character key:map.keySet()){
+      int count=map.get(key);
+      if(!map1.containsKey(count)){
+        List<Character> list=new ArrayList<>();
+        list.add(key);
+        map1.put(count,list);
+      }else{
+        List<Character> list=map1.get(count);
+        list.add(key);
+        map1.replace(count,list);
+      }
+      max=Math.max(count,max);  
+     }
+     List<Character> chars=map1.get(max);
+     List<Integer> newIndexes=new ArrayList<>();
+     for(int i=0;i<chars.size();i++)newIndexes.add(indexes.get(chars.get(i)));   
+     newIndexes.sort(null);
+     for(int i=0;i<newIndexes.size();i++)result+=s.charAt(newIndexes.get(i));
+     return result;
+    }
+}
