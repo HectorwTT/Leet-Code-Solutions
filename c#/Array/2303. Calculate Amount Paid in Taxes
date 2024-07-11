@@ -1,0 +1,14 @@
+public class Solution {
+    public double CalculateTax(int[][] brackets, int income) {
+     double total=0.0;   
+     double prev=0.0;
+     for(int i=0;i<brackets.Length;i++){
+      double percentage=brackets[i][1]/100.0;
+      double taxable=Math.Min(brackets[i][0],income)-prev;
+      if(taxable<0.0)break;
+      total+=(taxable * percentage);  
+       prev=brackets[i][0];
+     }
+     return total;   
+    }
+}
