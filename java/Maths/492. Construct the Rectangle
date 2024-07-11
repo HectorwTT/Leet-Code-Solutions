@@ -1,0 +1,23 @@
+class Solution {
+    public int[] constructRectangle(int area) {
+     int sqrt=(int)Math.pow(area,0.5);
+     int length=sqrt;
+     int width=sqrt;
+     int [] result= new int[2];
+     result[0]=length;
+     result[1]=width;
+     int min=(int)Math.pow(10,7)+1;
+     if(sqrt*sqrt==area)return result;
+     for(int w=1;w<=width+1;w++){
+      if(area%w!=0 )continue;
+      length=area/w; 
+      if(length<w)continue;
+      if(length-w<min){
+         min=length-w;
+         result[0]=length;
+         result[1]=w;
+      }          
+     }     
+     return result;
+    }
+}
