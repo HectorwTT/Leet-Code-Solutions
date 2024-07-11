@@ -1,0 +1,12 @@
+var calculateTax = function(brackets, income) {
+ let total=0.0;   
+ let prev=0.0;
+ for(let i=0;i<brackets.length;i++){
+  let percentage=brackets[i][1]/100.0;
+  let taxable=Math.min(brackets[i][0],income)-prev;
+  if(taxable<0.0)break;
+  total+=(taxable * percentage);  
+  prev=brackets[i][0];
+ }
+ return total;   
+};
