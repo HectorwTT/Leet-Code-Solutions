@@ -1,0 +1,23 @@
+public class Solution {
+    public int SumOfBeauties(int[] nums) {
+     int[] maximumsToLeft= new int[nums.Length];
+     int[] minimumsToRight= new int[nums.Length];
+     int sumOfBeauty=0;
+     minimumsToRight[nums.Length-1]= (int)Math.Pow(10,8);
+     if(nums[0]<nums[1])maximumsToLeft[1]=nums[0];
+     else maximumsToLeft[1]= maximumsToLeft[0];
+     if(nums[nums.Length-1]<nums[nums.Length-2])minimumsToRight[nums.Length-2]=nums[nums.Length-1];
+     else minimumsToRight[nums.Length-2]=nums[nums.Length-1];
+     for(int i=1;i<nums.Length;i++){
+        maximumsToLeft[i]= Math.Max(nums[i-1],maximumsToLeft[i-1]);
+     }   
+     for(int i=nums.Length-2;i>=0;i-- ){
+        minimumsToRight[i]=Math.Min(nums[i+1],minimumsToRight[i+1]);
+     }
+     for(int i=1;i<nums.Length-1;i++){
+        if(nums[i]>maximumsToLeft[i] && maximumsToLeft[i]!=0 && nums[i]< minimumsToRight[i] && minimumsToRight[i]!=nums[i])sumOfBeauty+=2;
+        else if(nums[i]>nums[i-1] && nums[i]<nums[i+1])sumOfBeauty++;
+     }
+     return sumOfBeauty;   
+    }
+}
