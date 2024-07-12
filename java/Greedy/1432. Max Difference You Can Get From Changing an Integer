@@ -1,0 +1,24 @@
+class Solution {
+    public int maxDiff(int num) {
+     int max=0;
+     int min=(int)Math.pow(10,8)+1;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     String number=""+num;
+     for(int i=0;i<number.length();i++){
+      char ch=number.charAt(i);
+      int digit=ch-48;
+      if(!map.containsKey(digit))map.put(digit,1);        
+     }
+     for(Integer key:map.keySet()){
+      for(int i=0;i<=9;i++){
+       String newNumber=number.replaceAll(""+key,""+i);
+       if(newNumber.charAt(0)=='0')continue;
+       int newNum=Integer.parseInt(newNumber);
+       if(newNum==0)continue;
+       if(newNum>max)max=newNum;
+       if(newNum<min)min=newNum; 
+      }  
+     }
+     return max-min;
+    }
+}
