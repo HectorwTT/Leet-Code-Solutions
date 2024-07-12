@@ -1,0 +1,23 @@
+class Solution {
+    public int sumOfBeauties(int[] nums) {
+     int[] maximumsToLeft= new int[nums.length];
+     int[] minimumsToRight= new int[nums.length];
+     int sumOfBeauty=0;
+     minimumsToRight[nums.length-1]= (int)Math.pow(10,8);
+     if(nums[0]<nums[1])maximumsToLeft[1]=nums[0];
+     else maximumsToLeft[1]= maximumsToLeft[0];
+     if(nums[nums.length-1]<nums[nums.length-2])minimumsToRight[nums.length-2]=nums[nums.length-1];
+     else minimumsToRight[nums.length-2]=nums[nums.length-1];
+     for(int i=1;i<nums.length;i++){
+        maximumsToLeft[i]= Math.max(nums[i-1],maximumsToLeft[i-1]);
+     }   
+     for(int i=nums.length-2;i>=0;i-- ){
+        minimumsToRight[i]=Math.min(nums[i+1],minimumsToRight[i+1]);
+     }
+     for(int i=1;i<nums.length-1;i++){
+        if(nums[i]>maximumsToLeft[i] && maximumsToLeft[i]!=0 && nums[i]< minimumsToRight[i] && minimumsToRight[i]!=nums[i])sumOfBeauty+=2;
+        else if(nums[i]>nums[i-1] && nums[i]<nums[i+1])sumOfBeauty++;
+     }
+     return sumOfBeauty;
+    }
+}
