@@ -1,0 +1,17 @@
+var isValid = function(s) {
+ const stack= [];
+ for(let i=0;i<s.length;i++){
+  var ch=s.charAt(i);
+  if(ch=='a' || stack.length==0)stack.push(""+ch);
+  else{
+   let last=stack[stack.length-1];
+   if(last=="ab" && ch=='c' )stack.pop();
+   else if(last=="a" && ch=='b'){
+    let string=stack.pop();
+    string+=ch;
+    stack.push(string);
+   }else stack.push(""+ch); 
+  }  
+ }
+ return stack.length==0;       
+};
