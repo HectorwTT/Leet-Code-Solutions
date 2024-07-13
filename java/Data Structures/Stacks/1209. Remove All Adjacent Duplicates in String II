@@ -1,0 +1,24 @@
+class Solution {
+    public String removeDuplicates(String s, int k) {
+     String result="";
+     Stack<String> stack=new Stack<>();
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(stack.isEmpty())stack.push(""+ch);
+      else{
+       String last=stack.peek();
+       if(last.indexOf(""+ch)==-1)stack.push(""+ch);
+       else{
+        String string=stack.pop();
+        if(string.length()!=k-1){
+         string+=ch;
+         stack.push(string);   
+        }
+       } 
+      }  
+     }
+     Collections.reverse(stack);
+     while(!stack.isEmpty())result+=stack.pop();
+     return result;
+    }
+}
