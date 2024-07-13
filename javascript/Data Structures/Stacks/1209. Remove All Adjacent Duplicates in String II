@@ -1,0 +1,21 @@
+var removeDuplicates = function(s, k) {
+ let result="";
+ const stack=[];
+ for(let i=0;i<s.length;i++){
+  var ch=s.charAt(i);
+  if(stack.length==0)stack.push(""+ch);
+  else{
+   let last=stack[stack.length-1];
+   if(last.indexOf(""+ch)==-1)stack.push(""+ch);
+   else{
+    let string=stack.pop();
+    if(string.length!=k-1){
+     string+=ch;
+     stack.push(string);   
+    }
+   } 
+  }  
+ }
+ while(stack.length!=0)result=stack.pop()+result;
+ return result;   
+};
