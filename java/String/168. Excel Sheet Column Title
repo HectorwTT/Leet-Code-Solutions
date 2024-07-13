@@ -1,0 +1,18 @@
+class Solution {
+    public String convertToTitle(int columnNumber) {
+     String title="";
+     while(columnNumber>0){
+      int mod=columnNumber%26;
+      if(mod==0)title+='Z';
+      else{
+       int number=64+mod;
+       char ch=(char)number;
+       title+=ch; 
+      }
+      columnNumber/=26;
+      if(mod==0)columnNumber--;   
+     }
+     StringBuffer sb=new StringBuffer(title);
+     return sb.reverse().toString();  
+    }
+}
