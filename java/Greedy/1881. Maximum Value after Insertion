@@ -1,0 +1,26 @@
+class Solution {
+    public String maxValue(String n, int x) {
+      int max=0;
+      boolean isNegative=n.charAt(0)=='-';
+      int index=-1;
+      for(int i=0;i<n.length();i++){
+       char ch=n.charAt(i); 
+       if(isNegative && i==0)continue;
+       else if(isNegative){
+        int digit=ch-48;
+        if(x<digit){
+           index=i;
+           break; 
+        }
+       }else{
+        int digit=ch-48;
+        if(x>digit){
+         index=i;
+         break;   
+        }
+       } 
+      }
+      if(index!=-1)return n.substring(0,index)+x+n.substring(index); 
+      else return n+x;    
+    }
+}
