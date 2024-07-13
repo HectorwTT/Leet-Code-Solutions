@@ -1,0 +1,17 @@
+class Solution {
+    public int addMinimum(String word) {
+     int total=0;
+     String word1=word.replaceAll("abc","0");
+     String word2=word1.replaceAll("ab","1");
+     String word3=word2.replaceAll("bc","1");
+     String word4=word3.replaceAll("ac","1");
+     String word5=word4.replaceAll("a","2");
+     String word6=word5.replaceAll("b","2");
+     String word7=word6.replaceAll("c","2");
+     for(int i=0;i<word7.length();i++){
+      int number=word7.charAt(i)-48;
+      total+=number;  
+     }
+     return total;     
+    }
+}
