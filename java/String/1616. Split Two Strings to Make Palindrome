@@ -1,0 +1,38 @@
+class Solution {
+    public boolean checkPalindromeFormation(String a, String b) {
+     String str1=getNewString(a,b);
+     String str2=getNewString(b,a);
+     StringBuffer sb1=new StringBuffer(str1);  
+     StringBuffer sb2=new StringBuffer(str2);
+     String str3=getNewString1(a,b);
+     String str4=getNewString1(b,a);
+     StringBuffer sb3=new StringBuffer(str3);
+     StringBuffer sb4=new StringBuffer(str4);
+     return str1.equals(sb1.reverse().toString()) 
+            || str2.equals(sb2.reverse().toString())
+            || str3.equals(sb3.reverse().toString())
+             || str4.equals(sb4.reverse().toString());
+    }
+    public String getNewString(String str1,String str2){
+     String result="";
+     int left=0;
+     int right=str2.length()-1;
+     String prefix="";
+     while(str1.charAt(left)==str2.charAt(right) && left<right){
+      prefix+=str1.charAt(left++);  
+      right--;
+     }
+     return prefix+str2.substring(left);  
+    }
+     public String getNewString1(String str1,String str2){
+     String result="";
+     int left=0;
+     int right=str2.length()-1;
+     String suffix="";
+     while(str1.charAt(left)==str2.charAt(right) && left<right){
+      suffix=str2.charAt(right--)+suffix;  
+      left++;
+     }
+     return str1.substring(0,right+1)+suffix;  
+    }
+}
