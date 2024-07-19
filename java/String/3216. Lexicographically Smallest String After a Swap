@@ -1,0 +1,17 @@
+class Solution {
+    public String getSmallestString(String s) {
+     String smallest=s;   
+     for(int i=0;i<s.length()-1;i++){ 
+      char iCh=s.charAt(i);  
+      int iChVal=iCh-48;      
+      int j=i+1;
+      char jCh=s.charAt(j);
+      int jChVal=jCh-48;
+      if(iChVal%2==jChVal%2){        
+       String string=s.substring(0,i)+jCh+s.substring(i+1,j)+iCh+s.substring(j+1);
+       if(string.compareTo(smallest)<0)smallest=string;
+      }      
+     }
+     return smallest;
+    }
+}
