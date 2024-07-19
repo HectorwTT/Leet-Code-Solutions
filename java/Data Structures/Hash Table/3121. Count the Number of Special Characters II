@@ -1,0 +1,29 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+     HashMap<Character,Integer>counts=new HashMap<>();
+     HashMap<Character,Integer> upperCaseIndexes=new HashMap<>();  
+     HashMap<Character,Integer> lowerCaseIndexes=new HashMap<>();
+     int total=0;
+     for(int i=0;i<word.length();i++){
+      char ch=word.charAt(i);
+      if(!counts.containsKey(ch))counts.put(ch,1);
+      else counts.replace(ch,counts.get(ch)+1); 
+      if(ch>=97 && ch<=122){
+       if(!lowerCaseIndexes.containsKey(ch))lowerCaseIndexes.put(ch,i);
+       else lowerCaseIndexes.replace(ch,i); 
+      }else{
+        if(!upperCaseIndexes.containsKey(ch))upperCaseIndexes.put(ch,i);
+      } 
+     }
+     for(Character key:counts.keySet()){
+      if(key>=97 && key<=122){
+       int upperKeyValue=key-32; 
+       char upperKey=(char)upperKeyValue;
+       if(counts.containsKey(upperKey)){
+        if(upperCaseIndexes.get(upperKey)>lowerCaseIndexes.get(key))total++;
+       }
+      }  
+     }
+     return total;   
+    }
+}
