@@ -1,0 +1,12 @@
+var losingPlayer = function(x, y) {
+ var current="Bob";
+ let numOfTurns=0;
+ while(x>0 && y>3){
+  x--; 
+  y-=4;
+  if(numOfTurns%2==0)current="Alice";
+  else current="Bob";
+  numOfTurns++;  
+ }
+ return current;    
+};
