@@ -1,0 +1,14 @@
+public class Solution {
+    public string LosingPlayer(int x, int y) {
+     string current="Bob";
+     int numOfTurns=0;
+     while(x>0 && y>3){
+       x--; 
+       y-=4;
+       if(numOfTurns%2==0)current="Alice";
+       else current="Bob";
+       numOfTurns++;  
+     }
+     return current;    
+    }
+}
