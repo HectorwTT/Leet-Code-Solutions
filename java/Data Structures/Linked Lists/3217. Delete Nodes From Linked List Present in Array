@@ -1,0 +1,15 @@
+class Solution {
+    public ListNode modifiedList(int[] nums, ListNode head) {
+     HashMap<Integer,Integer>map=new HashMap<>();
+     for(int i=0;i<nums.length;i++)if(!map.containsKey(nums[i]))map.put(nums[i],1);       
+     while(head!=null && map.containsKey(head.val))head=head.next;
+     ListNode current=head;
+     ListNode previous=head;
+     while(current!=null){
+      if(map.containsKey(current.val))previous.next=current.next;
+      else previous=current;
+      current=current.next;
+     }
+     return head;
+    }
+}
