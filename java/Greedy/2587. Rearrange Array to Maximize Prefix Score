@@ -1,0 +1,14 @@
+class Solution {
+    public int maxScore(int[] nums) {
+     int count=0;
+     long [] sums=new long[nums.length];
+     long total=0;   
+     Arrays.sort(nums);   
+     for(int i=nums.length-1;i>=0;i--){
+      total+=1L*nums[i];
+      sums[i]=total;
+      if(sums[i]>0)count++;
+     }
+     return count;
+    }
+}
