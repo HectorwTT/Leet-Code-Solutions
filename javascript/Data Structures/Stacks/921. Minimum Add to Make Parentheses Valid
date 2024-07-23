@@ -1,0 +1,17 @@
+var minAddToMakeValid = function(s) {
+ const  openBrackets= [];
+ const closedBrackets=[];
+ for(let i=0;i<s.length;i++){
+  if(s.charAt(i)=='(')openBrackets.push(s.charAt(i));
+  else{
+   if(openBrackets.length!=0)openBrackets.pop();
+  } 
+ }  
+ for(let i=s.length-1;i>=0;i--){
+  if(s.charAt(i)==')')closedBrackets.push(s.charAt(i));
+  else{
+   if(closedBrackets.length!=0)closedBrackets.pop();
+  } 
+ }
+ return openBrackets.length+closedBrackets.length;   
+};
