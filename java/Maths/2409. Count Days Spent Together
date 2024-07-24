@@ -1,0 +1,31 @@
+class Solution {
+    public int countDaysTogether(String arriveAlice, String leaveAlice, String arriveBob, String leaveBob) {
+     int arriveDate=0;  
+     int leaveDate=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     map.put(1,0);
+     map.put(2,31);
+     map.put(3,59);
+     map.put(4,90);
+     map.put(5,120);
+     map.put(6,151);
+     map.put(7,181);
+     map.put(8,212);
+     map.put(9,243);
+     map.put(10,273);
+     map.put(11,304);
+     map.put(12,334);     
+     int arriveAliceMonth=Integer.parseInt(arriveAlice.substring(0,2));
+     int arriveBobMonth=Integer.parseInt(arriveBob.substring(0,2));
+     int leaveAliceMonth=Integer.parseInt(leaveAlice.substring(0,2));
+     int leaveBobMonth=Integer.parseInt(leaveBob.substring(0,2));
+     int arriveAliceDays=Integer.parseInt(arriveAlice.substring(3));
+     int arriveBobDays=Integer.parseInt(arriveBob.substring(3));
+     int leaveAliceDays=Integer.parseInt(leaveAlice.substring(3));
+     int leaveBobDays=Integer.parseInt(leaveBob.substring(3));
+     arriveDate=Math.max(map.get(arriveAliceMonth)+arriveAliceDays,map.get(arriveBobMonth)+arriveBobDays);
+     leaveDate=Math.min(map.get(leaveAliceMonth)+leaveAliceDays,map.get(leaveBobMonth)+leaveBobDays);
+     if(leaveDate<arriveDate)return 0;
+     else return leaveDate-arriveDate+1;
+    }
+}
