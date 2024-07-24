@@ -1,0 +1,46 @@
+class Solution {
+    public String longestWord(String[] words) {
+     List<String> result=new ArrayList<>();
+     HashMap<String,Integer>map=new HashMap<>();
+     HashMap<Integer,List<String>>map1=new HashMap<>();
+     int max=1;
+     Arrays.sort(words);
+     for(int i=0;i<words.length;i++){
+      String word=words[i];
+      if(word.length()==1 && !map.containsKey(word)) map.put(word,1);      
+      else{
+       String substring=word.substring(0,word.length()-1);
+       if(map.containsKey(substring)){
+        int count=map.get(substring);
+        if(!map.containsKey(word))map.put(word,word.length());  
+       }else map.put(word,word.length());        
+      }        
+     }
+     for(String key:map.keySet()){
+      boolean isPossibleToBuildOneByOne=true;
+      for(int i=key.length()-1;i>0;i--){
+       String substring=key.substring(0,i);
+       if(!map.containsKey(substring)){
+         isPossibleToBuildOneByOne=false;
+          break;  
+       }
+      } 
+      if(!isPossibleToBuildOneByOne)continue;
+      int count=map.get(key);
+      max=Math.max(count,max);
+      if(!map1.containsKey(count)){
+       List<String> list=new ArrayList<>();
+       list.add(key);
+       map1.put(count,list);
+       }else{
+        List<String> list=map1.get(count);
+        list.add(key);
+        map1.replace(count,list);
+       }
+     }
+     if(!map1.containsKey(max))return "";
+     result=map1.get(max);
+     result.sort(null);
+     return result.get(0);
+    }
+}
