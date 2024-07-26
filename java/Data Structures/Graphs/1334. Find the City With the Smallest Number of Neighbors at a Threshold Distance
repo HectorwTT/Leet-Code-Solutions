@@ -1,0 +1,73 @@
+class Solution {
+    public int findTheCity(int n, int[][] edges, int distanceThreshold) {
+     int [] [] graph=new int [n][n];
+     for(int i=0;i<n;i++)   Arrays.fill(graph[i],-1);    
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     int min=n+1;
+     for(int i=0;i<edges.length;i++){
+        graph[edges[i][0]][edges[i][1]]=edges[i][2];
+        graph[edges[i][1]][edges[i][0]]=edges[i][2];
+     }     
+     for(int i=0;i<n;i++){
+      int [] distances= getDistances(graph,i);
+      int count=0;
+      for(int j=0;j<distances.length;j++){
+       if(distances[j]<=distanceThreshold && i!=j)count++; 
+      }
+      min=Math.min(min,count);
+      if(!map.containsKey(count)){
+       List<Integer> list=new ArrayList<>();
+       list.add(i);
+       map.put(count,list); 
+      }else{
+       List<Integer> list=map.get(count);
+       list.add(i);
+       map.replace(count,list); 
+      } 
+     }
+     List<Integer> list=map.get(min);
+     list.sort(null);System.out.println(map);
+     return list.get(list.size()-1);
+    }
+    public int[] getDistances(int[][] graph, int sourceVertex) {
+     Queue <Integer> vertices= new LinkedList<Integer>();
+     int [][]allDistances= new int[graph.length][graph[0].length];
+     boolean [][] visited = new boolean[graph.length][graph[0].length];
+     int[] result = new int[graph.length];
+     for(int i=0;i<allDistances.length;i++){
+      for(int j=0;j<allDistances[i].length;j++){
+       if(i==sourceVertex && j==sourceVertex) visited[i][j]= true;
+       else{
+        allDistances[i][j]=(int)Double.POSITIVE_INFINITY;
+        visited[i][j]=false; 
+       } 
+      }
+     }
+     for(int j=0;j<allDistances[sourceVertex].length;j++){
+      if(graph[sourceVertex][j]!=-1){
+       allDistances[sourceVertex][j]=graph[sourceVertex][j];
+       vertices.offer(j);
+       visited[sourceVertex][j]=true;  
+      }
+     }
+     while(!vertices.isEmpty()){
+      Integer vertex= vertices.poll();
+      for(int j= 0;j<allDistances[vertex].length;j++){
+        if(graph[vertex][j]!=-1){
+         if(visited[vertex][j]==false){
+          vertices.offer(j);
+          visited[vertex][j]=true;
+         }
+         if(allDistances[sourceVertex][j]
+            >allDistances[sourceVertex][vertex]+graph[vertex][j]){
+            allDistances[sourceVertex][j]=allDistances[sourceVertex][vertex]+graph[vertex][j];
+         }
+        }
+      }
+     }
+     for(int j=0;j<allDistances[sourceVertex].length;j++){
+      if(j!=sourceVertex)result[j]=allDistances[sourceVertex][j];
+     }
+     return result;
+}
+}
