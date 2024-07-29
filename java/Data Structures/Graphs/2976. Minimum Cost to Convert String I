@@ -1,0 +1,68 @@
+class Solution {
+    public long minimumCost(String source, String target, char[] original, char[] changed, int[] cost) {
+     HashMap<Integer,Integer> map =new HashMap<>();
+     long total=0;
+     for(int i=97;i<123;i++)map.put(i,i-97);
+     int [][] graph= new int [26][26];
+     long [][] allDistances=new long[26][26];
+     for(int i=0;i<26;i++)   Arrays.fill(graph[i],-1);
+     for(int i=0;i<original.length;i++){
+      int originalVal=original[i];
+      int changedVal=changed[i]; 
+      if(graph[map.get(originalVal)][map.get(changedVal)]==-1) graph[map.get(originalVal)][map.get(changedVal)]=cost[i];
+      else graph[map.get(originalVal)][map.get(changedVal)]=Math.min(cost[i],graph[map.get(originalVal)][map.get(changedVal)]);
+     }
+     for(int i=97;i<123;i++) allDistances[i-97]=getDistances(graph,i-97);          
+     for(int i=0;i<source.length();i++){
+      char ch=source.charAt(i);
+      if(target.charAt(i)==ch)continue;
+      int row=ch-97;
+      int column=target.charAt(i)-97;
+      if(allDistances[row][column]<Long.MAX_VALUE)total+=allDistances[row][column];        
+      else return -1;            
+     }
+     return total;
+    }
+
+     public long[] getDistances(int[][] graph, int sourceVertex) {
+     Queue <Integer> vertices= new LinkedList<Integer>();
+     long [][]allDistances= new long[graph.length][graph[0].length];
+     boolean [][] visited = new boolean[graph.length][graph[0].length];
+     long[] result = new long[graph.length];
+     for(int i=0;i<allDistances.length;i++){
+      for(int j=0;j<allDistances[i].length;j++){
+       if(i==sourceVertex && j==sourceVertex) visited[i][j]= true;
+       else{
+        allDistances[i][j]=Long.MAX_VALUE;
+        visited[i][j]=false; 
+       } 
+      }
+     }
+     for(int j=0;j<allDistances[sourceVertex].length;j++){
+      if(graph[sourceVertex][j]!=-1){
+       allDistances[sourceVertex][j]=1L*graph[sourceVertex][j];
+       vertices.offer(j);
+       visited[sourceVertex][j]=true;  
+      }
+     }
+     while(!vertices.isEmpty()){
+      Integer vertex= vertices.poll();
+      for(int j= 0;j<allDistances[vertex].length;j++){
+        if(graph[vertex][j]!=-1){
+         if(visited[vertex][j]==false){
+          vertices.offer(j);
+          visited[vertex][j]=true;
+         }
+         if(allDistances[sourceVertex][j]
+            >allDistances[sourceVertex][vertex]+1L*graph[vertex][j]){
+            allDistances[sourceVertex][j]=allDistances[sourceVertex][vertex]+1L*graph[vertex][j];
+         }
+        }
+      }
+     }
+     for(int j=0;j<allDistances[sourceVertex].length;j++){
+      if(j!=sourceVertex)result[j]=allDistances[sourceVertex][j];
+     }
+     return result;
+    }
+}
