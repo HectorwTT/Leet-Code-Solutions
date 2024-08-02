@@ -1,0 +1,29 @@
+class Solution {
+    public int minSwaps(int[] nums) {
+     int [] nums1=new int[2*nums.length];
+     int [] countOfZeroes=new int[nums1.length];
+     int numOfZeroes=0;
+     int total=0;
+     int min=(int)Double.POSITIVE_INFINITY;
+     for(int i=0;i<nums.length;i++) if(nums[i]==1)total++; 
+     for(int i=0;i<nums1.length;i++){
+      if(i>=nums.length)nums1[i]=nums[i-nums.length];
+      else nums1[i]= nums[i];
+      if(nums1[i]==0){
+       if(i==0)countOfZeroes[i]=1;
+       else countOfZeroes[i]=countOfZeroes[i-1]+1; 
+      }else{
+       if(i==0)countOfZeroes[i]=0;
+       else countOfZeroes[i]=countOfZeroes[i-1];
+      } 
+     }
+     if(total==0)return total;
+     for(int i=0;i<nums1.length-total;i++){
+      int numOfZeroesBefore=0;
+      if(i>0)numOfZeroesBefore=countOfZeroes[i-1];  
+      int diff=countOfZeroes[i+total-1]-numOfZeroesBefore;
+      min=Math.min(min,diff);
+     }
+     return min; 
+    }
+}
