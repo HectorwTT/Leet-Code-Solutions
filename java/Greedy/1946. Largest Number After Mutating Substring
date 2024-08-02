@@ -1,0 +1,32 @@
+class Solution {
+    public String maximumNumber(String num, int[] change) {
+     String result=num;
+     HashMap<String,Integer> map=new HashMap<>();
+     List<Integer> unchangeableIndexes=new ArrayList<>();
+    unchangeableIndexes.add(0);
+     for(int i=0;i<num.length();i++){
+      int digit=num.charAt(i)-48;
+      if(change[digit]<digit)unchangeableIndexes.add(i);    
+     }  
+     unchangeableIndexes.add(num.length());
+     int previous=0;
+     int current=0;
+     for(int i=1;i<unchangeableIndexes.size();i++){
+       previous=unchangeableIndexes.get(i-1);
+       current=unchangeableIndexes.get(i);
+       if(!map.containsKey(num.substring(previous,current)))map.put(num.substring(previous,current),1);
+       else continue;  
+       String newStr="";
+       String mutatedString="";
+       for(int j=previous;j<current;j++){
+         int digit=num.charAt(j)-48;
+         if(change[digit]>digit)mutatedString+=change[digit];
+         else mutatedString+=digit;
+       }
+       newStr=num.substring(0,previous)+mutatedString;
+       if(current!=num.length()) newStr+=num.substring(current);
+       if(newStr.compareTo(result)>0)result=newStr;
+     }
+     return result;  
+    }
+}
