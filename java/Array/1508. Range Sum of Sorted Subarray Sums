@@ -1,0 +1,18 @@
+class Solution {
+    public int rangeSum(int[] nums, int n, int left, int right) {
+     long result=0;
+     List<Long> list=new ArrayList<>();
+     for(int i=0;i<nums.length;i++){
+      long total=nums[i];
+      list.add(total);
+      for(int j=i+1;j<nums.length;j++){
+        total+=1L*nums[j];
+        list.add(total);  
+      }  
+     } 
+     list.sort(null);
+     for(int i=left-1;i<right;i++)  result+=1L*list.get(i);
+     long answer= result%((long)Math.pow(10,9)+7);      
+     return (int)answer;   
+    }
+}
