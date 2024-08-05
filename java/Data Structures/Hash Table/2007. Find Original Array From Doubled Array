@@ -1,0 +1,42 @@
+class Solution {
+ public int[] findOriginalArray(int[] changed) {     
+  if(changed.length%2!=0)return new int[0];
+  int [] result=new int[changed.length/2];
+  boolean [] isProcessed=new boolean[changed.length];
+  int index=0;
+  HashMap<Integer,List<Integer>> map=new HashMap<>();
+  Arrays.sort(changed);
+  for(int i=0;i<changed.length;i++){
+   if(!map.containsKey(changed[i])){
+    ArrayList<Integer> list=new ArrayList<>();
+    list.add(i);
+    map.put(changed[i],list);
+   }else{
+    List<Integer> list=map.get(changed[i]);
+    list.add(i);
+    map.replace(changed[i],list); 
+   }  
+  }  
+  for(int i=0;i<changed.length;i++){
+   if(isProcessed[i])continue;
+   if(map.containsKey(changed[i]) && !map.containsKey(2*changed[i])) return new int[0]; 
+   else{
+    if(changed[i]==0 && map.get(changed[i]).size()==1) return new int[0]; 
+    List<Integer> indexes1=map.get(changed[i]);
+    List<Integer> indexes2=map.get(2*changed[i]);
+    int index1=indexes1.remove(0);
+    int index2=indexes2.remove(0);
+    isProcessed[index1]=true;
+    isProcessed[index2]=true;
+    if(indexes1.size()==0)map.remove(changed[index1]);
+    else map.replace(changed[i],indexes1);
+    if(indexes2.size()==0)map.remove(changed[index2]);
+    else map.replace(2*changed[i],indexes2);  
+    result[index++]=changed[i];
+   }   
+  }
+  if(map.size()!=0)return new int[0];
+  Arrays.sort(result);
+  return result;
+ }
+}
