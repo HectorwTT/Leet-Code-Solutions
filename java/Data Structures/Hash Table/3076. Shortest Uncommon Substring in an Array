@@ -1,0 +1,52 @@
+class Solution {
+    public String[] shortestSubstrings(String[] arr) {
+     String []  result=new String [arr.length];
+     HashMap<Integer,List<String>> map1=new HashMap<>();
+     HashMap<String,Integer> map2=new HashMap<>();
+     for(int i=0;i<arr.length;i++){
+      String word=arr[i];
+      List<String> substrings=new ArrayList<>();
+      HashMap<String,Integer> map3=new HashMap<>();
+      for(int j=0;j<word.length();j++){
+       for(int k=j+1;k<=word.length();k++){
+        String substring=word.substring(j,k);
+        substrings.add(substring);
+        if(map3.containsKey(substring))continue;
+        if(!map2.containsKey(substring)){
+         map2.put(substring,1);
+         map3.put(substring,1);
+        }else  map2.replace(substring,map2.get(substring)+1);        
+      }
+      map1.put(i,substrings);  
+     }
+     }
+     for(int i=0;i<arr.length;i++){
+      int min=arr[i].length();
+      String string="";
+      List<String> substrings=map1.get(i);
+      HashMap<Integer,List<String>> map3=new HashMap<>();
+      for(int j=0;j<substrings.size();j++){
+       String substring=substrings.get(j);
+       if(map2.get(substring)==1){
+        min=Math.min(substring.length(),min);
+        if(!map3.containsKey(substring.length())){
+         List<String>substrings1=new ArrayList<>();
+         substrings1.add(substring);
+         map3.put(substring.length(),substrings1); 
+        }else{
+         List<String> substrings1=map3.get(substring.length());
+         substrings1.add(substring);
+         map3.replace(substring.length(),substrings1);
+        }
+       }  
+      }
+      if(map3.size()==0)result[i]="";
+      else{
+       List<String> substrings1=map3.get(min);
+       substrings1.sort(null);
+       result[i]=substrings1.get(0);  
+      }
+     }      
+     return result;  
+    }
+}
