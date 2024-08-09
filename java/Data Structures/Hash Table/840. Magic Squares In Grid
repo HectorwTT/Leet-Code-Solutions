@@ -1,0 +1,73 @@
+class Solution {
+    public int numMagicSquaresInside(int[][] grid) {
+     int total=0;
+     for(int i=0;i<=grid.length-3;i++){
+      for(int j=0;j<=grid.length-3;j++){
+       HashMap<Integer,Integer> map=new HashMap<>(); 
+       HashMap<Integer,Integer> map1=new HashMap<>(); 
+       if(!map1.containsKey(grid[i][j])
+           &&  grid[i][j]<=9   
+            &&  grid[i][j]>0)map1.put(grid[i][j],1);
+       else continue;
+       if(!map1.containsKey(grid[i][j+1])
+          &&  grid[i][j+1]<=9 
+          &&  grid[i][j+1]>0)map1.put(grid[i][j+1],1);
+       else continue;
+       if(!map1.containsKey(grid[i][j+2])
+          &&  grid[i][j+2]<=9 
+          && grid[i][j+2]>0)map1.put(grid[i][j+2],1);
+       else continue;
+       if(!map1.containsKey(grid[i+1][j])
+           &&  grid[i+1][j]<=9
+           &&  grid[i+1][j]>0)map1.put(grid[i+1][j],1);
+       else continue;
+       if(!map1.containsKey(grid[i+1][j+1])
+           && grid[i+1][j+1]<=9
+           && grid[i+1][j+1]>0)map1.put(grid[i+1][j+1],1);
+       else continue;
+       if(!map1.containsKey(grid[i+1][j+2])
+           && grid[i+1][j+2]<=9
+           &&  grid[i+1][j+2]>0)map1.put(grid[i+1][j+2],1);
+       else continue;
+       if(!map1.containsKey(grid[i+2][j]) 
+          && grid[i+2][j]<=9
+          &&  grid[i+2][j]>0)map1.put(grid[i+2][j],1);
+       else continue;
+       if(!map1.containsKey(grid[i+2][j+1])
+           &&  grid[i+2][j+1]<=9 
+           &&  grid[i+2][j+1]>0)map1.put(grid[i+2][j+1],1);
+       else continue;
+       if(!map1.containsKey(grid[i+2][j+2])
+           &&  grid[i+2][j+2]<=9
+           &&  grid[i+2][j+2]>0)map1.put(grid[i+2][j+2],1);
+       else continue;
+       int rowSum1=grid[i][j] +grid[i][j+1]+grid[i][j+2];
+       int rowSum2=grid[i+1][j] +grid[i+1][j+1]+grid[i+1][j+2];
+       int rowSum3=grid[i+2][j] +grid[i+2][j+1]+grid[i+2][j+2];
+       int colSum1=grid[i][j] +grid[i+1][j]+grid[i+2][j];
+       int colSum2=grid[i][j+1] +grid[i+1][j+1]+grid[i+2][j+1];
+       int colSum3=grid[i][j+2] +grid[i+1][j+2]+grid[i+2][j+2];
+       int diagonalSum1=grid[i][j]+grid[i+1][j+1]+grid[i+2][j+2];
+       int diagonalSum2=grid[i][j+2]+grid[i+1][j+1]+grid[i+2][j];
+       if(!map.containsKey(rowSum1))map.put(rowSum1,1);
+       else map.replace(rowSum1,map.get(rowSum1)+1);
+       if(!map.containsKey(rowSum2))map.put(rowSum2,1);
+       else map.replace(rowSum2,map.get(rowSum2)+1);
+       if(!map.containsKey(rowSum3))map.put(rowSum3,1);
+       else map.replace(rowSum3,map.get(rowSum3)+1);
+       if(!map.containsKey(colSum1))map.put(colSum1,1);
+       else map.replace(colSum1,map.get(colSum1)+1);
+       if(!map.containsKey(colSum2))map.put(colSum2,1);
+       else map.replace(colSum2,map.get(colSum2)+1);
+       if(!map.containsKey(colSum3))map.put(colSum3,1);
+       else map.replace(colSum1,map.get(colSum3)+1);
+       if(!map.containsKey(diagonalSum1))map.put(diagonalSum1,1);
+       else map.replace(diagonalSum1,map.get(diagonalSum1)+1);
+       if(!map.containsKey(diagonalSum2))map.put(diagonalSum2,1);
+       else map.replace(diagonalSum2,map.get(diagonalSum2)+1);
+       if(map.size()==1)total++;
+      }  
+     }
+     return total;    
+    }
+}
