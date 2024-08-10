@@ -1,0 +1,33 @@
+/**
+ * @param {string} s
+ * @return {number}
+ */
+var scoreOfParentheses = function(s) {
+ let total=0;
+ const stack= [];
+ s=s.replaceAll("()","1");
+ let sum=0;
+ for(let i=0;i<s.length;i++){
+  if(stack.length==0){
+   if(s.charAt(i)=='1'){
+    total++;
+    sum=total; 
+   }else{
+    stack.push(sum);
+    sum=0;
+   }   
+  }else{
+   if(s.charAt(i)=='('){
+    stack.push(sum); 
+    sum=0;
+   }else if(s.charAt(i)=='1')sum++;
+    else{
+     sum*=2;
+     let lastSum=stack.pop();
+     if(stack.length==0)total+=sum; 
+     else sum=lastSum+sum;
+    }
+   }   
+ }
+ return total;   
+};
