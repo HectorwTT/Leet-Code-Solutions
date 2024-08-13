@@ -1,0 +1,14 @@
+public class Solution {
+    public long GetDescentPeriods(int[] prices) {
+     long total=1;
+      int [] differences=new int [prices.Length]   ; 
+      for(int i=0;i<differences.Length;i++)differences[i]=1;
+      for(int i=1;i<differences.Length;i++){
+       if(prices[i]-prices[i-1]==-1){
+         differences[i]=differences[i-1]+1;        
+       } 
+       total+=1L*differences[i];      
+      }      
+      return total;    
+    }
+}
