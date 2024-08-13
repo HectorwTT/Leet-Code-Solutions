@@ -1,0 +1,14 @@
+class Solution {
+    public long getDescentPeriods(int[] prices) {
+      long total=1;
+      int [] differences=new int [prices.length]   ; 
+      Arrays.fill(differences,1);
+      for(int i=1;i<differences.length;i++){
+       if(prices[i]-prices[i-1]==-1){
+         differences[i]=differences[i-1]+1;        
+       } 
+       total+=1L*differences[i];      
+      }      
+      return total; 
+    }
+}
