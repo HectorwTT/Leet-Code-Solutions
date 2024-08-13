@@ -1,0 +1,21 @@
+class Solution {
+    public int finalPositionOfSnake(int n, List<String> commands) {
+     int [] [] matrix=new int[n][n];   
+     int count=0;
+     int row=0;
+     int column=0;
+     for(int i=0;i<n;i++){
+      for(int j=0;j<n;j++){
+       matrix[i][j] =count++;
+      }  
+     } 
+     for(int i=0;i<commands.size();i++){
+      String command=commands.get(i);
+      if(command.equals("UP"))row--;
+      else if(command.equals("RIGHT"))column++;
+      else if(command.equals("DOWN"))row++;
+      else column--;  
+     }
+     return matrix[row][column];
+    }
+}
