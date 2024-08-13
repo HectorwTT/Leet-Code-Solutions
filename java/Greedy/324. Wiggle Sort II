@@ -1,0 +1,14 @@
+class Solution {
+    public void wiggleSort(int[] nums) {
+     int [] nums1= new int [nums.length];
+     for(int i=0;i<nums.length;i++)nums1[i]=nums[i];
+     Arrays.sort(nums1);
+     int nums1Index=nums.length-1;
+     int nums1Index1=(nums.length-1)/2;      
+     for(int i=0;i<nums.length;i++){
+      if(i%2==0)nums[i]=nums1[nums1Index1--];
+      else nums[i]=nums1[nums1Index--];  
+     }
+     return;
+    }
+}
