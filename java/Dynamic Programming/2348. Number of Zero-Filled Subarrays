@@ -1,0 +1,19 @@
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+      long total=0;
+      int [] numOfConsecutiveZeroes=new int [nums.length];
+      if(nums[0]==0){
+        total++;
+        numOfConsecutiveZeroes[0]=1;
+      }    
+      for(int i=1;i<numOfConsecutiveZeroes.length;i++){
+       if(nums[i]==0){
+         if(numOfConsecutiveZeroes[i-1]!=0) numOfConsecutiveZeroes[i] =1+numOfConsecutiveZeroes[i-1];
+         else numOfConsecutiveZeroes[i] =1;
+         total+=1L*numOfConsecutiveZeroes[i];     
+       }       
+      }      
+      
+      return total;   
+    }
+}
