@@ -1,0 +1,30 @@
+var maxSatisfied = function(customers, grumpy, minutes) {
+ let max=0;
+ const prefixSums1=[];
+ const prefixSums2=[];
+ prefixSums1.length=customers.length;
+ prefixSums2.length=customers.length;
+ let total1=0;
+ let total2=0;
+ for(let i=0;i<customers.length;i++){
+  total1+=customers[i];
+  prefixSums1[i]=total1; 
+  if(grumpy[i]==0)total2+=customers[i];
+  prefixSums2[i]=total2;
+ } 
+ for(let i=0;i<=customers.length-minutes;i++){
+  let totalBefore=0;
+  let totalWithSecret=0;
+  let totalAfter=0;
+  let total=0;
+  totalWithSecret=prefixSums1[i+minutes-1];
+  if(i!=0){
+    totalBefore=prefixSums2[i-1];
+    totalWithSecret-=prefixSums1[i-1];
+  }  
+  if(i!=customers.length-minutes+1)totalAfter=prefixSums2[customers.length-1]-prefixSums2[i+minutes-1];  
+  total=totalBefore+totalWithSecret+totalAfter;
+  max=Math.max(total,max);
+ }
+ return max;  
+};
