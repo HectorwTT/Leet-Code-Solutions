@@ -1,0 +1,28 @@
+public class Solution {
+    public int MaxSatisfied(int[] customers, int[] grumpy, int minutes) {
+     int max=0;
+     int [] prefixSums1=new int[customers.Length];
+     int [] prefixSums2=new int[customers.Length];
+     int total1=0;
+     int total2=0;
+     for(int i=0;i<customers.Length;i++){
+       total1+=customers[i];
+       prefixSums1[i]=total1; 
+       if(grumpy[i]==0)total2+=customers[i];
+       prefixSums2[i]=total2;
+     }
+     for(int i=0;i<=customers.Length-minutes;i++){
+      int totalBefore=0;
+      int totalWithSecret=0;
+      int totalAfter=0;
+      int total=0;
+      if(i!=0)totalBefore=prefixSums2[i-1];
+      if(i!=customers.Length-minutes+1)totalAfter=prefixSums2[customers.Length-1]-prefixSums2[i+minutes-1];  
+      totalWithSecret=prefixSums1[i+minutes-1] ;
+      if(i!=0)totalWithSecret-=prefixSums1[i-1];
+      total=totalBefore+totalWithSecret+totalAfter;
+      max=Math.Max(total,max);
+     }
+     return max;   
+    }
+}
