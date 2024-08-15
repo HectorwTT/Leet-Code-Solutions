@@ -1,0 +1,42 @@
+class NeighborSum {
+    private int[][]grid;
+    private HashMap<Integer,Integer>map=new HashMap<>();
+    private int count;
+    public NeighborSum(int[][] grid) {
+     this.grid=grid; 
+     count=0; 
+     for(int i=0;i<grid.length;i++){
+      for(int j=0;j<grid[i].length;j++)map.put(grid[i][j],count++);  
+     } 
+    }
+    
+    public int adjacentSum(int value) {
+     int number=map.get(value);
+     int row=number/grid[0].length;
+     int column=number%grid[0].length; 
+     int north=0;
+     int south=0;
+     int east=0;
+     int west=0;
+     if(row!=0)north=grid[row-1][column];
+     if(row!=grid.length-1)south=grid[row+1][column];
+     if(column!=0)west=grid[row][column-1];
+     if(column!=grid[0].length-1)east=grid[row][column+1];
+     return north+east+south+west;
+    }
+    
+    public int diagonalSum(int value) {
+     int number=map.get(value);
+     int row=number/grid[0].length;
+     int column=number%grid[0].length; 
+     int northWest=0;
+     int southWest=0;
+     int northEast=0;
+     int southEast=0;
+     if(row!=0 && column!=0)northWest=grid[row-1][column-1];
+     if(row!=grid.length-1 && column!=0)southWest=grid[row+1][column-1];
+     if(row!=0 && column!=grid[0].length-1)northEast=grid[row-1][column+1];
+     if(row!=grid.length-1 && column!=grid[0].length-1)southEast=grid[row+1][column+1];
+     return northWest+northEast+southEast+southWest;   
+    }
+}
