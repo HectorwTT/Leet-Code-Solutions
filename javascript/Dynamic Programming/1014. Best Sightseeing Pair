@@ -1,0 +1,22 @@
+var maxScoreSightseeingPair = function(values) {
+ const maxValuesiPlusi=[];
+ const maxValuesjMinusj=[];
+ const maxValuesjMinusjAfterI=[];
+ let maxScore=0;
+ let maxValue=0;
+ for(let i=0;i<values.length;i++){
+  maxValuesiPlusi.push(values[i]+i);  
+  maxValuesjMinusj.push(values[i]-i);
+  maxValuesjMinusjAfterI.push(0);
+ }    
+ maxValue=maxValuesjMinusj[values.length-1];
+ for(let i=values.length-2;i>=0;i--){
+  maxValuesjMinusjAfterI[i]=maxValue;
+  maxValue=Math.max(maxValue,maxValuesjMinusj[i]);
+ }
+ for(let i=0;i<values.length-1;i++){
+  let score=maxValuesiPlusi[i]+maxValuesjMinusjAfterI[i];
+  maxScore=Math.max(score,maxScore);
+ }
+ return maxScore;    
+};
