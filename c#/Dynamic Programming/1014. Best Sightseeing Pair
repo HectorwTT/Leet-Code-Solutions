@@ -1,0 +1,23 @@
+public class Solution {
+    public int MaxScoreSightseeingPair(int[] values) {
+     int [] maxValuesiPlusi=new int[values.Length];
+     int [] maxValuesjMinusj=new int[values.Length];
+     int [] maxValuesjMinusjAfterI=new int[values.Length];
+     int maxScore=0;
+     int maxValue=0;
+     for(int i=0;i<values.Length;i++){
+      maxValuesiPlusi[i]=values[i]+i;  
+      maxValuesjMinusj[i]=values[i]-i;
+     }    
+     maxValue=maxValuesjMinusj[values.Length-1];
+     for(int i=values.Length-2;i>=0;i--){
+      maxValuesjMinusjAfterI[i]=maxValue;
+      maxValue=Math.Max(maxValue,maxValuesjMinusj[i]);
+     }
+     for(int i=0;i<values.Length-1;i++){
+      int score=maxValuesiPlusi[i]+maxValuesjMinusjAfterI[i];
+      maxScore=Math.Max(score,maxScore);
+     }
+     return maxScore;      
+    }
+}
