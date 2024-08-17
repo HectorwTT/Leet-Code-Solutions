@@ -1,0 +1,23 @@
+class Solution {
+    public int maxScoreSightseeingPair(int[] values) {
+     int [] maxValuesiPlusi=new int[values.length];
+     int [] maxValuesjMinusj=new int[values.length];
+     int [] maxValuesjMinusjAfterI=new int[values.length];
+     int maxScore=0;
+     int maxValue=0;
+     for(int i=0;i<values.length;i++){
+      maxValuesiPlusi[i]=values[i]+i;  
+      maxValuesjMinusj[i]=values[i]-i;
+     }    
+     maxValue=maxValuesjMinusj[values.length-1];
+     for(int i=values.length-2;i>=0;i--){
+      maxValuesjMinusjAfterI[i]=maxValue;
+      maxValue=Math.max(maxValue,maxValuesjMinusj[i]);
+     }
+     for(int i=0;i<values.length-1;i++){
+      int score=maxValuesiPlusi[i]+maxValuesjMinusjAfterI[i];
+      maxScore=Math.max(score,maxScore);
+     }
+     return maxScore;   
+    }
+}
