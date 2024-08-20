@@ -1,0 +1,11 @@
+var findPrefixScore = function(nums) {
+ const result=[];
+ let total=0;
+ let max=0;
+ for(let i=0;i<nums.length;i++){
+  max=Math.max(nums[i],max);
+  total+=max+(nums[i]);
+  result.push(total); 
+ }
+ return result;      
+};
