@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> mostVisited(int n, int[] rounds) {
+      List<Integer> result=new ArrayList<>();
+      int []sectors=new int[n+1];
+      int next=0;
+       int last=0;
+       int max=0;
+      for(int i=1;i<rounds.length;i++){    
+       next=rounds[i];
+       last=rounds[i-1];     
+       if(next<last){
+        for(int j=last;j<sectors.length;j++)sectors[j]++;
+        for(int j=0;j<next;j++)sectors[j]++;
+       }else for(int j=last;j<next;j++ )sectors[j]++;
+      }
+      sectors[rounds[rounds.length-1]]++;
+      for(int i=1;i<sectors.length;i++)max=Math.max(max,sectors[i]); 
+      for(int i=1;i<sectors.length;i++){
+       if(max==sectors[i]) result.add(i);
+      }
+      result.sort(null);
+      return result;
+    }
+}
