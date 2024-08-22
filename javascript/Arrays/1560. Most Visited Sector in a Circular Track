@@ -1,0 +1,21 @@
+var mostVisited = function(n, rounds) {
+ const result=[];
+ const  sectors=[];
+ sectors.length=n+1;
+ for(let i=0;i<sectors.length;i++)sectors[i]=0;
+ let next=0;
+ let last=0;
+ let max=0;
+ for(let i=1;i<rounds.length;i++){    
+  next=rounds[i];
+  last=rounds[i-1];     
+  if(next<last){
+   for(let j=last;j<sectors.length;j++)sectors[j]++;
+   for(let j=0;j<next;j++)sectors[j]++;
+  }else for(let j=last;j<next;j++)sectors[j]++;
+ }
+ sectors[rounds[rounds.length-1]]++;
+ for(let i=1;i<sectors.length;i++)max=Math.max(max,sectors[i]); 
+ for(let i=1;i<sectors.length;i++)if(max==sectors[i]) result.push(i);
+ return result;  
+};
