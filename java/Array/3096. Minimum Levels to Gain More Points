@@ -1,0 +1,37 @@
+class Solution {
+    public int minimumLevels(int[] possible) {
+     int total=0;
+     int aliceTotal=0;
+     int maxAliceTotal=-1;
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     for(int i=0;i<possible.length;i++){
+      if(possible[i]==1)total++;
+      else total--;  
+     }
+     for(int i=0;i<possible.length;i++){
+      if(possible[i]==1)aliceTotal++;
+      else aliceTotal--;
+      if(aliceTotal>total-aliceTotal){
+        maxAliceTotal=Math.max(aliceTotal,maxAliceTotal);
+        if(!map.containsKey(aliceTotal)){
+         List<Integer> list=new ArrayList<>();
+         list.add(i+1);
+         map.put(aliceTotal,list);
+        }else{
+          List<Integer> list=map.get(aliceTotal);
+          list.add(i+1);
+          map.replace(aliceTotal,list);
+        }
+      }  
+     }
+     if(!map.containsKey(maxAliceTotal))return -1;
+     int min=(int)Math.pow(10,5)+1;
+     for(Integer key:map.keySet()){
+      List<Integer> list=map.get(key);
+      int level=list.get(0);
+      min=Math.min(min,level);  
+     }
+     if(min==possible.length)return -1;
+     else return min;   
+    }
+}
