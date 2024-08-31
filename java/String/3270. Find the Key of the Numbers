@@ -1,0 +1,19 @@
+class Solution {
+    public int generateKey(int num1, int num2, int num3) {
+      String number1=""+num1;
+      String number2=""+num2;
+      String number3=""+num3;
+      String result="";
+      if(number1.length()<4)number1="0".repeat(4-number1.length())+number1;
+      if(number2.length()<4)number2="0".repeat(4-number2.length())+number2;
+      if(number3.length()<4)number3="0".repeat(4-number3.length())+number3;
+      for(int i=0;i<4;i++){
+       int chVal1=number1.charAt(i)-48;
+       int chVal2=number2.charAt(i)-48;
+       int chVal3=number3.charAt(i)-48;
+       int min=Math.min(chVal1,Math.min(chVal2,chVal3));
+       result+=min; 
+      }
+      return Integer.parseInt(result);  
+    }
+}
