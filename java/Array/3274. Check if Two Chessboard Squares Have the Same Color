@@ -1,0 +1,23 @@
+class Solution {
+    public boolean checkTwoChessboards(String coordinate1, String coordinate2) {
+      char [][] board=new char[8] [8];
+      for(int i=0;i<board.length;i++){
+       for(int j=0;j<board[i].length;j++){
+        if(i%2==0){
+          if(j%2==0)board[i][j]='W';
+          else board[i][j]='B';   
+        }else{
+          if(j%2==0)board[i][j]='B';
+          else board[i][j]='W';  
+        }       
+       } 
+      } 
+      int column1=coordinate1.charAt(0)-97; 
+      int column2=coordinate2.charAt(0)-97;   
+      int row1=coordinate1.charAt(1)-48;
+      int row2=coordinate2.charAt(1)-48;
+      row1=8-row1;
+      row2=8-row2;
+      return board[row1][column1]==board[row2][column2];
+    }
+}
