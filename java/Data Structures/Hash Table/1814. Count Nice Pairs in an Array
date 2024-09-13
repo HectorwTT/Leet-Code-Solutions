@@ -1,0 +1,29 @@
+class Solution {
+    public int countNicePairs(int[] nums) {
+      HashMap<Long,Long> map=new HashMap<>();  
+      long total;
+      for(int i=0;i<nums.length;i++){
+       String str=""+nums[i]; 
+       StringBuffer sb=new StringBuffer(str); 
+       sb.reverse();
+       long reverseNum=Long.parseLong(sb.toString());
+       long diff=reverseNum-(1L*nums[i]);
+       if(!map.containsKey(diff)) map.put(diff,1L);
+       else map.put(diff,map.get(diff)+1);       
+      }
+      total=getTotal(map); 
+      long number=(long)Math.pow(10,9)+7;
+      long mod =total%number;  
+      return (int)mod;
+    }
+
+    public long getTotal(HashMap<Long,Long> map){
+      long total=0;
+      for(Long key:map.keySet()){
+       long count=map.get(key);
+       long subtotal=(count*(count-1))/2;
+       total+=subtotal;
+      }  
+      return total;
+    }
+}
