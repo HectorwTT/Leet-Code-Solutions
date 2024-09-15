@@ -1,0 +1,18 @@
+class Solution {
+    public int[] getSneakyNumbers(int[] nums) {
+      int [] result=new int [2];  
+      HashMap<Integer,Integer> map=new HashMap<>();
+      int count=0;
+      for(int i=0;i<nums.length;i++){
+       if(!map.containsKey(nums[i]))map.put(nums[i],1);
+       else{
+        result[count++]=nums[i];
+        if(count==2){
+          Arrays.sort(result);
+          break;  
+        }
+       } 
+      }
+      return result;
+    }
+}
