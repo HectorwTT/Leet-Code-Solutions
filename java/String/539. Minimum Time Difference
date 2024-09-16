@@ -1,0 +1,38 @@
+class Solution {
+    public int findMinDifference(List<String> timePoints) {
+      timePoints.sort(null);
+      int min=24*60;
+      int diff=0;
+      int currentHours;
+      int currentMinutes;
+      int currentTime;
+      int previousHours;
+      int previousMinutes;
+      int previousTime;
+      String current="";
+      String previous="";
+      for(int i=1;i<timePoints.size();i++){
+       current=timePoints.get(i);
+       previous=timePoints.get(i-1);
+       currentHours=Integer.parseInt(current.substring(0,current.indexOf(":")));
+       currentMinutes=Integer.parseInt(current.substring(current.indexOf(":")+1));
+       currentTime=(60*currentHours)+currentMinutes;
+       previousHours=Integer.parseInt(previous.substring(0,previous.indexOf(":")));
+       previousMinutes=Integer.parseInt(previous.substring(previous.indexOf(":")+1));
+       previousTime=(60*previousHours)+previousMinutes;
+       diff=currentTime-previousTime;
+       min=Math.min(min,diff);
+      }  
+      current=timePoints.get(0);
+      previous=timePoints.get(timePoints.size()-1);
+      currentHours=Integer.parseInt(current.substring(0,current.indexOf(":")));
+       currentMinutes=Integer.parseInt(current.substring(current.indexOf(":")+1));
+       currentTime=(60*currentHours)+currentMinutes;
+       previousHours=Integer.parseInt(previous.substring(0,previous.indexOf(":")));
+       previousMinutes=Integer.parseInt(previous.substring(previous.indexOf(":")+1));
+       previousTime=(60*(23-previousHours))+(60-previousMinutes);
+       diff=previousTime+currentTime;
+       min=Math.min(min,diff);
+       return min;
+    }
+}
