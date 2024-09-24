@@ -1,0 +1,20 @@
+class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+      int min=0;
+      HashMap<Integer,Integer> map=new HashMap<>();
+      int  [] dp=new  int[days[days.length-1]+1]; 
+      for(int i=0;i<days.length;i++) map.put(days[i],1);
+      for(int i=1;i<dp.length;i++){
+       if(!map.containsKey(i))dp[i]=dp[i-1];
+       else {
+        int prevThirty=costs[2];
+        int prevSeven=costs[1];
+        int prevOne=costs[0]+dp[i-1];
+        if(i>=30)prevThirty+=dp[i-30];
+        if(i>=7)prevSeven+=dp[i-7];
+        dp[i]=Math.min(prevOne,Math.min(prevSeven,prevThirty));
+       }
+      }
+      return dp[dp.length-1];
+    }
+}
