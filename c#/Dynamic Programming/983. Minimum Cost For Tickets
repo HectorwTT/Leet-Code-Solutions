@@ -1,0 +1,19 @@
+public class Solution {
+    public int MincostTickets(int[] days, int[] costs) {
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     int  [] dp=new  int[days[days.Length-1]+1]; 
+     for(int i=0;i<days.Length;i++) map[days[i]]=1;
+     for(int i=1;i<dp.Length;i++){
+      if(!map.ContainsKey(i))dp[i]=dp[i-1];
+      else{
+       int prevThirty=costs[2];
+       int prevSeven=costs[1];
+       int prevOne=costs[0]+dp[i-1];
+       if(i>=30)prevThirty+=dp[i-30];
+       if(i>=7)prevSeven+=dp[i-7];
+       dp[i]=Math.Min(prevOne,Math.Min(prevSeven,prevThirty));
+       }
+      }
+      return dp[dp.Length-1];   
+    }
+}
