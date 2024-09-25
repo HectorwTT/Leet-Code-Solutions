@@ -1,0 +1,29 @@
+class Solution {
+    public String maskPII(String s) {
+     if(s.indexOf("@")!=-1) return maskEmail(s);
+     else return maskPhone(s);    
+    }
+    public String maskEmail(String s){
+     String result="";
+     String name=s.substring(0,s.indexOf("@")).toLowerCase();
+     String domain=s.substring(s.indexOf("@")+1).toLowerCase();
+     String middlePartName=name.substring(1,name.length()-1);
+     String asterixes="*".repeat(5);
+     result=name.charAt(0)+asterixes+name.charAt(name.length()-1)+"@"+domain;  
+     return result;
+    }
+
+    public String maskPhone(String s){
+     String result="";
+     String s1="";
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(ch>=48 &&ch<=57) s1+=ch;
+     }
+     if(s1.length()==10)result="***-***-"+s1.substring(6);
+     else if(s1.length()==11)result="+*-***-***-"+s1.substring(7);
+     else if(s1.length()==12)result="+**-***-***-"+s1.substring(8);
+     else result="+***-***-***-"+s1.substring(9);
+     return result;
+    }
+}
