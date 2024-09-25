@@ -1,0 +1,15 @@
+var minMoves = function(target, maxDoubles) {
+ let total=0;
+ let number=target;      
+ while(maxDoubles!=0 && number>1){       
+  if(number%2==1){
+   number--;
+   total++;
+  }
+  number/=2;
+  total++;
+  maxDoubles--; 
+  }
+  total+=(number-1); 
+  return total;     
+};
