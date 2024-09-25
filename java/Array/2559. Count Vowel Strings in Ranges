@@ -1,0 +1,33 @@
+class Solution {
+    public int[] vowelStrings(String[] words, int[][] queries) {
+     int []  result=new int[queries.length]; 
+     int []  prefixSums=new int[words.length];
+     int total=0;
+     for(int i=0;i<words.length;i++){
+      String word=words[i];
+      if((word.charAt(0)=='a' 
+         ||word.charAt(0)=='e'
+          || word.charAt(0)=='i'
+          || word.charAt(0)=='o'
+          ||word.charAt(0)=='u')
+          && (word.charAt(word.length()-1)=='a' 
+         ||word.charAt(word.length()-1)=='e'
+          || word.charAt(word.length()-1)=='i'
+          || word.charAt(word.length()-1)=='o'
+          ||word.charAt(word.length()-1)=='u')){
+            total++;
+            prefixSums[i]=total;
+          }else{
+            if(i>0)prefixSums[i]=prefixSums[i-1];
+          }  
+     } 
+     for(int i=0;i<queries.length;i++){
+       int start=queries[i][0];
+       int end=queries[i][1];
+       if(start==0)result[i]=prefixSums[end];
+       else if(start==end) result[i]=prefixSums[end]-prefixSums[start-1];
+       else result[i]=prefixSums[end]-prefixSums[start-1];        
+     }
+     return result;
+    }
+}
