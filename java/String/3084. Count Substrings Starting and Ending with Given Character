@@ -1,0 +1,9 @@
+class Solution {
+    public long countSubstrings(String s, char c) {
+     long number=0;
+     for(int i=0;i<s.length();i++){
+      if(s.charAt(i)==c)number++;  
+     }
+     return (number*(number+1))/2;         
+    }
+}
