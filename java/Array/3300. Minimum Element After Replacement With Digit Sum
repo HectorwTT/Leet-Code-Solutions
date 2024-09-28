@@ -1,0 +1,17 @@
+class Solution {
+    public int minElement(int[] nums) {
+     int min=0;   
+     int [] nums1=new int[nums.length];
+     for(int i=0;i<nums1.length;i++){
+      int number=nums[i]; 
+      int sum=0;
+      while(number!=0){
+       sum+=(number%10); 
+       number/=10;
+      } 
+      nums1[i]=sum;
+     }
+     Arrays.sort(nums1);
+     return nums1[0];  
+    }
+}
