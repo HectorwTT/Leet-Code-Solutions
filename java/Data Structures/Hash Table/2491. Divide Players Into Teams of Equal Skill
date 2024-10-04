@@ -1,0 +1,16 @@
+class Solution {
+    public long dividePlayers(int[] skill) {
+      long total=0;
+      HashMap<Integer,Integer> map= new HashMap<>();
+      Arrays.sort(skill);
+      int right=skill.length/2;   
+      int left=right-1;
+      while(left>=0 && right <=skill.length-1){
+       int value=skill[left]+skill[right];
+       total+=(1L*skill[left--]*1L*skill[right++]);
+       if(!map.containsKey(value))map.put(value,1);
+      }      
+      if(map.size()!=1)return -1;
+      else return total;
+    }
+}
