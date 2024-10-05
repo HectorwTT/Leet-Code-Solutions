@@ -1,0 +1,19 @@
+class Solution {
+    public boolean checkInclusion(String s1, String s2) {
+     HashMap<Character,Integer> s1map=getMap(s1);
+     for(int i=0;i<=s2.length()-s1.length();i++){
+        String substring=s2.substring(i,i+s1.length());
+      if(s1map.equals(getMap(substring)))return true;  
+     }
+     return false;   
+    }
+    HashMap<Character,Integer> getMap(String string){
+     HashMap<Character,Integer> map=new HashMap<>();
+     for(int i=0;i<string.length();i++){
+      char ch=string.charAt(i);
+      if(!map.containsKey(ch))map.put(ch,1);
+      else map.replace(ch,map.get(ch)+1);
+     }
+     return map;   
+    }
+}
