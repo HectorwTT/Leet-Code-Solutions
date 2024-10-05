@@ -1,0 +1,19 @@
+class Solution {
+    public int maxOperations(int[] nums, int k) {
+      Arrays.sort(nums);
+      HashMap<Integer,Integer> map=new HashMap<>();
+      int max=0;
+      for(int i=0;i<nums.length;i++){
+       if(!map.containsKey(nums[i]))map.put(nums[i],1);
+       else map.replace(nums[i],map.get(nums[i])+1); 
+      }
+      for(Integer key: map.keySet()){
+       if(key==k/2 && k%2==0)max+=map.get(key)/2;
+       else{
+        if(key>k-key)continue;
+        if(map.containsKey(k-key)) max+=Math.min(map.get(key),map.get(k-key));
+       } 
+      }
+      return max;  
+    }
+}
