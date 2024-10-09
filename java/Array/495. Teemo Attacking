@@ -1,0 +1,20 @@
+class Solution {
+    public int findPoisonedDuration(int[] timeSeries, int duration) {
+     int [] time=new int[timeSeries[timeSeries.length-1]+duration] ;
+     int total=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<timeSeries.length;i++)map.put(timeSeries[i],1);
+     for(int i=0;i<time.length;i++){
+      if(map.containsKey(i)){
+        int duration1=duration;
+        while(duration1!=0){
+          time[i+duration-duration1]=1;
+          if(map.containsKey(i+duration-duration1) && duration!=duration1)break;
+          duration1--;    
+        }
+      }
+     }
+     for(int i=0;i<time.length;i++) if(time[i]==1)total++;
+     return total;
+    }
+}
