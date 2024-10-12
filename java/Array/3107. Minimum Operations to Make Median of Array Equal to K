@@ -1,0 +1,16 @@
+class Solution {
+    public long minOperationsToMakeMedianK(int[] nums, int k) {
+       long total=0;
+       int mid=0;
+       Arrays.sort(nums); 
+       if(nums.length%2==1)mid=(nums.length-1)/2;
+       else mid=nums.length/2;
+       total+=1L*(Math.abs(nums[mid]-k));
+       nums[mid]=k;
+       for(int i=0;i<nums.length;i++){
+        if(i<mid){if(nums[i]>k)total+=1L*(nums[i]-k);}
+        else{if(nums[i]<k)total+=1L*(k-nums[i]);} 
+       }
+       return total;
+    }
+}
