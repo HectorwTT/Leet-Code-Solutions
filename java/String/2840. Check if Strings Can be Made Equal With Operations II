@@ -1,0 +1,29 @@
+class Solution {
+    public boolean checkStrings(String s1, String s2) {
+     List<Character>s1Odd=new ArrayList<>() ;
+     List<Character>s1Even=new ArrayList<>();
+     List<Character> s2Odd=new ArrayList<>();
+     List<Character> s2Even=new ArrayList<>();
+     char [] s1Chars=s1.toCharArray();
+     char [] s2Chars=s2.toCharArray();
+     Arrays.sort(s1Chars);
+     Arrays.sort(s2Chars);
+     if(!Arrays.equals(s1Chars,s2Chars)) return false;
+     for(int i=0;i<s1.length();i++){
+      char ch1=s1.charAt(i);
+      char ch2=s2.charAt(i);
+      if(i%2==0){
+       s1Even.add(ch1);
+       s2Even.add(ch2); 
+      }else{
+        s1Odd.add(ch1);
+        s2Odd.add(ch2);
+      }  
+     }
+     s1Even.sort(null);
+     s1Odd.sort(null);
+     s2Even.sort(null);
+     s2Odd.sort(null) ;     
+     return (s1Even.equals(s2Even) || s2Odd.equals(s1Odd))  ;  
+    }
+}
