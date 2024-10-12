@@ -1,0 +1,19 @@
+class Solution {
+    public int[] minBitwiseArray(List<Integer> nums) {
+      int [] ans=new int[nums.size()];
+      for(int i=0;i<nums.size();i++  ){
+       int number=nums.get(i);
+       boolean hasFound=false;
+       for(int j=0;j<number;j++){
+        int number1=j|(j+1);
+        if(number1==number){
+          hasFound=true;
+          ans[i]=j;
+          break;  
+        }
+       }
+       if(!hasFound)ans[i]=-1;
+      }
+      return ans;      
+    }
+}
