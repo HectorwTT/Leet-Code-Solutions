@@ -1,0 +1,27 @@
+class Solution {
+    public int[] findXSum(int[] nums, int k, int x) {
+       int [] ans=new int[nums.length-k+1] ;            
+       for(int i=0;i<=nums.length-k;i++)ans[i]=getXSum(nums,k,x,i);
+       return ans; 
+    }
+    public int getXSum(int []nums,int  k,int x,int index){
+       HashMap<Integer,Integer> map=new HashMap<>();        
+       int sum=0;  
+       int count=0;
+       for(int i=index;i<k+index;i++){
+        if(!map.containsKey(nums[i]))map.put(nums[i],1);
+        else map.replace(nums[i],map.get(nums[i])+1);
+        sum+=nums[i];
+       }
+       PriorityQueue<Integer> maxHeap= new PriorityQueue<>((a, b) -> 
+        ((map.get(b)-map.get(a)) != 0) ? (map.get(b) - map.get(a)):(b-a));
+       maxHeap.addAll(map.keySet());
+       int xSum=0;
+       while(count<x && !maxHeap.isEmpty()){
+        int number= maxHeap.remove();
+        xSum+=(number*map.get(number));
+        count++;
+       }       
+       return xSum;
+    }
+}
