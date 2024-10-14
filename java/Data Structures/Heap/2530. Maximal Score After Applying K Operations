@@ -1,0 +1,41 @@
+class Solution {
+    public long maxKelements(int[] nums, int k) {
+     long total=0;
+     PriorityQueue<Integer> heap=new PriorityQueue<>((a,b)->b-a);  
+     HashMap<Integer,List<Integer>> map=new HashMap<>();  Arrays.sort(nums);
+     int count=0;
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i])){
+       List<Integer> list=new ArrayList<>();
+       list.add(i);
+       map.put(nums[i],list); 
+      }else{
+        List<Integer> list=map.get(nums[i]);
+        list.add(i);
+        map.replace(nums[i],list);
+      }
+      heap.offer(nums[i]);  
+     }
+     while(count<k && !heap.isEmpty()){
+      int number=heap.remove();
+      total+=1L*number;
+      int newNumber=(number+2)/3;
+      heap.offer(newNumber);
+      List<Integer> indices=map.get(number);
+      int index=indices.remove(indices.size()-1);
+      if(indices.size()!=0)map.replace(number,indices);
+      else map.remove(number);
+      if(!map.containsKey(newNumber)){
+       List<Integer> list=new ArrayList<>();
+       list.add(index); 
+       map.put(newNumber,list);    
+      }else{
+       List<Integer> list=map.get(newNumber);
+       list.add(index);
+       map.replace(newNumber,list);
+      }
+      count++;  
+     }
+     return total;    
+    }
+}
