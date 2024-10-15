@@ -1,0 +1,16 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+     PriorityQueue<Long>pq=new PriorityQueue<>();
+     int min=0;
+     if(nums.length==1)return 1;
+     for(int i=0;i<nums.length;i++) pq.offer(1L*nums[i]);    
+     while(pq.peek()<1L*k){
+      long x=pq.poll();
+      long y=pq.poll();
+      long z=(2*x)+y;
+      pq.offer(z);
+      min++;  
+     }
+     return min;
+    }
+}
