@@ -1,0 +1,21 @@
+class Solution {
+    public int minStoneSum(int[] piles, int k) {
+      int total=0;
+      int count=0;
+      PriorityQueue<Integer> heap=new PriorityQueue<>((a,b)->b-a);
+      for(int i=0;i<piles.length;i++){       
+        heap.offer(piles[i]);
+      }
+      while(count<k){
+       int number=heap.remove();
+       int newNumber=number/2;
+       heap.offer(number-newNumber);        
+       count++;  
+      } 
+      while(!heap.isEmpty()){
+        int number=heap.remove();
+        total+=number;
+      }
+      return total;     
+    }
+}
