@@ -1,0 +1,21 @@
+class Solution {
+    public int halveArray(int[] nums) {
+      double sum=0;      
+      int min=0;
+      PriorityQueue<Double>pq=new PriorityQueue<>(Collections.reverseOrder());
+      for(int i=0;i<nums.length;i++){
+       double num=nums[i];
+       sum+=num;
+       pq.offer(num); 
+      }
+      double currentSum=sum;
+      while(currentSum>sum/2){
+       double number=pq.poll();
+       double half=number/2.0;
+       currentSum-=half;
+       pq.offer(half);
+       min++;
+      }   
+      return min; 
+    }
+}
