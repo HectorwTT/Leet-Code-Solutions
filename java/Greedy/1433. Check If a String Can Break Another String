@@ -1,0 +1,17 @@
+class Solution {
+    public boolean checkIfCanBreak(String s1, String s2) {
+     char [] s1Chars=s1.toCharArray();
+     char [] s2Chars=s2.toCharArray();
+     Arrays.sort(s1Chars);
+     Arrays.sort(s2Chars);
+     int numberS1CharsGreaterThanS2Chars=0;
+     int numberS2CharsGreaterThanS1Chars=0;
+     for(int i=0;i<s2Chars.length;i++){
+      int ch1Val=s1Chars[i];
+      int ch2Val=s2Chars[i];
+      if(ch1Val>=ch2Val)numberS1CharsGreaterThanS2Chars++;
+      if(ch2Val>=ch1Val)numberS2CharsGreaterThanS1Chars++;
+     }
+     return numberS1CharsGreaterThanS2Chars==s1.length() || numberS2CharsGreaterThanS1Chars==s2.length();
+    }
+}
