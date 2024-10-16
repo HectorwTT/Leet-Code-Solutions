@@ -1,0 +1,34 @@
+class Solution {
+    public String reorganizeString(String s) {
+      String result="";
+      HashMap <Character,Integer>  map=new HashMap<>();
+      PriorityQueue<Character> pq=new PriorityQueue<>((a,b)->map.get(b)-map.get(a));
+      for(int i=0;i<s.length();i++){
+        char ch=s.charAt(i);
+        if(!map.containsKey(ch))map.put(ch,1);
+        else map.replace(ch,map.get(ch)+1);
+      } 
+      pq.addAll(map.keySet());
+      while(pq.size()>1){
+       char ch1=pq.remove();
+       map.replace(ch1,map.get(ch1)-1);
+       result+=ch1;
+       char ch2=pq.remove(); 
+       map.replace(ch2,map.get(ch2)-1);
+       result+=ch2;
+       if(map.get(ch1)==0)map.remove(ch1);
+       else pq.offer(ch1);   
+       if(map.get(ch2)==0)map.remove(ch2);
+       else pq.offer(ch2); 
+      }
+      if(!pq.isEmpty()){
+       char ch=pq.remove();
+       String chs=""+ch;
+       result+=chs.repeat(map.get(ch)); 
+      }
+      for(int i=1;i<result.length();i++){
+       if(result.charAt(i)==result.charAt(i-1)) return "";
+      }    
+      return result;
+    }
+}
