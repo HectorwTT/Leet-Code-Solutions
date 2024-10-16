@@ -1,0 +1,10 @@
+class Solution {
+    public boolean queryString(String s, int n) {
+       int number=1;
+       while(number<=n){
+        String binary=Integer.toBinaryString(number++);
+        if(s.indexOf(binary)==-1)return false;
+       }
+       return true;  
+    }
+}
