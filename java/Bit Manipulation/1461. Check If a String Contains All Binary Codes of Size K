@@ -1,0 +1,12 @@
+class Solution {
+    public boolean hasAllCodes(String s, int k) {
+      int number=(int)Math.pow(2,k);
+      HashMap<Integer,Integer>map=new HashMap<>();
+      for(int i=0;i<=s.length()-k;i++){
+       String substring=s.substring(i,i+k); 
+       int num=Integer.parseInt(substring,2);
+       if(!map.containsKey(num))map.put(num,1); 
+      }
+      return map.size()==number;   
+    }
+}
