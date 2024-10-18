@@ -1,0 +1,30 @@
+class Solution {
+    public int countMaxOrSubsets(int[] nums) {
+      List<List<Integer>> subsets = new ArrayList<>();
+      int total=0;
+      int maxXor=nums[0];
+      for(int i=0;i<nums.length;i++)maxXor|=nums[i];
+      generateSubsets(nums, 0, new ArrayList<>(), subsets); 
+      for(List<Integer> subset:subsets){
+        if(subset.size()==0)continue;
+        int xor=subset.get(0);
+        for(int i=0;i<subset.size();i++){
+          xor|=subset.get(i);  
+        }
+        if(xor==maxXor)total++;
+      }
+      return total; 
+    }
+
+    private void generateSubsets(int[] nums, int index, List<Integer> subset, List<List<Integer>> subsets) {
+      
+        if (index == nums.length) {
+            subsets.add(new ArrayList<>(subset));
+            return;
+        }
+        subset.add(nums[index]);
+        generateSubsets(nums, index + 1, subset, subsets);
+        subset.remove(subset.size() - 1);
+        generateSubsets(nums, index + 1, subset, subsets);
+    }
+}
