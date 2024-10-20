@@ -1,0 +1,41 @@
+class Solution {
+    public String arrangeWords(String text) {
+      String  result="";
+      HashMap<Integer,List<String>>  map=new HashMap<>();
+      List<Integer> lengths=new ArrayList<>();
+      String [] words=text.split(" ");
+      for(int i=0;i<words.length;i++){
+       String word=words[i];
+       if(!map.containsKey(word.length())){
+        List<String> list=new ArrayList<>();
+        list.add(word.toLowerCase());
+        map.put(word.length(),list);
+        lengths.add(word.length()); 
+       }else{
+        List<String> list=map.get(word.length());
+        list.add(word.toLowerCase());
+        map.replace(word.length(),list);
+       } 
+      }
+      lengths.sort(null);
+      List<String> smallestWords=map.get(lengths.get(0));
+      String smallest=smallestWords.remove(0);
+      int first=smallest.charAt(0);
+      first-=32; 
+      char ch=(char)first;     
+      String newWord=""+ch;
+      if(smallest.length()>1)newWord+=smallest.substring(1);
+      result+=newWord;
+      map.replace(lengths.get(0),smallestWords);
+      for(int i=0;i<lengths.size();i++){
+       int length=lengths.get(i);
+       List<String> currentWords=map.get(length) ;
+       if(currentWords.size()==0)continue;
+       for(int j=0;j<currentWords.size();j++){
+        String currentWord=currentWords.get(j);
+        result+=" "+currentWord;
+       }
+      }
+      return result;    
+    }
+}
