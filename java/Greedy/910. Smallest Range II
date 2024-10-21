@@ -1,0 +1,17 @@
+class Solution {
+    public int smallestRangeII(int[] nums, int k) {
+     int min=(int)Math.pow(10,4)+1;
+     Arrays.sort(nums);  
+     for(int i=0;i<nums.length;i++){
+      int diff=0;  
+      if(i==0)diff=nums[nums.length-1]-nums[0];
+      else{
+       int minValue=Math.min(nums[0]+k,nums[i]-k);
+       int maxValue=Math.max(nums[nums.length-1]-k,nums[i-1]+k);
+        diff=maxValue-minValue;
+      }  
+       min=Math.min(diff,min);  
+     } 
+     return min;
+    }
+}
