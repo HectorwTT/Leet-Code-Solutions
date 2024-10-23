@@ -1,0 +1,22 @@
+class Solution {
+    public int numSpecialEquivGroups(String[] words) {
+      int total=0;
+      HashMap<List<List<Character>>,Integer> map=new HashMap<>();  
+      for(int i=0;i<words.length;i++){
+       String word=words[i];
+       List<Character> charsAtEvens=new ArrayList<>();
+       List<Character> charsAtOdds=new ArrayList<>();
+       for(int j=0;j<word.length();j++){
+        if(j%2==0)charsAtEvens.add(word.charAt(j));
+        else charsAtOdds.add(word.charAt(j));
+       }
+        charsAtEvens.sort(null);
+        charsAtOdds.sort(null);
+        List<List<Character>> chars=new ArrayList<>();
+        chars.add(charsAtEvens);
+        chars.add(charsAtOdds);
+        if(!map.containsKey(chars))map.put(chars,1);        
+      }  
+      return map.size();
+    }
+}
