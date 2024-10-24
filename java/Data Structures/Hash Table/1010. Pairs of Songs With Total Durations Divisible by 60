@@ -1,0 +1,22 @@
+class Solution {
+    public int numPairsDivisibleBy60(int[] time) {
+     int total=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<time.length;i++){
+      if(!map.containsKey(time[i]%60))map.put(time[i]%60,1);
+      else map.replace(time[i]%60,map.get(time[i]%60)+1);  
+     }
+     for(Integer key:map.keySet()){
+      if(key==0 || key==30){
+        int count=map.get(key)-1;
+        int sum=0;
+        while(count>0)sum+=count--;
+        total+=sum;
+      }else {
+        int rem=60-key;
+        if(map.containsKey(rem) && key<30)total+=(map.get(rem)*map.get(key));
+      }  
+     }
+     return total;
+    }
+}
