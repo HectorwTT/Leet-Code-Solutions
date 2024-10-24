@@ -1,0 +1,22 @@
+class Solution {
+    public long countCompleteDayPairs(int[] hours) {
+    long total=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<hours.length;i++){
+      if(!map.containsKey(hours[i]%24))map.put(hours[i]%24,1);
+      else map.replace(hours[i]%24,map.get(hours[i]%24)+1);  
+     }
+     for(Integer key:map.keySet()){
+      if(key==0 || key==12){
+        int count=map.get(key)-1;
+        long sum=0;
+        while(count>0)sum+=1L*count--;
+        total+=sum;
+      }else {
+        int rem=24-key;
+        if(map.containsKey(rem) && key<12)total+=1L*(map.get(rem)*map.get(key));
+      }  
+     }
+     return total;   
+    }
+}
