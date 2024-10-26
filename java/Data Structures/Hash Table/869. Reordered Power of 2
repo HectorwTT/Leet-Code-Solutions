@@ -1,0 +1,27 @@
+class Solution {
+    public boolean reorderedPowerOf2(int n) {
+      HashMap<Integer,Integer> map=new HashMap<>();
+      String number=""+n;
+      for(int i=0;i<number.length();i++){
+        char ch=number.charAt(i);
+        int digit=ch-48;
+        if(!map.containsKey(digit))map.put(digit,1);
+        else map.replace(digit,map.get(digit)+1);
+      }
+      int power=0;
+      while(power<30){
+        int newNum=(int)Math.pow(2,power++);
+        String newNumber=""+newNum;
+        if(newNumber.length()!=number.length())continue;
+        HashMap<Integer,Integer> map1=new HashMap<>();
+        for(int i=0;i<newNumber.length();i++){
+         char ch= newNumber.charAt(i);
+         int digit=ch-48;
+         if(!map1.containsKey(digit))map1.put(digit,1);
+         else map1.replace(digit,map1.get(digit)+1);  
+        }
+        if(map.equals(map1))return true;
+      }  
+      return false;
+    }
+}
