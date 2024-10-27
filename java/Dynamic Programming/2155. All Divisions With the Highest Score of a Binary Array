@@ -1,0 +1,39 @@
+class Solution {
+    public List<Integer> maxScoreIndices(int[] nums) {
+     int max=0;
+     int []  numOfZeroesBefore=new int[nums.length+1];
+     int []  numOfOnesAfter=new  int[nums.length];
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     int numOfZeroes=0;
+     int numOfOnes=0;
+     for(int i=0;i<numOfZeroesBefore.length;i++){
+      numOfZeroesBefore[i]=numOfZeroes;
+      if(i<numOfZeroesBefore.length-1 &&  nums[i]==0)numOfZeroes++;  
+     } 
+     numOfZeroesBefore[numOfZeroesBefore.length-1]=numOfZeroes;
+     for(int i=nums.length-1;i>0;i--){
+      if(nums[i]==1)numOfOnes++;  
+      numOfOnesAfter[i]=numOfOnes;
+     } 
+     if(nums[0]==1){
+      numOfOnes++;
+      numOfOnesAfter[0]=numOfOnes;
+     }
+     for(int i=0;i<numOfZeroesBefore.length;i++){
+      int total=0;
+      if(i==numOfZeroesBefore.length-1)total+=numOfZeroesBefore[i];
+      else total=numOfOnesAfter[i]+numOfZeroesBefore[i];
+      if(!map.containsKey(total)){
+        List<Integer> list=new ArrayList<>();
+        list.add(i);
+        map.put(total,list);
+      }else{
+        List<Integer> list=map.get(total);
+        list.add(i);
+        map.replace(total,list);
+      } 
+      max=Math.max(max,total) ;
+     }
+     return map.get(max);
+    }
+}
