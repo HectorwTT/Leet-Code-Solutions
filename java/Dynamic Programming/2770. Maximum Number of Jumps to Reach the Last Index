@@ -1,0 +1,13 @@
+class Solution {
+    public int maximumJumps(int[] nums, int target) {
+      int [] dp=new int[nums.length];
+      for(int j=0;j<nums.length;j++){
+       for(int i=0;i<j;i++){
+        if(-1*target<=nums[j]-nums[i] && nums[j]-nums[i]<=target)
+         if(i==0 || dp[i]!=0)dp[j]=Math.max(dp[j],dp[i]+1);
+       } 
+      }
+      if(dp[nums.length-1]==0)return -1;
+      else return dp[nums.length-1];  
+    }
+}
