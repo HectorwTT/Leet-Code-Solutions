@@ -1,0 +1,30 @@
+class Solution {
+    public String compressedString(String word) {
+     String comp="";  
+     int count=1; 
+     char previous=word.charAt(0);
+     char current=word.charAt(0);
+     for(int i=1;i<word.length();i++){
+      current= word.charAt(i);
+      previous=word.charAt(i-1);
+      if(current==previous)count++;
+      else{
+       if(count!=0){
+        comp+=count;
+        comp+=previous;
+       } 
+       count=1; 
+      }
+      if(count==9){
+       comp+=count;
+       comp+=current;
+       count=0; 
+      } 
+     }
+    if(count!=0) {
+     comp+=count;
+      comp+=current;
+    }  
+     return comp;
+    }
+}
