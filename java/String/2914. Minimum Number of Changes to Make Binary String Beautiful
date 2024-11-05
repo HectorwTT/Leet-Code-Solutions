@@ -1,0 +1,11 @@
+class Solution {
+    public int minChanges(String s) {
+     int total=0;
+     for(int i=1;i<s.length();i+=2){
+      char previous=s.charAt(i-1);
+      char current=s.charAt(i);
+      if(previous!=current) total++;
+     }  
+     return total;    
+    }
+}
