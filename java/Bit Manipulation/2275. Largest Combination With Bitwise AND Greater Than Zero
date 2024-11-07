@@ -1,0 +1,18 @@
+class Solution {
+    public int largestCombination(int[] candidates) {
+     int []  bitCount=new int[24];
+     for(int i=0;i<candidates.length;i++){
+       int num=candidates[i];
+       String binary=Integer.toBinaryString(num);
+       StringBuffer sb=new StringBuffer(binary);
+       sb.reverse();
+       String newBinary=sb.toString();
+       for(int j=0;j<newBinary.length();j++){
+        if(newBinary.charAt(j)=='1') bitCount[j]++;
+       }
+       
+     } 
+     Arrays.sort(bitCount);
+     return bitCount[bitCount.length-1];
+    }
+}
