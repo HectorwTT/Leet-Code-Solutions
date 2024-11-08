@@ -1,0 +1,24 @@
+public class Solution {
+    public int NumOfSubarrays(int[] arr) {
+     long    total=0;
+     long[] prefixSums=new  long [arr.Length];
+     long sum=0;
+     long even=0;
+     long odd=0;
+     for(int i=0;i<arr.Length;i++){
+      sum+=arr[i];
+      prefixSums[i]=sum;
+      if(prefixSums[i]%2==0)even++;
+      else odd++;
+      if(prefixSums[i]%2==1){
+        total++;
+        total+=even;
+      }else{
+        total+=odd;
+      }
+     }  
+     long mod=(long)Math.Pow(10,9)+7;
+     long answer=total%mod;
+     return (int) answer;      
+    }
+}
