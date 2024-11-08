@@ -1,0 +1,24 @@
+class Solution {
+    public int numOfSubarrays(int[] arr) {
+     long total=0;
+     long[] prefixSums=new  long [arr.length];
+     long sum=0;
+     long even=0;
+     long odd=0;
+     for(int i=0;i<arr.length;i++){
+      sum+=1L*arr[i];
+      prefixSums[i]=sum;
+      if(prefixSums[i]%2==0)even++;
+      else odd++;
+      if(prefixSums[i]%2==1){
+        total++;
+        total+=even;
+      }else{
+        total+=odd;
+      }
+     }  
+     long mod=(long)Math.pow(10,9)+7;
+     long answer=total%mod;
+     return (int)answer;    
+    }
+}
