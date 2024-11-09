@@ -1,0 +1,21 @@
+class Solution {
+    public int smallestNumber(int n, int t) {
+     int number=n;
+     int result=1;
+     boolean hasFound=false;
+     while(!hasFound){
+      int product=1;
+      String digits=""+number;
+      for(int i=0;i<digits.length();i++){
+       int digit=digits.charAt(i)-48;
+       product*=digit; 
+      }
+      if(product%t==0){
+        hasFound=true;
+        result=number;
+      }
+      number++;
+     }
+     return result;  
+    }
+}
