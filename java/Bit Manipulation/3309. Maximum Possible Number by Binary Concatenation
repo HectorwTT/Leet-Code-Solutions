@@ -1,0 +1,18 @@
+class Solution {
+    public int maxGoodNumber(int[] nums) {
+      int  max=0;
+      String first=Integer.toBinaryString(nums[0])+Integer.toBinaryString(nums[1])+Integer.toBinaryString(nums[2]);
+      max=Math.max(max,Integer.parseInt(first,2));
+      String second=Integer.toBinaryString(nums[0])+Integer.toBinaryString(nums[2])+Integer.toBinaryString(nums[1]);  
+      max=Math.max(max,Integer.parseInt(second,2));
+      String third=Integer.toBinaryString(nums[1])+Integer.toBinaryString(nums[0])+Integer.toBinaryString(nums[2]);
+      max=Math.max(max,Integer.parseInt(third,2));
+      String fourth=Integer.toBinaryString(nums[1])+Integer.toBinaryString(nums[2])+Integer.toBinaryString(nums[0]); 
+      max=Math.max(max,Integer.parseInt(fourth,2));
+      String fifth=Integer.toBinaryString(nums[2])+Integer.toBinaryString(nums[0])+Integer.toBinaryString(nums[1]);
+      max=Math.max(max,Integer.parseInt(fifth,2));
+      String sixth=Integer.toBinaryString(nums[2])+Integer.toBinaryString(nums[1])+Integer.toBinaryString(nums[0]); 
+      max=Math.max(max,Integer.parseInt(sixth,2));
+      return max;    
+    }
+}
