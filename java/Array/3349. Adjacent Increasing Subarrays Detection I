@@ -1,0 +1,34 @@
+class Solution {
+    public boolean hasIncreasingSubarrays(List<Integer> nums, int k) {
+      if(k>nums.size())return false;
+      if(k==1)return true;
+      for(int i=0;i<=nums.size()-2*k;i++){
+        int first=nums.get(i);
+        boolean isFirstIncreasing=true;
+        boolean isSecondIncreasing=true;
+        List<Integer> list=new ArrayList<>();
+        List<Integer> list1=new ArrayList<>();
+
+        for(int a=i;a<i+k;a++){
+          list.add(nums.get(a)); 
+        }
+         for(int b=i+k;b<i+k+k;b++){
+          list1.add(nums.get(b));  
+        }
+        for(int j=1;j<list.size();j++){
+         if(list.get(j)<=list.get(j-1)){
+          isFirstIncreasing=false;
+          break;  
+         }      
+        }
+         for(int j=1;j<list1.size();j++){
+         if(list1.get(j)<=list1.get(j-1)){
+          isSecondIncreasing=false;
+          break;  
+         }      
+        }
+        if(isFirstIncreasing && isSecondIncreasing)return true;
+      }
+      return false;  
+    }
+}
