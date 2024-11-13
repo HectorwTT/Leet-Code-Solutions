@@ -4,8 +4,7 @@ class Solution {
      int [] answer=new int[queries.length] ;
      int []beauties=new int[items.length];
      HashMap<Integer,Integer> maxBeauties=new HashMap<>();
-          HashMap<Integer,Integer> map=new HashMap<>();
-
+     HashMap<Integer,Integer> map=new HashMap<>();
      int maxBeauty=items[0][1];
      for(int i=0;i<items.length;i++){
        maxBeauty=Math.max(maxBeauty,items[i][1]);beauties[i]=maxBeauty;
