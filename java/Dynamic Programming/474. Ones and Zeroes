@@ -1,0 +1,14 @@
+class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+      int [] [] dp=new int[m+1][n+1] ;
+      for(int k=0;k<strs.length;k++){
+        int numOfZeroes=(int)strs[k].chars().filter(a->a=='0').count();
+        int numOfOnes=(int)strs[k].chars().filter(b->b=='1').count();
+        for (int i=m; i>=numOfZeroes; --i){
+          for (int j=n; j>=numOfOnes; --j)
+            dp[i][j] = Math.max(dp[i][j], 1 + dp[i-numOfZeroes][j-numOfOnes]);
+        }       
+      } 
+      return dp[m][n]; 
+    }
+}
