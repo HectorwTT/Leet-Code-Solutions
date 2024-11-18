@@ -1,0 +1,35 @@
+class Solution {
+    public int countValidSelections(int[] nums) {
+     int total=0;  
+     for(int i=0;i<nums.length;i++){
+       int curr=i;
+       int [] nums1=new int[nums.length];       
+       for(int j=0;j<nums1.length;j++)nums1[j]=nums[j];
+       if(nums[curr]!=0)continue;      
+       if(isValid(true,curr,nums1))total++;
+       for(int j=0;j<nums1.length;j++)nums1[j]=nums[j];
+       if(isValid(false,curr,nums1))total++; 
+     }
+     return total;    
+    }
+     public boolean isValid(boolean isMovingRight,int curr,int[]nums){
+       boolean [] hasVisited=new boolean[nums.length]; 
+       while(curr>=0 && curr<=nums.length-1){
+        if(nums[curr]==0){
+         if(!hasVisited[curr])hasVisited[curr]=true;
+         if(isMovingRight)curr++;
+         else curr--;        
+        }else{
+          nums[curr]--;
+          if(isMovingRight){
+            isMovingRight=false;
+            curr--;            
+          }else{
+            isMovingRight=true;
+            curr++;
+          }          
+        } 
+       }
+       return Arrays.stream(nums).sum()==0;
+     }
+}
