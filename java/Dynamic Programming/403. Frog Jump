@@ -1,0 +1,40 @@
+class Solution {
+    private Boolean[][] memo; // memoization array to store results of subproblems
+    private Map<Integer, Integer> positionMap = new HashMap<>(); // maps stone's value to its index
+    private int[] stones; // array of stones
+    private int numOfStones; // number of stones
+    public boolean canCross(int[] stones) {
+       numOfStones = stones.length;
+        memo = new Boolean[numOfStones][numOfStones];
+        this.stones = stones;
+        // populate the position map
+        for (int i = 0; i < numOfStones; ++i) {
+            positionMap.put(stones[i], i);
+        }
+        // start DFS from stone 0 with jump size 0
+        return dfs(0, 0);   
+    }
+    private boolean dfs(int index, int lastJumpSize){
+        // if we are at the last stone, crossing is successful
+        if (index == numOfStones - 1) {
+            return true;
+        }
+        // if we have visited this state, return the stored result
+        if (memo[index][lastJumpSize] != null) {
+            return memo[index][lastJumpSize];
+        }
+        // try to jump to the next stone with jump sizes: k-1, k, or k+1
+        for (int currentJumpSize = lastJumpSize - 1; currentJumpSize <= lastJumpSize + 1; ++currentJumpSize) {
+            if (currentJumpSize > 0) { // cannot jump back or stay
+                int nextPosition = stones[index] + currentJumpSize; // next stone's position
+                // check if there is a stone at the next position
+                if (positionMap.containsKey(nextPosition) && dfs(positionMap.get(nextPosition), currentJumpSize)) {
+                    // if we can cross starting from the next stone, mark the current state as true
+                    return memo[index][lastJumpSize] = true;
+                }
+            }
+        }
+        // if none of the jumps work, mark the current state as false
+        return memo[index][lastJumpSize] = false;
+    }
+}
