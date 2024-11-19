@@ -1,0 +1,14 @@
+class Solution {
+    public long mostPoints(int[][] questions) {
+      long []  dp= new long[questions.length];
+      dp[questions.length-1]=1L*questions[questions.length-1][0];
+      for(int i=questions.length-2;i>=0;i--){
+       long skip=dp[i+1];
+       long pick=1L*questions[i][0];
+       int next=questions[i][1];
+       if(i+next+1<=questions.length-1)pick+=dp[i+next+1];
+       dp[i]=Math.max(skip,pick);
+      }
+      return dp[0];     
+    }
+}
