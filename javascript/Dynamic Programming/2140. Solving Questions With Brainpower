@@ -1,0 +1,14 @@
+var mostPoints = function(questions) {
+ const  dp=[];
+ dp.length=questions.length;
+ for(let i=0;i<questions.length-1;i++)dp[i]=0;
+ dp[questions.length-1]=questions[questions.length-1][0];
+ for(let i=questions.length-2;i>=0;i--){
+  let skip=dp[i+1];
+  let pick=questions[i][0];
+  let next=questions[i][1];
+  if(i+next+1<=questions.length-1)pick+=dp[i+next+1];
+  dp[i]=Math.max(skip,pick);
+ }
+ return dp[0];   
+};
