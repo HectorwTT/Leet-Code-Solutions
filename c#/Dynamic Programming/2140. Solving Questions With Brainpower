@@ -1,0 +1,14 @@
+public class Solution {
+    public long MostPoints(int[][] questions) {
+      long []  dp= new long[questions.Length];
+      dp[questions.Length-1]=1L*questions[questions.Length-1][0];
+      for(int i=questions.Length-2;i>=0;i--){
+       long skip=dp[i+1];
+       long pick=1L*questions[i][0];
+       int next=questions[i][1];
+       if(i+next+1<=questions.Length-1)pick+=dp[i+next+1];
+       dp[i]=Math.Max(skip,pick);
+      }
+      return dp[0];   
+    }
+}
