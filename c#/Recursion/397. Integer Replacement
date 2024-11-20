@@ -1,0 +1,10 @@
+public class Solution {
+    public int IntegerReplacement(int n) {
+      return (int)LongReplacement(1L*n);
+    }
+    public long LongReplacement(long n){
+     if(n==1)    return  0; 
+     else if(n%2==0)return 1+LongReplacement(n/2);
+     else return 1+Math.Min(LongReplacement(n+1),LongReplacement(n-1));   
+    }
+}
