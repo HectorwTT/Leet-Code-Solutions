@@ -1,0 +1,54 @@
+class Solution {
+    public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
+      char [][] matrix=new char[m][n];
+      for(int i=0;i<m;i++)Arrays.fill(matrix[i],'.');
+      int numberOfGuardedCells=0;
+      for(int i=0;i<guards.length;i++) matrix[guards[i][0]][guards[i][1]]='G';
+      for(int i=0;i<walls.length;i++) matrix[walls[i][0]] [walls[i][1]] ='W';
+      for(int i=0;i<guards.length;i++){
+       int guardRow=guards[i][0];
+       int guardColumn=guards[i][1];
+       int guardRowNorth=guardRow-1;
+       int guardRowSouth=guardRow+1;
+       int guardColumnEast=guardColumn+1;
+       int guardColumnWest=guardColumn-1;
+       while(guardRowNorth>=0 
+        && matrix[guardRowNorth][guardColumn]!='W' 
+        && matrix[guardRowNorth][guardColumn]!='G'){
+          if(matrix[guardRowNorth][guardColumn]!='X'){
+            numberOfGuardedCells++;
+            matrix[guardRowNorth][guardColumn]='X';
+          }  
+          guardRowNorth--;  
+        }  
+        while(guardRowSouth <m 
+        && matrix[guardRowSouth][guardColumn]!='W' 
+        && matrix[guardRowSouth][guardColumn]!='G'){
+           if(matrix[guardRowSouth][guardColumn]!='X'){
+            numberOfGuardedCells++;
+            matrix[guardRowSouth][guardColumn]='X';
+          }  
+          guardRowSouth++;  
+        }  
+        while(guardColumnEast<n 
+        && matrix[guardRow][guardColumnEast]!='W' 
+        && matrix[guardRow][guardColumnEast]!='G'){
+           if(matrix[guardRow][guardColumnEast]!='X'){
+            numberOfGuardedCells++;
+            matrix[guardRow][guardColumnEast]='X';
+          }  
+          guardColumnEast++;  
+        } 
+        while(guardColumnWest>=0 
+        && matrix[guardRow][guardColumnWest]!='W' 
+        && matrix[guardRow][guardColumnWest]!='G'){
+           if(matrix[guardRow][guardColumnWest]!='X'){
+            numberOfGuardedCells++;
+            matrix[guardRow][guardColumnWest]='X';
+          }  
+          guardColumnWest--;  
+        }   
+      }
+      return(m*n)-guards.length-walls.length-numberOfGuardedCells;  
+    }
+}
