@@ -1,0 +1,12 @@
+class Solution {
+    public boolean canAliceWin(int n) {
+     int numberOfStones=n;
+     int numberToRemove=10;
+     while(numberToRemove>=0){
+       if(numberOfStones<numberToRemove)return numberToRemove%2==1;
+       numberOfStones-=numberToRemove;
+       numberToRemove--;
+     } 
+     return true;   
+    }
+}
