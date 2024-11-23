@@ -1,0 +1,28 @@
+class Solution {
+    public long shiftDistance(String s, String t, int[] nextCost, int[] previousCost) {
+      long  answer=0 ;
+      for(int i=0;i<t.length();i++){
+        char sch=s.charAt(i);
+        char tch=t.charAt(i);
+        if(sch==tch)continue;
+        long totalPrevious=0;
+        int sIndex=sch-97;
+        int tIndex=tch-97;
+        if(sIndex<tIndex){
+         for(int j=sIndex;j>=0;j--)totalPrevious+=1L*previousCost[j];
+         for(int j=previousCost.length-1;j>tIndex;j--)totalPrevious+=1L*previousCost[j];
+        }else{
+         for(int j=sIndex;j>tIndex;j--)totalPrevious+=1L*previousCost[j];   
+        } 
+        long totalNext=0;
+        if(sIndex<tIndex){
+         for(int j=sIndex;j<tIndex;j++)totalNext+=1L*nextCost[j];   
+        }else{
+          for(int j=sIndex;j<nextCost.length;j++)totalNext+=1L*nextCost[j];
+          for(int j=0;j<tIndex;j++)totalNext+=1L*nextCost[j]; 
+        }
+        answer+=Math.min(totalPrevious,totalNext);
+      } 
+      return answer;
+    }
+}
