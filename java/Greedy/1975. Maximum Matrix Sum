@@ -1,0 +1,19 @@
+class Solution {
+    public long maxMatrixSum(int[][] matrix){     
+     int countOfNegatives=0;
+     int min=(int)Math.pow(10,5)+1;
+     long sum=0;
+     for(int i=0;i<matrix.length;i++){
+      for(int j=0;j<matrix.length;j++){
+        if(matrix[i][j]<0)countOfNegatives++;
+        min=Math.min(min,Math.abs(matrix[i][j]));
+        sum+=1L*Math.abs(matrix[i][j]);
+      }  
+     }
+     if(countOfNegatives%2==0)return sum;
+     else {
+      sum-=2L*min;
+      return sum;  
+     }        
+    }
+}
