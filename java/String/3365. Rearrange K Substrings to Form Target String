@@ -1,0 +1,26 @@
+class Solution {
+    public boolean isPossibleToRearrange(String s, String t, int k) {
+      if(s.length()%k!=0) return false;
+      String[ ] sArray=new String[k];
+      String []  tArray=new String [k];
+      int sIndex=0;
+      int sStart=0;
+      int sEnd=s.length()/k;
+      int tIndex=0;
+      int tStart=0;
+      int tEnd=t.length()/k;
+      while(sIndex<sArray.length){
+        sArray[sIndex++]=s.substring(sStart,sEnd); 
+        sStart=sEnd;
+        sEnd=sEnd+s.length()/k;
+      }   
+      while(tIndex<tArray.length){
+        tArray[tIndex++]=t.substring(tStart,tEnd);  
+        tStart=tEnd;
+        tEnd=tEnd+t.length()/k; 
+      }
+      Arrays.sort(sArray);
+      Arrays.sort(tArray);
+      return Arrays.equals(sArray,tArray);
+    }  
+}
