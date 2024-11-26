@@ -1,0 +1,27 @@
+class Solution {
+    public int[] rearrangeBarcodes(int[] barcodes) {
+     int [] answer=new int[barcodes.length];
+     HashMap<Integer,Integer> map=new HashMap<>();
+     PriorityQueue<Integer> pq= new PriorityQueue<>((a, b) -> 
+    ((map.get(b) - map.get(a) != 0)) ? (map.get(b) - map.get(a)):
+     (b-a));
+     for(int i=0;i<barcodes.length;i++){
+      if(!map.containsKey(barcodes[i])) map.put(barcodes[i],1);
+      else map.replace(barcodes[i],map.get(barcodes[i])+1); 
+     }
+     pq.addAll(map.keySet());
+     int index=0;
+     while(pq.size()>1){
+      int first= pq.remove();
+      int second=pq.remove();
+      map.replace(first,map.get(first)-1);
+      map.replace(second,map.get(second)-1);
+      answer[index++]=first;
+      answer[index++]=second;
+      if(map.get(first)>0)pq.offer(first);
+      if(map.get(second)>0)pq.offer(second); 
+     }
+     while(!pq.isEmpty())answer[index]=pq.remove() ;  
+     return answer;   
+    }
+}
