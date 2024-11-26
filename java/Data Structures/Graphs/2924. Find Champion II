@@ -1,14 +1,16 @@
 class Solution {
     public int findChampion(int n, int[][] edges) {
-      HashMap<Integer,Integer>map=new HashMap<>();
-      List<Integer> champions=new ArrayList<>();
-      for(int i=0;i<edges.length;i++){
-       if(!map.containsKey(edges[i][1]))map.put(edges[i][1],1); 
-      } 
+      int []  counts=new  int[n];  
+      int numberOfChampions=0;
+      int champion=-1;
+      for(int i=0;i<edges.length;i++)counts[edges[i][1]]++; 
       for(int i=0;i<n;i++){
-       if(!map.containsKey(i))champions.add(i);      
+       if(counts[i]==0){
+        if(numberOfChampions==0)champion=i;
+        else champion=-1;
+        numberOfChampions++;
+       }      
       }
-      if(champions.size()!=1)return -1;
-      else return champions.get(0);
+       return champion;
     }
 }
