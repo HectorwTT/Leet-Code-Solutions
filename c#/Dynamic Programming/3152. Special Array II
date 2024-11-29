@@ -1,0 +1,24 @@
+public class Solution {
+    public bool[] IsArraySpecial(int[] nums, int[][] queries) {
+     int []  pairsWithDifferentPriority=new int[nums.Length];
+     bool [] answer=new bool[queries.Length];  
+     for(int i=1;i<pairsWithDifferentPriority.Length;i++){
+      if(nums[i]%2==nums[i-1]%2)pairsWithDifferentPriority[i]=pairsWithDifferentPriority[i-1];  
+      else pairsWithDifferentPriority[i]=pairsWithDifferentPriority[i-1]+1;
+     }
+     for(int i=0;i<queries.Length;i++){
+      int start=queries[i][0];
+      int end=queries[i][1];
+      if(start==0){
+       int numberOfPairs=pairsWithDifferentPriority[end];
+       if(numberOfPairs==end)answer[i]=true;
+       else answer[i]=false;
+      }else{
+        int numberOfPairs=pairsWithDifferentPriority[end]-pairsWithDifferentPriority[start];
+        if(numberOfPairs==end-start)answer[i]=true;
+        else answer[i]=false;
+      }  
+     }
+     return answer;  
+    }
+}
