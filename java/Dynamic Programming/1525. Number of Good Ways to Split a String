@@ -1,0 +1,23 @@
+class Solution {
+    public int numSplits(String s) {
+     int [] numOfDistinctFromFront=new int[s.length()];
+     int [] numOfDistinctFromBehind=new int[s.length()];
+     HashMap<Character,Integer>map1=new HashMap<>();  
+     HashMap<Character,Integer>map2=new HashMap<>();
+     int total=0; 
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(!map1.containsKey(ch))map1.put(ch,1);
+      numOfDistinctFromFront[i]=map1.size();  
+     }
+     for(int i=s.length()-1;i>=0;i--){
+      char ch=s.charAt(i);
+      if(!map2.containsKey(ch))map2.put(ch,1);
+      numOfDistinctFromBehind[i]=map2.size();  
+     } 
+     for(int i=0;i<s.length()-1;i++){
+      if(numOfDistinctFromFront[i]==numOfDistinctFromBehind[i+1]) total++; 
+     }  
+     return total;      
+    }
+}
