@@ -1,0 +1,15 @@
+class Solution {
+    public int removeAlmostEqualCharacters(String word) {
+     int total=0;
+     char[]chars=word.toCharArray();
+     for(int i=1;i<word.length();i++){
+      char current=chars[i];
+      char previous=chars[i-1];      
+      if(current==previous || (current==previous+1) ||(current==previous-1)){
+        total++;
+        chars[i]='.';
+      } 
+     }  
+     return total;  
+    }
+}
