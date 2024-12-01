@@ -1,0 +1,14 @@
+class Solution {
+    public int smallestNumber(int n) {
+      int answer=0;
+      String binary= Integer.toBinaryString(n);
+      String largerBinary="";
+      for(int i=0;i<binary.length();i++){
+       char bit= binary.charAt(i);
+       if(bit=='0')largerBinary+='1';
+       else largerBinary+='1';
+      }
+      answer=Integer.parseInt(largerBinary,2);
+      return answer;    
+    }
+}
