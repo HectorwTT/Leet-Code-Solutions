@@ -1,0 +1,18 @@
+class Solution {
+    public long findMaximumScore(List<Integer> nums) {
+      long total=0;
+      int index=0;
+      int start=0;
+      int last=nums.get(start);
+      while(index<nums.size()-1){
+       if(nums.get(index)>last){
+        total+=1L*(index-start)*nums.get(start);
+        start=index;
+        last=nums.get(start);
+       } 
+       index++;
+      }
+      total+=1L*(index-start)*nums.get(start);
+      return total;   
+    }
+}
