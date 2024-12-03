@@ -1,0 +1,44 @@
+class Solution {
+    public String shortestBeautifulSubstring(String s, int k) {
+      List<String> substrings=new ArrayList<>();
+      int [] numOfOnes=new int[s.length()] ;
+      int total=0;
+      int minLength=s.length();
+      HashMap<Integer,Integer> map=new HashMap<>();
+      for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       if(ch=='1'){
+        total++;
+        numOfOnes[i]=total;
+       }else{
+        if(i>0)numOfOnes[i]=numOfOnes[i-1]; 
+       }
+        if(!map.containsKey(numOfOnes[i]))map.put(numOfOnes[i],i);
+        else map.replace(numOfOnes[i],i);
+        if(numOfOnes[i]==k){
+         int last=0;
+         int startOfSubstring=last;
+         if(map.containsKey(0)){
+          last=map.get(0);
+          startOfSubstring=last+1;
+         }
+         String substring=s.substring(startOfSubstring,i+1);
+         minLength=Math.min(minLength,substring.length());
+         substrings.add(substring);
+        }else if(numOfOnes[i]>k){
+         int last=map.get(numOfOnes[i]-k);
+         int startOfSubstring=last+1;
+         String substring=s.substring(startOfSubstring,i+1);
+         minLength=Math.min(minLength,substring.length());
+         substrings.add(substring);
+        } 
+      }
+      List<String> newSubstrings=new ArrayList<>()   ;
+      for(int i=0;i<substrings.size();i++){
+       if(substrings.get(i).length()==minLength)newSubstrings.add(substrings.get(i)); 
+      }
+      newSubstrings.sort(null);
+      if(newSubstrings.size()==0)return "";
+      else return newSubstrings.get(0);     
+    }
+}
