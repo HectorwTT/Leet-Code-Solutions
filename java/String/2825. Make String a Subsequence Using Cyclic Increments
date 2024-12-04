@@ -1,0 +1,15 @@
+class Solution {
+    public boolean canMakeSubsequence(String str1, String str2) {
+      int pointer1=0;
+      int pointer2=0;
+      while(pointer1<str1.length()&& pointer2<str2.length()){
+       if(str1.charAt(pointer1)==str2.charAt(pointer2)
+          || (str1.charAt(pointer1)=='z' && str2.charAt(pointer2)=='a')
+          || (str1.charAt(pointer1)==str2.charAt(pointer2)-1)){
+            pointer1++;
+            pointer2++;
+          }else pointer1++; 
+      }
+      return pointer2==str2.length() && pointer1<=str1.length();   
+    }
+}
