@@ -1,0 +1,27 @@
+class Solution {
+    public int beautifulSubstrings(String s, int k) {
+     int total=0;
+     int [] numOfVowels=new int[s.length()];
+     int [] numOfConsonants=new int[s.length()];
+     int vowelsTotal=0;
+     int consonantsTotal=0;   
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u') vowelsTotal++;
+      else consonantsTotal++;
+      numOfVowels[i]=vowelsTotal;
+      numOfConsonants[i]=consonantsTotal; 
+     }
+     for(int i=0;i<s.length();i++){
+      for(int j=i+1;j<s.length();j++){
+        if((j-i)%2==0)continue;
+        int numberOfVowels=numOfVowels[j];
+        if(i>0)numberOfVowels-=numOfVowels[i-1];
+        int numberOfConsonants=numOfConsonants[j];
+        if(i>0)numberOfConsonants-=numOfConsonants[i-1];
+        if(numberOfVowels==numberOfConsonants && (numberOfVowels *numberOfConsonants)%k==0 )total++;                   
+      }  
+     }
+     return total;    
+    }
+}
