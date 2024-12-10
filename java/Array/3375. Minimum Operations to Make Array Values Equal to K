@@ -1,0 +1,26 @@
+class Solution {
+    public int minOperations(int[] nums, int k) {
+     List<Integer> list=new ArrayList<>();
+     int count=0;
+     for(int i=0;i<nums.length;i++){
+      if(!list.contains(nums[i]))list.add(nums[i]);
+     }  
+     list.sort(null); 
+     int index=list.size()-1;
+     int number=list.get(index);
+     if(k>=number){
+      if(list.size()==1 && number==k)return 0;
+      else  return -1;
+     }
+     if(k<list.get(0))return list.size();
+     for(int i=0;i<list.size();i++){
+      if(list.get(i)<k)  return -1;
+     }
+     while(index>=0 && number>k){
+      number=list.get(index);
+      count++;
+      index--;   
+     }
+     return count-1;
+    }
+}
