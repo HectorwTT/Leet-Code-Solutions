@@ -1,0 +1,19 @@
+class Solution {
+    public int buttonWithLongestTime(int[][] events) {
+      HashMap <Integer,Integer> map=new HashMap<>();
+      map.put(events[0][0],events[0][1]);
+      for(int i=1;i<events.length;i++){
+       int diff=events[i][1]-events[i-1][1];
+       if(!map.containsKey(events[i][0]))map.put(events[i][0],diff);
+       else{
+        if(map.get(events[i][0])<diff)map.replace(events[i][0],diff);
+       } 
+      }
+      PriorityQueue<Integer> maxHeap= new PriorityQueue<>((a, b) -> 
+    ((map.get(b) - map.get(a) != 0)) ? (map.get(b) - map.get(a)):
+     (a-b));
+     maxHeap.addAll(map.keySet());
+     return maxHeap.poll();
+
+    }
+}
