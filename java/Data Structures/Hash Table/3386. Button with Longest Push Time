@@ -1,0 +1,28 @@
+class Solution {
+    public int buttonWithLongestTime(int[][] events) {
+      int max=events[0][1];
+      int index=events[0][0];
+      HashMap<Integer,List<Integer>> map=new HashMap<>();
+      List<Integer> indexes=new ArrayList<>();
+      indexes.add(events[0][0]);
+      map.put(max,indexes); 
+      for(int i=1;i<events.length;i++){
+       int diff=events[i][1]-events[i-1][1];
+       if(diff>=max){
+        max=diff;
+        if(!map.containsKey(max)){
+         List<Integer> list=new ArrayList<>();
+         list.add(events[i][0]);
+         map.put(max,list);   
+        }else{
+          List<Integer> list=map.get(max);
+          list.add(events[i][0]);
+          map.replace(max,list);  
+        }
+       } 
+      }
+      List<Integer> indices=map.get(max);
+      indices.sort(null);
+      return indices.get(0);  
+    }
+}
