@@ -1,0 +1,15 @@
+public class Solution {
+    public long MaxEnergyBoost(int[] energyDrinkA, int[] energyDrinkB) {
+     long [] dpA =new long[energyDrinkA.Length]; 
+     long [] dpB=new long[energyDrinkB.Length];
+     dpA[0]=1L*energyDrinkA[0];
+     dpB[0]=1L*energyDrinkB[0];
+     dpA[1]=dpA[0]+1L*energyDrinkA[1];
+     dpB[1]=dpB[0]+1L*energyDrinkB[1];
+     for(int i=2;i<energyDrinkA.Length;i++){
+      dpA[i]=Math.Max(dpA[i-1],dpB[i-2])+1L*energyDrinkA[i];
+      dpB[i]=Math.Max(dpB[i-1],dpA[i-2])+1L*energyDrinkB[i];
+     }
+     return Math.Max(dpA[energyDrinkA.Length-1],dpB[energyDrinkB.Length-1]);  
+    }
+}
