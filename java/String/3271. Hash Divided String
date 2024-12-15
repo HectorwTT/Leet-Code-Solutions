@@ -1,0 +1,24 @@
+class Solution {
+    public String stringHash(String s, int k) {
+      List<String> substrings=new ArrayList<>();
+      int index=0;
+      int count=0;
+      int sum=0;
+      String result="";
+      while(index<=s.length()){
+       if(count==k){
+        int mod=sum%26;
+        char ch=(char)(97+mod);
+        result+=ch;
+        count=0;
+        sum=0;
+       }
+       if(index==s.length())break;
+       int position=s.charAt(index)-97;
+       sum+=position;
+       count++;
+       index++; 
+      }
+      return result;
+    }
+}
