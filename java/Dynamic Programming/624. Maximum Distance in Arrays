@@ -1,0 +1,30 @@
+class Solution {
+    public int maxDistance(List<List<Integer>> arrays) {
+     int[] maxFromFront=new int[arrays.size()];
+     int[] maxFromBehind=new int[arrays.size()];
+     List<Integer> array=arrays.get(0);
+     maxFromFront[0]=array.get(array.size()-1);
+     int max=0;
+     for(int i=1;i<maxFromFront.length;i++){
+      List<Integer> list=arrays.get(i);
+      int listMax=list.get(list.size()-1);  
+      maxFromFront[i]=Math.max(maxFromFront[i-1],listMax);        
+     }   
+     List<Integer> array1=arrays.get(maxFromBehind.length-1);
+     maxFromBehind[maxFromBehind.length-1] =array1.get(array1.size()-1);
+     for(int i=maxFromBehind.length-2;i>=0;i--){
+      List<Integer> list=arrays.get(i); 
+      int listMax=list.get(list.size()-1);
+      maxFromBehind[i]=Math.max(maxFromBehind[i+1],listMax);       
+     }
+     max=Math.max(0,Math.abs(array.get(0)-maxFromBehind[1]));
+     for(int i=1;i<maxFromBehind.length-1;i++){
+      List<Integer> list=arrays.get(i); 
+      int listMin=list.get(0); 
+       max=Math.max(max,Math.abs(listMin-maxFromFront[i-1]));
+       max=Math.max(max,Math.abs(listMin-maxFromBehind[i+1]));
+     }
+     max=Math.max(max,Math.abs(array1.get(0)-maxFromFront[maxFromFront.length-2]));
+     return max;                                           
+    }
+}
