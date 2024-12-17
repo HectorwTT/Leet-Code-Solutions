@@ -1,0 +1,57 @@
+class Solution {
+    public String repeatLimitedString(String s, int repeatLimit) {
+     HashMap<String,Integer>  map=new HashMap<>();
+     PriorityQueue<String> pq= new PriorityQueue<>((a,b)->b.compareTo(a));
+     String result="";
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      String str=""+ch; 
+      if(!map.containsKey(str)){
+       map.put(str,1);
+       pq.offer(str); 
+      }else map.replace(str,map.get(str)+1);   
+     }
+     while(pq.size()>1){
+      String first=pq.poll();
+      int count= map.get(first);
+      if(count<=repeatLimit){
+        String string=first.repeat(count);
+        result+=string;
+      }else{
+        String string=first.repeat(repeatLimit);
+        String second=pq.poll();
+        result+=string;
+        result+=second;
+        map.replace(first,map.get(first)-repeatLimit);
+        map.replace(second,map.get(second)-1);
+        pq.offer(first);
+        if(map.get(second)!=0)pq.offer(second);
+      } 
+     }
+     while(!pq.isEmpty()){
+      String first=pq.poll();
+      if(result.equals("")){
+       if(map.get(first)<=repeatLimit){
+        String string=first.repeat(map.get(first));
+        result+=string;
+       }else{
+        String string=first.repeat(repeatLimit);
+        result+=string;
+       } 
+      }else{
+       char lastCh=result.charAt(result.length()-1);
+       String string=""+lastCh;
+       if(!first.equals(string)){
+       if(map.get(first)<=repeatLimit){
+        String string1=first.repeat(map.get(first));
+        result+=string1;
+       }else{
+        String string1=first.repeat(repeatLimit);
+        result+=string1;
+       } 
+       } 
+      }  
+     }
+     return result;       
+    }
+}
