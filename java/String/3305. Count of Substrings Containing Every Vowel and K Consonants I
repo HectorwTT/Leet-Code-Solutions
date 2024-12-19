@@ -1,0 +1,33 @@
+class Solution {
+    public int countOfSubstrings(String word, int k) {
+     int count=0;
+     for(int i=0;i<word.length();i++){
+      for(int j=i+1;j<=word.length();j++){
+       String substring=word.substring(i,j); 
+       int numOfAs=0;
+       int numOfEs=0;
+       int numOfIs=0;
+       int numOfOs=0;
+       int numOfUs=0;
+       int numOfConsonants=0;
+       for(int l=0;l<substring.length();l++){
+        char ch=substring.charAt(l);
+        if(ch=='a')numOfAs++;
+        else if(ch=='e')numOfEs++;
+        else if(ch=='i')numOfIs++;
+        else if(ch=='o')numOfOs++;
+        else if(ch=='u')numOfUs++;
+        else numOfConsonants++;
+       }
+       
+       if(numOfAs>=1
+            && numOfEs>=1 
+            && numOfIs>=1 
+            && numOfOs>=1 
+            && numOfUs>=1 
+            && numOfConsonants==k) count++;                          
+      }  
+     }
+     return count;
+    }
+}
