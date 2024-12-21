@@ -1,0 +1,64 @@
+class Solution {
+    public int countDays(int days, int[][] meetings) {
+     int [][] mergedArray=merge(meetings);
+     int count=0;
+     if(mergedArray[0][0]!=1)count+=mergedArray[0][0]-1;
+     for(int i=1;i<mergedArray.length;i++){
+      int diff=mergedArray[i][0]-mergedArray[i-1][1]-1 ; 
+      count+=diff;
+     }   
+     if(mergedArray[mergedArray.length-1][1]!=days)count+=days-mergedArray[mergedArray.length-1][1];
+     return count;
+    }
+    public int[][] merge(int[][] intervals) {
+  HashMap<Integer,List<Integer>> map= new HashMap<>();
+  int [][] sortedIntervals;
+  List<Integer> starts= new ArrayList<>();
+  List<List<Integer>> result= new ArrayList<>();
+  for(int i=0;i<intervals.length;i++){
+   int start=intervals[i][0];
+   int end= intervals[i][1];
+   if(!map.containsKey(start)){
+    List<Integer> list= new ArrayList<>();
+    list.add(end);
+    map.put(start,list);
+   }else{
+    List<Integer> list= map.get(start);
+    list.add(end);
+    map.replace(start,list);
+    }
+    starts.add(start);
+  }
+  starts= starts.stream().distinct().sorted().collect(Collectors.toList());
+  sortedIntervals= new int[map.size()][2];
+  for(int i=0;i<starts.size();i++){
+   int start= starts.get(i);
+   sortedIntervals[i][0]=start;
+   List<Integer> list= map.get(start);
+   list.sort(null);
+   sortedIntervals[i][1]= list.get(list.size()-1);
+  }
+  List<Integer> list= new ArrayList<>();
+  list.add(sortedIntervals[0][0]);
+  list.add(sortedIntervals[0][1]);
+  result.add(list);  
+  for(int i=1;i<sortedIntervals.length;i++){
+   List<Integer> previousInterval= result.get(result.size()-1);
+   int previousStart= previousInterval.get(0);
+   int previousEnd= previousInterval.get(1);
+   if(sortedIntervals[i][0]>previousStart && sortedIntervals[i][0]<= previousEnd){
+    List<Integer> currentInterval= new ArrayList<>();
+    currentInterval.add(previousStart);
+    currentInterval.add(Math.max(previousEnd,sortedIntervals[i][1]));
+    result.remove(result.get(result.size()-1));
+    result.add(currentInterval);
+   }else{
+    List<Integer>currentInterval= new ArrayList<>();
+    currentInterval.add(sortedIntervals[i][0]);
+    currentInterval.add(sortedIntervals[i][1]);
+    result.add(currentInterval);
+   }
+  }
+  return result.stream().map(l -> l.stream().mapToInt(Integer::intValue).toArray()).toArray(int[][]::new);
+ }
+}
