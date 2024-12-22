@@ -1,0 +1,15 @@
+class Solution {
+    public int numOfPairs(String[] nums, String target) {
+     int total=0;
+     for(int i=0;i<nums.length;i++){
+      String first=nums[i]; 
+      for(int j=0;j<nums.length;j++){
+       if(i==j) continue;
+       String second=nums[j];
+       String string=first+second;
+       if(string.equals(target))total++;
+      }  
+     }
+     return total;      
+    }
+}
