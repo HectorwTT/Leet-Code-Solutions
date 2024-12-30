@@ -1,0 +1,21 @@
+class Solution {
+    public int nthSuperUglyNumber(int n, int[] primes) {
+        PriorityQueue<Integer> pque = new PriorityQueue<>();
+        int curr =1;
+        pque.add(1);
+        while( n>0 ){
+            curr = pque.peek();
+            pque.remove(curr);
+            while( !pque.isEmpty() && pque.peek() == curr)
+                pque.remove(curr);
+            for( int i=0; i<primes.length; i++ ){
+                if( i==0 && curr <= Integer.MAX_VALUE/primes[i])
+                    pque.add(curr*primes[i]);
+                if( i>=1 && primes[i]>primes[i-1] && curr <= Integer.MAX_VALUE/primes[i])
+                    pque.add(curr*primes[i]);
+            }
+            n--;
+        }
+        return curr;
+    }
+}
