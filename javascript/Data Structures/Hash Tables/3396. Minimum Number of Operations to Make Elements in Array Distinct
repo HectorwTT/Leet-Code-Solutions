@@ -1,0 +1,17 @@
+var minimumOperations = function(nums) {
+ let min=0;
+ let total=1;
+ const map=new Map();
+ map.set(nums[nums.length-1],1);
+ for(let i=nums.length-2;i>=0;i--){
+   if(!map.has(nums[i])){
+    map.set(nums[i],1);
+    total=map.size;
+   }else break;  
+ }
+ if(total==nums.length)return 0;
+ min=(nums.length-total)/3;
+ let mod=(nums.length-total)%3;
+ if(mod!=0)min=Math.floor(min)+1;
+ return min;   
+};
