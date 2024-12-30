@@ -1,0 +1,17 @@
+class Solution {
+public:
+ long longReplacement(long n){
+  if(n==1) return 0; 
+  else if(n%2==0)return 1+longReplacement(n/2);
+  else{
+   long longNPlusOne=longReplacement(n+1);
+   long longNMinusOne=longReplacement(n-1);
+   if(longNPlusOne<longNMinusOne) return 1+longNPlusOne;
+   else return 1+longNMinusOne; 
+  }    
+}
+ int integerReplacement(int n) {
+  int answer=longReplacement(n); 
+  return answer;
+ }
+};
