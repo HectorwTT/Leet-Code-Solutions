@@ -1,0 +1,17 @@
+class Solution {
+    public int nthUglyNumber(int n) {
+      PriorityQueue<Long> pq= new PriorityQueue<>();
+      pq.offer(1L);
+      int count=0;
+      long answer=0;
+      while(count<n){
+       long smallest=pq.peek();
+       if(!pq.contains(1L*smallest*2))pq.offer(1L*smallest*2);
+       if(!pq.contains(1L*smallest*3))pq.offer(1L*smallest*3);
+       if(!pq.contains(1L*smallest*5))pq.offer(1L*smallest*5);
+       answer=pq.remove();
+       count++;       
+      }
+      return (int)answer; 
+    }
+}
