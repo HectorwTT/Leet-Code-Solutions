@@ -1,0 +1,12 @@
+class Solution {
+    public int fillCups(int[] amount) {
+      int n=0;
+      Arrays.sort(amount);
+      while(amount[0]+amount[1]>amount[2]){
+       n++;
+       amount[0]--;
+       amount[1]--; 
+      }
+      return amount[2] +n;  
+    }
+}
