@@ -1,0 +1,45 @@
+class Solution {
+    public String modifyString(String s) {
+      char [] chars=s.toCharArray();
+      for(int i=0;i<chars.length;i++){
+       char ch=chars[i];
+       if(ch=='?'){
+        if(i==0){
+          if(chars.length==1 || chars[i+1]=='?') chars[i]='a'; 
+          else if(chars[i+1]=='z')chars[i]='a';
+          else if(chars[i+1]=='a')chars[i]='b';
+          else {
+            int next=chars[i+1];
+            next++;
+            chars[i]=(char)next;
+          }
+        }else if (i>0 && i<chars.length-1){
+          int prev=chars[i-1];
+          int next=chars[i+1];
+          if(chars[i+1]=='?'){
+            prev++;
+            if(prev>122)prev='a';
+           chars[i]=(char)prev; 
+          }else{
+            int max=Math.max(prev,next);
+            max++;   
+            if(max>122){
+              if(prev==97 || next==97)max=98;
+              else max=97;  
+            }         
+            chars[i]=(char)max;  
+          }  
+        }else{
+          if(chars[i-1]=='z')chars[i]='a';
+          else if(chars[i-1]=='a')chars[i]='b';
+          else {
+            int last=chars[i-1];
+            last++;
+            chars[i]=(char)last;
+          }
+        }
+       } 
+      }
+      return String.valueOf(chars);    
+    }
+}
