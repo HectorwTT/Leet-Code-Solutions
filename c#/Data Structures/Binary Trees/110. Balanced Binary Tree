@@ -1,0 +1,13 @@
+public class Solution {
+    public bool IsBalanced(TreeNode root) {
+      if(root==null)return true;
+      return GetHeight(root)!=-1;   
+    }
+    public int GetHeight(TreeNode root){
+     if(root==null)return 0;
+     int lh=GetHeight(root.left);
+     int rh=GetHeight(root.right);
+     if(Math.Abs(lh-rh)>1 || lh==-1 || rh==-1)return -1;
+     return Math.Max(lh,rh)+1;
+    }
+}
