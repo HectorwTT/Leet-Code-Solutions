@@ -1,0 +1,13 @@
+class Solution {
+    public boolean hasMatch(String s, String p) {
+      String first=p.substring(0,p.indexOf("*"));
+      String second=p.substring(p.indexOf("*")+1);
+      int firstIndexInS=s.indexOf(first);
+      if(firstIndexInS==-1)return false;
+      if(first.equals(""))return s.indexOf(second)!=-1;
+      int index=firstIndexInS+first.length();
+      if(second.equals(""))return true;
+      String substring=s.substring(index);
+      return substring.indexOf(second)>=0;
+    }
+}
