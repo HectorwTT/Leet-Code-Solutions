@@ -1,0 +1,16 @@
+public class Solution {
+    public int CountPalindromicSubsequence(string s) {
+        int count=0;
+     for(int i=0;i<26;i++){
+      int chVal=97+i;
+      char ch=(char)chVal;
+      int firstIndex=s.IndexOf(""+ch);
+      int lastIndex=s.LastIndexOf(""+ch);
+      if(lastIndex==firstIndex+1 || firstIndex==-1 || lastIndex==-1)continue;
+      Dictionary<char,int> map=new Dictionary<char,int>();
+      for(int j=firstIndex+1;j<lastIndex;j++)if(!map.ContainsKey(s[j]))map[s[j]]=1;
+      count+=map.Count;
+     } 
+     return count;    
+    }
+}
