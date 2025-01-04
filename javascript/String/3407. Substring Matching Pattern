@@ -1,0 +1,11 @@
+var hasMatch = function(s, p) {
+ let first=p.substring(0,p.indexOf("*"));
+ let second=p.substring(p.indexOf("*")+1);
+ let firstIndexInS=s.indexOf(first);
+ if(firstIndexInS==-1)return false;
+ if(first =="")return s.indexOf(second)!=-1;
+ let index=firstIndexInS+first.length;
+ if(second =="")return true;
+ let substring=s.substring(index);
+ return substring.indexOf(second)>=0;  
+};
