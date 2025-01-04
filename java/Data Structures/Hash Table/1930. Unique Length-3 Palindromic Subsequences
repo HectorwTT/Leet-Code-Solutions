@@ -1,0 +1,16 @@
+class Solution {
+    public int countPalindromicSubsequence(String s) {
+     int count=0;
+     for(int i=0;i<26;i++){
+      int chVal=97+i;
+      char ch=(char)chVal;
+      int firstIndex=s.indexOf(""+ch);
+      int lastIndex=s.lastIndexOf(""+ch);
+      if(lastIndex==firstIndex+1 || firstIndex==-1 || lastIndex==-1)continue;
+      HashMap<Character,Integer> map=new HashMap<>();
+      for(int j=firstIndex+1;j<lastIndex;j++)if(!map.containsKey(s.charAt(j)))map.put(s.charAt(j),1);
+      count+=map.size();
+     } 
+     return count;    
+    }
+}
