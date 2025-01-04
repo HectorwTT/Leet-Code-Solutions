@@ -1,0 +1,13 @@
+public class Solution {
+    public bool HasMatch(string s, string p) {
+      String first=p.Substring(0,p.IndexOf("*"));
+      String second=p.Substring(p.IndexOf("*")+1);
+      int firstIndexInS=s.IndexOf(first);
+      if(firstIndexInS==-1)return false;
+      if(first.Equals(""))return s.IndexOf(second)!=-1;
+      int index=firstIndexInS+first.Length;
+      if(second.Equals(""))return true;
+      String substring=s.Substring(index);
+      return substring.IndexOf(second)>=0;  
+    }
+}
