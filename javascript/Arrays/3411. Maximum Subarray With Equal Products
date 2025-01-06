@@ -1,0 +1,33 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxLength = function(nums) {
+  let n = nums.length;
+  let maxLength = 0;
+      for (let i = 0; i < n; i++) {
+            let currentProd = 1; // Product of the subarray
+            let currentGcd = 0; // GCD of the subarray
+            let currentLcm = 1; // LCM of the subarray
+            for (let j = i; j < n; j++) {
+                currentProd *= nums[j];
+                currentGcd = (currentGcd == 0) ? nums[j] : gcd(currentGcd, nums[j]);
+                currentLcm = lcm(currentLcm, nums[j]);
+
+                // Check if product equals gcd * lcm
+                if (currentProd ==  currentGcd * currentLcm) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                }
+            }
+        }
+
+        return maxLength;   
+    };
+    var gcd=function( a,  b) {
+        return b == 0 ? a : gcd(b, a % b);
+    };
+
+    // Helper function to calculate the LCM of two numbers
+    var lcm=function( a, b) {
+        return a / gcd(a, b) * b; // Ensure no overflow
+    };
