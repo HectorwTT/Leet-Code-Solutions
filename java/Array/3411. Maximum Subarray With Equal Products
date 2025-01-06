@@ -1,0 +1,29 @@
+class Solution {
+    public int maxLength(int[] nums) {
+      int n = nums.length;
+        int maxLength = 0;
+        for (int i = 0; i < n; i++) {
+            int currentProd = 1; // Product of the subarray
+            int currentGcd = 0; // GCD of the subarray
+            int currentLcm = 1; // LCM of the subarray
+            for (int j = i; j < n; j++) {
+                currentProd *= nums[j];
+                currentGcd = (currentGcd == 0) ? nums[j] : gcd(currentGcd, nums[j]);
+                currentLcm = lcm(currentLcm, nums[j]);
+                // Check if product equals gcd * lcm
+                if (currentProd == (long) currentGcd * currentLcm) {
+                    maxLength = Math.max(maxLength, j - i + 1);
+                }
+            }
+        }
+        return maxLength;   
+    }
+    private  int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
+    }
+
+    // Helper function to calculate the LCM of two numbers
+    private int lcm(int a, int b) {
+        return a / gcd(a, b) * b; // Ensure no overflow
+    }
+}
