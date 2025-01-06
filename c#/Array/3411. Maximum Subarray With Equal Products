@@ -1,0 +1,32 @@
+public class Solution {
+    public int MaxLength(int[] nums) {
+      int n = nums.Length;
+      int maxLength = 0;
+      for (int i = 0; i < n; i++) {
+            int currentProd = 1; // Product of the subarray
+            int currentGcd = 0; // GCD of the subarray
+            int currentLcm = 1; // LCM of the subarray
+            for (int j = i; j < n; j++) {
+                currentProd *= nums[j];
+                currentGcd = (currentGcd == 0) ? nums[j] : Gcd(currentGcd, nums[j]);
+                currentLcm = Lcm(currentLcm, nums[j]);
+
+                // Check if product equals gcd * lcm
+                if (currentProd == (long) currentGcd * currentLcm) {
+                    maxLength = Math.Max(maxLength, j - i + 1);
+                }
+            }
+        }
+
+        return maxLength;   
+    }
+    private  int Gcd(int a, int b) {
+        return b == 0 ? a : Gcd(b, a % b);
+    }
+
+    // Helper function to calculate the LCM of two numbers
+    private int Lcm(int a, int b) {
+        return a / Gcd(a, b) * b; // Ensure no overflow
+    }   
+    
+}
