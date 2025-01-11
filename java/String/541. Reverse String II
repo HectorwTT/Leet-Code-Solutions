@@ -1,0 +1,34 @@
+class Solution {
+    public String reverseStr(String s, int k) {
+     String result="";
+     int count=0;
+     boolean shouldReverse=true;
+     String reverse="";
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(shouldReverse){
+       reverse+=ch; 
+       count++;
+       if(count==k){
+        StringBuffer sb=new StringBuffer(reverse);
+        sb.reverse();
+        result+=sb.toString();
+        shouldReverse=false;
+       }
+      }else{
+        result+=ch;
+        count++;
+        if(count==2*k){
+          shouldReverse=true;
+          reverse="";
+          count=0;  
+        }
+      }  
+     }
+     if(shouldReverse){
+      StringBuffer sb=new StringBuffer(reverse);
+      result+=sb.reverse().toString();
+     }
+      return result;   
+    }
+}
