@@ -1,0 +1,16 @@
+var lastVisitedIntegers = function(nums) {
+ const seen=[];
+ const ans=[];
+ let k=0;
+ for(let i=0;i<nums.length;i++){
+  if(nums[i]>0){
+   k=0;
+   seen.unshift(nums[i]);
+  }else{
+    k++;
+    if(k>seen.length)ans.push(-1);
+    else ans.push(seen[k-1]); 
+  } 
+ }
+ return ans;  
+};
