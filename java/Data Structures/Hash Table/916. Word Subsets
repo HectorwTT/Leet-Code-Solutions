@@ -1,0 +1,36 @@
+class Solution {
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+     List<String> result= new ArrayList<>();      
+     HashMap<Character,Integer> map1=new HashMap<>();
+     String word="";
+     for(int index=0;index<words2.length;index++){
+      word+=words2[index];
+     }
+     for(int i=0;i<word.length();i++){
+      if(!map1.containsKey(word.charAt(i))) map1.put(word.charAt(i),1);
+      else map1.replace(word.charAt(i),map1.get(word.charAt(i))+1); 
+     }
+     for(int index1=0;index1<words1.length;index1++){
+      String word1=words1[index1];
+      HashMap<Character,Integer>map2=new HashMap<>();
+      for(int i=0;i<word1.length();i++){
+       if(!map2.containsKey(word1.charAt(i)))map2.put(word1.charAt(i),1);
+       else map2.replace(word1.charAt(i),map2.get(word1.charAt(i))+1); 
+      }System.out.println(map2);
+      boolean isUniversal=true;System.out.println("A"+map1);
+      for(Character key:map1.keySet()){
+       if(!map2.containsKey(key) ){
+        isUniversal=false;
+        break;
+       }else{
+       //if(map2.get(key)<map1.get(key)){
+         //isUniversal=false;
+         //break;   
+        //}
+       }
+      }
+      if(isUniversal)result.add(word1);
+     }
+     return result;
+    } 
+}
