@@ -1,0 +1,21 @@
+class Solution {
+    public String reformatNumber(String number) {
+      String result="";
+      List<Character> list= new ArrayList<>();
+      int index=0;
+      String last="";
+      for(int i=0;i<number.length();i++){
+        char ch=number.charAt(i);
+        if(ch>=48 && ch<=57)list.add(ch);
+      }
+      while(list.size()-index>4){
+       for(int i=index;i<index+3;i++)result+=list.get(i);
+       result+="-";
+       index+=3; 
+      }
+      for(int i=index;i<list.size();i++)last+=list.get(i);
+      if(last.length()==4)result+=last.substring(0,2)+"-"+last.substring(2);
+      else result+=last;
+      return result;  
+    }
+}
