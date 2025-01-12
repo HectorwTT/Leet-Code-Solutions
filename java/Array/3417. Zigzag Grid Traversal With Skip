@@ -1,0 +1,24 @@
+class Solution {
+    public List<Integer> zigzagTraversal(int[][] grid) {
+      int currentRow=0;
+      int currentColumn=0;
+      List<Integer> result=new ArrayList<>();      
+      while(currentRow<grid.length ){
+        if(currentColumn>=grid[0].length || currentColumn<0){
+         currentRow++;
+         if(currentColumn<0){
+            if(currentColumn==-1)currentColumn=0;
+            else currentColumn=1;
+         }else{
+           if(currentColumn==grid[0].length)currentColumn=grid[0].length-1;
+           else currentColumn=grid[0].length-2; 
+         }
+        }else{        
+          result.add(grid[currentRow][currentColumn]);
+          if(currentRow%2==0)currentColumn+=2;
+          else currentColumn-=2;  
+        }
+      }
+      return result;    
+    }
+}
