@@ -1,0 +1,20 @@
+class Solution {
+    public int getLargestOutlier(int[] nums) {
+     int total=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     int max=-1001;
+     for(int i=0;i<nums.length;i++){
+        total+=nums[i];
+      if(!map.containsKey(nums[i]))map.put(nums[i],i);
+      else map.replace(nums[i],i); 
+     }
+     for(int i=0;i<nums.length;i++){
+      int number=nums[i];
+      int outlier=total-2*number;
+      if(map.containsKey(outlier) && map.get(outlier)!=i){
+        max=Math.max(outlier,max);
+      } 
+     } 
+     return max;     
+    }
+}
