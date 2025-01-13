@@ -1,0 +1,35 @@
+class Solution {
+    public int numPrimeArrangements(int n) {
+        int numPrime=countPrime(n);
+        int numComposite=n-numPrime;
+
+        long primePermu=permutation(numPrime);
+        long compositePermu=permutation(numComposite);
+
+        long result= (primePermu*compositePermu)%(long)(Math.pow(10,9)+7);
+        return (int)result;
+    }
+    public int countPrime(int n){
+        int count=0;
+        for(int i=2;i<=n;i++){
+            int flag=1;
+            for(int j=2;j<=Math.sqrt(i);j++){
+                if(i%j==0){
+                    flag=0;
+                    break;
+                }
+            }
+            if(flag==1){
+                count++;
+            }
+        }
+        return count;
+    }
+    public long permutation(int num){
+        long pro=1;
+        for(int i=num;i>=1;i--){
+            pro=(pro*i)%(long)(Math.pow(10,9)+7);
+        }
+        return pro;
+    }
+}
