@@ -1,0 +1,18 @@
+var createTargetArray = function(nums, index) {
+ const target=[];
+ target.length=nums.length;
+ for(let i=0;i<target.length;i++)target[i]=0;
+ for(let i=0;i<nums.length;i++){
+  if(index[i]==i)target[index[i]]=nums[i];
+  else{
+   let old=target[index[i]];
+   target[index[i]]=nums[i];
+   for(let j=index[i]+1;j<target.length;j++){
+    let old1=target[j];
+    target[j]= old;
+    old=old1; 
+   }
+  }
+ }  
+ return target;   
+};
