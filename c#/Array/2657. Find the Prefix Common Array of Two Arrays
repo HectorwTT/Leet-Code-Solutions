@@ -1,0 +1,16 @@
+public class Solution {
+    public int[] FindThePrefixCommonArray(int[] A, int[] B) {
+     int [] numbers=new int[A.Length];
+     int [] answers=new int[A.Length];
+     for(int i=0;i<A.Length;i++){
+      numbers[A[i]-1]++;
+      numbers[B[i]-1]++;
+      int count=0;
+      for(int j=0;j<numbers.Length;j++){
+        if(numbers[j]==2)count++;
+      }   
+      answers[i]=count;
+     }  
+     return answers;   
+    }
+}
