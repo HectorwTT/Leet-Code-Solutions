@@ -1,0 +1,53 @@
+class Solution {
+    public int expressiveWords(String s, String[] words) {
+     int count=0;
+     String original="";
+     List<Integer> counts=new ArrayList<>();
+     int numOfConsecutive=1;
+     char previous=s.charAt(0);
+     char current=previous;
+     for(int i=1;i<s.length();i++){
+      current=s.charAt(i);
+      previous=s.charAt(i-1);
+      if(current==previous)numOfConsecutive++;
+      else{
+        counts.add(numOfConsecutive);
+        original+=previous;
+        numOfConsecutive=1;    
+      }
+     }
+     original+= current; 
+     counts.add(numOfConsecutive);
+     for(int i=0;i<words.length;i++){
+       String word= words[i];
+       String original1="";
+       List<Integer> counts1=new ArrayList<>();
+        previous=word.charAt(0);
+        current=previous;
+        numOfConsecutive=1;
+       for(int j=1;j<word.length();j++){
+        current=word.charAt(j);
+        previous=word.charAt(j-1);
+        if(previous==current)numOfConsecutive++; 
+        else{
+         counts1.add(numOfConsecutive);
+         original1+=previous;
+         numOfConsecutive=1;    
+        }
+       } 
+        original1+=current;
+        counts1.add(numOfConsecutive);
+        int numDifferent=0;
+        int numGreaterThanThree=0;
+        if(!original1.equals(original))continue;
+        for(int j=0;j<counts.size();j++){
+          if(counts1.get(j)!= counts.get(j)){
+            numDifferent++;
+            if(counts1.get(j)<counts.get(j) && counts.get(j)>=3)numGreaterThanThree++;
+          }
+        }
+        if(numDifferent== numGreaterThanThree)count++;  
+     }
+     return count;
+    }
+}
