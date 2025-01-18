@@ -1,0 +1,25 @@
+var countServers = function(grid) {
+ let total=0;
+ let numberOfIsolated=0;
+ const serversByRow=new Map();
+ const serversByColumn=new Map();
+ for(let i=0;i<grid.length;i++){
+  for(let j=0;j<grid[i].length;j++){
+   let row=i;
+   let column=j;
+   if(grid[i][j]==1){
+    total++;   
+    if(!serversByRow.has(i))serversByRow.set(i,1);
+    else serversByRow.set(i,serversByRow.get(i)+1); 
+    if(!serversByColumn.has(j))serversByColumn.set(j,1);
+    else serversByColumn.set(j,serversByColumn.get(j)+1);  
+   } 
+   } 
+ }    
+ for(let i=0;i<grid.length;i++){
+  for(let j=0;j<grid[i].length;j++){
+   if(grid[i][j]==1) if(serversByRow.get(i)==1 && serversByColumn.get(j)==1)numberOfIsolated++;   
+  } 
+ }
+ return total-numberOfIsolated;       
+};
