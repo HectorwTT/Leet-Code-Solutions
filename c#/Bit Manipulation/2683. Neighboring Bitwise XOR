@@ -1,0 +1,7 @@
+public class Solution {
+    public bool DoesValidArrayExist(int[] derived) {
+      int xorSum=0;
+      for(int i=0;i<derived.Length;i++) xorSum^=derived[i];
+      return xorSum==0;    
+    }
+}
