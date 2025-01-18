@@ -1,0 +1,29 @@
+class Solution {
+    public int countServers(int[][] grid) {
+      int total=0;
+      int numberOfIsolated=0;
+      HashMap<Integer,Integer>serversByRow=new HashMap<>();
+      HashMap<Integer,Integer> serversByColumn=new HashMap<>();
+      for(int i=0;i<grid.length;i++){
+       for(int j=0;j<grid[i].length;j++){
+        int row=i;
+        int column=j;
+        if(grid[i][j]==1){
+         total++;   
+         if(!serversByRow.containsKey(i))serversByRow.put(i,1);
+         else serversByRow.replace(i,serversByRow.get(i)+1); 
+        if(!serversByColumn.containsKey(j))serversByColumn.put(j,1);
+         else serversByColumn.replace(j,serversByColumn.get(j)+1);  
+        } 
+       } 
+      }    
+      for(int i=0;i<grid.length;i++){
+       for(int j=0;j<grid[i].length;j++){
+        if(grid[i][j]==1){
+         if(serversByRow.get(i)==1 && serversByColumn.get(j)==1)numberOfIsolated++;   
+        }
+       } 
+      }
+      return total-numberOfIsolated;    
+    }
+}
