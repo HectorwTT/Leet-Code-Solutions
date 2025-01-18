@@ -1,0 +1,29 @@
+public class Solution {
+    public int CountServers(int[][] grid) {
+       int total=0;
+      int numberOfIsolated=0;
+      Dictionary<int,int>serversByRow=new Dictionary<int,int>();
+      Dictionary<int,int> serversByColumn=new Dictionary<int,int>();
+      for(int i=0;i<grid.Length;i++){
+       for(int j=0;j<grid[i].Length;j++){
+        int row=i;
+        int column=j;
+        if(grid[i][j]==1){
+         total++;   
+         if(!serversByRow.ContainsKey(i))serversByRow[i]=1;
+         else serversByRow[i]=serversByRow[i]+1; 
+        if(!serversByColumn.ContainsKey(j))serversByColumn[j]=1;
+         else serversByColumn[j]=serversByColumn[j]+1;  
+        } 
+       } 
+      }    
+      for(int i=0;i<grid.Length;i++){
+       for(int j=0;j<grid[i].Length;j++){
+        if(grid[i][j]==1){
+         if(serversByRow[i]==1 && serversByColumn[j]==1)numberOfIsolated++;   
+        }
+       } 
+      }
+      return total-numberOfIsolated;      
+    }
+}
