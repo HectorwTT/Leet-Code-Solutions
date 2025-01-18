@@ -1,0 +1,16 @@
+public class Solution {
+    public bool PredictTheWinner(int[] nums) {
+       return CanTheFirstPlayerWin(nums,0,nums.Length-1,0,0,1);   
+    }
+    public bool CanTheFirstPlayerWin(int [] nums,int left,
+     int right,int player1Sum,int player2Sum,int numOfTurn){             
+      if(left==right) return player1Sum+nums[left]>=player2Sum ; 
+      else{
+        if(numOfTurn%2==0) return CanTheFirstPlayerWin(nums,left+1,right,player1Sum,player2Sum+nums[left],numOfTurn+1)
+                 && CanTheFirstPlayerWin(nums,left,right-1,player1Sum,nums[right]+player2Sum,numOfTurn+1); 
+        else  return CanTheFirstPlayerWin(nums,left+1,right,player1Sum+nums[left],player2Sum,numOfTurn+1)
+                 || CanTheFirstPlayerWin(nums,left,right-1,player1Sum+nums[right],player2Sum,numOfTurn+1);          
+      }                  
+    }      
+    
+}
