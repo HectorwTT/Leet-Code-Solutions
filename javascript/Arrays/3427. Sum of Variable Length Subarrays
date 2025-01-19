@@ -1,0 +1,17 @@
+var subarraySum = function(nums) {
+ const sums=[];
+ let total=0;
+ let subarraySum=0;
+ for(let i=0;i<nums.length;i++){
+  total+=nums[i];
+  sums[i]=total; 
+ }
+ for(let i=0;i<nums.length;i++){
+  let start=Math.max(0,i-nums[i]);
+  let sum= 0;
+  if(start==0)sum=sums[i];
+  else sum=sums[i]-sums[start-1];
+  subarraySum+=sum;  
+ } 
+ return subarraySum;        
+};
