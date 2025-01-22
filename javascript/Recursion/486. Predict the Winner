@@ -1,0 +1,15 @@
+var predictTheWinner = function(nums) {
+ return canTheFirstPlayerWin(nums,0,nums.length-1,0,0,1);   
+};
+var canTheFirstPlayerWin=function( nums,left,right,player1Sum,player2Sum,numOfTurn){             
+ if(left==right) return player1Sum+nums[left]>=player2Sum ; 
+ else{
+  if(numOfTurn%2==0) return canTheFirstPlayerWin(nums,left+1,right,
+                             player1Sum,player2Sum+nums[left],numOfTurn+1)
+                 && canTheFirstPlayerWin(nums,left,right-1,
+                 player1Sum,nums[right]+player2Sum,numOfTurn+1); 
+  else  return canTheFirstPlayerWin(nums,left+1,right,player1Sum+nums[left],player2Sum,numOfTurn+1)
+                 || canTheFirstPlayerWin(nums,left,right-1,player1Sum+nums[right],
+                 player2Sum,numOfTurn+1);          
+ }                  
+};
