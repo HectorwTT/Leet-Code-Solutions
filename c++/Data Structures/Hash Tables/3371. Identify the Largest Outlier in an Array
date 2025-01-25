@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int getLargestOutlier(vector<int>& nums) {
+     int total=0;
+     unordered_map<int,int> map;
+     int max=-1001;
+     for(int i=0;i<nums.size();i++){
+        total+=nums[i];
+      if(map.find(nums[i])==map.end())map[nums[i]]=i;
+      else map[nums[i]]=i; 
+     }
+     for(int i=0;i<nums.size();i++){
+      int number=nums[i];
+      int outlier=total-2*number;
+      if(map.find(outlier)!=map.end()   &&  map[outlier]!=i){
+        max=std::max(outlier,max); 
+      } 
+     } 
+     return max;  
+    }
+};
