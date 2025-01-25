@@ -1,0 +1,12 @@
+var lengthOfLIS = function(nums) {
+ const lengths= [];
+ let max=0;
+ for(let i=0;i<nums.length;i++)lengths.push(1);
+ for(let i=1;i<nums.length;i++){
+  for(let j=0;j<i;j++){
+   if(nums[j]<nums[i] && lengths[i]<=lengths[j]) lengths[i]=lengths[j]+1;
+  }
+ }
+ for(let i=0;i<lengths.length;i++)max=Math.max(lengths[i],max);
+ return max;
+};
