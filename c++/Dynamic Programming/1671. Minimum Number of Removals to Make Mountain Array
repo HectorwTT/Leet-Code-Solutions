@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int minimumMountainRemovals(vector<int>& sequence) {
+     vector<int> lengthsFromFront;
+     vector<int> lengthsFromBehind;
+     int maxLength=1;
+     for(int i=0;i<sequence.size();i++)lengthsFromFront.push_back(1);
+     for(int i=0;i<sequence.size();i++)lengthsFromBehind.push_back(1);
+     for(int i=0;i<sequence.size();i++){
+      for(int j=i-1;j>=0;j--){
+       if(sequence.at(j)<sequence.at(i) && lengthsFromFront.at(i)<=lengthsFromFront.at(j)) 
+        lengthsFromFront.at(i)=lengthsFromFront.at(j)+1;
+      }
+     }
+     for(int i=sequence.size()-1;i>=0;i--){
+      for(int j=i+1;j<sequence.size();j++){
+       if(sequence.at(j)<sequence.at(i) && lengthsFromBehind.at(i)<=lengthsFromBehind.at(j)) 
+        lengthsFromBehind.at(i)=lengthsFromBehind.at(j)+1;
+      }
+     }
+     for(int i=0;i<sequence.size();i++){
+      if(lengthsFromFront.at(i)==1 ||  lengthsFromBehind.at(i)==1)continue;
+      maxLength=std::max(maxLength,lengthsFromFront.at(i)+lengthsFromBehind.at(i)-1);       
+     }       
+     return sequence.size()-maxLength;
+    }
+};
