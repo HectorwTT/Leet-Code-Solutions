@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int longestSubarray(vector<int>& nums) {
+     vector<int> numOfConsecutiveOnesFromFront;
+     vector<int> numOfConsecutiveOnesFromBehind;
+     int max=0;
+     for(int i=0;i<nums.size();i++)numOfConsecutiveOnesFromFront.push_back(0);
+     for(int i=0;i<nums.size();i++)numOfConsecutiveOnesFromBehind.push_back(0);
+     if(nums.size()==1)return max; 
+     if(nums.at(0)==1)numOfConsecutiveOnesFromFront.at(0)=1;
+     for(int i=1;i<nums.size();i++){
+      if(nums.at(i)==1){
+        if(nums.at(i-1)==1)numOfConsecutiveOnesFromFront.at(i)=
+         numOfConsecutiveOnesFromFront.at(i-1)+1;
+        else numOfConsecutiveOnesFromFront.at(i)=1;
+      }  
+     } 
+     if(nums.at(nums.size()-1)==1)numOfConsecutiveOnesFromBehind.at(nums.size()-1)=1; 
+     for(int i=nums.size()-2;i>=0;i--){
+      if(nums.at(i)==1){
+        if(nums.at(i+1)==1)numOfConsecutiveOnesFromBehind.at(i)=numOfConsecutiveOnesFromBehind.at(i+1)+1;
+        else numOfConsecutiveOnesFromBehind.at(i)=1;
+      }  
+     } 
+     max=std::max(numOfConsecutiveOnesFromBehind.at(1),max);  
+    for(int i=1;i<nums.size()-1;i++) max=std::max(max,numOfConsecutiveOnesFromFront.at(i-1)+numOfConsecutiveOnesFromBehind.at(i+1));  
+    max=std::max(numOfConsecutiveOnesFromFront.at(nums.size()-2),max);
+     return max;   
+    }
+};
