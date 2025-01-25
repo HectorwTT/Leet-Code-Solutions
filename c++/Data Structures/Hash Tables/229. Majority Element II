@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+     vector<int> numbers;
+     unordered_map<int,int> map;
+     int third = nums.size()/3;
+     for(int i=0;i<nums.size();i++){
+      int number = nums[i];
+      if(map.find(number)==map.end()) map[number]=1;
+      else map[number]=map[number]+1;
+     }
+     for(auto number:map){
+      if(number.second> third) numbers.push_back(number.first);
+     }
+     return numbers;   
+    }
+};
