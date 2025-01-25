@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int climbStairs(int n) {
+     if(n==0) return 0;
+     if(n==1) return 1;
+     vector<int>numOfSteps;
+     numOfSteps.push_back(1);
+     numOfSteps.push_back(2);
+     for(int i=2;i<n;i++){
+      int numOfStepsAtI= numOfSteps.at(i-1) + numOfSteps.at(i-2);
+      numOfSteps.push_back(numOfStepsAtI);
+     }
+     return numOfSteps.at(n-1);   
+    }
+};
