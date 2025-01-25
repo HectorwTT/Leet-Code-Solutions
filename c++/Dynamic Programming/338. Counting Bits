@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<int> countBits(int n) {
+     vector<int> numberOfOnes;
+     if(n==0){
+      numberOfOnes.push_back(0);    
+      return numberOfOnes;
+     }   
+     numberOfOnes.push_back(0);
+     numberOfOnes.push_back(1);
+     if(n==1)return numberOfOnes;
+     numberOfOnes.push_back(1);
+     int lastPowerOfTwo=2;
+     for(int i=3;i<=n;i++){
+            if( __builtin_popcount(i)==1){
+                numberOfOnes.push_back(1);
+                lastPowerOfTwo=i;
+            }
+            else{
+                numberOfOnes.push_back(numberOfOnes.at(lastPowerOfTwo)+
+                                 numberOfOnes.at(i-lastPowerOfTwo));
+            }
+        }
+        return numberOfOnes; 
+    }
+};
