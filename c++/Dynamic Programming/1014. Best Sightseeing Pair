@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maxScoreSightseeingPair(vector<int>& values) {
+     int maxScore=0;
+     int maxValue=values.at(values.size()-1)-(values.size()-1);
+     for(int i=values.size()-2;i>=0;i--){
+      int score  =values.at(i)+i;  
+      maxScore=std::max(score+maxValue,maxScore);
+      maxValue=std::max(values.at(i)-i,maxValue);
+     }        
+     return maxScore;      
+    }
+};
