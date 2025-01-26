@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+      ListNode *current= head;
+      unordered_map<ListNode*,int>map;
+      while(current!=NULL){
+       if(map.find(current)!=map.end())return true;
+       else map[current]=1;
+       current=current->next;
+      }
+      return false;  
+    }
+};
