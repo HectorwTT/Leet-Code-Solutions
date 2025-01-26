@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long maxEnergyBoost(vector<int>& energyDrinkA, vector<int>& energyDrinkB) {
+     vector<long> dpA ; 
+     vector<long> dpB;
+     dpA.push_back(1L*energyDrinkA[0]);
+     dpB.push_back(1L*energyDrinkB[0]);
+     dpA.push_back(dpA[0]+1L*energyDrinkA[1]);
+     dpB.push_back(dpB[0]+1L*energyDrinkB[1]);
+     for(int i=2;i<energyDrinkA.size();i++){
+      dpA.push_back(std::max(dpA[i-1],dpB[i-2])+1L*energyDrinkA[i]);
+      dpB.push_back(std::max(dpB[i-1],dpA[i-2])+1L*energyDrinkB[i]);
+     }
+     return std::max(dpA[energyDrinkA.size()-1],dpB[energyDrinkB.size()-1]);  
+    }
+};
