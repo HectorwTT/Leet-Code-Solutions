@@ -1,0 +1,29 @@
+var jump = function(nums) {
+ const minJumps= [];
+ for(let i=0;i<nums.length;i++)minJumps.push(0);
+ for(let i=nums.length-2;i>=0;i--){
+  if(nums[i]!=0){
+   if(nums.length-1-i<=nums[i])minJumps[i]=1;
+   else{
+    let jump=0;
+    const list=[];
+    while(jump<=nums[i]){
+     if(minJumps[i+jump]!=0){
+      minJumps[i]=1+ minJumps[i+jump];
+      list.push(minJumps[i]);
+     }
+     jump++;
+    }
+    if(list.length!=0){
+     let minJump=list.at(0);
+     for(let j=1;j<list.length;j++){
+      let x= list.at(j);
+      if(x<minJump)minJump=x;
+     }
+     minJumps[i]=minJump;
+    }
+   }
+  }
+  }
+  return minJumps[0];   
+};
