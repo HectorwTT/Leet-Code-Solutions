@@ -1,0 +1,14 @@
+class Solution {
+    public int countPartitions(int[] nums) {
+      int total=(int)Arrays.stream(nums).sum(); 
+      int count=0;
+      int sum=0;
+      for(int i=0;i<nums.length-1;i++){
+       sum+=nums[i];
+       int rest=Math.abs(total-sum);
+       int diff=Math.abs(rest-sum);
+       if(diff%2==0)count++;
+      }
+      return count;
+    }
+}
