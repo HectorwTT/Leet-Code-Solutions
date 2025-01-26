@@ -1,0 +1,15 @@
+public class Solution {
+    public int CountPartitions(int[] nums) {
+      int total=0; 
+      int count=0;
+      int sum=0;
+      for(int i=0;i<nums.Length;i++)total+=nums[i];
+      for(int i=0;i<nums.Length-1;i++){
+       sum+=nums[i];
+       int rest=Math.Abs(total-sum);
+       int diff=Math.Abs(rest-sum);
+       if(diff%2==0)count++;
+      }
+      return count;   
+    }
+}
