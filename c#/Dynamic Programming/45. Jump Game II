@@ -1,0 +1,31 @@
+public class Solution {
+    public int Jump(int[] nums) {
+     int [] minJumps= new int[nums.Length];
+     minJumps[nums.Length-1]=0;
+     for(int i=nums.Length-2;i>=0;i--){
+      if(nums[i]!=0){
+        if(nums.Length-1-i<=nums[i])minJumps[i]=1;
+        else{
+         int jump=0;
+         IList<int> list= new List<int>();
+         while(jump<=nums[i]){
+          if(minJumps[i+jump]!=0){
+            minJumps[i]=1+ minJumps[i+jump];
+            list.Add(minJumps[i]);
+          }
+          jump++;
+         }
+         if(list.Count!=0){
+          int minJump=list[0];
+          for(int j=1;j<list.Count;j++){
+           int x= list[j];
+           if(x<minJump)minJump=x;
+          }
+          minJumps[i]=minJump;
+         }
+        }
+      }
+     }
+     return minJumps[0];   
+    }
+}
