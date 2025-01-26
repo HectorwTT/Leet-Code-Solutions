@@ -1,0 +1,21 @@
+public class Solution {
+    public bool IsHappy(int n) {
+     int number=n;
+     Dictionary<int,int> map= new Dictionary<int,int>();
+     map[number]=1;
+     while(number!=1){
+      string nstr=""+number;
+      int value=0;
+      for(int i=0;i<nstr.Length;i++){
+       char ch= nstr[i];
+       int val= ch-48;
+       int valSquared= (int)Math.Pow(val,2);
+       value+=valSquared;
+      }
+      number=value;
+      if(map.ContainsKey(number))return false;
+      map[number]=1;
+     }
+     return true;   
+    }
+}
