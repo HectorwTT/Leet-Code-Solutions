@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int trap(vector<int>& heights) {
+     int totalWater = 0;
+     int leftPointer = 0;
+     int rightPointer = heights.size() - 1;
+     int leftBound = 0;
+     int rightBound = 0;
+     while(leftPointer<rightPointer){
+       if(heights[leftPointer]<=
+         heights[rightPointer]){
+          leftBound= std::max(heights[leftPointer],
+                   leftBound);
+          totalWater+= leftBound-heights[leftPointer];
+          leftPointer++;        
+         }else{
+          rightBound=std::max(heights[rightPointer],rightBound);
+          totalWater+=rightBound-heights[rightPointer];
+          rightPointer--; 
+         }
+     }
+     return totalWater;   
+    }
+};
