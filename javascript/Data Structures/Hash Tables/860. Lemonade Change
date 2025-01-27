@@ -1,7 +1,3 @@
-/**
- * @param {number[]} bills
- * @return {boolean}
- */
 var lemonadeChange = function(bills) {
       const map = new Map();
       for(let i=0;i<bills.length;i++){
