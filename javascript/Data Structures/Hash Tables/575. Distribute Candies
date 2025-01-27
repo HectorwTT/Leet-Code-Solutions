@@ -1,0 +1,17 @@
+var distributeCandies = function(candyType) {
+ let candies=0;
+ let maxCandies=candyType.length/2;
+ let maxType=0;
+ const map=new Map();
+ for(let i=0;i<candyType.length;i++){
+  if(!map.has(candyType[i]))map.set(candyType[i],1);
+  else map.set(candyType[i],map.get(candyType[i])+1);  
+ } 
+ let keys = map.keys();
+ for(let [key, value] of map) {
+  candies++;
+  maxType++;
+  if(candies==maxCandies)break;
+ }
+ return maxType;         
+};
