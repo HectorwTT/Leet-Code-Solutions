@@ -1,0 +1,18 @@
+public class Solution {
+    public int DistributeCandies(int[] candyType) {
+     int candies=0;
+     int maxCandies=candyType.Length/2;
+     int maxType=0;
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     for(int i=0;i<candyType.Length;i++){
+      if(!map.ContainsKey(candyType[i]))map[candyType[i]]=1;
+      else map[candyType[i]]=map[candyType[i]]+1;  
+     } 
+     foreach(KeyValuePair<int,int> entry in map){ 
+      candies++;
+      maxType++;
+      if(candies==maxCandies)break;
+     } 
+     return maxType;      
+    }
+}
