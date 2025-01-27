@@ -1,0 +1,34 @@
+var rangeSumBST = function(root, low, high) {
+ var inOrder=inorderTraversal(root);
+ let sum=0;
+ for(let i=0;i<inOrder.length;i++){
+      if(inOrder.at(i)>=low && inOrder.at(i)<=high)sum+=inOrder.at(i);  
+ }   
+ return sum;  
+};
+
+var inorderTraversal = function(root) {
+  const result=[];
+   if(root==null)return result;
+   else if(root.left==null && root.right==null){
+    result.push(root.val);
+    return result;
+   }else if(root.left==null){
+    let rightTraversal= inorderTraversal(root.right);
+    result.push(root.val);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    return result;
+   }else if(root.right==null){
+    let leftTraversal=inorderTraversal(root.left);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    result.push(root.val);
+    return result;
+   }else{
+    let leftTraversal=inorderTraversal(root.left);
+    let rightTraversal=inorderTraversal(root.right);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    result.push(root.val);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    return result;
+   }   
+};
