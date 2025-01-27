@@ -1,0 +1,13 @@
+var numJewelsInStones = function(jewels, stones) {
+ const map=new Map();
+ let answer=0;
+ for(let i=0;i<jewels.length;i++){
+  var ch =jewels.charAt(i);
+  if(!map.has(ch))map.set(ch,1);  
+ } 
+ for(let i=0;i<stones.length;i++){
+  var ch=stones.charAt(i);
+  if(map.has(ch))answer++;  
+ }
+ return answer;  
+};
