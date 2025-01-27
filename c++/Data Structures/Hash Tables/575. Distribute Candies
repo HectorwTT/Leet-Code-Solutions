@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int distributeCandies(vector<int>& candyType) {
+     int candies=0;
+     int maxCandies=candyType.size()/2;
+     int maxType=0;
+     unordered_map<int,int> map;
+     for(int i=0;i<candyType.size();i++){
+      if(map.find(candyType[i])==map.end())map[candyType[i]]=1;
+      else map[candyType[i]]=map[candyType[i]]+1;  
+     } 
+     for(auto key:map){
+      candies++;
+      maxType++;
+      if(candies==maxCandies)break;
+     } 
+     return maxType;    
+    }
+};
