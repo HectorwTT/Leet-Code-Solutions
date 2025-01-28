@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int maxSubArray(vector<int>& nums) {
+     int max = nums[0];
+     int cur = max;
+     for(int i = 1 ; i < nums.size() ; i++){
+        cur = std::max(nums[i],nums[i]+cur);
+        max = std::max(cur,max);
+     }
+     return max;     
+    }
+};
