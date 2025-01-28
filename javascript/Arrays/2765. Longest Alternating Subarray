@@ -1,0 +1,18 @@
+var alternatingSubarray = function(nums) {
+ let max=-1;
+ for(let i=0;i<nums.length-1;i++){
+  const list= [];
+  list.push(nums[i]);
+  if(nums[i+1]!=nums[i]+1)continue;
+  for(let j=i+1;j<nums.length;j++){
+   if(list.length%2==0){
+    if(nums[j]!=nums[i] || nums[j]!=nums[j-1]-1)break;
+   }else{
+     if(nums[j]!=nums[i]+1 || nums[j]!=nums[j-1]+1)break;
+   }
+   list.push(nums[j]);
+   if(max<list.length)max=list.length;
+  }
+ }
+ return max;  
+};
