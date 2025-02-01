@@ -1,0 +1,24 @@
+public class Solution {
+    public string FindValidPair(string s) {
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     String result="";
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      int digit=ch-48;
+      if(!map.ContainsKey(digit))map[digit]=1;
+      else map[digit]=map[digit]+1;  
+     }
+
+     for(int i=0;i<s.Length-1;i++){
+      char current=s[i];
+      char next=s[i+1];
+      int currentDigit=current-48;
+      int nextDigit=next-48;
+      if(map[currentDigit]==currentDigit && map[nextDigit]==nextDigit && currentDigit!=nextDigit){
+       result+=currentDigit+""+nextDigit;
+       break; 
+      }
+     }
+     return result;       
+    }
+}
