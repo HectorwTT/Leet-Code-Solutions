@@ -1,0 +1,16 @@
+public class Solution {
+    public int MinOperations(int[] nums) {
+     int total=0;
+     int previous=nums[0];
+     for(int i=1;i<nums.Length;i++){
+      int current= nums[i];
+      if(current<=previous){
+        int newCurrent=previous+1;
+        total+=newCurrent-current;
+        nums[i]=newCurrent;
+      }
+      previous=nums[i];
+     }   
+     return total;   
+    }
+}
