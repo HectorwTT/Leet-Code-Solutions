@@ -1,0 +1,25 @@
+class Solution {
+public:
+    string findValidPair(string s) {
+     unordered_map<int,int> map;
+     string result="";
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      int digit=ch-48;
+      if(map.find(digit)==map.end())map[digit]=1;
+      else map[digit]=map[digit]+1;  
+     }
+
+     for(int i=0;i<s.size()-1;i++){
+      char current=s[i];
+      char next=s[i+1];
+      int currentDigit=current-48;
+      int nextDigit=next-48;
+      if(map[currentDigit]==currentDigit && map[nextDigit]==nextDigit && currentDigit!=nextDigit){
+       result=to_string(currentDigit)+to_string(nextDigit);
+       break; 
+      }
+     }
+     return result;      
+    }
+};
