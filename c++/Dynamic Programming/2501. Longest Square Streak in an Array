@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int longestSquareStreak(vector<int>& arr) {
+     vector<int> lengths;
+     std::sort(arr.begin(),arr.end());
+     unordered_map<int,int> map;
+     for(int i=0;i<arr.size();i++)lengths.push_back(1);
+     int max= lengths[0];
+     for(int i=0;i<arr.size();i++){
+       double squareroot= pow(arr[i],0.5);
+       double squarerootceil= ceil(squareroot);
+       if(squareroot==squarerootceil){
+         int squarerootint= (int)squareroot;
+         if(map.find(squarerootint)!=map.end()){
+          int last= map[squarerootint];
+          lengths[i]=lengths[last]+1;
+          max=std::max(max,lengths[i]);
+         }
+       }      
+       if(map.find(arr[i])!=map.end())map[arr[i]]=i;
+       else map[arr[i]]=i;
+     }
+     if(max<2)return -1;
+     return max;       
+    }
+};
