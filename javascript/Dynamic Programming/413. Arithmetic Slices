@@ -1,0 +1,31 @@
+var numberOfArithmeticSlices = function(nums) {
+ if(nums.length==1)return 0;
+ let total=0;
+ let difference=0;
+ difference= nums[1]-nums[0];
+ let length=1;
+ for(let i=2;i<=nums.length;i++){
+  if(i==nums.Length){
+   if(length>=2)total+=getAddFactorial(length);
+   continue;
+   }
+   let curr= nums[i];
+   let prev= nums[i-1];
+   if(difference!= curr-prev ){
+    difference= curr-prev;
+    if(length>=2)total+=getAddFactorial(length);
+    length=1;
+   }else length++;
+ }
+ return total;       
+};
+
+var getAddFactorial=function(difference){
+ let total=0;
+ let number=1;
+ while(number<difference){
+  total+=number;
+  number++;
+ }
+ return total;
+};
