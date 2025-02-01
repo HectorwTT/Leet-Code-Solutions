@@ -1,0 +1,17 @@
+public class Solution {
+    public int LongestMonotonicSubarray(int[] nums) {
+     int [] increasingSubArrayLength=new  int[nums.Length];
+     int [] decreasingSubArrayLength=new int[nums.Length];
+     int increasingSubArrayMax=1;
+     int decreasingSubArrayMax=1;
+     for(int i=0;i<increasingSubArrayLength.Length;i++)increasingSubArrayLength[i]=1;
+     for(int i=0;i<decreasingSubArrayLength.Length;i++)decreasingSubArrayLength[i]=1;
+     for(int i=1;i<nums.Length;i++){
+      if(nums[i]>nums[i-1])increasingSubArrayLength[i]=increasingSubArrayLength[i-1]+1; 
+      if(nums[i]<nums[i-1])decreasingSubArrayLength[i]=decreasingSubArrayLength[i-1]+1;   
+      increasingSubArrayMax=Math.Max(increasingSubArrayMax,increasingSubArrayLength[i]);
+      decreasingSubArrayMax=Math.Max(decreasingSubArrayMax,decreasingSubArrayLength[i]);
+     }
+     return Math.Max(increasingSubArrayMax,decreasingSubArrayMax);    
+    }
+}
