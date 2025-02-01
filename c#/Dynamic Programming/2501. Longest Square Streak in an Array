@@ -1,0 +1,26 @@
+public class Solution {
+    public int LongestSquareStreak(int[] arr) {
+     int [] lengths= new int[arr.Length];
+     Array.Sort(arr);
+     Dictionary<int,int> map= new Dictionary<int,int>();
+     for(int i=0;i<lengths.Length;i++)lengths[i]=1;
+     int max= lengths[0];
+     for(int i=0;i<arr.Length;i++){
+       double squareroot= Math.Pow(arr[i],0.5);
+       double squarerootceil= Math.Ceiling(squareroot);
+       if(squareroot==squarerootceil){
+         int squarerootint= (int)squareroot;
+         if(map.ContainsKey(squarerootint)){
+          int last= map[squarerootint];
+          lengths[i]=lengths[last]+1;
+          max=Math.Max(max,lengths[i]);
+         }
+       }
+      
+       if(!map.ContainsKey(arr[i]))map[arr[i]]=i;
+       else map[arr[i]]=i;
+     }
+     if(max<2)return -1;
+     return max;    
+    }
+}
