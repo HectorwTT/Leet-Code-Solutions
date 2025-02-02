@@ -1,0 +1,20 @@
+public class Solution {
+    public bool Check(int[] nums) {
+     int index=0; 
+     int newIndex=0;
+     int[]  nums1=new int[nums.Length];
+     for(int i=1;i<nums.Length;i++){
+      int curr=nums[i];
+      int prev=nums[i-1];
+      if(curr<prev){
+       index=i;
+       break; 
+      }  
+     }     
+     for(int i=index;i<nums.Length;i++)nums1[newIndex++]=nums[i];
+     for(int i=0;i<index;i++)nums1[newIndex++]=nums[i];
+     Array.Sort(nums);
+     for(int i=0;i<nums.Length;i++)if(nums[i]!=nums1[i]) return  false;
+     return true;  
+    }
+}
