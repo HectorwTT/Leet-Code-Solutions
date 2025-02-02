@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int maxSatisfied(vector<int>& customers, vector<int>& grumpy, int minutes) {
+     int max=0;
+     vector<int> prefixSums1;
+     vector<int> prefixSums2;
+     int total1=0;
+     int total2=0;
+     for(int i=0;i<customers.size();i++){
+       total1+=customers[i];
+       prefixSums1.push_back(total1); 
+       if(grumpy[i]==0)total2+=customers[i];
+       prefixSums2.push_back(total2);
+     }
+     for(int i=0;i<=customers.size()-minutes;i++){
+      int totalBefore=0;
+      int totalWithSecret=0;
+      int totalAfter=0;
+      int total=0;
+      totalWithSecret=prefixSums1[i+minutes-1];
+      if(i!=0){
+        totalBefore=prefixSums2[i-1];
+        totalWithSecret-=prefixSums1[i-1];
+      }  
+      if(i!=customers.size()-minutes+1)
+       totalAfter=prefixSums2[customers.size()-1]-prefixSums2[i+minutes-1];  
+      total=totalBefore+totalWithSecret+totalAfter;
+      max=std::max(total,max);
+     }
+     return max;  
+    }
+};
