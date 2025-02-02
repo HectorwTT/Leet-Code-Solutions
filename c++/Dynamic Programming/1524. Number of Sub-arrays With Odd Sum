@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr) {
+     long total=0;
+     vector<long> prefixSums;
+     long sum=0;
+     long even=0;
+     long odd=0;
+     for(int i=0;i<arr.size();i++){
+      sum+=1L*arr[i];
+      prefixSums.push_back(sum);
+      if(prefixSums[i]%2==0)even++;
+      else odd++;
+      if(prefixSums[i]%2==1){
+        total++;
+        total+=even;
+      }else{
+        total+=odd;
+      }
+     }  
+     long mod=(long)pow(10,9)+7;
+     long answer=total%mod;
+     return (int)answer;    
+    }
+};
