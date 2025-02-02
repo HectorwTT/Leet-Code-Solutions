@@ -1,0 +1,53 @@
+public class Solution {
+    public int MaxProfit(int[] prices) {
+     if(prices.Length==1)return 0;
+     int [] profitsFromFront= new int[prices.Length];
+     int [] profitsFromBehind= new int[prices.Length];
+     IList<int> maxIndexes= new List<int>();
+     int min=prices[0];
+     int max=prices[prices.Length-1];
+     int lastMaxIndex=-1;
+     Dictionary<int,int> nextMinIndexes= new Dictionary<int,int>();
+     Dictionary<int,int> extraProfits=new Dictionary<int,int>();
+     if(prices[0]>prices[1])maxIndexes.Add(0);
+     for(int i=1;i<prices.Length-1;i++){
+      min=Math.Min(prices[i],min);  
+      if(prices[i-1]<=prices[i] && prices[i]>=prices[i+1]){
+        maxIndexes.Add(i);
+        profitsFromFront[i]=prices[i]-min;
+        lastMaxIndex=i;
+      }
+      if(prices[i-1]>=prices[i] && prices[i+1]>=prices[i]){
+       if(lastMaxIndex!=-1)nextMinIndexes[lastMaxIndex]=i;
+       extraProfits[i]=0;
+      }
+     }
+     if(prices[prices.Length-1]>prices[prices.Length-2]){
+        maxIndexes.Add(prices.Length-1);
+        profitsFromFront[prices.Length-1]=prices[prices.Length-1]-min;
+     } 
+     int maxExtraProfit=0;
+     for(int i=prices.Length-2;i>=1;i--){
+      max=Math.Max(max,prices[i]);
+      if(extraProfits.ContainsKey(i)){
+        profitsFromBehind[i]=max-prices[i];  
+        maxExtraProfit=Math.Max(maxExtraProfit,profitsFromBehind[i]);
+        extraProfits[i]=maxExtraProfit;
+      }  
+     }
+     if(prices[0]<prices[1]){
+       profitsFromBehind[0]=max-prices[0]; 
+     }     
+     int maxProfit=0;
+     for(int i=0;i<maxIndexes.Count;i++){
+      int maxIndex=maxIndexes[i];
+      int profit=profitsFromFront[maxIndex];   
+      if(nextMinIndexes.ContainsKey(maxIndex)){
+      int nextMinIndex=nextMinIndexes[maxIndex];
+      profit+=extraProfits[nextMinIndex];   
+     }
+     maxProfit=Math.Max(profit,maxProfit);
+    }
+    return maxProfit;  
+    }
+}
