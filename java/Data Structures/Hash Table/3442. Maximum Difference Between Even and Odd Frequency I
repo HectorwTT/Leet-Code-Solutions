@@ -1,0 +1,23 @@
+class Solution {
+    public int maxDifference(String s) {
+      HashMap<Character,Integer> map=new HashMap<>();
+      PriorityQueue<Integer> evenPq=new PriorityQueue<>((a,b) -> b - a);
+      PriorityQueue<Integer> oddPq=new PriorityQueue<>();
+      for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       if(!map.containsKey(ch))map.put(ch,1);
+       else map.replace(ch,map.get(ch)+1); 
+      }
+      for(Character key:map.keySet()){
+       if(map.get(key)%2==0) evenPq.offer(map.get(key));
+       else oddPq.offer(map.get(key));
+      }  
+      int evenGreatest=evenPq.peek();
+      int oddLeast=oddPq.peek();
+      while(evenPq.size()>1)evenPq.poll();
+      while(oddPq.size()>1)oddPq.poll();
+      int evenLeast=evenPq.peek();
+      int oddGreatest=oddPq.peek();
+      return Math.max(oddLeast-evenGreatest,oddGreatest-evenLeast);  
+    }
+}
