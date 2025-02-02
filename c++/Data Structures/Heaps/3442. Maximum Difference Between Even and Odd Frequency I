@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int maxDifference(string s) {
+     unordered_map<char,int> map;
+     priority_queue<int> evenPq;
+     priority_queue <int, vector<int>, greater<int>> oddPq;
+      for(int i=0;i<s.length();i++){
+       char ch=s[i];
+       if(map.find(ch)==map.end())map[ch]=1;
+       else map[ch]=map[ch]+1; 
+      }
+      for(auto key:map){
+       if(key.second%2==0) evenPq.push(key.second);
+       else oddPq.push(key.second);
+      }  
+      int evenGreatest=evenPq.top();
+      int oddLeast=oddPq.top();
+      while(evenPq.size()>1)evenPq.pop();
+      while(oddPq.size()>1)oddPq.pop();
+      int evenLeast=evenPq.top();
+      int oddGreatest=oddPq.top();
+      return std::max(oddLeast-evenGreatest,oddGreatest-evenLeast);     
+    }
+};
