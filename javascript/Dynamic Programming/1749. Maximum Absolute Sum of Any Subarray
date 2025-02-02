@@ -1,0 +1,15 @@
+var maxAbsoluteSum = function(nums) {
+ let max = nums[0];
+ let cur = max;
+ for(let i = 1 ; i < nums.length ; i++){
+  cur = Math.max(nums[i],nums[i]+cur);
+  max = Math.max(cur,max);
+ }
+ let min=nums[0];
+ cur=min;
+ for(let i=1;i<nums.length;i++){
+  cur=Math.min(nums[i],nums[i]+cur);
+  min=Math.min(cur,min);
+ }
+ return Math.max(max,Math.abs(min));    
+};
