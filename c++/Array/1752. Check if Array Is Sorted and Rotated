@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool check(vector<int>& nums) {
+     int index=0; 
+     int newIndex=0;
+     vector<int>nums1;
+     for(int i=1;i<nums.size();i++){
+      int curr=nums[i];
+      int prev=nums[i-1];
+      if(curr<prev){
+       index=i;
+       break; 
+      }  
+     }     
+     for(int i=index;i<nums.size();i++)nums1.push_back(nums[i]);
+     for(int i=0;i<index;i++)nums1.push_back(nums[i]);
+     std::sort(nums.begin(),nums.end());
+     for(int i=0;i<nums.size();i++)if(nums[i]!=nums1[i]) return  false;
+     return true;        
+    }
+};
