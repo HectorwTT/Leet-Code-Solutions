@@ -1,0 +1,49 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+       unordered_map <int,string> values;
+       values[0]="";
+       values[1]="I";
+       values[2]="II";
+       values[3]="III";
+       values[4]="IV";
+       values[5]="V";
+       values[6]="VI";
+       values[7]="VII";
+       values[8]="VIII";
+       values[9]="IX";
+       values[10]="X";
+       values[20]="XX";
+       values[30]="XXX";
+       values[40]="XL";
+       values[50]="L";
+       values[60]="LX";
+       values[70]="LXX";
+       values[80]="LXXX";
+       values[90]="XC";
+       values[100]="C";
+       values[200]="CC";
+       values[300]="CCC";
+       values[400]="CD";
+       values[500]="D";
+       values[600]="DC";
+       values[700]="DCC";
+       values[800]="DCCC";
+       values[900]="CM";
+       values[1000]="M";
+       values[2000]="MM";
+       values[3000]="MMM";
+       values[4000]="MMMM";
+       int power =0;
+       string str ="";
+       while(num!=0){
+         int mod = num% 10;
+         int number = mod * (int)pow(10,power);
+         string  ch = values[number];
+         str = ch +str;
+         power++;
+         num /=10;         
+       } 
+    return str;   
+    }
+};
