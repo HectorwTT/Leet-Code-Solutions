@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int romanToInt(string s) {
+     int number = 0;
+     unordered_map <char,int> values;
+     values['I']=1;
+     values['V']=5;
+     values['X']=10;
+     values['L']=50;
+     values['C']=100;
+     values['D']=500;
+     values['M']=1000;
+     int pointer= s.size()-1;
+     int sum =0;
+     int curr=0;
+     int previous =0;
+     while(pointer >=0){
+      char numeral = s[pointer];
+      curr = values[numeral];
+      if(curr < previous) curr = -1*curr;
+       sum += curr;
+       previous = curr;
+       pointer = pointer -1;
+     }
+     return sum;   
+    }
+};
