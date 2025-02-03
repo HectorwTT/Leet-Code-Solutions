@@ -1,0 +1,37 @@
+var getMinimumDifference = function(root) {
+ const inorderList= inorderTraversal(root);
+ let min=inorderList[1]-inorderList[0];
+ for(let i=2;i<inorderList.length;i++){
+  let curr= inorderList[i];
+  let prev=inorderList[i-1];
+  min =Math.min(curr-prev,min);
+ }
+ return min;  
+};
+
+var inorderTraversal = function(root) {
+  const result=[];
+   if(root==null)return result;
+   else if(root.left==null && root.right==null){
+    result.push(root.val);
+    return result;
+   }else if(root.left==null){
+    let rightTraversal= inorderTraversal(root.right);
+    result.push(root.val);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    return result;
+   }else if(root.right==null){
+    let leftTraversal=inorderTraversal(root.left);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    result.push(root.val);
+    return result;
+   }else{
+    let leftTraversal=inorderTraversal(root.left);
+    let rightTraversal=inorderTraversal(root.right);
+    for(let i=0;i<leftTraversal.length;i++)result.push(leftTraversal[i]);
+    result.push(root.val);
+    for(let i=0;i<rightTraversal.length;i++)result.push(rightTraversal[i]);
+    return result;
+   }   
+};
+     
