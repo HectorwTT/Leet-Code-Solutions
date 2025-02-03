@@ -1,0 +1,38 @@
+public class Solution {
+    public int GetMinimumDifference(TreeNode root) {
+     IList<int> inorderList= InorderTraversal(root);
+     int min=inorderList[1]-inorderList[0];
+     for(int i=2;i<inorderList.Count;i++){
+      int curr= inorderList[i];
+      int prev=inorderList[i-1];
+      min =Math.Min(curr-prev,min);
+     }  
+     return min; 
+    }
+
+    public IList<int> InorderTraversal(TreeNode root) {
+      IList<int> result= new List<int>(); 
+      if(root==null)return result;
+      else if(root.left==null && root.right==null){
+        result.Add(root.val);
+        return result;
+      }else if(root.left==null){
+        result.Add(root.val);
+        IList<int> RightInorderTraversal=InorderTraversal(root.right);
+        foreach(var value in RightInorderTraversal)result.Add(value);
+        return result;
+      }else if(root.right==null){
+        IList<int> LeftInorderTraversal=InorderTraversal(root.left);
+        foreach(var value in LeftInorderTraversal)result.Add(value);
+        result.Add(root.val);
+        return result;
+      }else{
+        IList<int> LeftInorderTraversal=InorderTraversal(root.left);
+        foreach(var value in LeftInorderTraversal)result.Add(value);
+        result.Add(root.val);
+        IList<int> RightInorderTraversal=InorderTraversal(root.right);
+        foreach(var value in RightInorderTraversal)result.Add(value);
+        return result;
+      }
+    }
+}
