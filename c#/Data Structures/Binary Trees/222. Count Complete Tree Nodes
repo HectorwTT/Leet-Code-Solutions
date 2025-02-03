@@ -1,0 +1,8 @@
+public class Solution {
+    public int CountNodes(TreeNode root) {
+      if(root==null)return 0;
+     else if(root.left==null) return 1+CountNodes(root.right);
+     else if(root.right==null) return 1+ CountNodes(root.left);
+     else return 1+CountNodes(root.left)+ CountNodes(root.right);       
+    }
+}
