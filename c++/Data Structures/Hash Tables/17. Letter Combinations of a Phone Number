@@ -1,0 +1,67 @@
+class Solution {
+public:
+    vector<string> letterCombinations(string digits) {
+     vector<string> result;
+     if(digits=="") return result;
+        else{
+         unordered_map<char,vector<string>> letters ;
+         vector<string> two;
+         two.push_back("a");
+         two.push_back("b");
+         two.push_back("c");
+         vector<string> three;
+         three.push_back("d");
+         three.push_back("e");
+         three.push_back("f");
+         vector<string> four;
+         four.push_back("g");
+         four.push_back("h");
+         four.push_back("i");
+         vector<string> five;
+         five.push_back("j");
+         five.push_back("k");
+         five.push_back("l");
+         vector<string> six;
+         six.push_back("m");
+         six.push_back("n");
+         six.push_back("o");
+         vector<string> seven;
+         seven.push_back("p");
+         seven.push_back("q");
+         seven.push_back("r");
+         seven.push_back("s");
+         vector<string> eight;
+         eight.push_back("t");
+         eight.push_back("u");
+         eight.push_back("v");
+         vector<string>nine;
+         nine.push_back("w");
+         nine.push_back("x");
+         nine.push_back("y");
+         nine.push_back("z");
+         letters['2']=two;
+         letters['3']=three;
+         letters['4']=four;
+         letters['5']=five;
+         letters['6']=six;
+         letters['7']=seven;
+         letters['8']=eight;
+         letters['9']=nine;
+         if(digits.size()==1) return letters[digits[0]];
+         else{
+          char first= digits[0];
+          vector<string>combos=letters[first];
+          for(int i=0;i<combos.size();i++){
+           string digit=combos[i];
+           vector<string>combos1 =letterCombinations(digits.substr(1));
+           for(int j=0;j<combos1.size();j++){
+               string combination1=combos1[j];
+               string newcombo=digit+combination1;
+               result.push_back(newcombo);
+           }
+          }
+          return result;
+         }
+        }      
+    }
+};
