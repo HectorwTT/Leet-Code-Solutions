@@ -1,0 +1,6 @@
+var countNodes = function(root) {
+ if(root==null)return 0;
+ else if(root.left==null) return 1+countNodes(root.right);
+ else if(root.right==null) return 1+ countNodes(root.left);
+ else return 1+countNodes(root.left)+ countNodes(root.right);   
+};
