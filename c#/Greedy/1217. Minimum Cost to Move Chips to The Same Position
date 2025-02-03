@@ -1,0 +1,11 @@
+public class Solution {
+    public int MinCostToMoveChips(int[] position) {
+      int numOfEven=0;
+      int numOfOdd=0;
+      for(int i=0;i<position.Length;i++){
+       if(position[i]%2==0)numOfEven++;
+        else numOfOdd++;
+      }
+      return Math.Min(numOfEven,numOfOdd);   
+    }
+}
