@@ -1,0 +1,21 @@
+class Solution {
+public:
+    long long pickGifts(vector<int>& gifts, int k) {
+       priority_queue<int> maxHeap;
+       long total=0;
+       for(int i=0;i<gifts.size();i++)maxHeap.push(gifts[i]);
+       int count=0;
+       while(count<k){
+        int newGift= maxHeap.top();
+        maxHeap.pop();
+        int newGiftSquareRoot= (int)pow(newGift,0.5);
+        maxHeap.push(newGiftSquareRoot);
+        count++;
+       } 
+       while(!maxHeap.empty()){
+        total+=1L * maxHeap.top();
+        maxHeap.pop();
+       } 
+       return total;   
+    }
+};
