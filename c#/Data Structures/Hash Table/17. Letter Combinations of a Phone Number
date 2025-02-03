@@ -1,0 +1,66 @@
+public class Solution {
+    public IList<string> LetterCombinations(string digits) {
+     if(digits.Equals("")) return new List<string>();
+        else{
+         Dictionary<char,IList<string>> letters = new Dictionary<char,IList<string>>();
+         IList<string> two= new List<string>();
+         two.Add("a");
+         two.Add("b");
+         two.Add("c");
+         IList<string> three= new List<string>();
+         three.Add("d");
+         three.Add("e");
+         three.Add("f");
+         List<string> four= new List<string>();
+         four.Add("g");
+         four.Add("h");
+         four.Add("i");
+         IList<string> five= new List<string>();
+         five.Add("j");
+         five.Add("k");
+         five.Add("l");
+         IList<string> six= new List<string>();
+         six.Add("m");
+         six.Add("n");
+         six.Add("o");
+         IList<string> seven= new List<string>();
+         seven.Add("p");
+         seven.Add("q");
+         seven.Add("r");
+         seven.Add("s");
+         List<string> eight= new List<string>();
+         eight.Add("t");
+         eight.Add("u");
+         eight.Add("v");
+         List<string>nine= new List<string>();
+         nine.Add("w");
+         nine.Add("x");
+         nine.Add("y");
+         nine.Add("z");
+         letters['2']=two;
+         letters['3']=three;
+         letters['4']=four;
+         letters['5']=five;
+         letters['6']=six;
+         letters['7']=seven;
+         letters['8']=eight;
+         letters['9']=nine;
+         if(digits.Length==1) return letters[digits[0]];
+         else{
+          char first= digits[0];
+          IList<string>combos=letters[first];
+          IList<string> result = new List<string>();
+          for(int i=0;i<combos.Count;i++){
+           string digit=combos[i];
+           IList<string>combos1 =LetterCombinations(digits.Substring(1));
+           for(int j=0;j<combos1.Count;j++){
+               string combination1=combos1[j];
+               string newcombo=digit+combination1;
+               result.Add(newcombo);
+           }
+          }
+          return result;
+         }
+        }   
+    }
+}
