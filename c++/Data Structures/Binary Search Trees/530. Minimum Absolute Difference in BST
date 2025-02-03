@@ -1,0 +1,48 @@
+class Solution {
+public:
+    int getMinimumDifference(TreeNode* root) {
+      vector<int> inorderList= inorderTraversal(root);
+      std::sort(inorderList.begin(),inorderList.end());
+      int min=inorderList[1]-inorderList[0];
+      for(int i=2;i<inorderList.size();i++){
+       int curr= inorderList[i];
+       int prev=inorderList[i-1];
+       min =std::min(curr-prev,min);
+      }
+      return min;  
+    }
+     public:
+      vector<int> inorderTraversal(TreeNode* root) {
+         vector<int> result;
+         if(root==NULL)return result;
+         if (root->left==NULL && root->right==NULL) {
+             vector<int> rootlist;
+             rootlist.push_back(root->val);
+             return rootlist;
+        }
+        else {
+            if(root->left==NULL){
+                result.push_back(root->val);
+                vector<int> rightlist = inorderTraversal(root->right);
+                for(int i=0;i<rightlist.size();i++)result.push_back(rightlist[i]);
+                return result;
+            }
+            else if (root->right==NULL){
+                vector<int> leftlist = inorderTraversal(root->left);
+                for(int i=0;i<leftlist.size();i++)result.push_back(leftlist[i]);
+                result.push_back(root->val);
+                return result;
+            }else{
+                vector<int> leftlist;
+                vector<int> rightlist;
+                if(root->left!=NULL)leftlist=inorderTraversal(root->left);  
+                if (root->right!=NULL)rightlist= inorderTraversal(root->right);
+                vector<int> result;
+                for(int i=0;i<leftlist.size();i++)result.push_back(leftlist[i]);
+                result.push_back(root->val);
+                for(int i=0;i<rightlist.size();i++)result.push_back(rightlist[i]);
+                return result;
+            }
+        } 
+    }       
+};
