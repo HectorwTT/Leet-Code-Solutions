@@ -1,0 +1,22 @@
+public class Solution {
+    public bool CanJump(int[] nums) {
+     bool[] canReachEnd= new bool[nums.Length];
+     canReachEnd[nums.Length-1]=true;
+     for(int i=nums.Length-2;i>=0;i--){
+      if(nums[i]!=0){
+        if(nums.Length-1-i<=nums[i])canReachEnd[i]=true;
+        else{
+         int jump=0;
+         while(jump<=nums[i]){
+          if(canReachEnd[i+jump]){
+              canReachEnd[i]=true;
+              break;
+          }
+          jump++;
+         }
+        }
+      }
+     }
+     return canReachEnd[0];   
+    }
+}
