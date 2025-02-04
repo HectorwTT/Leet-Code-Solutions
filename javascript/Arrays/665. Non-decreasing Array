@@ -1,0 +1,26 @@
+var checkPossibility = function(nums) {
+ let total=0;
+ let index=0;
+ for(let i=1;i<nums.length;i++){
+  if(nums[i]<nums[i-1]){
+   total++;
+   index=i;
+  }
+ }
+ if(total>1) return false;
+ if(total==0)return true;
+ let tmp= nums[index-1];
+ let tmp1=nums[index]; 
+ nums[index-1]= nums[index]-1;
+ let total1=0;
+ for(let i=1;i<nums.length;i++)if(nums[i]>=nums[i-1])total1++;
+ nums[index-1]=tmp;
+ nums[index]=tmp;
+ let total2=0;
+ for(let i=1;i<nums.length;i++)if(nums[i]>=nums[i-1])total2++;
+ nums[index-1]=tmp1;
+ nums[index]=tmp1;
+ let total3=0;
+ for(let i=1;i<nums.length;i++)if(nums[i]>=nums[i-1])total3++;
+ return total1==nums.length-1 || total2==nums.length-1 ||total3==nums.length-1;      
+};
