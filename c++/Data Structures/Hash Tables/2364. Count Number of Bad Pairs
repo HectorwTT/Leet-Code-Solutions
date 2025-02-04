@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long countBadPairs(vector<int>& nums) {
+     long cnt=0;
+     int n= nums.size();
+     unordered_map<int,int> mp;
+     for(int i=0;i<n;i++){
+        int prev=0;
+        if(mp.find(i-nums[i])==mp.end())prev=0;
+        else prev=mp[i-nums[i]];
+        cnt+= prev;
+        mp[i-nums[i]]=prev+1;
+    }
+    return 1L*n*(n-1)/2-cnt;      
+    }
+};
