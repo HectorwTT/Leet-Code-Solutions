@@ -1,0 +1,21 @@
+var canJump = function(nums) {
+ const canReachEnd=[];
+ for(let i=0;i<nums.length;i++)canReachEnd.push(false);
+ canReachEnd[nums.length-1]=true;
+ for(let i=nums.length-2;i>=0;i--){
+  if(nums[i]!=0){
+   if(nums.length-1-i<=nums[i])canReachEnd[i]=true;
+   else{
+    let jump=0;
+    while(jump<=nums[i]){
+     if(canReachEnd[i+jump]){
+      canReachEnd[i]=true;
+      break;
+     }
+     jump++;
+    }
+   }
+  }
+ }
+ return canReachEnd[0];       
+};
