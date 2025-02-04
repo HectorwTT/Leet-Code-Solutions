@@ -1,0 +1,17 @@
+var longestConsecutive = function(nums) {
+   if(nums.length==0)return 0;
+   let max=1;
+   let length=1;
+   nums.sort((x,y)=>x-y); 
+   for(let i=1;i<nums.length;i++){
+    if(nums[i]==nums[i-1])continue;
+    else if(nums[i]-nums[i-1]==1){
+     length++; 
+     max=Math.max(max,length);
+    }else{
+       max=Math.max(max,length);
+       length=1; 
+    }  
+   }
+   return max;   
+};
