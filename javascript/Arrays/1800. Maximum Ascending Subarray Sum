@@ -1,0 +1,16 @@
+var maxAscendingSum = function(nums) {
+ let maxSum=0;
+ for(let i=0;i<nums.length;i++){
+  let sum= nums[i];
+  if(sum>maxSum)maxSum=sum;
+  const list=[];
+  list.push(sum);
+  for(let j=i+1;j<nums.length;j++){
+   if(nums[j]<=list[list.length-1])break;
+   list.push(nums[j]);
+   sum+=nums[j];
+   if(sum>maxSum)maxSum=sum;
+  }
+ }
+ return maxSum;     
+};
