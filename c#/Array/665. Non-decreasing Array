@@ -1,0 +1,35 @@
+public class Solution {
+    public bool CheckPossibility(int[] nums) {
+     int total=0;
+     int index=0;
+     for(int i=1;i<nums.Length;i++){
+      if(nums[i]<nums[i-1]){
+        total++;
+        index=i;
+      }
+     }
+     if(total>1) return false;
+     if(total==0)return true;
+     int tmp= nums[index-1];
+     int tmp1=nums[index]; 
+     nums[index-1]= nums[index]-1;
+     int total1=0;
+     for(int i=1;i<nums.Length;i++){
+        if(nums[i]>=nums[i-1])total1++;
+     }
+     nums[index-1]=tmp;
+     nums[index]=tmp;
+     
+     int total2=0;
+     for(int i=1;i<nums.Length;i++){
+        if(nums[i]>=nums[i-1])total2++;
+     }
+     nums[index-1]=tmp1;
+     nums[index]=tmp1;
+     int total3=0;
+     for(int i=1;i<nums.Length;i++){
+        if(nums[i]>=nums[i-1])total3++;
+     }
+     return total1==nums.Length-1 || total2==nums.Length-1 ||total3==nums.Length-1;   
+    }
+}
