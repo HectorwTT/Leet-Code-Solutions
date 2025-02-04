@@ -1,0 +1,10 @@
+var containsNearbyDuplicate = function(nums, k) {
+ const map=new Map() ;
+ for(let i=0;i<nums.length;i++){
+  if(!map.has(nums[i]))map[nums[i]]=i;  
+  else{
+   if(Math.abs(map[nums[i]]-i)<=k) return true;
+   map[nums[i]]=i;
+  }
+ }    
+};
