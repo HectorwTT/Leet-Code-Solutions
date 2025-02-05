@@ -1,0 +1,18 @@
+public class Solution {
+    public bool AreAlmostEqual(string s1, string s2) {
+    if(s1.Equals(s2))return true;
+     int numDifferent=0;
+     Dictionary<char,int> map1=new Dictionary<char,int>();
+     Dictionary<char,int> map2=new Dictionary<char,int>();
+     for(int i=0;i<s1.Length;i++){
+      if(s1[i]!=s2[i])numDifferent++;
+      if(numDifferent>2)return false;  
+      if(!map1.ContainsKey(s1[i]))map1[s1[i]]=1;
+      else map1[s1[i]]=map1[s1[i]]+1;
+      if(!map2.ContainsKey(s2[i]))map2[s2[i]]=1;
+      else map2[s2[i]]=map2[s2[i]]+1;
+     }
+      return  numDifferent==2  &&  map1.Keys.Count == map2.Keys.Count &&
+      map1.Keys.All(k => map2.ContainsKey(k) && object.Equals(map2[k], map1[k]));       
+    }
+}
