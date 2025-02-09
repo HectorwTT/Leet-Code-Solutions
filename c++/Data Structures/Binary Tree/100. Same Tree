@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool isEqual(TreeNode* t1, TreeNode* t2) {
+     if(t1==NULL && t2!=NULL) return false;
+     if(t1!=NULL && t2 ==NULL) return false;
+     if(t1==NULL && t2==NULL) return true;
+     if(t1->val!=t2->val) return false;
+     else{
+      bool areLeftEqual=isEqual(t1->left,t2->left);
+      bool areRightEqual= isEqual(t1->right,t2->right);
+      return  areLeftEqual &&areRightEqual;
+     }  
+    }
+    public:
+     bool isSameTree(TreeNode* p, TreeNode* q) {
+      if((p==NULL && q!=NULL)||(p!=NULL && q==NULL)) return false;
+      if(p==NULL && q==NULL)return true;
+      if(p->left== NULL && q->left == NULL 
+         && p->right==NULL && q->right==NULL 
+         && p->val== q->val) return true;
+      else return isEqual(p,q);         
+    }        
+};
