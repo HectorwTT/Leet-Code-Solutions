@@ -1,0 +1,15 @@
+class Solution {
+    public int[] assignElements(int[] groups, int[] elements) {
+     int[] ans = new int[groups.length];
+    Arrays.fill(ans, -1);
+    Map<Integer, Integer> eleIndex = new HashMap<>();
+    for(int i = 0; i < elements.length; ++i) eleIndex.put(elements[i], eleIndex.getOrDefault(elements[i], i));
+    for(int i = 0; i < groups.length; ++i){
+        for(int f = 1; f*f <= groups[i]; ++f){
+            if(groups[i] % f == 0 && eleIndex.containsKey(f)) ans[i] = Math.min((ans[i] >= 0? ans[i]:1000000), eleIndex.get(f));
+            if(groups[i] % f == 0 && eleIndex.containsKey(groups[i]/f)) ans[i] = Math.min((ans[i] >= 0? ans[i]:1000000), eleIndex.get(groups[i]/f));
+        }
+    }
+    return ans;   
+    }
+}
