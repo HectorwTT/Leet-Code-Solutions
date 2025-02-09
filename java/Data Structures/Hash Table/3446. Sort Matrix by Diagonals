@@ -1,0 +1,35 @@
+class Solution {
+    public int[][] sortMatrix(int[][] mat) {
+     HashMap<Integer,List<Integer>> map =new HashMap<>();
+     for(int i=0;i<mat.length;i++){
+      for(int j=0;j<mat[i].length;j++){
+       int diagonal=i-j;
+       if(!map.containsKey(diagonal)){
+        List<Integer> list=new ArrayList<>();
+        list.add(mat[i][j]);
+        map.put(diagonal,list); 
+       }else{
+        List<Integer> list=map.get(diagonal);
+        list.add(mat[i][j]);
+        map.replace(diagonal,list);
+       } 
+      }  
+     }
+     for(Integer key:map.keySet()){
+      List<Integer> list=map.get(key);
+      if(key<0)list.sort(null);
+      else Collections.sort(list, Collections.reverseOrder());
+      map.replace(key,list);  
+     }
+     for(int i=0;i<mat.length;i++){
+      for(int j=0;j<mat[i].length;j++){
+        int diagonal=i-j;
+        List<Integer> list=map.get(diagonal);
+        int first=list.remove(0);
+        mat[i][j]=first;
+        map.replace(diagonal,list);
+      }  
+     }
+     return mat;   
+    }
+}
