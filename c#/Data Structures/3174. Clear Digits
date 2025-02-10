@@ -1,0 +1,17 @@
+public class Solution {
+    public string ClearDigits(string s) {
+     Stack<char> stack= new Stack<char>();
+     String result="";
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      if(ch>=97 && ch<=122)stack.Push(ch);
+      else{
+        if(stack.Count!=0)stack.Pop();
+      }  
+     }
+     while(stack.Count!=0){
+      result=stack.Pop()+result;  
+     }
+     return result;   
+    }
+}
