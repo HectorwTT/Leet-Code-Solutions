@@ -1,0 +1,24 @@
+public class Solution {
+    public int CalPoints(string[] operations) {
+       Stack<int> scores= new Stack<int>();
+       for(int i=0;i<operations.Length;i++){
+        if(operations[i].Equals("D")){
+         int previous= scores.Peek();
+         scores.Push(previous*2);
+        }else if(operations[i].Equals("+")){
+            int last= scores.Pop();
+            int previous=scores.Pop();
+            scores.Push(previous);
+            scores.Push(last);
+            scores.Push(last+previous);
+        }else if(operations[i].Equals("C"))scores.Pop();
+        else scores.Push(Int32.Parse(operations[i]));
+        }
+        int total=0;
+        while(scores.Count!=0){
+         int score= scores.Pop();
+         total+=score;
+        }
+        return total;   
+    }
+}
