@@ -1,0 +1,20 @@
+class Solution {
+public:
+    string clearDigits(string s) {
+     stack<char> stack;
+     string result="";
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      if(ch>=97 && ch<=122)stack.push(ch);
+      else{
+        if(stack.size()!=0)stack.pop();
+      }  
+     }
+     while(stack.size()!=0){
+      result=stack.top()+result;  
+      stack.pop();
+     }
+     return result;   
+    }   
+    
+};
