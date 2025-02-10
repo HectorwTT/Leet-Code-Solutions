@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string makeGood(string s) {
+     stack<char> stack;
+     string result="";
+     for(int i=0;i<s.size();i++){
+      char ch= s[i];
+      if(stack.size()==0)stack.push(ch);
+      else{
+       char previous= stack.top();
+       int chValue= ch;
+       int previousValue=previous;
+       if(chValue== previousValue+32 ||chValue==previousValue-32)stack.pop();
+       else stack.push(ch);
+      }
+     }
+     while(stack.size()!=0){
+      result=stack.top()+result;
+      stack.pop();
+     }
+     return result;   
+    }
+};
