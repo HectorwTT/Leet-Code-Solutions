@@ -1,0 +1,19 @@
+public class Solution {
+    public string MakeGood(string s) {
+     Stack<char> stack=new  Stack<char>()  ;
+     string result="";
+     for(int i=0;i<s.Length;i++){
+      char ch= s[i];
+      if(stack.Count==0)stack.Push(ch);
+      else{
+       char previous= stack.Peek();
+       int chValue= ch;
+       int previousValue=previous;
+       if(chValue== previousValue+32 ||chValue==previousValue-32)stack.Pop();
+       else stack.Push(ch);
+      }
+     }
+     while(stack.Count!=0)result=stack.Pop()+result;
+     return result;      
+    }
+}
