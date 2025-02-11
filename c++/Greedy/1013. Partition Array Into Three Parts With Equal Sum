@@ -1,0 +1,37 @@
+class Solution {
+public:
+    bool canThreePartsEqualSum(vector<int>& arr) {
+     unordered_map<int,int> map;
+     vector<int>sums;
+     int total=0;
+     for(int i=0;i<arr.size();i++){
+        total+=arr[i];
+        sums.push_back(total);
+        if(map.find(sums[i])==map.end())map[sums[i]]=i;
+        else map[sums[i]]=i;
+     }
+     if(total==0 && map.size()==1)return true;
+     int firstZeroIndex=-1;
+     int secondZeroIndex=-1;
+     int thirdZeroIndex=-1;
+     for(int i=0;i<sums.size();i++){
+       int sum= sums[i];
+       if(map.find(2*sum)!=map.end() && map.find(3 * sum)!=map.end()){
+           int thirdPart= map[3*sum];
+            int secondPart= map[2*sum];
+           if(secondPart>i && thirdPart>i && thirdPart>secondPart){
+            if(thirdPart==sums.size()-1) return true;
+           }
+       }
+       if(sums[i]==0){
+           if(firstZeroIndex==-1)firstZeroIndex=i;
+           else if(secondZeroIndex==-1)secondZeroIndex=i;
+           else if(thirdZeroIndex==-1)thirdZeroIndex=i;
+           if(firstZeroIndex!=-1 && secondZeroIndex!=-1  
+              && secondZeroIndex>firstZeroIndex && thirdZeroIndex>secondZeroIndex
+              && (thirdZeroIndex==arr.size()-1 || sums[arr.size()-1]==0)) return true;
+       }
+      }
+      return false;    
+    }
+};
