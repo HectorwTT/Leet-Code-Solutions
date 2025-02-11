@@ -1,0 +1,11 @@
+var isBalanced = function(root) {
+ if(root==null)return true;
+ return height(root)!=-1;   
+};
+var height=function(root){
+ if(root==null)return 0;
+ let lh=height(root.left);
+ let rh=height(root.right);
+ if(Math.abs(lh-rh)>1 || lh==-1 || rh==-1)return -1;
+ return Math.max(lh,rh)+1;
+};
