@@ -1,0 +1,18 @@
+public class Solution {
+    public string RemoveStars(string s) {
+     Stack<char>chars=new Stack<char>()  ;
+     for(int i=0;i<s.Length;i++){
+      char ch= s[i];
+      if(ch=='*')chars.Pop();
+      else chars.Push(ch);
+     }
+     string reversedstr="";
+     while(chars.Count!=0){
+      char ch= chars.Pop();
+      reversedstr+=ch;
+     }
+     string result="";
+     for(int i=reversedstr.Length-1;i>=0;i--)result+=reversedstr[i];
+     return result;        
+    }
+}
