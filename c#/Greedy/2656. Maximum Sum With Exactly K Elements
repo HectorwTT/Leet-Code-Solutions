@@ -1,0 +1,12 @@
+public class Solution {
+    public int MaximizeSum(int[] nums, int k) {
+     int total=0;
+     while(k>0){
+       Array.Sort(nums);
+       total+= nums[nums.Length-1];
+       nums[nums.Length-1]++;
+       k--;
+     }
+     return total;   
+    }
+}
