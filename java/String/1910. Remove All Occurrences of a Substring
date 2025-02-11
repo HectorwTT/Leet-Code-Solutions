@@ -1,0 +1,7 @@
+class Solution {
+    public String removeOccurrences(String s, String part) {
+     int condition = (s.length())/(part.length())+1;
+     while (condition-->0) s= s.replaceFirst(part,"" );
+     return s;   
+    }
+}
