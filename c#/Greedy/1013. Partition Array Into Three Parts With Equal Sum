@@ -1,0 +1,36 @@
+public class Solution {
+    public bool CanThreePartsEqualSum(int[] arr) {
+     Dictionary<int,int> map= new Dictionary<int,int>();
+      int [] sums= new int[arr.Length];
+      int total=0;
+      for(int i=0;i<arr.Length;i++){
+        total+=arr[i];
+        sums[i]=total;
+        if(!map.ContainsKey(sums[i]))map[sums[i]]=i;
+        else map[sums[i]]=i;
+      }
+      if(total==0 && map.Count==1)return true;
+      int firstZeroIndex=-1;
+      int secondZeroIndex=-1;
+      int thirdZeroIndex=-1;
+      for(int i=0;i<sums.Length;i++){
+       int sum= sums[i];
+       if(map.ContainsKey(2*sum) && map.ContainsKey(3 * sum)){
+           int thirdPart= map[3*sum];
+            int secondPart= map[2*sum];
+           if(secondPart>i && thirdPart>i && thirdPart>secondPart){
+            if(thirdPart==sums.Length-1) return true;
+           }
+       }
+       if(sums[i]==0){
+           if(firstZeroIndex==-1)firstZeroIndex=i;
+           else if(secondZeroIndex==-1)secondZeroIndex=i;
+           else if(thirdZeroIndex==-1)thirdZeroIndex=i;
+           if(firstZeroIndex!=-1 && secondZeroIndex!=-1  
+              && secondZeroIndex>firstZeroIndex && thirdZeroIndex>secondZeroIndex
+              && (thirdZeroIndex==arr.Length-1 || sums[arr.Length-1]==0)) return true;
+       }
+      }
+      return false;     
+    }
+}
