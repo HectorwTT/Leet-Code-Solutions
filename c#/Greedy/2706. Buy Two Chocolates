@@ -1,0 +1,8 @@
+public class Solution {
+    public int BuyChoco(int[] prices, int money) {
+     Array.Sort(prices);
+     int twocheapest=prices[0]+prices[1];
+     if(money-twocheapest>=0) return money-twocheapest;
+     else return money;    
+    }
+}
