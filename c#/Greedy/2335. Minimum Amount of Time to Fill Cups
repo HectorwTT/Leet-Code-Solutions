@@ -1,0 +1,12 @@
+public class Solution {
+    public int FillCups(int[] amount) {
+      int n=0;
+      Array.Sort(amount);
+      while(amount[0]+amount[1]>amount[2]){
+       n++;
+       amount[0]--;
+       amount[1]--; 
+      }
+      return amount[2] +n;   
+    }
+}
