@@ -1,0 +1,28 @@
+ int n=queries.length;
+        int[] ans=new int[n];
+        Arrays.sort(nums);
+        int sum=0;
+        int count=0;
+        for(int i=0;i<n;i++){
+            int flag=0;
+            for(int j=0;j<nums.length;j++){
+                if(sum+nums[j]<=queries[i]){
+                    sum+=nums[j];
+                    count++;
+                    
+                }
+                else{
+                    ans[i]=count;
+                    count=0;
+                    sum=0;
+                    flag=1;
+                    break;
+                }
+            }
+            if(flag==0){
+                ans[i]=count;
+                count=0;
+                sum=0;
+            }
+        }
+        return ans;
