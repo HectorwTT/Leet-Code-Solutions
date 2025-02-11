@@ -1,0 +1,10 @@
+var fillCups = function(amount) {
+ let n=0;
+ amount.sort((x,y)=>x-y);
+ while(amount[0]+amount[1]>amount[2]){
+  n++;
+  amount[0]--;
+  amount[1]--; 
+ }
+ return amount[2] +n;      
+};
