@@ -1,0 +1,14 @@
+public class Solution {
+    public int MinOperations(string[] logs) {
+     int min=0;   
+     Stack<string> stack=new Stack<string>();
+     for(int i=0;i<logs.Length;i++){
+      if(logs[i].Equals("./"))continue;
+      else if(logs[i].Equals("../")){
+       if(stack.Count!=0)stack.Pop();
+      }else stack.Push(logs[i]); 
+        
+     }
+     return stack.Count;      
+    }
+}
