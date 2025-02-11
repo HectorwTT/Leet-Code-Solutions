@@ -1,0 +1,13 @@
+public class Solution {
+    public int MaximumJumps(int[] nums, int target) {
+      int [] dp=new int[nums.Length];
+      for(int j=0;j<nums.Length;j++){
+       for(int i=0;i<j;i++){
+        if(-1*target<=nums[j]-nums[i] && nums[j]-nums[i]<=target)
+         if(i==0 || dp[i]!=0)dp[j]=Math.Max(dp[j],dp[i]+1);
+       } 
+      }
+      if(dp[nums.Length-1]==0)return -1;
+      else return dp[nums.Length-1];     
+    }
+}
