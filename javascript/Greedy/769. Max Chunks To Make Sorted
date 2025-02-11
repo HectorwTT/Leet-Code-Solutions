@@ -1,0 +1,10 @@
+var maxChunksToSorted = function(arr) {
+ let answer=0;
+ let total=0;
+ for(let i=0;i<arr.length;i++){
+      total+=arr[i];
+      int sum=(i*(i+1))/2;
+      if(total==sum)answer++;
+ } 
+ return answer;   
+};
