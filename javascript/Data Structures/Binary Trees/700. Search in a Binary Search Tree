@@ -1,0 +1,10 @@
+var searchBST = function(root, val) {
+ var  key= new TreeNode(val);
+ var current= root;
+ while(current !=null){
+  if(current.val==key.val) return current;
+  else if(current.val>key.val) current= current.left;
+  else current= current.right;
+ }
+ return current;     
+};
