@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int maximizeSum(vector<int>& nums, int k) {
+     int total=0;
+     while(k>0){
+       std::sort(nums.begin(),nums.end());
+       total+= nums[nums.size()-1];
+       nums[nums.size()-1]++;
+       k--;
+     }
+     return total;   
+    }
+};
