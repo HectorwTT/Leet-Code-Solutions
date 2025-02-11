@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int tribonacci(int n) {
+      if(n==0) return 0;
+     if(n<=2)return 1;  
+     vector<int>trib;
+     trib.push_back(0);
+     trib.push_back(1);
+     trib.push_back(1);
+     for(int i=3;i<n+1;i++) trib.push_back(trib[i-3]+trib[i-2]+trib[i-1]);
+     return trib[n];  
+    }
+};
