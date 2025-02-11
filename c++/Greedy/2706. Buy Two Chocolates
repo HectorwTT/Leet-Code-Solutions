@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int buyChoco(vector<int>& prices, int money) {
+     std::sort(prices.begin(),prices.end());
+     int twocheapest=prices[0]+prices[1];
+     if(money-twocheapest>=0) return money-twocheapest;
+     else return money;   
+    }
+};
