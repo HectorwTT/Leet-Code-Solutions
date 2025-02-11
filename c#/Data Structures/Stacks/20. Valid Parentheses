@@ -1,0 +1,21 @@
+public class Solution {
+    public bool IsValid(string s) {
+     Stack<char> brackets=new Stack<char>()  ;
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      if(ch=='('||ch=='['||ch=='{') brackets.Push(ch);
+      if(ch==')'||ch==']'||ch=='}'){
+       if(brackets.Count==0)return false;
+       else{
+        char preceding = brackets.Peek();
+        if(ch==')'&& preceding!='(') return false;
+        else if(ch==']'&& preceding !='[') return false;
+        else if(ch=='}' && preceding !='{') return false;
+        else brackets.Pop();
+       } 
+      }
+     }
+     if(brackets.Count==0)return true;
+     else return false;     
+    }
+}
