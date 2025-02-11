@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maximumJumps(vector<int>& nums, int target) {
+     vector<int> dp;
+     for(int i=0;i<nums.size();i++)dp.push_back(0);
+      for(int j=0;j<nums.size();j++){
+       for(int i=0;i<j;i++){
+        if(-1*target<=nums[j]-nums[i] && nums[j]-nums[i]<=target)
+         if(i==0 || dp[i]!=0)dp[j]=std::max(dp[j],dp[i]+1);
+       } 
+      }
+      if(dp[nums.size()-1]==0)return -1;
+      else return dp[nums.size()-1];     
+    }
+};
