@@ -1,0 +1,6 @@
+var buyChoco = function(prices, money) {
+ prices.sort((x,y)=>x-y);
+ let twocheapest=prices[0]+prices[1];
+ if(money-twocheapest>=0) return money-twocheapest;
+ else return money;      
+};
