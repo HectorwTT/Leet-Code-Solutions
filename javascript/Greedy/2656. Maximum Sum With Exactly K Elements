@@ -1,0 +1,10 @@
+var maximizeSum = function(nums, k) {
+ let total=0;
+ while(k>0){
+  nums.sort((x,y)=>x-y);
+  total+= nums[nums.length-1];
+  nums[nums.length-1]++;
+  k--;
+ }
+ return total;     
+};
