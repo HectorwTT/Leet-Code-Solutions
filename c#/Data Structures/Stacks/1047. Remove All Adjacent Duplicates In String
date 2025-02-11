@@ -1,0 +1,23 @@
+public class Solution {
+    public string RemoveDuplicates(string s) {
+     Stack<char>chars= new Stack<char>();
+     string result="";
+     for(int i=0;i<s.Length;i++){
+      char ch= s[i];
+      if(chars.Count==0){
+       chars.Push(ch);
+       result+=ch;
+      }else{
+       char previous= chars.Peek();
+        if(previous==ch){
+         if(result.Length>0)result=result.Substring(0,result.Length-1);
+           chars.Pop();
+          }else{
+            chars.Push(ch);
+            result+=ch;
+          } 
+         }
+        }
+        return result;   
+    }
+}
