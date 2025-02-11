@@ -1,0 +1,35 @@
+var canThreePartsEqualSum = function(arr) {
+ const map= new Map();
+ const sums= [];
+ for(let i=0;i<arr.length;i++)sums.push(0);
+  let total=0;
+  for(let i=0;i<arr.length;i++){
+   total+=arr[i];
+   sums[i]=total;
+   if(!map.has(sums[i]))map.set(sums[i],i);
+   else map.set(sums[i],i);
+  }
+  if(total==0 && map.length==1)return true;
+  let firstZeroIndex=-1;
+  let secondZeroIndex=-1;
+  let thirdZeroIndex=-1;
+  for(let i=0;i<sums.length;i++){
+   let sum= sums[i];
+   if(map.has(2*sum) && map.has(3 * sum)){
+    let thirdPart= map.get(3*sum);
+    let secondPart= map.get(2*sum);
+    if(secondPart>i && thirdPart>i && thirdPart>secondPart){
+     if(thirdPart==sums.length-1) return true;
+    }
+   }
+   if(sums[i]==0){
+    if(firstZeroIndex==-1)firstZeroIndex=i;
+    else if(secondZeroIndex==-1)secondZeroIndex=i;
+    else if(thirdZeroIndex==-1)thirdZeroIndex=i;
+    if(firstZeroIndex!=-1 && secondZeroIndex!=-1  
+        && secondZeroIndex>firstZeroIndex && thirdZeroIndex>secondZeroIndex
+        && (thirdZeroIndex==arr.length-1 || sums[arr.length-1]==0)) return true;
+    }
+   }    
+   return false;    
+};
