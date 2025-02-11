@@ -1,0 +1,17 @@
+public class Solution {
+    public int[] FinalPrices(int[] prices) {
+     int [] answer= new int[prices.Length];
+     for(int i=0;i<prices.Length;i++){
+      bool isChanged=false;
+      for(int j=i+1;j<prices.Length;j++){
+       if(prices[j]<=prices[i]){
+        answer[i]=prices[i]-prices[j];
+        isChanged=true;
+        break;
+       }
+      }
+      if(!isChanged)answer[i]=prices[i];
+      }
+      return answer;   
+    }
+}
