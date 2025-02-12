@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int numSplits(string s) {
+     vector<int> numOfDistinctFromFront;
+     vector<int> numOfDistinctFromBehind;
+     unordered_map<char,int>map1;  
+     unordered_map<char,int>map2;
+     int total=0; 
+     for(int i=0;i<s.size();i++)numOfDistinctFromFront.push_back(0);
+     for(int i=0;i<s.size();i++)numOfDistinctFromBehind.push_back(0);
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      if(map1.find(ch)==map1.end())map1[ch]=1;
+      numOfDistinctFromFront[i]=map1.size();  
+     }
+     for(int i=s.size()-1;i>=0;i--){
+      char ch=s[i];
+      if(map2.find(ch)==map2.end())map2[ch]=1;
+      numOfDistinctFromBehind[i]=map2.size();  
+     } 
+     for(int i=0;i<s.size()-1;i++){
+      if(numOfDistinctFromFront[i]==numOfDistinctFromBehind[i+1]) total++; 
+     }  
+     return total;         
+    }
+};
