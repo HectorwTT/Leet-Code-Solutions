@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int longestSubsequence(vector<int>& arr, int difference) {
+     vector<int> lengths;
+     unordered_map<int,int> map;
+     for(int i=0;i<arr.size();i++)lengths.push_back(1);
+     int max= lengths[0];
+     for(int i=0;i<arr.size();i++){
+       if(map.find(arr[i]-difference)!=map.end()){
+        int last= map[arr[i]-difference];
+        lengths[i]=lengths[last]+1;
+        max=std::max(max,lengths[i]);
+       }
+       if(map.find(arr[i])==map.end())map[arr[i]]=i;
+       else map[arr[i]]=i;
+     }
+     return max;    
+    }
+};
