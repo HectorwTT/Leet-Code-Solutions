@@ -1,0 +1,12 @@
+var removeDuplicates = function(nums) {
+ const map= new Map();
+ let total=0;
+ for(let i=0;i<nums.length;i++){
+  if(!map.has(nums[i])){
+   total++;
+   map.set(nums[i],1);
+  }else nums[i]=101;
+ }
+ nums.sort((x,y)=>x-y);
+ return total;   
+};
