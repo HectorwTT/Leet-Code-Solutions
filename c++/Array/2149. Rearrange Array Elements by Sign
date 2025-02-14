@@ -1,0 +1,19 @@
+class Solution {
+public:
+    vector<int> rearrangeArray(vector<int>& nums) {
+     vector<int> result;
+     vector<int> positiveNumbers;  
+     vector<int> negativeNumbers;
+     int positiveIndex=0;
+     int negativeIndex=0;
+     for(int i=0;i<nums.size();i++){
+      if(nums[i]>0) positiveNumbers.push_back(nums[i]); 
+      else negativeNumbers.push_back(nums[i]);
+     }  
+     for(int i=0;i<nums.size();i++){
+      if(i%2==0) result.push_back(positiveNumbers[positiveIndex++]);
+      else result.push_back(negativeNumbers[negativeIndex++]);  
+     }
+     return result;    
+    }
+};
