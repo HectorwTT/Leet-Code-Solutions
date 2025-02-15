@@ -1,0 +1,56 @@
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+     ListNode* l1Current=l1;
+      ListNode* l2Current=l2;
+      ListNode* result= NULL;
+      ListNode* resultCurrent=NULL;   
+      int carryover=0;  
+      while(l1Current!=NULL && l2Current!=NULL){
+       int l1Value=l1Current->val;
+       int l2Value=l2Current->val;
+       int resultVal=l1Value+l2Value+carryover;
+       if(resultVal>=10){
+        resultVal=resultVal-10;
+        carryover=1;
+       }else carryover=0;
+       if(result==NULL){
+        result=new ListNode(resultVal);
+        resultCurrent=result;
+       }else{
+        ListNode* tmp=new ListNode(resultVal);
+        resultCurrent->next=tmp;
+        resultCurrent=resultCurrent->next;
+       } 
+       l1Current=l1Current->next;
+       l2Current=l2Current->next;
+      }
+      while(l1Current!=NULL){
+       int resultVal=carryover+l1Current->val;
+       if(resultVal>=10){
+        carryover=1;
+        resultVal-=10;
+       }else carryover=0;
+       ListNode* tmp=new ListNode(resultVal);
+       resultCurrent->next=tmp;
+       resultCurrent=resultCurrent->next;
+       l1Current=l1Current->next;
+      }   
+       while(l2Current!=NULL){
+       int resultVal=carryover+l2Current->val;
+       if(resultVal>=10){
+        carryover=1;
+        resultVal-=10;
+       }else carryover=0;
+       ListNode* tmp=new ListNode(resultVal);
+       resultCurrent->next=tmp;
+       resultCurrent=resultCurrent->next;
+       l2Current=l2Current->next;
+      } 
+      if(carryover==1){
+        ListNode* tmp=new ListNode(1);
+        resultCurrent->next=tmp;
+      }
+      return result;   
+    }
+};
