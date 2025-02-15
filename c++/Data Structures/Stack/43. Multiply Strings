@@ -1,0 +1,111 @@
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if(num1=="0"|| num2=="0") return "0";
+        stack<int> stack;
+        string multiplier="";
+        string multiplicand="";
+        string result="";
+        string product="";
+        vector<string>strings;
+        int carryover=0;
+        if(num1.size()>=num2.size()) {
+         multiplicand=num1;
+         multiplier=num2;
+        }else{
+         multiplicand=num2;
+         multiplier=num1;
+        }
+        for(int i=0;i<multiplier.size();i++){
+         char digit= multiplier[i];
+         int digitval= digit-48;
+         stack.push(digitval);
+        }
+        int numberOfdigits=stack.size();
+        while(stack.size()!=0){
+         int digitval= stack.top();
+         for(int i=multiplicand.size()-1;i>=0;i--){
+          char digit= multiplicand[i];
+          int digitval1= digit-48;
+          int productOfMultiply= digitval1*digitval+carryover;
+          if(productOfMultiply>=10){
+           carryover= productOfMultiply/10;
+           productOfMultiply%=10;
+          }else carryover= 0;
+          result= to_string(productOfMultiply)+result;
+         }
+         if(carryover!=0) result=to_string(carryover)+result;
+         if(stack.size()<numberOfdigits){
+          string zero="0";
+          string zeroes="";
+          int count=0;
+          while(count<numberOfdigits-stack.size()){
+           zeroes+=zero;
+           count++; 
+          }
+          result+=zeroes;
+         }
+         strings.push_back(result);
+         result="";
+         carryover=0;
+         stack.pop();
+        }
+        if(strings.size()==1)return strings[0];
+        string result1=strings[0];
+        string result2= strings[1];
+        product= addStrings(result1,result2);
+        for(int i=2;i<strings.size();i++){
+         product=addStrings(product,strings[i]);
+        }
+        return product;
+    }
+    public:
+     string addStrings(string a, string b) {
+     stack<int> astack;
+     stack<int> bstack;
+     stack<int> reststack;
+     string result="";
+     int carryover=0;
+     for(int i=0;i<a.size();i++){
+      char ch= a[i];
+      int chval= ch-48;
+      astack.push(chval);
+     }
+     for(int i=0;i<b.size();i++){
+      char ch= b[i];
+      int chval= ch-48;
+      bstack.push(chval);
+     }
+     while(astack.size()!=0 && bstack.size()!=0){
+      int aval=astack.top();
+      astack.pop();
+      int bval=bstack.top();
+      bstack.pop();
+      int total=aval+bval+carryover;
+      if(total>=10){
+        total-=10;
+        carryover=1;
+      }else{
+        carryover=0;
+      }
+      result= to_string(total)+result;
+     }
+     if(astack.size()==0)reststack= bstack;
+     else reststack=astack;
+     while(reststack.size()!=0){
+       int restval= reststack.top();
+       reststack.pop();
+       int total= restval+carryover;
+       if(total>=10){
+         total-=10;
+         carryover=1;
+       }else {
+         carryover=0;
+       }
+       result=to_string(total)+result;
+     }
+     if(carryover==1) result="1"+result;
+     return result;
+    }    
+    
+};
