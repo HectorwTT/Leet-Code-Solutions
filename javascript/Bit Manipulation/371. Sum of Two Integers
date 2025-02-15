@@ -1,0 +1,8 @@
+var getSum = function(a, b) {
+  while ((a&b) != 0) {
+            let olda = a;
+            a = olda^b;
+            b = (olda&b) << 1;
+  }
+  return a|b;   
+};
