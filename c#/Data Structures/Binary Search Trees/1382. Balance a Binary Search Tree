@@ -1,0 +1,31 @@
+public class Solution {
+    public TreeNode BalanceBST(TreeNode root) {
+     IList<int> inorder = new List<int>();
+     inorderTraversal(root, inorder);
+     return createBalancedBST(inorder, 0, inorder.Count - 1);
+    }
+
+    private void inorderTraversal(TreeNode root, IList<int> inorder) {
+        if (root == null) return;
+        inorderTraversal(root.left, inorder);
+        inorder.Add(root.val);
+        inorderTraversal(root.right, inorder);
+    }
+
+    private TreeNode createBalancedBST(
+        IList<int> inorder,
+        int start,
+        int end
+    ) {
+        if (start > end) return null;
+        int mid = start + (end - start) / 2;
+        TreeNode leftSubtree = createBalancedBST(inorder, start, mid - 1);
+        TreeNode rightSubtree = createBalancedBST(inorder, mid + 1, end);
+        TreeNode node = new TreeNode(
+            inorder[mid],
+            leftSubtree,
+            rightSubtree
+        );
+        return node;
+    }
+}
