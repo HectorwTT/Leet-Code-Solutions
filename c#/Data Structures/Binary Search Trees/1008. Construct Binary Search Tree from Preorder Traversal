@@ -1,0 +1,18 @@
+public class Solution {
+    public TreeNode BstFromPreorder(int[] preorder) {
+     TreeNode root = new TreeNode(preorder[0]);
+     for(int i=1;i<preorder.Length;i++){
+          TreeNode node= new TreeNode(preorder[i]);
+          TreeNode current= root;
+          TreeNode previous = current;
+          while(current !=null){
+            previous=current;
+            if(current.val>node.val) current= current.left;
+            else current= current.right;
+          }
+          if(previous.val>node.val) previous.left= node;
+          else previous.right=node;
+      }
+      return root;   
+    }
+}
