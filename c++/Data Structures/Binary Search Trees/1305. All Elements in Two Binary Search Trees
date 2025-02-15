@@ -1,0 +1,38 @@
+class Solution {
+public:
+    vector<int> getAllElements(TreeNode* root1, TreeNode* root2) {
+     vector<int> result;
+     vector<int> tree1=inorderTraversal(root1);
+     vector<int> tree2=inorderTraversal(root2);
+     for(int i=0;i<tree1.size();i++)result.push_back(tree1[i]);
+     for(int i=0;i<tree2.size();i++)result.push_back(tree2[i]);
+     std::sort(result.begin(),result.end());
+     return result;   
+    }
+    public:
+    vector<int> inorderTraversal(TreeNode* root) {
+      vector<int> result;
+      if(root==NULL)return result;
+      else if(root->left==NULL && root->right==NULL){
+        result.push_back(root->val);
+        return result;
+      }else if(root->left==NULL){
+        result.push_back(root->val);
+        vector<int> rightTraversal=inorderTraversal(root->right);
+        for(int i=0;i<rightTraversal.size();i++)result.push_back(rightTraversal.at(i));
+        return result;
+      }else if(root->right==NULL){
+        vector<int> leftTraversal=inorderTraversal(root->left);
+        for(int i=0;i<leftTraversal.size();i++)result.push_back(leftTraversal.at(i));
+        result.push_back(root->val);
+        return result;
+      }else{
+       vector<int> leftTraversal=inorderTraversal(root->left);
+        for(int i=0;i<leftTraversal.size();i++)result.push_back(leftTraversal.at(i));
+        result.push_back(root->val);
+        vector<int> rightTraversal=inorderTraversal(root->right);
+        for(int i=0;i<rightTraversal.size();i++)result.push_back(rightTraversal.at(i));
+        return result;
+      }  
+    }
+};
