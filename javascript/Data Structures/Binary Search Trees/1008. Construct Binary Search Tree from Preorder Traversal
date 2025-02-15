@@ -1,0 +1,16 @@
+var bstFromPreorder = function(preorder) {
+  const root = new TreeNode(preorder[0]);
+  for(let i=1;i<preorder.length;i++){
+   const node= new TreeNode(preorder[i]);
+   let current= root;
+   let previous = current;
+   while(current !=null){
+    previous=current;
+    if(current.val>node.val) current= current.left;
+    else current= current.right;
+   }
+   if(previous.val>node.val) previous.left= node;
+   else previous.right=node;
+  }
+  return root;     
+};
