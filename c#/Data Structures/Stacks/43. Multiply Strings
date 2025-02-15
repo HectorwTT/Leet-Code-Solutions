@@ -1,0 +1,106 @@
+public class Solution {
+    public string Multiply(string num1, string num2) {
+        if(num1.Equals("0")|| num2.Equals("0")) return "0";
+        Stack<int> stack= new Stack<int>();
+        string multiplier="";
+        string multiplicand="";
+        string result="";
+        string product="";
+        IList<string>strings= new List<string>();
+        int carryover=0;
+        if(num1.Length>=num2.Length) {
+         multiplicand=num1;
+         multiplier=num2;
+        }else{
+         multiplicand=num2;
+         multiplier=num1;
+        }
+        for(int i=0;i<multiplier.Length;i++){
+         char digit= multiplier[i];
+         int digitval= digit-48;
+         stack.Push(digitval);
+        }
+        int numberOfdigits=stack.Count;
+        while(stack.Count!=0){
+         int digitval= stack.Peek();
+         for(int i=multiplicand.Length-1;i>=0;i--){
+          char digit= multiplicand[i];
+          int digitval1= digit-48;
+          int productOfMultiply= digitval1*digitval+carryover;
+          if(productOfMultiply>=10){
+           carryover= productOfMultiply/10;
+           productOfMultiply%=10;
+          }else carryover= 0;
+          result= productOfMultiply+result;
+         }
+         if(carryover!=0) result=carryover+result;
+         if(stack.Count<numberOfdigits){
+          string zero="0";
+          string zeroes="";
+          int count=0;
+          while(count<numberOfdigits-stack.Count){
+           zeroes+=zero;
+           count++; 
+          }
+          result+=zeroes;
+         }
+         strings.Add(result);
+         result="";
+         carryover=0;
+         stack.Pop();
+        }
+        if(strings.Count==1)return strings[0];
+        string result1=strings[0];
+        string result2= strings[1];
+        product= addStrings(result1,result2);
+        for(int i=2;i<strings.Count;i++){
+         product=addStrings(product,strings[i]);
+        }
+        return product;
+    }
+    public String addStrings(string a, string b) {
+     Stack<int> astack= new Stack<int>();
+     Stack<int> bstack= new Stack<int>();
+     Stack<int> reststack= new Stack<int>();
+     string result="";
+     int carryover=0;
+     for(int i=0;i<a.Length;i++){
+      char ch= a[i];
+      int chval= ch-48;
+      astack.Push(chval);
+     }
+     for(int i=0;i<b.Length;i++){
+      char ch= b[i];
+      int chval= ch-48;
+      bstack.Push(chval);
+     }
+     while(astack.Count!=0 && bstack.Count!=0){
+      int aval=astack.Pop();
+      int bval=bstack.Pop();
+      int total=aval+bval+carryover;
+      if(total>=10){
+        total-=10;
+        carryover=1;
+      }else{
+        carryover=0;
+      }
+      result= total+result;
+     }
+     if(astack.Count==0)reststack= bstack;
+     else reststack=astack;
+     while(reststack.Count!=0){
+       int restval= reststack.Pop();
+       int total= restval+carryover;
+       if(total>=10){
+         total-=10;
+         carryover=1;
+       }else {
+         carryover=0;
+       }
+       result=total+result;
+     }
+     if(carryover==1) result="1"+result;
+     return result;
+    }    
+    
+}
