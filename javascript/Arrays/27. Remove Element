@@ -1,0 +1,11 @@
+var removeElement = function(nums, val) {
+ let total= 0;
+ for(let i=0;i<nums.length;i++){
+  if(nums[i]==val){
+   total++;
+   nums[i]=51;
+  }
+  }
+  nums.sort((x,y)=>x-y);
+  return nums.length-total;     
+};
