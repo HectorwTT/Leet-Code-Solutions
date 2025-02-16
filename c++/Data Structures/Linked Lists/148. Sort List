@@ -1,0 +1,22 @@
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+       if(head==NULL) return NULL;
+         ListNode* current=head;
+         vector<int> numbers;
+         while(current!=NULL){
+             int val= current->val;
+             numbers.push_back(val);
+             current=current->next;
+         }
+          std::sort(numbers.begin(),numbers.end());
+          ListNode* newhead= new ListNode(numbers[0]);
+          ListNode* newcurrent= newhead;
+          for(int i=1;i<numbers.size();i++){
+            ListNode* tmp= new ListNode(numbers[i]);
+            newcurrent->next= tmp;
+            newcurrent=newcurrent->next;
+          }
+          return newhead;   
+    }
+};
