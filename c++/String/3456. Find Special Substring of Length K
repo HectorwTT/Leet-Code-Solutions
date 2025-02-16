@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool hasSpecialSubstring(string s, int k) {
+     int numDistinct=1;
+     if(s.size()==1)return true;
+     for(int i=1;i<s.size();i++){
+        char current= s[i];
+        char previous = s[i-1];
+        if(current== previous)numDistinct++;
+        else{
+          if(numDistinct==k)return true;
+          numDistinct=1;  
+        }
+     }
+     return numDistinct==k;   
+    }
+};
