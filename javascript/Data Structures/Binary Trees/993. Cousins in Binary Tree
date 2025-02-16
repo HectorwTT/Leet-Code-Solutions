@@ -1,0 +1,33 @@
+var isCousins = function(root, x, y) {
+ const parentOfX= getParent(root,null,x);
+ const parentOfY=getParent(root,null,y); 
+ let depthOfX= getDepth(root,x,0);
+ let depthOfY=getDepth(root,y,0);
+ return depthOfX==depthOfY && parentOfX.val!=parentOfY.val;
+};
+var getParent=function(root,parent,value){
+ if(root==null)return null;
+ else if (parent==null && root.val==value)return null;
+ else if(root.left==null && root.right==null && root.val!=value)return null;
+ else if (root.val==value)return parent;
+ else{
+  const leftChild= getParent(root.left,root,value);
+  const rightChild= getParent(root.right,root,value);
+  if(leftChild!=null)return leftChild;
+  else if(rightChild!=null)return rightChild;
+  else return null;
+ }
+};
+var getDepth=function(root,value,depth){
+ if(root==null)return -1;
+ else if(root.val==value) return depth;
+ else if(root.left==null && root.right==null && root.val!=value)return -1;
+ else if(root.val==value)return depth+1;
+ else{
+  let leftDepth= getDepth(root.left,value,depth+1);
+  let rightDepth=getDepth(root.right,value,depth+1);
+  if(leftDepth!=-1)return leftDepth;
+  else if(rightDepth!=-1)return rightDepth;
+  else return -1;
+ }
+};
