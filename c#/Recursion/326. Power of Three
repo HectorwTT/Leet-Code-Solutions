@@ -1,0 +1,11 @@
+public class Solution {
+    public bool IsPowerOfThree(int n) {
+      if(n<=0)return false;
+      if(n==1 ||n==3) return true;
+      if(n%3!=0) return false;
+      else{
+       if(n/3==3 && n%3==0) return true;
+       else return IsPowerOfThree(n/3);
+      }   
+    }
+}
