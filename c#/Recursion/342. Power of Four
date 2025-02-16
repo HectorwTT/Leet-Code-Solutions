@@ -1,0 +1,13 @@
+public class Solution {
+    public bool IsPowerOfFour(int n) {
+      if(n<=0)return false;
+      double squareRootN= Math.Pow(n,0.5);
+      double squareRootN1= Math.Ceiling(squareRootN);
+      if(squareRootN1!=squareRootN)return false;
+      else{
+        int n1= (int)squareRootN1;
+        int number= n & n-1;
+        return number==0;
+       }   
+    }
+}
