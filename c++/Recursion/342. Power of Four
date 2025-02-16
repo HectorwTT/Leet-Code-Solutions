@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool isPowerOfFour(int n) {
+      if(n<=0)return false;
+      double squareRootN= pow(n,0.5);
+      double squareRootN1= ceil(squareRootN);
+      if(squareRootN1!=squareRootN)return false;
+      else{
+        int n1= (int)squareRootN1;
+        int number= n & n-1;
+        return number==0;
+       }   
+    }
+};
