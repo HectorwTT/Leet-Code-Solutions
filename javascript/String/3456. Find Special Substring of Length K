@@ -1,0 +1,14 @@
+var hasSpecialSubstring = function(s, k) {
+ let numDistinct=1;
+ if(s.length==1)return true;
+ for(let i=1;i<s.length;i++){
+  var current= s[i];
+  var previous = s[i-1];
+  if(current== previous)numDistinct++;
+  else{
+   if(numDistinct==k)return true;
+   numDistinct=1;  
+  }
+ }
+ return numDistinct==k;      
+};
