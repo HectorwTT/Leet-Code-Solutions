@@ -1,0 +1,16 @@
+public class Solution {
+    public bool HasSpecialSubstring(string s, int k) {
+      int numDistinct=1;
+      if(s.Length==1)return true;
+      for(int i=1;i<s.Length;i++){
+        char current= s[i];
+        char previous = s[i-1];
+        if(current== previous)numDistinct++;
+        else{
+          if(numDistinct==k)return true;
+          numDistinct=1;  
+        }
+      }
+      return numDistinct==k;     
+    }
+}
