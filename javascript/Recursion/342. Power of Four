@@ -1,0 +1,11 @@
+var isPowerOfFour = function(n) {
+ if(n<=0)return false;
+ let squareRootN= Math.pow(n,0.5);
+ let squareRootN1= Math.ceil(squareRootN);
+ if(squareRootN1!=squareRootN)return false;
+ else{
+   let n1= squareRootN1;
+   let number= n & n-1;
+   return number==0;
+  }   
+};
