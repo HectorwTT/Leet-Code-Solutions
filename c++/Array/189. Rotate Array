@@ -1,0 +1,24 @@
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        vector<int> nums1= getNewArray(nums,k);
+        for(int i=0;i<nums1.size();i++)nums[i]=nums1[i];
+        return;
+    }
+public:
+    vector<int> getNewArray(vector<int> nums,int k){
+      vector<int> result;
+      for(int i=0;i<nums.size();i++)result.push_back(0);
+      int newIndex= 0;
+      if(k<nums.size())newIndex=nums.size()-k;
+      else newIndex=nums.size()-k%nums.size();
+      int index=0;
+      for(int i=newIndex;i<nums.size();i++){
+          result[index++]= nums[i];
+      }
+      for(int i=0;i<newIndex;i++){
+          result[index++]=nums[i];
+      }
+      return result;
+    }  
+};
