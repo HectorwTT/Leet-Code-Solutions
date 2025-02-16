@@ -1,0 +1,16 @@
+class Solution {
+    public boolean hasSpecialSubstring(String s, int k) {
+      int numDistinct=1;
+      if(s.length()==1)return true;
+      for(int i=1;i<s.length();i++){
+        char current= s.charAt(i);
+        char previous = s.charAt(i-1);
+        if(current== previous)numDistinct++;
+        else{
+          if(numDistinct==k)return true;
+          numDistinct=1;  
+        }
+      }
+      return numDistinct==k;  
+    }
+}
