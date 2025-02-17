@@ -1,0 +1,15 @@
+public class Solution {
+    public bool HasPathSum(TreeNode root, int targetSum) {
+     if(root==null) return false;
+     if(root.left==null && root.right==null){
+         return root.val== targetSum;
+     } else{
+        int value=root.val;
+        int restOfTotal= targetSum-value;
+        if(root.left==null)return HasPathSum(root.right,restOfTotal);
+        else if(root.right==null)return HasPathSum(root.left,restOfTotal);
+        else return HasPathSum(root.left,restOfTotal) 
+                 || HasPathSum(root.right,restOfTotal);
+     }
+    }    
+}
