@@ -1,0 +1,26 @@
+public class Solution {
+    public bool IsPalindrome(ListNode head) {
+     ListNode current=head;
+     ListNode prev=null;
+     ListNode root= null;
+     while(current!=null){
+      int currentvalue = current.val;
+      prev=root;
+      root = new ListNode(currentvalue);
+      root.next=prev;
+      current=current.next;
+     }
+  
+     ListNode l1current=head;
+     ListNode l2current=root;
+     while(l1current!=null && l2current!=null){
+      int current1= l1current.val;
+      int current2=l2current.val;
+      if(current1!=current2) return false;
+      l1current= l1current.next;
+      l2current= l2current.next;  
+     }
+     if((l1current==null && l2current!=null)||(l2current==null && l1current!=null))return false;
+     else return true;  
+    }
+}
