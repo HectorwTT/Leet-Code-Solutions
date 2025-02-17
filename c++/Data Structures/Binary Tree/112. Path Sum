@@ -1,0 +1,16 @@
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int targetSum) {
+     if(root==NULL) return false;
+     if(root->left==NULL && root->right==NULL){
+         return root->val== targetSum;
+     } else{
+        int value=root->val;
+        int restOfTotal= targetSum-value;
+        if(root->left==NULL)return hasPathSum(root->right,restOfTotal);
+        else if(root->right==NULL)return hasPathSum(root->left,restOfTotal);
+        else return hasPathSum(root->left,restOfTotal) 
+                 ||hasPathSum(root->right,restOfTotal);
+     }   
+    }
+};
