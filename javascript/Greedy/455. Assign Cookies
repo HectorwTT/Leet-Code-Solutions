@@ -1,0 +1,11 @@
+var findContentChildren = function(g, s) {
+ g.sort((x,y)=>x-y);
+ s.sort((x,y)=>x-y);
+ let contentChildren = 0;
+ let cookieIndex = 0;
+ while (cookieIndex < s.length && contentChildren < g.length) {
+  if (s[cookieIndex] >= g[contentChildren]) contentChildren++;
+  cookieIndex++;
+ }
+ return contentChildren;     
+};
