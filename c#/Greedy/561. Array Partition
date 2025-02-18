@@ -1,0 +1,8 @@
+public class Solution {
+    public int ArrayPairSum(int[] nums) {
+      int max=0;
+      Array.Sort(nums);
+      for(int i=0;i<=nums.Length-2;i+=2)max+=nums[i];
+      return max;   
+    }
+}
