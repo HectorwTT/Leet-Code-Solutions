@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int minCost(string colors, vector<int>& neededTime) {
+     vector<int> length;
+     length.push_back(1);
+     for(int i=1;i<neededTime.size();i++)length.push_back(0);
+     int total=0;
+     int max=neededTime[0];
+     int sum=neededTime[0];
+     for(int i=1;i<colors.size();i++){
+      if(colors[i-1]==colors[i]){
+        length[i]=length[i-1]+1;
+        max=std::max(neededTime[i],max);
+        sum+=neededTime[i];
+      }else{
+        total+=sum-max;
+        length[i]=1;
+        max= neededTime[i];
+        sum= neededTime[i];
+      }
+      if(i==colors.size()-1)total+=sum-max;
+     }
+    return total;      
+    }
+};
