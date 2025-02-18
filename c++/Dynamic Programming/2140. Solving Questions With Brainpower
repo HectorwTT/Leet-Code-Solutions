@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long mostPoints(vector<vector<int>>& questions) {
+      vector<long>  dp;
+      for(int i=0;i<questions.size();i++)dp.push_back(0);
+      dp[questions.size()-1]=1L*questions[questions.size()-1][0];
+      for(int i=questions.size()-2;i>=0;i--){
+       long skip=dp[i+1];
+       long pick=1L*questions[i][0];
+       int next=questions[i][1];
+       if(i+next+1<=questions.size()-1)pick+=dp[i+next+1];
+       dp[i]=std::max(skip,pick);
+      }
+      return dp[0];     
+    }
+};
