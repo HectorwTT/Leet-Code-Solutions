@@ -1,0 +1,26 @@
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+     IList<IList<string>> anagrams = new List<IList<string>>();
+     Dictionary <string,IList<String>> listOfAnagrams= new Dictionary<string,IList<string>>();
+     for(int i=0;i<strs.Length;i++){
+      String word=strs[i];
+      char[] wordchars= word.ToCharArray();
+      Array.Sort(wordchars);
+      string sortedword = new string(wordchars);
+      if(!listOfAnagrams.ContainsKey(sortedword)){
+       IList<string>words= new List<string>();
+       words.Add(word);
+       listOfAnagrams[sortedword]=words;       
+      }else{
+        IList<string> words= listOfAnagrams[sortedword];
+        words.Add(word);
+        listOfAnagrams[sortedword]=words;
+      }                
+     }
+     foreach(var(key,value)in listOfAnagrams){
+      IList<string>words= listOfAnagrams[key];
+      anagrams.Add(words);
+     }
+     return anagrams;   
+    }
+}
