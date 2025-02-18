@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int maxDistance(vector<vector<int>>& arrays) {
+     vector<int> maxFromFront;
+     vector<int> maxFromBehind;
+     for(int i=0;i<arrays.size();i++)maxFromFront.push_back(0);
+     for(int i=0;i<arrays.size();i++)maxFromBehind.push_back(0);
+     vector<int> array=arrays[0];
+     maxFromFront[0]=array[array.size()-1];
+     int max=0;
+     for(int i=1;i<maxFromFront.size();i++){
+      vector<int> list=arrays[i];
+      int listMax=list[list.size()-1];  
+      maxFromFront[i]=std::max(maxFromFront[i-1],listMax);        
+     }   
+     vector<int> array1=arrays[maxFromBehind.size()-1];
+     maxFromBehind[maxFromBehind.size()-1] =array1[array1.size()-1];
+     for(int i=maxFromBehind.size()-2;i>=0;i--){
+      vector<int> list=arrays[i]; 
+      int listMax=list[list.size()-1];
+      maxFromBehind[i]=std::max(maxFromBehind[i+1],listMax);       
+     }
+     max=std::max(0,std::abs(array[0]-maxFromBehind[1]));
+     for(int i=1;i<maxFromBehind.size()-1;i++){
+      vector<int> list=arrays[i]; 
+      int listMin=list[0]; 
+       max=std::max(max,std::abs(listMin-maxFromFront[i-1]));
+       max=std::max(max,std::abs(listMin-maxFromBehind[i+1]));
+     }
+     max=std::max(max,std::abs(array1[0]-maxFromFront[maxFromFront.size()-2]));
+     return max;     
+    }
+};
