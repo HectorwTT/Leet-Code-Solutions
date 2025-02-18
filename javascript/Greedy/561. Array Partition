@@ -1,0 +1,6 @@
+var arrayPairSum = function(nums) {
+      let max=0;
+      nums.sort((x,y)=>x-y);
+      for(let i=0;i<=nums.length-2;i+=2)max+=nums[i];
+      return max;     
+};
