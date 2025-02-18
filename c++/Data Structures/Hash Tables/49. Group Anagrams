@@ -1,0 +1,29 @@
+class Solution {
+public:
+    vector<vector<string>> groupAnagrams(vector<string>& strs) {
+     vector<vector<string>> anagrams;
+     unordered_map <string,vector<string>> listOfAnagrams;
+     for(int i=0;i<strs.size();i++){
+      string word=strs[i];
+      vector<char> wordchars;
+      for(int j=0;j<word.size();j++)wordchars.push_back(word[j]);
+      std::sort(wordchars.begin(),wordchars.end());
+      string sortedword ="";
+      for(int j=0;j<wordchars.size();j++)sortedword+=wordchars[j];
+      if(listOfAnagrams.find(sortedword)==listOfAnagrams.end()){
+       vector<string>words;
+       words.push_back(word);
+       listOfAnagrams[sortedword]=words;       
+      }else{
+        vector<string> words= listOfAnagrams[sortedword];
+        words.push_back(word);
+        listOfAnagrams[sortedword]=words;
+      }                
+     }
+     for(auto key: listOfAnagrams){
+      vector<string>words= key.second;
+      anagrams.push_back(words);
+     }
+     return anagrams;   
+    }
+};
