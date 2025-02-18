@@ -1,0 +1,28 @@
+var reverseBetween = function(head, left, right) {
+        let current = head;
+        let last=current;
+        let index=1;
+        if(right==index || left==right)return head;
+        
+        while(index<left){
+            last=current;
+            current=current.next;
+            index++;
+        }
+        let firstReverse= new ListNode(current.val);
+        let currentReverse=firstReverse;
+        if(current.next!=null) current=current.next;
+        while(index<right){
+            let value= current.val;
+            const tmp = new ListNode(value);
+            const newtail = currentReverse;
+            currentReverse=tmp;
+            currentReverse.next=newtail;
+            current=current.next;
+            index++;
+        }
+        last.next=currentReverse;
+        firstReverse.next=current;
+        if(left==1) return head.next;
+        else return head;      
+};
