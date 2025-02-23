@@ -1,0 +1,16 @@
+public class Solution {
+    public bool HasSameDigits(string s) {
+     string newS="";
+     while(s.Length>2){
+      newS="";  
+      for(int i=1;i<s.Length;i++){
+       int current=s[i]-48;  
+       int previous=s[i-1]-48;
+       int newNum=(current+previous)%10;
+       newS+=newNum;
+      } 
+      s=newS;
+     } 
+     return s[s.Length-1]==s[s.Length-2];   
+    }
+}
