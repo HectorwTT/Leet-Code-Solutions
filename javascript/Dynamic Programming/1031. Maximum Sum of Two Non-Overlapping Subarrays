@@ -1,0 +1,49 @@
+var maxSumTwoNoOverlap = function(nums, firstLen, secondLen) {
+     let total=0;
+     let total1=0;
+     let max=0;
+     const sums=[];
+     const sums1=[];
+     const maxOfSecondLengthSubArraysFromFront=[];
+     const  maxOfSecondLengthSubArraysFromBehind=[];   
+     for(let i=0;i<nums.length;i++){
+      total+=nums[i];
+      sums.push(total);  
+      sums1.push(0);
+      maxOfSecondLengthSubArraysFromFront.push(0);
+      maxOfSecondLengthSubArraysFromBehind.push(0);
+     } 
+     for(let i=nums.length-1;i>=0;i--){
+      total1+=nums[i];
+      sums1[i]=total1;  
+     } 
+     for(let i=0;i<nums.length;i++){
+      if(i>=secondLen-1){
+       if(i==secondLen-1) maxOfSecondLengthSubArraysFromFront[i]=sums[i];
+       else{
+        let total2=sums[i]-sums[i-secondLen];
+        maxOfSecondLengthSubArraysFromFront[i]=Math.max(maxOfSecondLengthSubArraysFromFront[i-1],total2);
+       }
+      }  
+     }
+     for(let i=nums.length-1;i>=0;i--){
+      if(i<=nums.length-secondLen){
+       if(i==nums.length-secondLen) maxOfSecondLengthSubArraysFromBehind[i]=sums1[i];
+       else{
+        let total3=sums1[i]-sums1[i+secondLen];
+        maxOfSecondLengthSubArraysFromBehind[i]=Math.max(maxOfSecondLengthSubArraysFromBehind[i+1],total3);
+       }
+      }      
+     }
+     for(let i=0;i<=nums.length-firstLen;i++){
+      if(i==0)max=Math.max(max,sums[firstLen-1]+maxOfSecondLengthSubArraysFromBehind[firstLen]);
+      else if(i==nums.length-firstLen)max=Math.max(max,
+                                 sums[sums.length-1]-sums[i-1]+maxOfSecondLengthSubArraysFromFront[i-1]); 
+      else{
+         let prefix=maxOfSecondLengthSubArraysFromFront[i-1];
+         let suffix=maxOfSecondLengthSubArraysFromBehind[i+firstLen];
+         max=Math.max(max,sums[i+firstLen-1]-sums[i-1]+Math.max(prefix,suffix));
+      } 
+     }
+     return max;        
+};
