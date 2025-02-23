@@ -1,0 +1,14 @@
+var hasSameDigits = function(s) {
+     let newS="";
+     while(s.length>2){
+      newS="";  
+      for(let i=1;i<s.length;i++){
+       let current=s.charCodeAt(i)-48;  
+       let previous=s.charCodeAt(i-1)-48;
+       let newNum=(current+previous)%10;
+       newS+=newNum;
+      } 
+      s=newS;
+     } 
+     return s.charAt(s.length-1)==s.charAt(s.length-2);     
+};
