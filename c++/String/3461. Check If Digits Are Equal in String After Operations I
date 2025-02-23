@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool hasSameDigits(string s) {
+     string newS="";
+     while(s.size()>2){
+      newS="";  
+      for(int i=1;i<s.size();i++){
+       int current=s[i]-48;  
+       int previous=s[i-1]-48;
+       int newNum=(current+previous)%10;
+       newS+=newNum;
+      } 
+      s=newS;
+     } 
+     return s[s.size()-1]==s[s.size()-2];   
+    }
+};
