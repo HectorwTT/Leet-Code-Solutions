@@ -1,0 +1,16 @@
+class Solution {
+    public boolean hasSameDigits(String s) {
+     String newS="";
+     while(s.length()>2){
+      newS="";  
+      for(int i=1;i<s.length();i++){
+       int current=s.charAt(i)-48;  
+       int previous=s.charAt(i-1)-48;
+       int newNum=(current+previous)%10;
+       newS+=newNum;
+      } 
+      s=newS;
+     } 
+     return s.charAt(s.length()-1)==s.charAt(s.length()-2);
+    }
+}
