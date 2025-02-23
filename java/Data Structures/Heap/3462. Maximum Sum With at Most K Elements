@@ -1,0 +1,23 @@
+class Solution {
+    public long maxSum(int[][] grid, int[] limits, int k) {
+     PriorityQueue<Integer> maxHeap=new PriorityQueue<>((a,b)->(b-a));
+     long sum=0;
+     for(int i=0;i<grid.length;i++){
+      int [] arr=grid[i];
+      Arrays.sort(arr);
+      int count=0;
+      int index=arr.length-1;
+      while(count<limits[i]){
+        maxHeap.offer(arr[index--]);
+        count++;
+      } 
+     }
+     int count=0;
+     while(count<k){
+      int number=maxHeap.poll();
+      sum+=1L*number;  
+      count++;
+     }
+     return sum;
+    }
+}
