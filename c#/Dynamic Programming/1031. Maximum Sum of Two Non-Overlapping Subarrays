@@ -1,0 +1,48 @@
+public class Solution {
+    public int MaxSumTwoNoOverlap(int[] nums, int firstLen, int secondLen) {
+      int total=0;
+     int total1=0;
+     int max=0;
+     int [] sums=new int[nums.Length];
+     int [] sums1=new int[nums.Length];
+     int [] maxOfSecondLengthSubArraysFromFront=new int[nums.Length];
+     int []  maxOfSecondLengthSubArraysFromBehind=new int[nums.Length];   
+     for(int i=0;i<sums.Length;i++){
+      total+=nums[i];
+      sums[i]=total;  
+     } 
+     for(int i=sums.Length-1;i>=0;i--){
+      total1+=nums[i];
+      sums1[i]=total1;  
+     } 
+     for(int i=0;i<nums.Length;i++){
+      if(i>=secondLen-1){
+       if(i==secondLen-1) maxOfSecondLengthSubArraysFromFront[i]=sums[i];
+       else{
+        int total2=sums[i]-sums[i-secondLen];
+        maxOfSecondLengthSubArraysFromFront[i]=Math.Max(maxOfSecondLengthSubArraysFromFront[i-1],total2);
+       }
+      }  
+     }
+     for(int i=nums.Length-1;i>=0;i--){
+      if(i<=nums.Length-secondLen){
+       if(i==nums.Length-secondLen) maxOfSecondLengthSubArraysFromBehind[i]=sums1[i];
+       else{
+        int total3=sums1[i]-sums1[i+secondLen];
+        maxOfSecondLengthSubArraysFromBehind[i]=Math.Max(maxOfSecondLengthSubArraysFromBehind[i+1],total3);
+       }
+      }      
+     }
+     for(int i=0;i<=nums.Length-firstLen;i++){
+      if(i==0)max=Math.Max(max,sums[firstLen-1]+maxOfSecondLengthSubArraysFromBehind[firstLen]);
+      else if(i==nums.Length-firstLen)max=Math.Max(max,
+                                 sums[sums.Length-1]-sums[i-1]+maxOfSecondLengthSubArraysFromFront[i-1]); 
+      else{
+         int prefix=maxOfSecondLengthSubArraysFromFront[i-1];
+         int suffix=maxOfSecondLengthSubArraysFromBehind[i+firstLen];
+         max=Math.Max(max,sums[i+firstLen-1]-sums[i-1]+Math.Max(prefix,suffix));
+      } 
+     }
+     return max;   
+    }
+}
