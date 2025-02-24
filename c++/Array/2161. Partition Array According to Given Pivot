@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> pivotArray(vector<int>& nums, int pivot) {
+     vector<int> result;
+     vector<int> lessThan;
+     vector<int> equalTo;  
+     vector<int> moreThan;
+     for(int i=0;i<nums.size();i++){
+      if(nums[i]<pivot) lessThan.push_back(nums[i]);
+      else if(nums[i]==pivot)equalTo.push_back(nums[i]);
+      else moreThan.push_back(nums[i]); 
+     } 
+     for(int i=0;i<lessThan.size();i++)result.push_back(lessThan[i]);   
+     for(int i=0;i<equalTo.size();i++)result.push_back(equalTo[i]);   
+     for(int i=0;i<moreThan.size();i++)result.push_back(moreThan[i]);   
+     return result;
+    }
+};
