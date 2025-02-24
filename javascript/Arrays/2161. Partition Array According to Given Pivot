@@ -1,0 +1,15 @@
+var pivotArray = function(nums, pivot) {
+ const result=[];
+ const lessThan=[];
+ const equalTo=[];  
+ const moreThan=[];
+ for(let i=0;i<nums.length;i++){
+  if(nums[i]<pivot) lessThan.push(nums[i]);
+  else if(nums[i]==pivot)equalTo.push(nums[i]);
+  else moreThan.push(nums[i]); 
+ } 
+ for(let i=0;i<lessThan.length;i++)result.push(lessThan[i]);   
+ for(let i=0;i<equalTo.length;i++)result.push(equalTo[i]);   
+ for(let i=0;i<moreThan.length;i++)result.push(moreThan[i]);   
+ return result;   
+};
