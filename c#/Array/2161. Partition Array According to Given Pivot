@@ -1,0 +1,20 @@
+public class Solution {
+    public int[] PivotArray(int[] nums, int pivot) {
+     IList<int> result=new List<int>() ;
+     int[]arr;
+     IList<int> lessThan=new List<int>()  ;
+     IList<int> equalTo=new List<int>()   ;  
+     IList<int> moreThan=new List<int>()  ;
+     for(int i=0;i<nums.Length;i++){
+      if(nums[i]<pivot) lessThan.Add(nums[i]);
+      else if(nums[i]==pivot)equalTo.Add(nums[i]);
+      else moreThan.Add(nums[i]); 
+     } 
+     for(int i=0;i<lessThan.Count;i++)result.Add(lessThan[i]);   
+     for(int i=0;i<equalTo.Count;i++)result.Add(equalTo[i]);   
+     for(int i=0;i<moreThan.Count;i++)result.Add(moreThan[i]);   
+     arr=new int[result.Count];
+     for(int i=0;i<arr.Length;i++)arr[i] =result[i];    
+     return arr;   
+    }
+}
