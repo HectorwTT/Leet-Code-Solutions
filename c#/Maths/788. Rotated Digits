@@ -1,0 +1,14 @@
+public class Solution {
+    public int RotatedDigits(int n) {
+     int total=0;  
+     for(int i=1;i<=n;i++){
+      String number=""+i;
+      if(number.IndexOf("7")!=-1 || number.IndexOf("3")!=-1 || number.IndexOf("4")!=-1)continue;
+      if(number.IndexOf("2")!=-1
+         || number.IndexOf("5")!=-1
+         || number.IndexOf("6")!=-1
+         ||number.IndexOf("9")!=-1)total++;      
+     } 
+     return total;     
+    }
+}
