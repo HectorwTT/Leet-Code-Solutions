@@ -1,0 +1,14 @@
+class Solution {
+    public int rotatedDigits(int n) {
+     int total=0;  
+     for(int i=1;i<=n;i++){
+      String number=""+i;
+      if(number.indexOf("7")!=-1 || number.indexOf("3")!=-1 || number.indexOf("4")!=-1)continue;
+      if(number.indexOf("2")!=-1
+         || number.indexOf("5")!=-1
+         || number.indexOf("6")!=-1
+         ||number.indexOf("9")!=-1)total++;      
+     } 
+     return total;      
+    }
+}
