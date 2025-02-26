@@ -2,27 +2,27 @@ class Solution {
     public int rotatedDigits(int n) {
      int total=0;
      boolean [] isRotated=new boolean[n+1];
+     boolean [] hasInvalidDigits=new boolean[n+1];
      for(int i=1;i<=n;i++){
       if(i==2 || i==5 || i==6 || i==9){
         isRotated[i]=true; 
         total++;
+      }else if(i==3 || i==4 ||i==7){
+        hasInvalidDigits[i]=true;
       }else{
       int number=i/10;
       int mod=i%10;
-      String num=""+number;
-      if(num.contains("4")
-       || num.contains("7")
-        || num.contains("3")
-        || mod==3 || mod==4 || mod==7){
+      if(hasInvalidDigits[number] || hasInvalidDigits[mod]){
          isRotated[i]=false;
+         hasInvalidDigits[i]=true;
          continue;
-      } 
+      }
       if(isRotated[number] || isRotated[mod]){
        isRotated[i]=true;
        total++;
       }  
      }
     }
-    return total;   
+    return total;    
     }
 }
