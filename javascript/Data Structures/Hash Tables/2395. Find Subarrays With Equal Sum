@@ -1,0 +1,10 @@
+var findSubarrays = function(nums) {
+  const sums= new Map();
+  for(let i=0;i<nums.length-1;i++){
+      let prev= nums[i];
+      let curr=nums[i+1];
+      if(sums.has(prev+curr))return true;
+      else sums.set(prev+curr,1);
+  }
+  return false;   
+};
