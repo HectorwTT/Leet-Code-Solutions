@@ -1,0 +1,61 @@
+var minSumOfLengths = function(arr, target) {
+     let total=0;
+     const sums=new Map();
+     const starts=new Map();
+     const ends=new Map();
+     let min=arr.length+1;
+     const lengthsFromFront=[];
+     const  lengthsFromBehind=[];
+     for(let i=0;i<arr.length;i++)lengthsFromFront.push(arr.length+1); 
+     for(let i=0;i<arr.length;i++)lengthsFromBehind.push(arr.length+1);
+     sums.set(0,0);
+     for(let i=0;i<arr.length;i++){
+      total+=arr[i];
+      sums.set(total,i);
+      if(sums.has(total-target)){
+       if(sums.get(total-target)==i){
+        starts.set(i,i);
+        ends.set(i,i);
+       }else if(total==target){
+        starts.set(0,i);
+        ends.set(i,0);
+       }else{ 
+          starts.set(sums.get(total-target)+1,i);
+          ends.set(i,sums.get(total-target)+1) ;
+       }  
+      }  
+     }
+     let prefix=arr.length+1;
+     let suffix=arr.length+1;
+     for(let i=0;i<arr.length;i++){
+      if(ends.has(i)){
+        let start=ends.get(i);
+        let length=i-start+1;
+        if(i==0)lengthsFromFront[i]=1;
+        else lengthsFromFront[i]=Math.min(length,lengthsFromFront[i-1]);
+      }else if(i>0)lengthsFromFront[i]=lengthsFromFront[i-1];
+     }
+     for(let i=arr.length-1;i>=0;i--){
+      if(starts.has(i)){
+        let end=starts.get(i);
+        let length=end-i+1;
+        if(i==arr.length-1)lengthsFromBehind[i]=1;
+        else lengthsFromBehind[i]=Math.min(length,lengthsFromBehind[i+1]);
+      }else if(i<arr.length-1)lengthsFromBehind[i]=lengthsFromBehind[i+1];
+     }
+    
+     for(let i=0;i<arr.length;i++){
+      if(starts.has(i)){
+       let length=starts.get(i)-i+1;
+       if(i==0)prefix=arr.length+1;
+       else prefix=lengthsFromFront[i-1];
+       if(i==arr.length-1)suffix=arr.length+1;
+       else if(starts.get(i)==arr.length-1)suffix=arr.length+1;
+       else suffix=lengthsFromBehind[starts.get(i)+1];
+       let totalLength=length+Math.min(prefix,suffix);
+       min=Math.min(totalLength,min);        
+      }  
+     }
+     if(min>=arr.length+1)return -1;
+     else return min;   
+};
