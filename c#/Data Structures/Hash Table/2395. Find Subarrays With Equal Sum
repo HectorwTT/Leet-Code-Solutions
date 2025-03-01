@@ -1,0 +1,12 @@
+public class Solution {
+    public bool FindSubarrays(int[] nums) {
+     Dictionary<int,int> sums= new Dictionary<int,int>();
+     for(int i=0;i<nums.Length-1;i++){
+      int prev= nums[i];
+      int curr=nums[i+1];
+      if(sums.ContainsKey(prev+curr))return true;
+      else sums[prev+curr]=1;
+     }
+     return false;   
+    }
+}
