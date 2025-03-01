@@ -1,0 +1,21 @@
+class Solution {
+public:
+    bool predictTheWinner(vector<int>& nums) {
+     return canTheFirstPlayerWin(nums,0,nums.size()-1,0,0,1);   
+    }
+public:
+    bool canTheFirstPlayerWin(vector<int>& nums,int left,
+                      int right,int player1Sum,int player2Sum,int numOfTurn){
+             
+      if(left==right) return player1Sum+nums[left]>=player2Sum ; 
+      else{
+        if(numOfTurn%2==0) return canTheFirstPlayerWin(nums,left+1,right,
+                 player1Sum,player2Sum+nums[left],numOfTurn+1)
+                 && canTheFirstPlayerWin(nums,left,right-1,player1Sum,nums[right]+player2Sum,numOfTurn+1); 
+        else  return canTheFirstPlayerWin(nums,left+1,right,player1Sum+nums[left],player2Sum,numOfTurn+1)
+                 || canTheFirstPlayerWin(nums,left,right-1,
+                 player1Sum+nums[right],player2Sum,numOfTurn+1);          
+      }                  
+    }       
+    
+};
