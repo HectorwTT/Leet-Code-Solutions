@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool findSubarrays(vector<int>& nums) {
+     unordered_map<int,int> sums;
+     for(int i=0;i<nums.size()-1;i++){
+      int prev= nums[i];
+      int curr=nums[i+1];
+      if(sums.find(prev+curr)!=sums.end())return true;
+      else sums[prev+curr]=1;
+     }
+     return false;    
+    }
+};
