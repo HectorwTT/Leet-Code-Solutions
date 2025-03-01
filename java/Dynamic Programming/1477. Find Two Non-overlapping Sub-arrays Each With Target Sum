@@ -1,0 +1,64 @@
+class Solution {
+    public int minSumOfLengths(int[] arr, int target) {
+     int total=0;
+     HashMap<Integer,Integer> sums=new HashMap<>();
+     HashMap<Integer,Integer> starts=new HashMap<>();
+     HashMap<Integer,Integer> ends=new HashMap<>();
+     int min=100001;
+     int [] lengthsFromFront=new int[arr.length];
+     int [] lengthsFromBehind=new int[arr.length];
+     Arrays.fill(lengthsFromFront,100001); 
+     Arrays.fill(lengthsFromBehind,100001);
+     sums.put(0,0);
+     for(int i=0;i<arr.length;i++){
+      total+=arr[i];
+      sums.put(total,i);
+      if(sums.containsKey(total-target)){
+       if(sums.get(total-target)==i){
+        starts.put(i,i);
+        ends.put(i,i);
+       }else if(total==target){
+        starts.put(0,i);
+        ends.put(i,0);
+       }else{ 
+          starts.put(sums.get(total-target)+1,i);
+          ends.put(i,sums.get(total-target)+1) ;
+       }  
+      }  
+     }
+     if(starts.size()<=1)return -1;
+     int prefix=100001;
+     int suffix=100001;
+     for(int i=0;i<arr.length;i++){
+      if(ends.containsKey(i)){
+        int start=ends.get(i);
+        int length=i-start+1;
+        if(i==0)lengthsFromFront[i]=1;
+        else lengthsFromFront[i]=Math.min(length,lengthsFromFront[i-1]);
+      }else if(i>0)lengthsFromFront[i]=lengthsFromFront[i-1];
+     }
+     for(int i=arr.length-1;i>=0;i--){
+      if(starts.containsKey(i)){
+        int end=starts.get(i);
+        int length=end-i+1;
+        if(i==arr.length-1)lengthsFromBehind[i]=1;
+        else lengthsFromBehind[i]=Math.min(length,lengthsFromBehind[i+1]);
+      }else if(i<arr.length-1)lengthsFromBehind[i]=lengthsFromBehind[i+1];
+     }
+    
+     for(int i=0;i<arr.length;i++){
+      if(starts.containsKey(i)){
+       int length=starts.get(i)-i+1;
+       if(i==0)prefix=100001;
+       else prefix=lengthsFromFront[i-1];
+       if(i==arr.length-1)suffix=100001;
+       else if(starts.get(i)==arr.length-1)suffix=100001;
+       else suffix=lengthsFromBehind[starts.get(i)+1];
+       int totalLength=length+Math.min(prefix,suffix);
+       min=Math.min(totalLength,min);        
+      }  
+     }
+     if(min>=100001)return -1;
+     else return min;
+    }
+}
