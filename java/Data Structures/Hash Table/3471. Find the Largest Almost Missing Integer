@@ -1,0 +1,23 @@
+class Solution {
+    public int largestInteger(int[] nums, int k) {
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     int max=-1;
+     for(int i=0;i<=nums.length-k;i++){
+      for(int j=i;j<i+k;j++){
+       if(!map.containsKey(nums[j])){
+        List<Integer> subArrays=new ArrayList<>();
+        subArrays.add(i);
+        map.put(nums[j],subArrays);
+       }else{
+        List<Integer> subArrays=map.get(nums[j]);
+        if(!subArrays.contains(i))subArrays.add(i);
+        map.replace(nums[j],subArrays);
+       }
+      }  
+     }
+     for(Integer key:map.keySet()){
+      if(map.get(key).size()==1)max=Math.max(max,key);  
+     }
+     return max;       
+    }
+}
