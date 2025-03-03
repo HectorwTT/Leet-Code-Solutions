@@ -1,0 +1,17 @@
+public class Solution {
+    public int[] ProductExceptSelf(int[] nums) {
+     int [] forwardmultiplications = new int[nums.Length];
+     int [] backwardmultiplications = new int[nums.Length];
+     int[] productexceptself= new int [nums.Length];
+     forwardmultiplications[0]= nums[0];
+     backwardmultiplications[nums.Length-1]= nums[nums.Length-1];
+     for(int i=1;i<nums.Length;i++) forwardmultiplications[i]=nums[i]* forwardmultiplications[i-1];
+     for(int i=nums.Length-2;i>=0;i--)backwardmultiplications[i]= nums[i]*backwardmultiplications[i+1];
+     productexceptself[0]= backwardmultiplications[1];
+     for(int i=1;i<nums.Length-1;i++)
+       productexceptself[i]= forwardmultiplications[i-1]*backwardmultiplications[i+1];
+     productexceptself[nums.Length-1]=
+     forwardmultiplications[nums.Length-2];
+     return productexceptself;   
+    }
+}
