@@ -1,0 +1,19 @@
+var productExceptSelf = function(nums) {
+ const forwardmultiplications=[];
+ const backwardmultiplications=[];
+ const productexceptself=[];
+ for(let i=0;i<nums.length;i++){
+  forwardmultiplications.push(0); 
+  backwardmultiplications.push(0); 
+  productexceptself.push(0); 
+ }
+ forwardmultiplications[0]=nums[0];
+ backwardmultiplications[nums.length-1]= nums[nums.length-1];
+ for(let i=1;i<nums.length;i++) forwardmultiplications[i]=nums[i]* forwardmultiplications[i-1];
+ for(let i=nums.length-2;i>=0;i--)backwardmultiplications[i]= nums[i]*backwardmultiplications[i+1];
+ productexceptself[0]= backwardmultiplications[1];
+ for(let i=1;i<nums.length-1;i++)
+  productexceptself[i]= forwardmultiplications[i-1]*backwardmultiplications[i+1];
+     productexceptself[nums.length-1]=forwardmultiplications[nums.length-2];
+ return productexceptself;      
+};
