@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+     vector<int> forwardmultiplications;
+     vector<int> backwardmultiplications;
+     vector<int> productexceptself;
+     for(int i=0;i<nums.size();i++){
+       forwardmultiplications.push_back(0); 
+       backwardmultiplications.push_back(0); 
+       productexceptself.push_back(0); 
+     }
+    forwardmultiplications[0]=nums[0];
+     backwardmultiplications[nums.size()-1]= nums[nums.size()-1];
+     for(int i=1;i<nums.size();i++) forwardmultiplications[i]=nums[i]* forwardmultiplications[i-1];
+     for(int i=nums.size()-2;i>=0;i--)backwardmultiplications[i]= nums[i]*backwardmultiplications[i+1];
+     productexceptself[0]= backwardmultiplications[1];
+     for(int i=1;i<nums.size()-1;i++)
+       productexceptself[i]= forwardmultiplications[i-1]*backwardmultiplications[i+1];
+     productexceptself[nums.size()-1]=forwardmultiplications[nums.size()-2];
+     return productexceptself;     
+    }
+};
