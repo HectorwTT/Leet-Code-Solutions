@@ -1,0 +1,48 @@
+public class Solution {
+    public int[] ClosestPrimes(int left, int right) {
+      int []  answer=new  int[2];
+      Dictionary<int,IList<int>> map=new Dictionary<int,IList<int>>();
+      int min=right;
+      int count=0;
+      int previous=0;
+      int current=0;
+      Array.Fill(answer,-1);
+      bool[] prime = new bool[right+1];
+      for(int i=2;i<=right;i++)prime[i] = true;
+      for(int p = 2; p*p <=right; p++){
+       if(prime[p] == true){
+        for(int i = p*p; i <= right; i += p) prime[i] = false;
+       }
+      } 
+      for(int i=left;i<=right;i++){
+       if(prime[i]){
+        if(count==0){
+         previous=i;
+         current=i;   
+        }
+        if(count>=1){
+         previous=current;
+         current=i;
+         int diff= current-previous;
+         min=Math.Min(diff,min);
+         if(!map.ContainsKey(diff)){
+          IList<int> list=new List<int>();
+          list.Add(previous);
+          map[diff]=list;  
+         }else{
+          IList<int> list=map[diff];
+          list.Add(previous);
+          map[diff]=list; 
+         }  
+        }
+        count++;
+       } 
+      }    
+      if(current!=previous){
+        IList<int> numbers=map[min];
+        answer[0]=numbers[0];
+        answer[1]=answer[0]+min;
+      }
+      return answer;   
+    }
+}
