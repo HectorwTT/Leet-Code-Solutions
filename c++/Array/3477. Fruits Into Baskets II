@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int numOfUnplacedFruits(vector<int>& fruits, vector<int>& baskets) {
+     int count=0;   
+     vector<bool>isAvailable;
+     for(int i=0;i<baskets.size();i++)isAvailable.push_back(false);
+     for(int i=0;i<fruits.size();i++){
+      for(int j=0;j<baskets.size();j++){
+       if(!isAvailable[j]){
+        if(fruits[i]<=baskets[j]){
+         isAvailable[j] =true;
+         count++; 
+         break; 
+        }
+       } 
+      } 
+      }
+      return baskets.size()-count;   
+    }
+};
