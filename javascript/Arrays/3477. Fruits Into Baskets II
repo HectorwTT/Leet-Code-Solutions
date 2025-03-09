@@ -1,0 +1,17 @@
+var numOfUnplacedFruits = function(fruits, baskets) {
+ let count=0;   
+ const isAvailable=[];
+ for(let i=0;i<baskets.length;i++)isAvailable.push(false);
+ for(let i=0;i<fruits.length;i++){
+  for(let j=0;j<baskets.length;j++){
+   if(!isAvailable[j]){
+    if(fruits[i]<=baskets[j]){
+     isAvailable[j] =true;
+     count++; 
+     break; 
+    }
+   } 
+  } 
+ }
+ return baskets.length-count;     
+};
