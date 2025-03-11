@@ -1,0 +1,25 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+      int total=0;
+      int [] aIndices=new int[s.length()];
+      int [] bIndices=new int[s.length()];
+      int [] cIndices=new int[s.length()];
+      HashMap<Character,Integer> map=new HashMap<>();   
+      Arrays.fill(aIndices,-1);
+      Arrays.fill(bIndices,-1);
+      Arrays.fill(cIndices,-1);
+      for(int i=s.length()-1;i>=0;i--){
+       char ch=s.charAt(i);
+       if(!map.containsKey(ch))map.put(ch,i);
+       else map.replace(ch,i);
+       if(map.containsKey('a'))aIndices[i]= map.get('a');
+       if(map.containsKey('b'))bIndices[i]= map.get('b');
+       if(map.containsKey('c'))cIndices[i]= map.get('c');
+       if(aIndices[i]!=-1 && bIndices[i]!=-1 && cIndices[i]!=-1){
+        int maxIndex=Math.max(aIndices[i],Math.max(bIndices[i],cIndices[i]));
+        total+=s.length()-maxIndex;
+       } 
+      }       
+      return total;  
+    }
+}
