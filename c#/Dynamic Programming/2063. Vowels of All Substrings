@@ -1,0 +1,12 @@
+public class Solution {
+    public long CountVowels(string word) {
+     long total=0;
+     for(int i=0;i<word.Length;i++){
+      char ch=word[i];
+      if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+        total+=(1L*(i+1)*1L*(word.Length-i));
+      }  
+     }
+     return total;    
+    }
+}
