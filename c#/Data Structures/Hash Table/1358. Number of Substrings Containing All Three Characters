@@ -1,0 +1,25 @@
+public class Solution {
+    public int NumberOfSubstrings(string s) {
+      int total=0;
+      int [] aIndices=new int[s.Length];
+      int [] bIndices=new int[s.Length];
+      int [] cIndices=new int[s.Length];
+      Dictionary<char,int> map=new Dictionary<char,int>();   
+      Array.Fill(aIndices,-1);
+      Array.Fill(bIndices,-1);
+      Array.Fill(cIndices,-1);
+      for(int i=s.Length-1;i>=0;i--){
+       char ch=s[i];
+       if(!map.ContainsKey(ch))map[ch]=i;
+       else map[ch]=i;
+       if(map.ContainsKey('a'))aIndices[i]= map['a'];
+       if(map.ContainsKey('b'))bIndices[i]= map['b'];
+       if(map.ContainsKey('c'))cIndices[i]= map['c'];
+       if(aIndices[i]!=-1 && bIndices[i]!=-1 && cIndices[i]!=-1){
+        int maxIndex=Math.Max(aIndices[i],Math.Max(bIndices[i],cIndices[i]));
+        total+=s.Length-maxIndex;
+       } 
+      }       
+      return total;    
+    }
+}
