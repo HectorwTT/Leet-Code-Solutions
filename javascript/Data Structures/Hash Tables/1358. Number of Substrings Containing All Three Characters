@@ -1,0 +1,23 @@
+var numberOfSubstrings = function(s) {
+ let total=0;
+ const aIndices=[];
+ const bIndices=[];
+ const cIndices=[];
+ const map=new Map() ;   
+ for(let i=0;i<s.length;i++)aIndices.push(-1);
+ for(let i=0;i<s.length;i++)bIndices.push(-1);
+ for(let i=0;i<s.length;i++)cIndices.push(-1);
+ for(let i=s.length-1;i>=0;i--){
+  var ch=s.charAt(i);
+  if(!map.has(ch))map.set(ch,i);
+  else map.set(ch,i);
+  if(map.has('a'))aIndices[i]= map.get('a');
+  if(map.has('b'))bIndices[i]= map.get('b');
+  if(map.has('c'))cIndices[i]= map.get('c');
+  if(aIndices[i]!=-1 && bIndices[i]!=-1 && cIndices[i]!=-1){
+    let maxIndex=Math.max(aIndices[i],Math.max(bIndices[i],cIndices[i]));
+    total+=s.length-maxIndex;
+  } 
+ }       
+ return total;    
+};
