@@ -1,10 +1,13 @@
-var maximumCount = function(nums) {
- let pos=0;
- let neg=0;
- for(let i=0;i<nums.length;i++){
-  if(nums[i]==0)continue;
-  if(nums[i]>0)pos++;
-  if(nums[i]<0)neg++;
- }  
- return Math.max(pos,neg);   
+class Solution {
+public:
+    int maximumCount(vector<int>& nums) {
+      int pos=0;
+      int neg=0;
+      for(int i=0;i<nums.size();i++){
+          if(nums[i]==0)continue;
+          if(nums[i]>0)pos++;
+          if(nums[i]<0)neg++;
+      }  
+      return std::max(pos,neg);   
+    }
 };
