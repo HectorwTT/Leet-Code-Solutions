@@ -1,0 +1,25 @@
+class Solution {
+    public int totalNumbers(int[] digits) {
+     List<Integer> evenIndexes=new ArrayList<>();
+     List<Integer> evens=new ArrayList<>();
+     for(int i=0;i<digits.length;i++){
+      if(digits[i]%2==0)evenIndexes.add(i);  
+     }
+     for(int k=0;k<evenIndexes.size();k++){
+      int index= evenIndexes.get(k);  
+      for(int i=0;i<digits.length;i++){   
+       for(int j=0;j<digits.length;j++){
+        if(j==index || j==i)continue;
+        String number=""+digits[i];
+        if(i!=index){
+          number+=""+digits[j]+""+digits[index];
+          evens.add(Integer.parseInt(number));
+        }  
+       }
+      }  
+     }
+     return (int)evens.stream().filter(n->n>=100)
+               .distinct().count();
+       
+    }
+}
