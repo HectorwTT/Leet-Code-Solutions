@@ -1,0 +1,23 @@
+var maxProfit = function(prices) {
+ let n = prices.length;
+ if (n == 0) return 0;
+ const leftProfits = [];  // Max profit from day 0 to day i
+ const rightProfits = []; // Max profit from day i to last day
+ let leftMin = prices[0];
+ for(let i=0;i<n;i++){
+  leftProfits.push(0);
+  rightProfits.push(0);  
+ }
+ for (let i = 1; i < n; i++) {
+  leftMin = Math.min(leftMin, prices[i]);
+  leftProfits[i]= Math.max(leftProfits[i - 1], prices[i] - leftMin);
+ }
+ let rightMax = prices[n - 1];
+ for (let i = n - 2; i >= 0; i--) {
+  rightMax = Math.max(rightMax, prices[i]);
+  rightProfits[i] = Math.max(rightProfits[i + 1], rightMax - prices[i]);
+ }
+ let maxProfit = 0;
+ for (let i = 0; i < n; i++)maxProfit = Math.max(maxProfit, leftProfits[i] + rightProfits[i]);
+ return maxProfit;   
+};
