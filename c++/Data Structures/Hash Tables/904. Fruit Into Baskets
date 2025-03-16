@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        int  max=0;
+     unordered_map<int,int> map;
+     int index=0;
+     for(int i=0;i<fruits.size();i++){
+      if(map.find(fruits[i])==map.end()) map[fruits[i]]=1;
+      else map[fruits[i]]=map[fruits[i]]+1;
+      if(map.size()==3){
+       while(map.size()>2){
+        max=std::max(i-index,max);
+        map[fruits[index]]=map[fruits[index]]-1;
+        if(map[fruits[index]]==0)map.erase(fruits[index]);
+        index++;
+       } 
+      }else max=std::max(i-index+1,max); 
+     }
+     return max;     
+    }
+};
