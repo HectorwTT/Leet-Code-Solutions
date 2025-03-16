@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int rob(TreeNode* root) {
+     vector<int> result = dfs(root);
+     return std::max(result[0], result[1]);  
+    }
+private:
+    vector<int> dfs(TreeNode* node){
+        vector<int> result;
+        if (node == NULL){
+          result.push_back(0);
+          result.push_back(0);  
+        }else{        
+         vector<int> left = dfs(node->left);
+         vector<int> right = dfs(node->right);
+         int rob = node->val + left[0] + right[0]; // Rob this node ➡ can't rob children
+         int notRob = std::max(left[0], left[1]) + std::max(right[0], right[1]); 
+         // Don't rob ➡ take max of children   
+         result.push_back(notRob);
+         result.push_back(rob); 
+        }    
+        return result;    
+    }
+};
