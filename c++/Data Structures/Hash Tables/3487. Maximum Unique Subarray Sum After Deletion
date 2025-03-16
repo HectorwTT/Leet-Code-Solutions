@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maxSum(vector<int>& nums) {
+      int total=0;
+      unordered_map<int,int> map;
+      std::sort(nums.begin(),nums.end());
+      if(nums[nums.size()-1]<=0)total=nums[nums.size()-1];
+      else{
+       for(int i=nums.size()-1;i>=0;i--){
+        if(nums[i]<0)break;
+        if(map.find(nums[i])==map.end()){
+         map[nums[i]]=1;
+         total+=nums[i];
+        }
+       }      
+      }
+      return total;   
+    }
+};
