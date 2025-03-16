@@ -1,0 +1,18 @@
+class Solution {
+    public int maxSum(int[] nums) {
+      int total=0;
+      HashMap<Integer,Integer> map=new HashMap<>();
+      Arrays.sort(nums);
+      if(nums[nums.length-1]<=0)total=nums[nums.length-1];
+      else{
+       for(int i=nums.length-1;i>=0;i--){
+        if(nums[i]<0)break;
+        if(!map.containsKey(nums[i])){
+         map.put(nums[i],1);
+         total+=nums[i];
+        }
+       }      
+      }
+      return total;    
+    }
+}
