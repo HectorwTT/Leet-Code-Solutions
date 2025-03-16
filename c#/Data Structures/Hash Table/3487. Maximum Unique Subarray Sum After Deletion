@@ -1,0 +1,18 @@
+public class Solution {
+    public int MaxSum(int[] nums) {
+      int total=0;
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      Array.Sort(nums);
+      if(nums[nums.Length-1]<=0)total=nums[nums.Length-1];
+      else{
+       for(int i=nums.Length-1;i>=0;i--){
+        if(nums[i]<0)break;
+        if(!map.ContainsKey(nums[i])){
+         map[nums[i]]=1;
+         total+=nums[i];
+        }
+       }      
+      }
+      return total;    
+    }
+}
