@@ -1,0 +1,19 @@
+var rob = function(root) {
+  const result = dfs(root);
+  return Math.max(result[0], result[1]);  
+};
+var dfs=function(node) {
+ const result=[];   
+ if (node == null){
+  result.push(0);
+  result.push(0);
+ }else{        
+  const left = dfs(node.left);
+  const right = dfs(node.right);
+  let rob = node.val + left[0] + right[0]; // Rob this node ➡ can't rob children
+  let notRob = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);// Don't rob ➡ take max of children  
+  result.push(notRob);
+  result.push(rob);
+ }             
+ return result;
+}; 
