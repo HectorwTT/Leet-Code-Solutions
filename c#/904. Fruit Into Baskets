@@ -1,0 +1,20 @@
+public class Solution {
+    public int TotalFruit(int[] fruits) {
+     int  max=0;
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     int index=0;
+     for(int i=0;i<fruits.Length;i++){
+      if(!map.ContainsKey(fruits[i])) map[fruits[i]]=1;
+      else map[fruits[i]]=map[fruits[i]]+1;
+      if(map.Count==3){
+       while(map.Count>2){
+        max=Math.Max(i-index,max);
+        map[fruits[index]]=map[fruits[index]]-1;
+        if(map[fruits[index]]==0)map.Remove(fruits[index]);
+        index++;
+       } 
+      }else max=Math.Max(i-index+1,max); 
+     }
+     return max;     
+    }
+}
