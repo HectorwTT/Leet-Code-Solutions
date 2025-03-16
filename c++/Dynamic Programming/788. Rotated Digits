@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int rotatedDigits(int n) {
+     int total=0;
+     vector<bool> isRotated;
+     vector<bool> hasInvalidDigits;
+     for(int i=0;i<=n;i++){
+        isRotated.push_back(false);
+        hasInvalidDigits.push_back(false);
+     }   
+     for(int i=1;i<=n;i++){
+      if(i==2 || i==5 || i==6 || i==9){
+        isRotated[i]=true; 
+        total++;
+      }else if(i==3 || i==4 ||i==7) hasInvalidDigits[i]=true;
+      else{
+      int number=i/10;
+      int mod=i%10;
+      if(hasInvalidDigits[number] || hasInvalidDigits[mod]){
+         hasInvalidDigits[i]=true;
+         continue;
+      }
+      if(isRotated[number] || isRotated[mod]){
+       isRotated[i]=true;
+       total++;
+      }  
+     }
+    }
+    return total;    
+    }
+};
