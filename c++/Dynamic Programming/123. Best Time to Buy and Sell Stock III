@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maxProfit(vector<int>& prices) {
+      int n = prices.size();
+      if (n == 0) return 0;
+      vector<int> leftProfits ;  // Max profit from day 0 to day i
+      vector<int> rightProfits ; // Max profit from day i to last day
+      int leftMin = prices[0];
+      for(int i=0;i<n;i++){
+       leftProfits.push_back(0);
+       rightProfits.push_back(0);  
+      }
+      for (int i = 1; i < n; i++) {
+       leftMin = std::min(leftMin, prices[i]);
+       leftProfits[i]= std::max(leftProfits[i - 1], prices[i] - leftMin);
+      }
+      int rightMax = prices[n - 1];
+      for (int i = n - 2; i >= 0; i--) {
+       rightMax = std::max(rightMax, prices[i]);
+       rightProfits[i] = std::max(rightProfits[i + 1], rightMax - prices[i]);
+      }
+      int maxProfit = 0;
+      for (int i = 0; i < n; i++)maxProfit = std::max(maxProfit, leftProfits[i] + rightProfits[i]);
+      return maxProfit;     
+    }
+};
