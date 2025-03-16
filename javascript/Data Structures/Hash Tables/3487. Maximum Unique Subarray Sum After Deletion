@@ -1,0 +1,16 @@
+var maxSum = function(nums) {
+ let total=0;
+ const map=new Map();
+ nums.sort((x,y)=>x-y);
+ if(nums[nums.length-1]<=0)total=nums[nums.length-1];
+ else{
+  for(let i=nums.length-1;i>=0;i--){
+   if(nums[i]<0)break;
+   if(!map.has(nums[i])){
+    map.set(nums[i],1);
+    total+=nums[i];
+    }
+  }      
+ }
+ return total;   
+};
