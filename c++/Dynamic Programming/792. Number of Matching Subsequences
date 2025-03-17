@@ -1,0 +1,35 @@
+class Solution {
+public:
+    int numMatchingSubseq(string s, vector<string>& words) {
+     int total=0;
+     unordered_map<string,int> map;
+     unordered_map<string,int> map1;
+     for(int i=0;i<words.size();i++){
+      if(map1.find(words[i])!=map.end()) continue;
+      else if(map.find(words[i])!=map.end())total++;
+      else{
+       if(isSubsequence(words[i],s)){
+        total++;
+        map[words[i]]=1;
+       }else{
+        map1[words[i]]=1;
+       }
+      }  
+     }
+     return total;     
+    }
+public:
+  bool isSubsequence(string s, string t) {
+   int index=0;
+   if(s.size()==0) return true;
+   for(int i=0;i<t.size();i++){
+    int tch = t[i];
+    int sch= s[index];
+    if(tch==sch) {
+     if(index==s.size()-1)return true;
+     index++;
+    }
+   }
+   return false;
+  }      
+};
