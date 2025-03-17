@@ -1,0 +1,9 @@
+var divideArray = function(nums) {
+ nums.sort((x,y)=>x-y);
+ for(let i=0;i<=nums.length-2;i+=2){
+  let prev=nums[i];
+  let curr= nums[i+1];
+  if(prev!=curr)return false;
+ }   
+ return nums[0]==nums[1];     
+};
