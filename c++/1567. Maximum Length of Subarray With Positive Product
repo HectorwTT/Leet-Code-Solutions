@@ -1,0 +1,59 @@
+class Solution {
+public:
+    int getMaxLen(vector<int>& nums) {
+     int numOfNegatives=0;
+     int firstNegativeIndex=0;
+     int secondNegativeIndex=0;
+     int lastNegativeIndex=0;
+     int start=0;
+     int end=0;
+     int length=0;
+     int max=0;
+     if(nums.size()==1 && nums[0]>0)return 1;
+     for(int i=0;i<nums.size();i++){
+      if(nums[i]==0 || i==nums.size()-1){
+       if(i!=0){
+        if(nums[i]==0)end=i-1;
+        else end=i;
+        if(i==nums.size()-1){
+          if(nums[i]<0){
+           if(numOfNegatives==0)firstNegativeIndex=i;
+           if(numOfNegatives==1)secondNegativeIndex=i;
+           numOfNegatives++;
+           lastNegativeIndex=i;
+          }   
+        }
+        if(numOfNegatives%2==0){
+          if(start==end){
+           if(nums[start]==0)length=0;
+           else length=1; 
+          }else length=end-start+1;
+          max=std::max(length,max);  
+        }else{
+          if(numOfNegatives==1){
+            length=std::max(firstNegativeIndex-start,end-lastNegativeIndex);
+          }else{
+            int firstEvenStart=start;
+            int secondEvenStart=firstNegativeIndex+1;
+           length=std::max(end-secondEvenStart+1,lastNegativeIndex-start); 
+          }
+          max=std::max(max,length);  
+        }
+       }
+        numOfNegatives=0;
+        length=0;
+        firstNegativeIndex=-1;
+        secondNegativeIndex=-1;
+        lastNegativeIndex=-1;
+        start=i+1; 
+      }
+      if(nums[i]<0){
+        if(numOfNegatives==0)firstNegativeIndex=i;
+        if(numOfNegatives==1)secondNegativeIndex=i;
+        numOfNegatives++;
+        lastNegativeIndex=i;
+      }  
+     }
+     return max;             
+    }
+};
