@@ -1,0 +1,76 @@
+class Solution {
+    public int maxProduct(int[] nums) {
+     int numOfNegatives=0;
+     int firstNegativeIndex=0;
+     int secondNegativeIndex=0;
+     int lastNegativeIndex=0;
+     int start=0;
+     int end=0;
+     int productOfSubArray=0;
+     int product=1;
+     int[] products=new int[nums.length];
+     int max=0;
+     if(nums.length==1)return nums[0];
+     for(int i=0;i<nums.length;i++){
+      if(nums[i]==0)product=1;
+      else{
+       product*=nums[i];
+       products[i]=product; 
+      }  
+     }
+     for(int i=0;i<nums.length;i++){
+        if(nums[i]<0){
+        if(numOfNegatives==0)firstNegativeIndex=i;
+        if(numOfNegatives==1)secondNegativeIndex=i;
+        numOfNegatives++;
+        lastNegativeIndex=i;
+      }
+      if(nums[i]==0 || i==nums.length-1){
+       if(i!=0){
+        if(nums[i]==0)end=i-1;
+        else end=i;
+        if(numOfNegatives%2==0){
+          if(start==end){
+           productOfSubArray=nums[start];
+           max=Math.max(productOfSubArray,max); 
+          }else {
+           productOfSubArray=products[end];
+           max=Math.max(productOfSubArray,max); 
+          }
+           
+        }else{
+          if(numOfNegatives==1){           
+            if(firstNegativeIndex==start){
+              int product1=products[end];
+              if(start==end)product1=products[start];
+              else product1=products[end]/products[start];  
+              productOfSubArray=Math.max(products[firstNegativeIndex],product1);                                                                       
+              max=Math.max(max,productOfSubArray);                              
+            }else{
+              productOfSubArray=Math.max(products[firstNegativeIndex]/nums[firstNegativeIndex],
+                                          products[end]/products[firstNegativeIndex]);
+              max=Math.max(max,productOfSubArray);    
+            }
+          }else{
+           int product2=0;
+           int product3=0;
+           if(lastNegativeIndex==end)product2=products[end]/nums[end];
+           else product2=products[lastNegativeIndex]/nums[lastNegativeIndex]; 
+           if(firstNegativeIndex==start)product3=products[end]/nums[start];
+           else product3=products[end]/products[firstNegativeIndex];          
+           productOfSubArray=Math.max(product3, product2);                                       
+           max=Math.max(max,productOfSubArray);                          
+          } 
+           
+        }
+       }
+        numOfNegatives=0;        
+        firstNegativeIndex=-1;
+        secondNegativeIndex=-1;
+        lastNegativeIndex=-1;
+        start=i+1; 
+      }     
+     }
+     return max;    
+    }
+}
