@@ -1,0 +1,15 @@
+class Solution {
+public:
+    long long getDescentPeriods(vector<int>& prices) {
+      long total=1;
+      vector<int> differences; 
+      for(int i=0;i<prices.size();i++)differences.push_back(1);
+      for(int i=1;i<differences.size();i++){
+       if(prices[i]-prices[i-1]==-1){
+         differences[i]=differences[i-1]+1;        
+       } 
+       total+=1L*differences[i];      
+      }      
+      return total;   
+    }
+};
