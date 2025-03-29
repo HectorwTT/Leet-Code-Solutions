@@ -1,0 +1,26 @@
+var minimumIndex = function(nums) {
+ let index=-1;
+ const map=new Map();
+ const map1=new Map();
+ const  counts=[];
+ for(let i=0;i<nums.length;i++)counts.push(0);
+ for(let i=0;i<nums.length;i++){
+  if(!map.has(nums[i]))map.set(nums[i],1);
+  else map.set(nums[i],map.get(nums[i])+1);
+  if(!map1.has(nums[i]))map1.set(nums[i],i);
+  else map1.set(nums[i],i);  
+  counts[i]=map.get(nums[i]);
+ }  
+ for(let i=0;i<nums.length-1;i++){
+  let count=counts[i];
+  let lengthOfPrefix=i+1;
+  let lastIndexOfNum=map1.get(nums[i]);
+  let lastCount=counts[lastIndexOfNum]-count;
+  let lengthOfSuffix=nums.length-(i+1);
+  if(count*2>lengthOfPrefix && lastCount*2>lengthOfSuffix){
+   index=i;
+   break;
+  }        
+ }
+ return index;   
+};
