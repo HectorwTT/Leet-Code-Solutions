@@ -1,0 +1,13 @@
+class Solution {
+public:
+    int reverseDegree(string s) {
+     int total=0;
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      int position=ch-97+1;
+      int reversePosition=27-position;
+      total+=((i+1)*reversePosition);
+     }
+     return total;    
+    }
+};
