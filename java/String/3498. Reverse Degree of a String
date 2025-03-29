@@ -1,0 +1,12 @@
+class Solution {
+    public int reverseDegree(String s) {
+     int total=0;
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      int position=ch-97+1;
+      int reversePosition=27-position;
+      total+=((i+1)*reversePosition);
+     }
+     return total;      
+    }
+}
