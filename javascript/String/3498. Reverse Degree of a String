@@ -1,0 +1,10 @@
+var reverseDegree = function(s) {
+ let total=0;
+ for(let i=0;i<s.length;i++){
+  var ch=s.charCodeAt(i);
+  let position=ch-97+1;
+  let reversePosition=27-position;
+  total+=((i+1)*reversePosition);
+ }
+ return total;    
+};
