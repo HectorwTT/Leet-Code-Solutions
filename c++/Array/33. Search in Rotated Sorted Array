@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+     int index=nums.size()-1;
+     while(nums[index]<nums[0]){
+      index--;
+     }    
+     if(index==nums.size()-1) return bSearch(nums,0,index,target);
+     else{
+         int index1= bSearch(nums,0,index,target);
+         int index2=bSearch(nums,index+1,nums.size()-1,target);
+         if(index1==-1)return index2;
+         else return index1;         
+     }
+    }
+    public:
+     int bSearch(vector<int>& nums,int start,int end,int target){
+     int left=start;
+     int right=end;
+     while(left<=right){
+      int mid=(left +right)/2;
+      if(nums[mid]==target)return mid;
+      else if(nums[mid]>target)right=mid-1;
+      else left = mid+1;
+     }
+     return -1;
+    }       
+    
+};
