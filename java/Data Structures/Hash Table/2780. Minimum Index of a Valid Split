@@ -1,0 +1,27 @@
+class Solution {
+    public int minimumIndex(List<Integer> nums) {
+     int  index=-1;
+     HashMap<Integer,Integer> map=new HashMap<Integer,Integer>();
+     HashMap<Integer,Integer> map1=new HashMap<Integer,Integer>();
+     int []counts=new int[nums.size()];
+     for(int i=0;i<nums.size();i++){
+      if(!map.containsKey(nums.get(i)))map.put(nums.get(i),1);
+      else map.replace(nums.get(i),map.get(nums.get(i))+1);
+      if(!map1.containsKey(nums.get(i)))map1.put(nums.get(i),i);
+      else map1.replace(nums.get(i),i);  
+      counts[i]=map.get(nums.get(i));
+     }  
+     for(int i=0;i<nums.size()-1;i++){
+      int count=counts[i];
+      int lengthOfPrefix=i+1;
+      int lastIndexOfNum=map1.get(nums.get(i));
+      int lastCount=counts[lastIndexOfNum]-count;
+      int lengthOfSuffix=nums.size()-(i+1);
+      if(count*2>lengthOfPrefix && lastCount*2>lengthOfSuffix){
+        index=i;
+        break;
+      }        
+     }
+     return index;
+    }
+}
