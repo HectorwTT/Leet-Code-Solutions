@@ -1,0 +1,26 @@
+public class Solution {
+    public int Search(int[] nums, int target) {
+     int index=nums.Length-1;
+     while(nums[index]<nums[0]){
+      index--;
+     }    
+     if(index==nums.Length-1) return BSearch(nums,0,index,target);
+     else{
+         int index1= BSearch(nums,0,index,target);
+         int index2=BSearch(nums,index+1,nums.Length-1,target);
+         if(index1==-1)return index2;
+         else return index1;         
+     }
+    }
+    public int BSearch(int [] nums,int start,int end,int target){
+     int left=start;
+     int right=end;
+     while(left<=right){
+      int mid=(left +right)/2;
+      if(nums[mid]==target)return mid;
+      else if(nums[mid]>target)right=mid-1;
+      else left = mid+1;
+     }
+     return -1;
+    }           
+}
