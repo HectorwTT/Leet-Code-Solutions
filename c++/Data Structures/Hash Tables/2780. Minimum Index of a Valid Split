@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minimumIndex(vector<int>& nums) {
+     int index=-1;
+     unordered_map<int,int> map;
+     unordered_map<int,int> map1;
+     vector<int>counts;
+     for(int i=0;i<nums.size();i++)counts.push_back(0);
+     for(int i=0;i<nums.size();i++){
+      if(map.find(nums[i])==map.end())map[nums[i]]=1;
+      else map[nums[i]]=map[nums[i]]+1;
+      if(map1.find(nums[i])==map.end())map1[nums[i]]=i;
+      else map1[nums[i]]=i;  
+      counts[i]=map[nums[i]];
+     }  
+     for(int i=0;i<nums.size()-1;i++){
+      int count=counts[i];
+      int lengthOfPrefix=i+1;
+      int lastIndexOfNum=map1[nums[i]];
+      int lastCount=counts[lastIndexOfNum]-count;
+      int lengthOfSuffix=nums.size()-(i+1);
+      if(count*2>lengthOfPrefix && lastCount*2>lengthOfSuffix){
+        index=i;
+        break;
+      }        
+     }
+     return index;   
+    }
+};
