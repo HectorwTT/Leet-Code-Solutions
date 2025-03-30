@@ -1,0 +1,12 @@
+public class Solution {
+    public int[] MinCosts(int[] cost) {
+      int []  answer=new  int[cost.Length];
+      for(int i=0;i<cost.Length;i++){
+       if(i==0)answer[i]=cost[i];
+       else{
+        answer[i]=Math.Min(answer[i-1],cost[i]);
+       } 
+      }
+      return answer;   
+    }
+}
