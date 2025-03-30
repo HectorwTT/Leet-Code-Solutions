@@ -1,0 +1,23 @@
+public class Solution {
+    public IList<int> PartitionLabels(string s) {
+        int[] lastOccurrence = new int[26];
+        for (int i = 0; i < s.Length; ++i) {
+            lastOccurrence[s[i] - 'a'] = i;
+        }
+
+        int partitionEnd = 0, partitionStart = 0;
+        IList<int> partitionSizes = new List<int>();
+        for (int i = 0; i < s.Length; ++i) {
+            partitionEnd = Math.Max(
+                partitionEnd,
+                lastOccurrence[s[i] - 'a']
+            );
+            // End of the current partition
+            if (i == partitionEnd) {
+                partitionSizes.Add(i - partitionStart + 1);
+                partitionStart = i + 1;
+            }
+        }
+        return partitionSizes;   
+    }
+}
