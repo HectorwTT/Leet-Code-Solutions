@@ -1,0 +1,17 @@
+class Solution {
+    public long putMarbles(int[] weights, int k) {
+       long diff=0;
+       int index=0;
+       List<Integer> weights1= new ArrayList<>();
+       for(int i=0;i<weights.length-1;i++){
+        int weight= weights[i]+weights[i+1];
+        weights1.add(weight);
+
+       } 
+       weights1.sort(null);
+       for(int i=0;i<k-1;i++){
+        diff+= 1L*(weights1.get(weights1.size()-1-i)-weights1.get(i));
+       }
+       return diff;
+    }
+}
