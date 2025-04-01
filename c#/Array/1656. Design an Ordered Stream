@@ -1,0 +1,24 @@
+public class OrderedStream {
+    private String[] values;
+    private int lastptr;
+    public OrderedStream(int n) {
+     values=new String[n+1];
+     lastptr=1;     
+    }
+    
+    public IList<string> Insert(int idKey, string value){
+       values[idKey]=value;
+       if(idKey!=lastptr) return new List<string>();
+       else{
+        int current=idKey;
+        IList<string> result=new List<string>();
+        while( current!=values.Length && values[current]!=null ){
+         result.Add(values[current]);
+         current++;
+        }
+        lastptr=current;
+        return result;   
+       }
+    }   
+}
+
