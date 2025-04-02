@@ -1,0 +1,15 @@
+public class Solution {
+    public long MaximumTripletValue(int[] nums) {
+     long max=0;
+     for(int i=0;i<nums.Length;i++){
+      for(int j=i+1;j<nums.Length;j++){
+       for(int k=j+1;k<nums.Length;k++){
+        long value=(((1L*nums[i])-(1L*nums[j]))*(1L*nums[k]));
+        max=Math.Max(max,value);
+       } 
+      }  
+     } 
+     if(max<=0)return 0;
+     else return max;    
+    }
+}
