@@ -1,0 +1,16 @@
+class Solution {
+public:
+    long long maximumTripletValue(vector<int>& nums) {
+     long max=0;
+     for(int i=0;i<nums.size();i++){
+      for(int j=i+1;j<nums.size();j++){
+       for(int k=j+1;k<nums.size();k++){
+        long value=(((1L*nums[i])-(1L*nums[j]))*(1L*nums[k]));
+        max=std::max(max,value);
+       } 
+      }  
+     } 
+     if(max<=0)return 0;
+     else return max;      
+    }
+};
