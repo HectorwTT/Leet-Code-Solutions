@@ -1,0 +1,15 @@
+public class Solution {
+    public int MinimumSum(int[] nums) {
+      int minSum=(int)Math.Pow(10,9);
+     for(int i=0;i<nums.Length;i++){
+      for(int j=i+1;j<nums.Length;j++){
+       for(int k=j+1;k<nums.Length;k++){
+        int sum=nums[i]+nums[j]+nums[k];  
+        if(nums[i]<nums[j] && nums[k]< nums[j])minSum=Math.Min(minSum,sum);
+       }
+      } 
+     }
+     if(minSum==(int)Math.Pow(10,9))return -1;
+     else return minSum;   
+    }
+}
