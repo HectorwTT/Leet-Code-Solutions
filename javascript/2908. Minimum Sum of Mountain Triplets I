@@ -1,0 +1,13 @@
+var minimumSum = function(nums) {
+ let minSum=Math.pow(10,9);
+ for(let i=0;i<nums.length;i++){
+  for(let j=i+1;j<nums.length;j++){
+   for(let k=j+1;k<nums.length;k++){
+    let sum=nums[i]+nums[j]+nums[k];  
+    if(nums[i]<nums[j] && nums[k]< nums[j])minSum=Math.min(minSum,sum);
+    }
+   } 
+  }
+  if(minSum==Math.pow(10,9))return -1;
+  else return minSum;   
+};
