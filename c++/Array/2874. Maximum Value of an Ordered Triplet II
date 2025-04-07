@@ -1,0 +1,29 @@
+class Solution {
+public:
+    long long maximumTripletValue(vector<int>& nums) {
+     vector<int> maximumsToLeft;
+     vector<int> maximumsToRight;
+     long max=0;
+     for(int i=0;i<nums.size();i++)maximumsToRight.push_back(0);
+     for(int i=0;i<nums.size();i++)maximumsToLeft.push_back(0);
+     if(nums[0]>nums[1])maximumsToLeft[1]=nums[0];
+     maximumsToRight[nums.size()-2]=nums[nums.size()-1];
+     for(int i=2;i<nums.size();i++){
+        maximumsToLeft[i]= std::max(nums[i-1],maximumsToLeft[i-1]);
+     }   
+     for(int i=nums.size()-3;i>=0;i-- ){
+        maximumsToRight[i]=std::max(nums[i+1],maximumsToRight[i+1]);
+     }
+     for(int i=1;i<nums.size()-1;i++){
+      if(maximumsToLeft[i]>nums[i]){
+        long sum= (1L*maximumsToLeft[i]-1L*nums[i])*(1L*maximumsToRight[i]);
+        if(max==0)max=sum;
+        else{
+            if(max<sum)max=sum;
+        }
+      }
+     }
+     if(max<0)return 0;
+     else return max;      
+    }
+};
