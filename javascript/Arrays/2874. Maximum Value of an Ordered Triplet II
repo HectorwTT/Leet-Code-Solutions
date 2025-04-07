@@ -1,0 +1,26 @@
+var maximumTripletValue = function(nums) {
+ const maximumsToLeft= [];
+ const maximumsToRight= [];
+ for(let i=0;i<nums.length;i++)maximumsToLeft.push(0);
+ for(let i=0;i<nums.length;i++)maximumsToRight.push(0);
+ let max=0;
+ if(nums[0]>nums[1])maximumsToLeft[1]=nums[0];
+ maximumsToRight[nums.length-2]=nums[nums.length-1];
+ for(let i=2;i<nums.length;i++){
+        maximumsToLeft[i]= Math.max(nums[i-1],maximumsToLeft[i-1]);
+ }   
+ for(let i=nums.length-3;i>=0;i-- ){
+  maximumsToRight[i]=Math.max(nums[i+1],maximumsToRight[i+1]);
+ }
+ for(let i=1;i<nums.length-1;i++){
+  if(maximumsToLeft[i]>nums[i]){
+   let sum= (maximumsToLeft[i]-nums[i])*(maximumsToRight[i]);
+   if(max==0)max=sum;
+   else{
+    if(max<sum)max=sum;
+   }
+  }
+ }
+ if(max<0)return 0;
+ else return max;      
+};
