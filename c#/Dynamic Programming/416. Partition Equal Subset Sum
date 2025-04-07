@@ -1,0 +1,14 @@
+public class Solution {
+    public bool CanPartition(int[] nums) {
+     int sum =0;
+     for(int i=0;i<nums.Length;i++)sum+=nums[i];
+     if(sum%2==1)return false;
+     int target=sum/2;
+     bool[]dp=new bool[target+1];
+     dp[0]=true;
+     foreach(int num in nums){
+      for (int currSum=target;currSum>=num;currSum--) dp[currSum] = dp[currSum] || dp[currSum -num];
+     } 
+      return dp[target];    
+    }
+}
