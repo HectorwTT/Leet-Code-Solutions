@@ -1,0 +1,16 @@
+public class Solution {
+    public long PutMarbles(int[] weights, int k) {
+     long diff=0;
+     int index=0;
+     IList<int> weights1= new List<int>();
+     for(int i=0;i<weights.Length-1;i++){
+        int weight= weights[i]+weights[i+1];
+        weights1.Add(weight);
+     } 
+     ((List<int>)weights1).Sort();
+     for(int i=0;i<k-1;i++){
+        diff+= 1L*(weights1[weights1.Count-1-i]-weights1[i]);
+     }
+       return diff;   
+    }
+}
