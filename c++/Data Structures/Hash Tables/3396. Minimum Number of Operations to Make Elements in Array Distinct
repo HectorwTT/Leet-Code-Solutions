@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int minimumOperations(vector<int>& nums) {
+     int min=0;
+     int total=1;
+     unordered_map<int,int> map;
+     map[nums[nums.size()-1]]=1;
+     for(int i=nums.size()-2;i>=0;i--){
+      if(map.find(nums[i])==map.end()){
+       map[nums[i]]=1;
+       total=map.size();
+      }else break;  
+     }
+     if(total==nums.size())return 0;
+     min=(nums.size()-total)/3;
+     int mod=(nums.size()-total)%3;
+     if(mod!=0)min++;
+     return min;    
+    }
+};
