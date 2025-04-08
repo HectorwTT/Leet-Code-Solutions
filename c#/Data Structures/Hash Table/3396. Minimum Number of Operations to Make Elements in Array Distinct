@@ -1,0 +1,19 @@
+public class Solution {
+    public int MinimumOperations(int[] nums) {
+     int min=0;
+     int total=1;
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     map[nums[nums.Length-1]]=1;
+     for(int i=nums.Length-2;i>=0;i--){
+      if(!map.ContainsKey(nums[i])){
+       map[nums[i]]=1;
+       total=map.Count;
+      }else break;  
+     }
+     if(total==nums.Length)return 0;
+     min=(nums.Length-total)/3;
+     int mod=(nums.Length-total)%3;
+     if(mod!=0)min++;
+     return min;   
+    }
+}
