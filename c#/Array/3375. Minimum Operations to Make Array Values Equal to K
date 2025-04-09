@@ -1,0 +1,26 @@
+public class Solution {
+    public int MinOperations(int[] nums, int k) {
+     IList<int> list=new List<int>();
+     int count=0;
+     for(int i=0;i<nums.Length;i++){
+      if(!list.Contains(nums[i]))list.Add(nums[i]);
+     }  
+      ((List<int>)list).Sort();; 
+     int index=list.Count-1;
+     int number=list[index];
+     if(k>=number){
+      if(list.Count==1 && number==k)return 0;
+      else  return -1;
+     }
+     if(k<list[0])return list.Count;
+     for(int i=0;i<list.Count;i++){
+      if(list[i]<k)  return -1;
+     }
+     while(index>=0 && number>k){
+      number=list[index];
+      count++;
+      index--;   
+     }
+     return count-1;     
+    }
+}
