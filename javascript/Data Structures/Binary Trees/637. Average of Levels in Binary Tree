@@ -1,0 +1,14 @@
+var averageOfLevels = function(root) {
+ let q = [root], ans = []
+    while (q[0]) {
+        let qlen = q.length, total=0
+        for (let i = 0; i < qlen; i++) {
+            let curr = q.shift()
+            total+=curr.val
+            if (curr.left) q.push(curr.left)
+            if (curr.right) q.push(curr.right)
+        }
+        ans.push(total/qlen)            
+    }
+    return ans   
+};
