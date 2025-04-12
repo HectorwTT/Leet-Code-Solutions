@@ -1,0 +1,17 @@
+public class Solution {
+    public int SmallestRangeII(int[] nums, int k) {
+     int min=(int)Math.Pow(10,4)+1;
+     Array.Sort(nums);  
+     for(int i=0;i<nums.Length;i++){
+      int diff=0;  
+      if(i==0)diff=nums[nums.Length-1]-nums[0];
+      else{
+       int minValue=Math.Min(nums[0]+k,nums[i]-k);
+       int maxValue=Math.Max(nums[nums.Length-1]-k,nums[i-1]+k);
+        diff=maxValue-minValue;
+      }  
+       min=Math.Min(diff,min);  
+     } 
+     return min;   
+    }
+}
