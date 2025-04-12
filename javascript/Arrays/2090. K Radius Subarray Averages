@@ -1,0 +1,17 @@
+var getAverages = function(nums, k) {
+  const prefixSums=[];
+  const answer=[];
+  let total=0;
+  for(let i=0;i<nums.length;i++  )answer.push(-1);
+  for(let i=0;i<nums.length;i++){
+       total+=nums[i];
+       prefixSums.push(total); 
+  }
+  for(let i=k;i<=nums.length-1-k;i++){
+   let sum=prefixSums[i+k];
+   if(i!=k)sum-=prefixSums[i-k-1];
+   let avg=sum/(2*k+1);
+   answer[i]=Math.floor(avg);
+  }
+  return answer;         
+};
