@@ -1,0 +1,10 @@
+public class Solution {
+    public int FindMin(int[] nums) {
+      int index=nums.Length-1;
+      if(nums[index]>=nums[0])return nums[0];
+      else{
+         while(nums[index]<nums[0]) index--;
+         return nums[index+1];  
+      } 
+    }
+}
