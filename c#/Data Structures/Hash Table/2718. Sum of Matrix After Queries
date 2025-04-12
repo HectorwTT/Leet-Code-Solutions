@@ -1,0 +1,26 @@
+public class Solution {
+    public long MatrixSumQueries(int n, int[][] queries) {
+     Dictionary<int,int> seenRows=new Dictionary<int,int>();
+     Dictionary<int,int> seenColumns=new Dictionary<int,int>();
+     long total=0;
+     for(int i=queries.Length-1;i>=0;i--){
+      int type=queries[i][0];
+      if(type==0){
+       int row= queries[i][1];
+       if(seenRows.ContainsKey(row))continue;
+       seenRows[row]=1; 
+        long value=1L*queries[i][2];
+        long number=1L*(n-seenColumns.Count);
+        total+=value*number;              
+      }else{
+        int column=queries[i][1];
+        if(seenColumns.ContainsKey(column))continue;
+        seenColumns[column]=1;
+         long value=1L*queries[i][2];
+         long number=1L*(n-seenRows.Count);   
+         total+=value*number;          
+      }  
+     }
+    return total;         
+    }
+}
