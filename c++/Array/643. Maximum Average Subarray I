@@ -1,0 +1,20 @@
+class Solution {
+public:
+    double findMaxAverage(vector<int>& nums, int k) {
+     double max=-1*std::pow(10,4)-1;
+     vector<double> prefixSums;
+     double total=0.0;
+     for(int i=0;i<nums.size();i++)prefixSums.push_back(0.0);
+     for(int i=0;i<prefixSums.size();i++){
+      total+=nums[i];  
+      prefixSums[i]=total;
+     } 
+     for(int i=0;i<=nums.size()-k;i++){
+      double sum=prefixSums[i+k-1];
+      if(i!=0)sum-=prefixSums[i-1];
+      double average=sum/k;
+      max=std::max(average,max);
+     }
+     return max;     
+    }
+};
