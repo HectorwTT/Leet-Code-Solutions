@@ -1,0 +1,12 @@
+public class Solution {
+    public int MaxCount(int m, int n, int[][] ops) {
+     int max=0;
+     int minRow=m;
+     int minColumn=n;
+     for(int i=0;i<ops.Length;i++){
+      minRow=Math.Min(ops[i][0],minRow);
+      minColumn=Math.Min(ops[i][1],minColumn);
+     }
+     return minRow*minColumn;    
+    }
+}
