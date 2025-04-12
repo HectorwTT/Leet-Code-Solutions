@@ -1,0 +1,18 @@
+public class Solution {
+    public double FindMaxAverage(int[] nums, int k) {
+     double max=-1*Math.Pow(10,4)-1;
+     double [] prefixSums= new double[nums.Length];
+     double total=0.0;
+     for(int i=0;i<prefixSums.Length;i++){
+      total+=nums[i];  
+      prefixSums[i]=total;
+     } 
+     for(int i=0;i<=nums.Length-k;i++){
+      double sum=prefixSums[i+k-1];
+      if(i!=0)sum-=prefixSums[i-1];
+      double average=sum/k;
+      max=Math.Max(average,max);
+     }
+     return max;  
+    }
+}
