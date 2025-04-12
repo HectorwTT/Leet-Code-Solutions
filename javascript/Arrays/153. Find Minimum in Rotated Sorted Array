@@ -1,0 +1,8 @@
+var findMin = function(nums) {
+ let index=nums.length-1;
+ if(nums[index]>=nums[0])return nums[0];
+ else{
+  while(nums[index]<nums[0]) index--;
+  return nums[index+1];  
+ }   
+};
