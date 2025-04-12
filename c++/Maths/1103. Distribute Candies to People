@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<int> distributeCandies(int candies, int num_people) {
+       int multiple=0;
+       vector<int> result;
+       for(int i=0;i<num_people;i++)result.push_back(0);
+       while(candies>0){
+        for(int i=0;i<result.size();i++){
+            int numCandies= multiple*num_people + i+1;
+            if(candies-numCandies>0){
+             result[i]+= numCandies;
+             candies-=numCandies;
+            }
+            else{
+                result[i]+= candies;
+                candies=0;
+                break;
+            }
+        }
+        multiple++;
+       }
+       return result;      
+    }
+};
