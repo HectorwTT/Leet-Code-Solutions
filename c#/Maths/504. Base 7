@@ -1,0 +1,16 @@
+public class Solution {
+    public string ConvertToBase7(int num) {
+     string baseseven="";
+      bool isNegative=false;
+      if(num<0) isNegative=true;
+      if(num<7 &&num>=0) return ""+num;
+      if(num<0)num=-1*num;
+      while(num!=0){
+       int mod=num%7;
+       baseseven = mod+baseseven;
+       num/=7;
+      }
+      if(isNegative) return "-"+baseseven;
+      else return baseseven;     
+    }
+}
