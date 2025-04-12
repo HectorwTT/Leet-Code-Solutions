@@ -1,0 +1,21 @@
+var distributeCandies = function(candies, num_people) {
+       let multiple=0;
+       const result=[];
+       for(let i=0;i<num_people;i++)result.push(0);
+       while(candies>0){
+        for(let i=0;i<result.length;i++){
+            let numCandies= multiple*num_people + i+1;
+            if(candies-numCandies>0){
+             result[i]+= numCandies;
+             candies-=numCandies;
+            }
+            else{
+                result[i]+= candies;
+                candies=0;
+                break;
+            }
+        }
+        multiple++;
+       }
+       return result;         
+};
