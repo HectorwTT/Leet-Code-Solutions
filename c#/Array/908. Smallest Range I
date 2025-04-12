@@ -1,0 +1,7 @@
+public class Solution {
+    public int SmallestRangeI(int[] nums, int k) {
+     Array.Sort(nums);
+     if(nums[0]+k>=nums[nums.Length-1]-k)return 0;
+     else return (nums[nums.Length-1]-k)-(nums[0]+k);   
+    }
+}
