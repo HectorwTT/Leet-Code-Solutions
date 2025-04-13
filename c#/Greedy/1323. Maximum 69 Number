@@ -1,0 +1,20 @@
+public class Solution {
+    public int Maximum69Number (int num) {
+        String numString=""+num;
+        String newNumString="";
+        int index=numString.Length;
+        for(int i=0;i<index;i++){
+         char ch= numString[i];
+         int val= ch-48;
+         if(val==6){
+            newNumString+="9";
+            index=i+1;
+            break;
+         }else newNumString+=ch;
+        }
+        if(index!=numString.Length){
+         newNumString+=numString.Substring(index);
+        }
+        return int.Parse(newNumString);   
+    }
+}
