@@ -1,0 +1,29 @@
+public class Solution {
+    public int NumberOfWeakCharacters(int[][] properties) {
+     int count=0;
+       Array.Sort(properties, (a, b) =>
+         {
+             for (int i = 0; i < Math.Min(a.Length, b.Length); i++){
+              if (a[i] != b[i]) return a[i].CompareTo(b[i]);
+             }
+             return a.Length.CompareTo(b.Length); // optional: shorter arrays come first if equal
+         });
+     int maxAttack=properties[properties.Length-1][0];
+     int maxDefense=properties[properties.Length-1][1];
+     int currentMaxDefense=properties[properties.Length-1][1];
+     int current=properties.Length-1;
+     int previous=current-1;
+     for(int i=properties.Length-1;i>0;i--){
+      current=i;
+      previous=current-1;   
+      if(properties[previous][0]!=properties[current][0]){  
+        maxDefense=Math.Max(currentMaxDefense,maxDefense);
+        if(properties[previous][1]<maxDefense)count++;      
+        currentMaxDefense=properties[previous][1];
+      }else{
+        if(properties[previous][0]!=maxAttack  && properties[previous][1]<maxDefense)count++;
+      }            
+     }
+      return  count;      
+    }
+}
