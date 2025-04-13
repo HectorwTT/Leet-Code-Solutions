@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxCoins(vector<int>& piles) {
+     std::sort(piles.begin(),piles.end());
+     int index=piles.size()-1;
+     int count=0;
+     int max=0;
+     while(count<piles.size()/3){
+      max+=piles[index-1];
+      index-=2;
+      count++;
+     }
+     return max;     
+    }
+};
