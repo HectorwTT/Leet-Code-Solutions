@@ -1,0 +1,14 @@
+public class Solution {
+    public int MaxCoins(int[] piles) {
+     Array.Sort(piles);
+     int index=piles.Length-1;
+     int count=0;
+     int max=0;
+     while(count<piles.Length/3){
+      max+=piles[index-1];
+      index-=2;
+      count++;
+     }
+     return max;     
+    }
+}
