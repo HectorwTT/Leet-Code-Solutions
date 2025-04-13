@@ -1,0 +1,12 @@
+var maxCoins = function(piles) {
+ piles.sort((x,y)=>x-y);
+ let index=piles.length-1;
+ let count=0;
+ let max=0;
+ while(count<piles.length/3){
+  max+=piles[index-1];
+  index-=2;
+  count++;
+ }
+ return max;   
+};
