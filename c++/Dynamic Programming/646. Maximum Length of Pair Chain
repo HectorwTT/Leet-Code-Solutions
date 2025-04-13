@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int findLongestChain(vector<vector<int>>& pairs) {
+     vector<int> lengths;
+     std::sort(pairs.begin(), pairs.end());  
+     for(int i=0;i<pairs.size();i++)lengths.push_back(1);
+     for(int i=1;i<pairs.size();i++){
+      for(int j=0;j<i;j++){
+       if(pairs[j][1]<pairs[i][0] && lengths[i]<=lengths[j]) lengths[i]=lengths[j]+1;
+      }
+     }
+     std::sort(lengths.begin(),lengths.end());
+     return lengths[lengths.size()-1];    
+    }
+};
