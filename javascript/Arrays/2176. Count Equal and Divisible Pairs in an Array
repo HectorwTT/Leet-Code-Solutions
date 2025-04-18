@@ -1,0 +1,20 @@
+var countPairs = function(nums, k) {
+ const map=new Map();
+ let total=0;
+ for(let i=0;i<nums.length;i++){
+  if(!map.has(nums[i])){
+   const list=[];
+   list.push(i);
+   map.set(nums[i],list);
+  }else{
+   const list= map.get(nums[i]);
+   list.push(i);
+   map[nums[i]]=list;
+   for(let j=0;j<list.length;j++){
+    let index=list[j];
+    if(index<i && (index*i)%k==0)total++;
+   }
+  }
+ }
+ return total;   
+};
