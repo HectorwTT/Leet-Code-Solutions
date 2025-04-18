@@ -1,0 +1,33 @@
+public class Solution {
+    public string CountAndSay(int n) {
+      if(n==1)return "1"; 
+      else{
+       string str=CountAndSay(n-1);
+       IList<int>digits=new List<int>();
+       IList<int>counts=new List<int>();
+       int count=1;
+       char previousCh=str[0];
+       char currentCh=str[0];
+       if(str.Length==1) return "11";
+       string result="";       
+       for(int i=1;i<str.Length;i++){
+        previousCh=str[i-1];
+        currentCh=str[i]; 
+        if(currentCh==previousCh)count++;  
+        else{
+          digits.Add(previousCh-48);
+          counts.Add(count);
+          count=1;  
+        }
+       }
+       digits.Add(currentCh-48);
+       counts.Add(count);
+       for(int i=0;i<counts.Count;i++){
+        int digit=digits[i];
+        int countOfDigit=counts[i];
+        result+=countOfDigit+""+digit;
+       }
+       return result;
+      }   
+    }
+}
