@@ -1,0 +1,31 @@
+var countAndSay = function(n) {
+     if(n==1)return "1"; 
+      else{
+       let str=countAndSay(n-1);
+       const digits=[];
+       const counts=[];
+       let count=1;
+       var previousCh=str.charCodeAt(0);
+       var currentCh=str.charCodeAt(0);
+       if(str.length==1) return "11";
+       let result="";       
+       for(let i=1;i<str.length;i++){
+        previousCh=str.charAt(i-1);
+        currentCh=str.charAt(i); 
+        if(currentCh==previousCh)count++;  
+        else{
+          digits.push(previousCh);
+          counts.push(count);
+          count=1;  
+        }
+       }
+       digits.push(currentCh);
+       counts.push(count);
+       for(let i=0;i<counts.length;i++){
+        let digit=digits[i];
+        let countOfDigit=counts[i];
+        result+=countOfDigit+""+digit;
+       }
+       return result;   
+    }   
+};
