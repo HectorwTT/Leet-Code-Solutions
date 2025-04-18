@@ -1,0 +1,34 @@
+class Solution {
+    public String countAndSay(int n) {
+      if(n==1)return "1"; 
+      else{
+       String string=countAndSay(n-1);
+       List<Integer>digits=new ArrayList<>();
+       List<Integer>counts=new ArrayList<>();
+       int count=1;
+       char previousCh=string.charAt(0);
+       char currentCh=string.charAt(0);
+       if(string.length()==1) return "11";
+       String result="";       
+       for(int i=1;i<string.length();i++){
+        previousCh=string.charAt(i-1);
+        currentCh=string.charAt(i); 
+        if(currentCh==previousCh){
+          count++;  
+        }else{
+          digits.add(previousCh-48);
+          counts.add(count);
+          count=1;  
+        }
+       }
+       digits.add(currentCh-48);
+       counts.add(count);
+       for(int i=0;i<counts.size();i++){
+        int digit=digits.get(i);
+        int countOfDigit=counts.get(i);
+        result+=countOfDigit+""+digit;
+       }
+       return result;
+      }
+    }
+}
