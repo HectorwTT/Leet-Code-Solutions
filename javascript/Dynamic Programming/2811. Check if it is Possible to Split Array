@@ -1,0 +1,9 @@
+var canSplitArray = function(nums, m) {
+ if(nums.length<=2)return true;
+ for(let i=1;i<nums.length;i++){
+  let curr=nums[i];
+  let prev= nums[i-1];
+  if(curr+prev>=m || curr==m || prev==m)return true;
+ }
+ return false;    
+};
