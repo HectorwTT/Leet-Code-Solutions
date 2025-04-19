@@ -1,0 +1,12 @@
+class Solution {
+public:
+    bool canSplitArray(vector<int>& nums, int m) {
+     if(nums.size()<=2)return true;
+     for(int i=1;i<nums.size();i++){
+        int curr=nums[i];
+        int prev= nums[i-1];
+        if(curr+prev>=m || curr==m || prev==m)return true;
+      }
+      return false;   
+    }
+};
