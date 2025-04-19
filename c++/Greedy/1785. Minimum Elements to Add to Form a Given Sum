@@ -1,0 +1,9 @@
+class Solution {
+public:
+    int minElements(vector<int>& nums, int limit, int goal) {
+      long sum = 0;
+      for (int i=0;i<nums.size();i++)sum += nums[i];
+      long diff = std::abs(goal - sum);
+      return (int)((diff + limit - 1) / limit); // ceiling of diff / limit    
+    }
+};
