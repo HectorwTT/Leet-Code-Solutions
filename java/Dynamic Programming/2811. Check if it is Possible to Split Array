@@ -1,0 +1,11 @@
+class Solution {
+    public boolean canSplitArray(List<Integer> nums, int m) {
+      if(nums.size()<=2)return true;
+      for(int i=1;i<nums.size();i++){
+        int curr=nums.get(i);
+        int prev= nums.get(i-1);
+        if(curr+prev>=m || curr==m || prev==m)return true;
+      }
+      return false;    
+    }
+}
