@@ -1,0 +1,11 @@
+public class Solution {
+    public bool CanSplitArray(IList<int> nums, int m) {
+     if(nums.Count<=2)return true;
+      for(int i=1;i<nums.Count;i++){
+        int curr=nums[i];
+        int prev= nums[i-1];
+        if(curr+prev>=m || curr==m || prev==m)return true;
+      }
+      return false;   
+    }
+}
