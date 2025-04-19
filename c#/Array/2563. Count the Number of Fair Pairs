@@ -1,0 +1,41 @@
+public class Solution {
+    public long CountFairPairs(int[] nums, int lower, int upper) {
+        Array.Sort(nums);
+        long ans = 0;
+        for (int i = 0; i < nums.Length; i++) {
+            int low=lower-nums[i];
+            int high=upper-nums[i];
+            long l=Help1(nums,i+1,low);
+            long h=Help2(nums,i+1,high);
+            ans+=h-l;
+        }
+        return ans;
+    }
+    public long Help2(int[] nums,int s,int high) {
+        int end = nums.Length;
+        while (s < end) {
+            int mid = (s+end) / 2;
+            if (nums[mid] >high) {
+                end = mid;
+            } else {
+                s = mid + 1;
+            }
+        }
+        return s;
+    }
+     public long Help1(int[] nums,int s,int low) {
+        int end = nums.Length;
+        while (s < end) {
+            int mid = (s+end)/ 2;
+            if (nums[mid] < (low)) {
+                s = mid + 1;
+            } else {
+                end = mid;
+            }
+        }
+        return s;
+    }
+    
+     
+    
+}
