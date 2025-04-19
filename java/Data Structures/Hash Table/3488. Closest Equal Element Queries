@@ -1,0 +1,45 @@
+class Solution {
+    public List<Integer> solveQueries(int[] nums, int[] queries) {
+     List<Integer> answer=new ArrayList<>();
+     HashMap<Integer,Integer> mapFromBehind=new HashMap<>();  
+     HashMap<Integer,Integer> mapFromFront=new HashMap<>();     
+     int [] indicesFromFront=new int[nums.length];
+     int [] indicesFromBehind=new int[nums.length];
+     for(int i=nums.length-1;i>=0;i--){
+      if(!mapFromBehind.containsKey(nums[i])){
+       mapFromBehind.put(nums[i],i);
+       indicesFromBehind[i]=nums.length;
+      }else{
+       indicesFromBehind[i]=mapFromBehind.get(nums[i]);
+       mapFromBehind.replace(nums[i],i); 
+      }  
+     }
+     for(int i=0;i<nums.length;i++){
+      if(!mapFromFront.containsKey(nums[i])){
+       mapFromFront.put(nums[i],i);
+       indicesFromFront[i]=nums.length;
+      }else{
+       indicesFromFront[i]=mapFromFront.get(nums[i]);
+       mapFromFront.replace(nums[i],i); 
+      }  
+     }
+     for(int i=0;i<queries.length;i++){
+      int index=queries[i];
+      if(indicesFromFront[index]==nums.length && indicesFromBehind[index]==nums.length)answer.add(-1);
+      else if(indicesFromBehind[index]==nums.length){
+       int antiClockwiseDistance=index-indicesFromFront[index]; 
+       int clockwiseDistance=nums.length-index+mapFromBehind.get(nums[index]);
+       answer.add(Math.min(antiClockwiseDistance,clockwiseDistance));
+      }else if(indicesFromFront[index]==nums.length){
+        int antiClockwiseDistance=index+nums.length-mapFromFront.get(nums[index]);
+        int clockwiseDistance=indicesFromBehind[index]-index;
+        answer.add(Math.min(antiClockwiseDistance,clockwiseDistance));
+      }else{
+        int antiClockwiseDistance=index-indicesFromFront[index];
+        int clockwiseDistance=indicesFromBehind[index]-index;
+        answer.add(Math.min(antiClockwiseDistance,clockwiseDistance));
+      } 
+     }
+     return answer;
+    }
+}
