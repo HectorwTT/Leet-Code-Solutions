@@ -1,0 +1,22 @@
+public class Solution {
+    public int MaximumSum(int[] arr) {
+        if(arr.Length ==1) return arr[0];
+        int[] forward = new int[arr.Length];
+        int[] backward = new int[arr.Length];
+        int max= arr[0];
+        int currentMax_forward = 0;
+        int currentMax_backward = 0;        
+        for(int i= 0; i< arr.Length; i++){
+            currentMax_forward = Math.Max(arr[i], arr[i] + currentMax_forward);
+            forward[i] = currentMax_forward;
+            max = Math.Max(max, currentMax_forward); 
+        }        
+        for(int i= arr.Length-1; i>= 0; i--){
+            currentMax_backward = Math.Max(arr[i], arr[i] + currentMax_backward);
+            backward[i] = currentMax_backward;
+        }   		
+        for(int i=0; i< arr.Length-2; i++) max = Math.Max(max,forward[i] + backward[i+2]);         
+        max = Math.Max(max, backward[1]); 
+        return max;   
+    }
+}
