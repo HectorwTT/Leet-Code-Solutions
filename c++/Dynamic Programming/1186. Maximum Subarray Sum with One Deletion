@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int maximumSum(vector<int>& arr) {
+        if(arr.size() ==1) return arr[0];
+        vector<int> forward;
+        vector<int> backward;
+        for(int i=0;i<arr.size();i++)forward.push_back(0);
+        for(int i=0;i<arr.size();i++)backward.push_back(0);
+        int max= arr[0];
+        int currentMax_forward = 0;
+        int currentMax_backward = 0;        
+        for(int i= 0; i< arr.size(); i++){
+            currentMax_forward = std::max(arr[i], arr[i] + currentMax_forward); 
+            forward[i] = currentMax_forward;           
+            max = std::max(max, currentMax_forward); 
+            
+        }        
+        for(int i= arr.size()-1; i>= 0; i--){
+            currentMax_backward = std::max(arr[i], arr[i] + currentMax_backward);
+            backward[i] = currentMax_backward;
+        }   		
+        for(int i=0; i< arr.size()-2; i++) max = std::max(max,forward[i] + backward[i+2]);         
+        max = std::max(max, backward[1]); 
+        return max;      
+    }
+};
