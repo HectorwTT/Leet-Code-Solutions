@@ -1,0 +1,23 @@
+var maximumSum = function(arr) {
+        if(arr.length ==1) return arr[0];
+        const forward=[];
+        const backward=[];
+        for(let i=0;i<arr.length;i++)forward.push(0);
+        for(let i=0;i<arr.length;i++)backward.push(0);
+        let max= arr[0];
+        let currentMax_forward = 0;
+        let currentMax_backward = 0;        
+        for(let i= 0; i< arr.length; i++){
+            currentMax_forward = Math.max(arr[i], arr[i] + currentMax_forward); 
+            forward[i] = currentMax_forward;           
+            max = Math.max(max, currentMax_forward); 
+            
+        }        
+        for(let i= arr.length-1; i>= 0; i--){
+            currentMax_backward = Math.max(arr[i], arr[i] + currentMax_backward);
+            backward[i] = currentMax_backward;
+        }   		
+        for(let i=0; i< arr.length-2; i++) max = Math.max(max,forward[i] + backward[i+2]);         
+        max = Math.max(max, backward[1]); 
+        return max;         
+};
