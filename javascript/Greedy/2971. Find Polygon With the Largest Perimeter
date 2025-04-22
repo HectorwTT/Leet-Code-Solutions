@@ -1,0 +1,15 @@
+var largestPerimeter = function(nums) {
+ nums.sort((x,y)=>x-y);
+ const sums=[];
+ for(let i=0;i<nums.length;i++)sums.push(0);
+ let sum=nums[0];
+ let max=-1;
+ for(let i=1;i<sums.length;i++){
+  sum+=nums[i];
+  sums[i]= sum; 
+ }
+ for(let i=2;i<sums.length;i++){
+  if(nums[i]<sums[i-1]) max=sums[i];
+ }
+ return max;    
+};
