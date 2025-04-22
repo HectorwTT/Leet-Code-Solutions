@@ -1,0 +1,16 @@
+public class Solution {
+    public long LargestPerimeter(int[] nums) {
+        Array.Sort(nums);
+        long [] sums= new long[nums.Length];
+        long sum=1L*nums[0];
+        long max=-1;
+        for(int i=1;i<sums.Length;i++){
+            sum+=nums[i];
+            sums[i]= sum; 
+        }
+        for(int i=2;i<sums.Length;i++){
+          if(1L* nums[i]<sums[i-1]) max=sums[i];
+        }
+        return max;   
+    }
+}
