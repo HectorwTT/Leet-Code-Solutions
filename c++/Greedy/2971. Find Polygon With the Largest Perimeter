@@ -1,0 +1,18 @@
+class Solution {
+public:
+    long long largestPerimeter(vector<int>& nums) {
+        std::sort(nums.begin(),nums.end());
+        vector<long>sums;
+        for(int i=0;i<nums.size();i++)sums.push_back(0);
+        long sum=1L*nums[0];
+        long max=-1;
+        for(int i=1;i<sums.size();i++){
+            sum+=nums[i];
+            sums[i]= sum; 
+        }
+        for(int i=2;i<sums.size();i++){
+          if(1L* nums[i]<sums[i-1]) max=sums[i];
+        }
+        return max;      
+    }
+};
