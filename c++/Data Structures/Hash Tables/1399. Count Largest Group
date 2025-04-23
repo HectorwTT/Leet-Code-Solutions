@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int countLargestGroup(int n) {
+        unordered_map <int,vector<int>> map;
+        int maxSize=1;
+        int total=0;
+        for(int i=1;i<=n;i++){
+         int number=i;
+         int sum=0;
+         while(number>0){
+          int mod=number%10;
+          number/=10;
+          sum+=mod;
+         }
+         if(map.find(sum)==map.end()){
+            vector<int> numbers;
+            numbers.push_back(number);
+            map[sum]=numbers;
+         }else{
+            vector<int> numbers= map[sum];
+            numbers.push_back(number);
+            map[sum]=numbers;
+            if(numbers.size()>maxSize)maxSize= numbers.size();
+         }
+        }
+        for(auto key:map){
+            if(key.second.size()==maxSize)total++;
+        }
+        return total;   
+    }
+};
