@@ -1,0 +1,30 @@
+public class Solution {
+    public int CountLargestGroup(int n) {
+        Dictionary <int,IList<int>> map = new Dictionary<int,IList<int>>();
+        int maxSize=1;
+        int total=0;
+        for(int i=1;i<=n;i++){
+         int number=i;
+         int sum=0;
+         while(number>0){
+          int mod=number%10;
+          number/=10;
+          sum+=mod;
+         }
+         if(!map.ContainsKey(sum)){
+            IList<int> numbers= new List<int>();
+            numbers.Add(number);
+            map[sum]=numbers;
+         }else{
+            IList<int> numbers= map[sum];
+            numbers.Add(number);
+            map[sum]=numbers;
+            if(numbers.Count>maxSize)maxSize= numbers.Count;
+         }
+        }
+        foreach(var(key,value)in map){
+          if(value.Count==maxSize)total++;
+         }
+        return total;   
+    }
+}
