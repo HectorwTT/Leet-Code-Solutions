@@ -1,0 +1,22 @@
+class Solution {
+public:
+    long long countSubarrays(vector<int>& nums, int minK, int maxK) {
+        long res = 0L;
+        int left=0, minIdx=-1, maxIdx=-1, n=nums.size();
+        for(int i=0; i<n; i++){
+            if(nums[i] < minK || nums[i] > maxK){ // if out of range reset all values
+                left = i + 1;
+                minIdx = maxIdx = -1;
+                continue;
+            }
+            if(nums[i] == minK) minIdx = i;
+            if(nums[i] == maxK) maxIdx = i;
+            
+            if(minIdx != -1 && maxIdx != -1){ // if both min index and max index is found calculate the result
+                long val = std::min(minIdx, maxIdx) - left + 1;
+                res += val;
+            }
+        }
+        return res;      
+    }
+};
