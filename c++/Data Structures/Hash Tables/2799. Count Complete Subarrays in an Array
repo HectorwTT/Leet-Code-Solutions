@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int countCompleteSubarrays(vector<int>& nums) {
+      int total=0;
+      int count=0;
+      unordered_map<int,int> distincts;
+      for(int i=0;i<nums.size();i++){
+       if(distincts.find(nums[i])==distincts.end()){
+        distincts[nums[i]]=1;
+       } 
+      }
+      count=distincts.size();
+      if(count==1){
+       int number=0;
+       while(number<=nums.size()){
+        total+=number;
+        number++;
+       } 
+       return total;
+      }
+      for(int i=0;i<nums.size();i++){
+       unordered_map<int,int> map1; 
+       map1[nums[i]]=1;
+       for(int j=i+1;j<nums.size();j++){
+        if(map1.find(nums[j])==map1.end())map1[nums[j]]=1;
+        else map1[nums[j]]=map1[nums[j]]+1;
+        if(map1.size()==count)total++; 
+       }  
+      }
+      return total;    
+    }
+};
