@@ -1,0 +1,16 @@
+public class Solution {
+    public int ComputeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+     int aheight=Math.Abs(ay2-ay1);
+     int awidth=Math.Abs(ax2-ax1);  
+     int bheight=Math.Abs(by2-by1); 
+     int bwidth=Math.Abs(bx2-bx1);
+     int aarea=aheight*awidth;
+     int barea=bheight*bwidth;
+     int cx1=Math.Max(ax1,bx1);
+     int cx2=Math.Min(ax2,bx2);
+     int cy1=Math.Max(ay1,by1);
+     int cy2=Math.Min(ay2,by2);
+     int carea=Math.Max(0,cx2-cx1)*Math.Max(0,cy2-cy1);
+     return aarea+barea-carea;   
+    }
+}
