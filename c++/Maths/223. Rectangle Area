@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int computeArea(int ax1, int ay1, int ax2, int ay2, int bx1, int by1, int bx2, int by2) {
+     int aheight=std::abs(ay2-ay1);
+     int awidth=std::abs(ax2-ax1);  
+     int bheight=std::abs(by2-by1); 
+     int bwidth=std::abs(bx2-bx1);
+     int aarea=aheight*awidth;
+     int barea=bheight*bwidth;
+     int cx1=std::max(ax1,bx1);
+     int cx2=std::min(ax2,bx2);
+     int cy1=std::max(ay1,by1);
+     int cy2=std::min(ay2,by2);
+     int carea=std::max(0,cx2-cx1)*std::max(0,cy2-cy1);
+     return aarea+barea-carea;    
+    }
+};
