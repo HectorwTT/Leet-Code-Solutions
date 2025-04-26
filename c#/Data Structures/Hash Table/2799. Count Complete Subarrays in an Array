@@ -1,0 +1,31 @@
+public class Solution {
+    public int CountCompleteSubarrays(int[] nums) {
+      int total=0;
+      int count=0;
+      Dictionary<int,int> distincts=new Dictionary<int,int>();
+      for(int i=0;i<nums.Length;i++){
+       if(!distincts.ContainsKey(nums[i])){
+        distincts[nums[i]]=1;
+       } 
+      }
+      count=distincts.Count;
+      if(count==1){
+       int number=0;
+       while(number<=nums.Length){
+        total+=number;
+        number++;
+       } 
+       return total;
+      }
+      for(int i=0;i<nums.Length;i++){
+       Dictionary<int,int> map1=new Dictionary<int,int>(); 
+       map1[nums[i]]=1;
+       for(int j=i+1;j<nums.Length;j++){
+        if(!map1.ContainsKey(nums[j]))map1[nums[j]]=1;
+        else map1[nums[j]]=map1[nums[j]]+1;
+        if(map1.Count==count)total++; 
+       }  
+      }
+      return total;    
+    }
+}
