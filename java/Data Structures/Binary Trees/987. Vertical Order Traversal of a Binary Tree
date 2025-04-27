@@ -1,0 +1,93 @@
+class Solution {
+    public List<List<Integer>> verticalTraversal(TreeNode root) {
+     List<List<Integer>> answer=new ArrayList<>();
+     List<Integer> columns=new  ArrayList<>();
+     HashMap<Integer,List<Integer>> columnsAndRows=new HashMap<>();
+     HashMap<TreeNode,List<Integer>> tree=getRowsAndColumns(root,0,0);
+     HashMap<List<Integer>,List<TreeNode>>treeNodesByRowAndColumn=new HashMap<>();
+     for(TreeNode key:tree.keySet()){
+      List<Integer> points=tree.get(key);
+      int column=points.get(1);  
+      int row=points.get(0);
+      if(!columns.contains(column))columns.add(column);
+      if(!columnsAndRows.containsKey(column)){
+        List<Integer> rows=new ArrayList<>();
+        rows.add(row);
+        columnsAndRows.put(column,rows);
+      }else{
+        List<Integer> rows=columnsAndRows.get(column);
+        rows.add(row);
+        columnsAndRows.replace(column,rows);
+      }
+      if(!treeNodesByRowAndColumn.containsKey(points)){
+        List<TreeNode>nodes=new ArrayList<>();
+        nodes.add(key);
+        treeNodesByRowAndColumn.put(points,nodes);         
+      }else{
+        List<TreeNode>nodes=treeNodesByRowAndColumn.get(points);
+        nodes.add(key);
+        treeNodesByRowAndColumn.replace(points,nodes);  
+      }     
+     }
+     columns.sort(null);
+     for(int i=0;i<columns.size();i++){
+      List<Integer> values=new ArrayList<>();  
+      List<Integer> rows=columnsAndRows.get(columns.get(i));
+      List<Integer>distinctRows=rows.stream().distinct().sorted().collect(Collectors.toList());
+      for(int j=0;j<distinctRows.size();j++ ){
+       List<Integer> point=new ArrayList<>();
+       point.add(distinctRows.get(j));
+       point.add(columns.get(i));
+       List<TreeNode> nodes= treeNodesByRowAndColumn.get(point);
+        List<Integer> nodeValues=new ArrayList<>();
+       for(int k=0;k<nodes.size();k++){
+        TreeNode node=nodes.get(k);
+        int value=node.val;
+        nodeValues.add(value);
+       }
+       nodeValues.sort(null);
+       values.addAll(nodeValues);
+      }          
+      answer.add(values);
+     }    
+     return answer.stream().distinct().collect(Collectors.toList());  
+    }
+
+    public HashMap<TreeNode,List<Integer>> getRowsAndColumns(TreeNode root,int  row,int column){
+      HashMap<TreeNode,List<Integer>> tree=new HashMap<>();
+      if(root==null) return null;
+      else if(root.left==null && root.right==null){
+       List<Integer> point=new ArrayList<>();
+       point.add(row);
+       point.add(column);
+       tree.put(root,point);
+       return tree; 
+      }else if(root.left==null){
+       HashMap<TreeNode,List<Integer>>rightSubTree=getRowsAndColumns(root.right,row+1,column+1); 
+       if(rightSubTree!=null)tree.putAll(rightSubTree);
+       List<Integer> point=new ArrayList<>();
+       point.add(row);
+       point.add(column);
+       tree.put(root,point);
+       return tree;
+      }else if(root.right==null){
+       HashMap<TreeNode,List<Integer>>leftSubTree=getRowsAndColumns(root.left,row+1,column-1); 
+       if(leftSubTree!=null)tree.putAll(leftSubTree);
+       List<Integer> point=new ArrayList<>();
+       point.add(row);
+       point.add(column);
+       tree.put(root,point);
+       return tree;
+      }else{
+       HashMap<TreeNode,List<Integer>>leftSubTree=getRowsAndColumns(root.left,row+1,column-1); 
+       if(leftSubTree!=null)tree.putAll(leftSubTree);
+       HashMap<TreeNode,List<Integer>>rightSubTree=getRowsAndColumns(root.right,row+1,column+1); 
+       if(rightSubTree!=null)tree.putAll(rightSubTree);
+       List<Integer> point=new ArrayList<>();
+       point.add(row);
+       point.add(column);
+       tree.put(root,point);
+       return tree; 
+      }
+    } 
+}
