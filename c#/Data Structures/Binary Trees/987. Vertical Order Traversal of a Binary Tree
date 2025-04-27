@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+
+public class Solution {
+    
+    class NodeInfo {
+        public int row, col, val;
+        
+        public NodeInfo(int row, int col, int val) {
+            this.row = row;
+            this.col = col;
+            this.val = val;
+        }
+    }
+    
+    public IList<IList<int>> VerticalTraversal(TreeNode root) {
+        var nodes = new List<NodeInfo>();
+        
+        // Step 1: DFS traversal
+        DFS(root, 0, 0, nodes);
+        
+        // Step 2: Sort nodes
+        nodes.Sort((a, b) => {
+            if (a.col != b.col) return a.col.CompareTo(b.col);
+            if (a.row != b.row) return a.row.CompareTo(b.row);
+            return a.val.CompareTo(b.val);
+        });
+        
+        // Step 3: Group by column
+        var result = new List<IList<int>>();
+        int prevCol = int.MinValue;
+        
+        foreach (var node in nodes) {
+            if (node.col != prevCol) {
+                result.Add(new List<int>());
+                prevCol = node.col;
+            }
+            result[result.Count - 1].Add(node.val);
+        }
+        
+        return result;
+    }
+    
+    private void DFS(TreeNode node, int row, int col, List<NodeInfo> nodes) {
+        if (node == null) return;
+        
+        nodes.Add(new NodeInfo(row, col, node.val));
+        
+        DFS(node.left, row + 1, col - 1, nodes);
+        DFS(node.right, row + 1, col + 1, nodes);
+    }
+}
