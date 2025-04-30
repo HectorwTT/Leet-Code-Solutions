@@ -1,0 +1,8 @@
+var findNumbers = function(nums) {
+ let total=0;
+ for(let i=0;i<nums.length;i++){
+  let num=nums[i];   
+  if((num>=1000 && num<10000) || (num<100 && num>9) || num==100000)total++;
+ }
+ return total;     
+};
