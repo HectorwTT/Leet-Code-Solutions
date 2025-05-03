@@ -1,0 +1,23 @@
+public class Solution {
+    public int MinDominoRotations(int[] tops, int[] bottoms) {
+      int [] countTops=new int[7];
+      int [] countBottoms=new int[7];    
+      int [] rotationsTops=new int[7];
+      int [] rotationsBottoms=new int[7];
+      int min=tops.Length;
+      for(int i=0;i<tops.Length;i++){
+        countTops[tops[i]]++;
+        countBottoms[bottoms[i]]++;
+        if(bottoms[i]!=tops[i])rotationsTops[bottoms[i]]++;
+        if(tops[i]!=bottoms[i])rotationsBottoms[tops[i]]++;
+      }
+      for(int i=1;i<countTops.Length;i++){
+       if(countTops[i]==tops.Length || countBottoms[i]==bottoms.Length)min=0;
+       if(countTops[i]+rotationsTops[i]==tops.Length)min=Math.Min(min,rotationsTops[i]); 
+       if(countBottoms[i]+rotationsBottoms[i]==bottoms.Length)
+        min=Math.Min(min,rotationsBottoms[i]); 
+      }
+      if(min==tops.Length)return -1;
+      else return min;   
+    }
+}
