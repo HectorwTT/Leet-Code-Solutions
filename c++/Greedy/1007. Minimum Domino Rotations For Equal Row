@@ -1,0 +1,30 @@
+class Solution {
+public:
+    int minDominoRotations(vector<int>& tops, vector<int>& bottoms) {
+      vector<int> countTops;
+      vector<int> countBottoms;    
+      vector<int> rotationsTops;
+      vector<int> rotationsBottoms;
+      int min=tops.size();
+      for(int i=0;i<7;i++){
+       countTops.push_back(0); 
+       rotationsTops.push_back(0); 
+       countBottoms.push_back(0); 
+       rotationsBottoms.push_back(0);
+      }
+      for(int i=0;i<tops.size();i++){
+        countTops[tops[i]]++;
+        countBottoms[bottoms[i]]++;
+        if(bottoms[i]!=tops[i])rotationsTops[bottoms[i]]++;
+        if(tops[i]!=bottoms[i])rotationsBottoms[tops[i]]++;
+      }
+      for(int i=1;i<countTops.size();i++){
+       if(countTops[i]==tops.size()|| countBottoms[i]==bottoms.size())min=0;
+       if(countTops[i]+rotationsTops[i]==tops.size())min=std::min(min,rotationsTops[i]); 
+       if(countBottoms[i]+rotationsBottoms[i]==bottoms.size())
+        min=std::min(min,rotationsBottoms[i]); 
+      }
+      if(min==tops.size())return -1;
+      else return min;      
+    }
+};
