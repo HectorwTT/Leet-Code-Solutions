@@ -1,0 +1,27 @@
+var minDominoRotations = function(tops, bottoms) {
+      const countTops=[];
+      const countBottoms=[];    
+      const rotationsTops=[];
+      const rotationsBottoms=[];
+      let min=tops.length;
+      for(let i=0;i<7;i++){
+       countTops.push(0); 
+       rotationsTops.push(0); 
+       countBottoms.push(0); 
+       rotationsBottoms.push(0);
+      }
+      for(let i=0;i<tops.length;i++){
+        countTops[tops[i]]++;
+        countBottoms[bottoms[i]]++;
+        if(bottoms[i]!=tops[i])rotationsTops[bottoms[i]]++;
+        if(tops[i]!=bottoms[i])rotationsBottoms[tops[i]]++;
+      }
+      for(let i=1;i<countTops.length;i++){
+       if(countTops[i]==tops.length|| countBottoms[i]==bottoms.length)min=0;
+       if(countTops[i]+rotationsTops[i]==tops.length)min=Math.min(min,rotationsTops[i]); 
+       if(countBottoms[i]+rotationsBottoms[i]==bottoms.length)
+        min=Math.min(min,rotationsBottoms[i]); 
+      }
+      if(min==tops.length)return -1;
+      else return min;         
+};
