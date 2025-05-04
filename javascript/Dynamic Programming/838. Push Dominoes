@@ -1,0 +1,46 @@
+var pushDominoes=function(dominoes) {
+    const n = dominoes.length;
+    const distFromR = Array(n).fill(0);
+    const distFromL = Array(n).fill(0);
+    const result = dominoes.split('');
+
+    // Distance from nearest 'R'
+    let dist = 0;
+    for (let i = 0; i < n; i++) {
+        if (dominoes[i] === 'R') {
+            dist = 1;
+        } else if (dominoes[i] === '.' && dist > 0) {
+            distFromR[i] = dist++;
+        } else {
+            dist = 0;
+        }
+    }
+
+    // Distance from nearest 'L'
+    dist = 0;
+    for (let i = n - 1; i >= 0; i--) {
+        if (dominoes[i] === 'L') {
+            dist = 1;
+        } else if (dominoes[i] === '.' && dist > 0) {
+            distFromL[i] = dist++;
+        } else {
+            dist = 0;
+        }
+    }
+
+    // Resolve final state
+    for (let i = 0; i < n; i++) {
+        if (dominoes[i] === '.') {
+            const left = distFromL[i];
+            const right = distFromR[i];
+
+            if (left === 0 && right === 0) result[i] = '.';
+            else if (left === 0) result[i] = 'R';
+            else if (right === 0) result[i] = 'L';
+            else if (left === right) result[i] = '.';
+            else result[i] = left < right ? 'L' : 'R';
+        }
+    }
+
+    return result.join('');
+}
