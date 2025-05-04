@@ -1,0 +1,12 @@
+class Solution {
+    public int maxProduct(int n) {
+     List<Integer> digits=new ArrayList<>(); 
+     while(n!=0){
+      int mod=n%10;
+      digits.add(mod);
+      n/=10;  
+     } 
+     digits.sort(null);
+     return digits.get(digits.size()-1)*digits.get(digits.size()-2);   
+    }
+}
