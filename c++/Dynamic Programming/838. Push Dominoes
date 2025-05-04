@@ -1,0 +1,54 @@
+class Solution {
+public:
+    string pushDominoes(string dominoes) {
+        int n = dominoes.size();
+        vector<int> distFromNearestR(n, 0);
+        vector<int> distFromNearestL(n, 0);
+        string result = dominoes;
+
+        // Calculate distances from nearest 'R'
+        int dist = 0;
+        for (int i = 0; i < n; ++i) {
+            if (dominoes[i] == 'R') {
+                dist = 1;
+            } else if (dominoes[i] == '.' && dist > 0) {
+                distFromNearestR[i] = dist++;
+            } else {
+                dist = 0;
+            }
+        }
+
+        // Calculate distances from nearest 'L'
+        dist = 0;
+        for (int i = n - 1; i >= 0; --i) {
+            if (dominoes[i] == 'L') {
+                dist = 1;
+            } else if (dominoes[i] == '.' && dist > 0) {
+                distFromNearestL[i] = dist++;
+            } else {
+                dist = 0;
+            }
+        }
+
+        // Determine final states
+        for (int i = 0; i < n; ++i) {
+            if (dominoes[i] == '.') {
+                if (distFromNearestR[i] == 0 && distFromNearestL[i] == 0) {
+                    result[i] = '.';
+                } else if (distFromNearestR[i] == 0) {
+                    result[i] = 'L';
+                } else if (distFromNearestL[i] == 0) {
+                    result[i] = 'R';
+                } else if (distFromNearestR[i] == distFromNearestL[i]) {
+                    result[i] = '.';
+                } else if (distFromNearestR[i] < distFromNearestL[i]) {
+                    result[i] = 'R';
+                } else {
+                    result[i] = 'L';
+                }
+            }
+        }
+
+        return result;
+    }
+};
