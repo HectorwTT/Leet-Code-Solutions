@@ -1,0 +1,42 @@
+public class Solution {
+    public string PushDominoes(string dominoes) {
+     char [] newDominoes=new char[dominoes.Length];
+     int []  distFromNearestL=new int[dominoes.Length];
+     int[]  distFromNearestR=new int[dominoes.Length];
+     String answer="";
+     for(int i=0;i<dominoes.Length;i++){
+      char ch=dominoes[i];
+      if(ch=='L')newDominoes[i]='L';
+      else if(ch=='R')newDominoes[i]='R'; 
+     }
+     for(int i=1;i<dominoes.Length;i++){
+      char ch=dominoes[i];
+      if(ch=='.'){
+        char prevCh=dominoes[i-1];
+        if(prevCh=='R')distFromNearestR[i]=1;
+        else if(prevCh=='.'){
+           if(distFromNearestR[i-1]!=0)distFromNearestR[i]=distFromNearestR[i-1]+1; 
+        }
+      } 
+     }  
+     for(int i=dominoes.Length-2;i>=0;i--){
+      char ch=dominoes[i];
+      if(ch=='.'){
+        char nextCh=dominoes[i+1];
+        if(nextCh=='L')distFromNearestL[i]=1;
+        else if(nextCh=='.'){
+           if(distFromNearestL[i+1]!=0)distFromNearestL[i]=distFromNearestL[i+1]+1; 
+        }
+      } 
+     } 
+     for(int i=0;i<dominoes.Length;i++){
+     if(newDominoes[i]=='R' || newDominoes[i]=='L')continue; 
+     if(distFromNearestR[i]>=1 && distFromNearestL[i]==0) newDominoes[i]='R';
+     else if(distFromNearestR[i]==0 && distFromNearestL[i]>=1)newDominoes[i]='L';  
+     else if(distFromNearestL[i]==distFromNearestR[i])newDominoes[i]='.';
+     else if(distFromNearestR[i]<distFromNearestL[i])newDominoes[i]='R';
+     else if(distFromNearestR[i]>distFromNearestL[i])newDominoes[i]='L'; 
+    } 
+    return string.Join("",newDominoes);
+    }
+}
