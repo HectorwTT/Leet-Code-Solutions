@@ -1,0 +1,12 @@
+public class Solution {
+    public int MaxProduct(int n) {
+     IList<int> digits=new List<int>(); 
+     while(n!=0){
+      int mod=n%10;
+      digits.Add(mod);
+      n/=10;  
+     } 
+     ((List<int>)digits).Sort();
+     return digits[digits.Count-1]*digits[digits.Count-2];     
+    }
+}
