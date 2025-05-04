@@ -1,0 +1,10 @@
+var maxProduct = function(n) {
+ const digits=[]; 
+ let str=""+n;
+ for(let i=0;i<str.length;i++){
+  let mod=str.charAt(i);
+  digits.push(mod);  
+ }
+ digits.sort((x,y)=>x-y);
+ return digits[digits.length-1]*digits[digits.length-2];     
+};
