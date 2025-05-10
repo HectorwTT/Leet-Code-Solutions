@@ -1,0 +1,34 @@
+class Solution {
+    public long minSum(int[] nums1, int[] nums2) {
+      long answer=0;
+      long sum1=0;
+      long sum2=0;
+      int numOfZeroes1=0;
+      int numOfZeroes2=0;
+      long sum1_AddedOnes=0;
+      long sum2_AddedOnes=0;
+      for(int i=0;i<nums1.length;i++){
+       sum1+=1L*nums1[i];
+       if(nums1[i]==0) numOfZeroes1++;
+      }  
+      for(int i=0;i<nums2.length;i++){
+       sum2+=1L*nums2[i];
+       if(nums2[i]==0) numOfZeroes2++;
+      }
+      sum1_AddedOnes=sum1+(1L*numOfZeroes1);
+      sum2_AddedOnes=sum2+(1L*numOfZeroes2);
+      if(sum1<sum2){
+        if(numOfZeroes1==0)return -1;
+        if(numOfZeroes2==0 && sum1_AddedOnes>sum2)return -1;
+        return Math.max(sum1_AddedOnes,sum2_AddedOnes);
+      }else if(sum2<sum1){
+        if(numOfZeroes2==0)return -1;
+        if(numOfZeroes1==0 && sum2_AddedOnes>sum1)return -1;
+         return Math.max(sum1_AddedOnes,sum2_AddedOnes);
+      }else{
+         if(numOfZeroes1==0 && numOfZeroes2!=0)return -1;
+         if(numOfZeroes2==0 && numOfZeroes1!=0)return -1;
+         return Math.max(sum1_AddedOnes,sum2_AddedOnes);
+      }
+    }
+}
