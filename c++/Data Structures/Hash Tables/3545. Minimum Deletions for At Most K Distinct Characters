@@ -1,0 +1,43 @@
+class Solution {
+public:
+    int minDeletion(string s, int k) {
+     unordered_map<char,int> map;
+     unordered_map<int,vector<char>> map1;
+     vector<int> counts;
+     int min=0;
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      if(map.find(ch)==map.end())map[ch]=1;
+      else map[ch]=map[ch]+1;  
+     }
+     if(map.size()<=k)return 0;
+     for(auto key:map){
+      int count= key.second;
+      if(map1.find(count)==map1.end()){
+       vector<char> chars;
+       chars.push_back(key.first);
+       map1[count]=chars; 
+       counts.push_back(count);
+      }else{
+       vector<char> chars=map1[count];
+       chars.push_back(key.first);
+       map1[count]=chars;
+      }  
+     }  
+     std::sort(counts.begin(),counts.end());
+     int countsIndex=0;
+     while(map.size()>k){
+      int count=counts[countsIndex];  
+      vector<char> chars=map1[count];
+      int charsIndex=0; 
+      while(charsIndex<chars.size()){
+        min+=count;
+        char ch=chars[charsIndex++];
+        map.erase(ch);
+        if(map.size()==k)break;
+      }
+      countsIndex++; 
+     } 
+     return min;   
+    }
+};
