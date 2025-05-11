@@ -1,0 +1,40 @@
+var minDeletion = function(s, k) {
+     const map=new Map() ;
+     const map1=new Map();
+     const counts=[];
+     let min=0;
+     for(let i=0;i<s.length;i++){
+      var ch=s.charAt(i);
+      if(!map.has(ch))map.set(ch,1);
+      else map.set(ch,map.get(ch)+1);  
+     }
+     if(map.size<=k)return 0;
+     for(const key of map.keys()){
+      let count= map.get(key);
+      if(!map1.has(count)){
+       const chars=[];
+       chars.push(key);
+       map1.set(count,chars); 
+       counts.push(count);
+      }else{
+       const chars=map1.get(count);
+       chars.push(key);
+       map1.set(count,chars);
+      }  
+     }  
+     counts.sort((x,y)=>x-y);
+     let countsIndex=0;
+     while(map.size>k){
+      let count=counts[countsIndex];  
+      const chars=map1.get(count);
+      let charsIndex=0; 
+      while(charsIndex<chars.length){
+        min+=count;
+        var ch=chars[charsIndex++];
+        map.delete(ch);
+        if(map.size==k)break;
+      }
+      countsIndex++; 
+     } 
+     return min;    
+};
