@@ -1,0 +1,43 @@
+public class Solution {
+    public int MinDeletion(string s, int k) {
+     Dictionary<char,int> map=new Dictionary<char,int>()  ;
+     Dictionary<int,IList<char>> map1=new Dictionary<int,IList<char>>() ;
+     IList<int> counts=new  List<int>();
+     int min=0;
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      if(!map.ContainsKey(ch))map[ch]=1;
+      else map[ch]=map[ch]+1;  
+     }
+     if(map.Count<=k)return 0;
+     foreach(var(key,value)in  map){
+      int count=map[key];
+      if(!map1.ContainsKey(count)){
+       IList<char> chars=new List<char>()   ;
+       chars.Add(key);
+       map1[count]=chars; 
+       counts.Add(count);
+      }else{
+       IList<char> chars=map1[count];
+       chars.Add(key);
+       map1[count]=chars;
+      }  
+     }  
+     List<int> sorted = counts.ToList();
+     sorted.Sort();
+     int countsIndex=0;
+     while(map.Count>k){
+      int count=sorted[countsIndex];  
+      IList<char> chars=map1[count];
+      int charsIndex=0; 
+      while(charsIndex<chars.Count){
+        min+=count;
+        char ch=chars[charsIndex++];
+        map.Remove(ch);
+        if(map.Count==k)break;
+      }
+      countsIndex++; 
+     } 
+     return min;   
+    }
+}
