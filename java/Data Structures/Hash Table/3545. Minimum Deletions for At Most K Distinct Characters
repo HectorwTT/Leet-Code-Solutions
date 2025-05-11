@@ -1,0 +1,42 @@
+class Solution {
+    public int minDeletion(String s, int k) {
+     HashMap<Character,Integer> map=new HashMap<>();
+     HashMap<Integer,List<Character>> map1=new HashMap<>();
+     List<Integer> counts=new ArrayList<>();
+     int min=0;
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(!map.containsKey(ch))map.put(ch,1);
+      else map.replace(ch,map.get(ch)+1);  
+     }
+     if(map.size()<=k)return 0;
+     for(Character key:map.keySet()){
+      int count= map.get(key);
+      if(!map1.containsKey(count)){
+       List<Character> chars=new ArrayList<>();
+       chars.add(key);
+       map1.put(count,chars); 
+       counts.add(count);
+      }else{
+       List<Character> chars=map1.get(count);
+       chars.add(key);
+       map1.replace(count,chars);
+      }  
+     }  
+     counts.sort(null);
+     int countsIndex=0;
+     while(map.size()>k){
+      int count=counts.get(countsIndex);  
+      List<Character> chars=map1.get(count);
+      int charsIndex=0; 
+      while(charsIndex<chars.size()){
+        min+=count;
+        char ch=chars.get(charsIndex++);
+        map.remove(ch);
+        if(map.size()==k)break;
+      }
+      countsIndex++; 
+     } 
+     return min;
+    }
+}
