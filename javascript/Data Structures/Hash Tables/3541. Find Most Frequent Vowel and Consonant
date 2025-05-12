@@ -1,0 +1,21 @@
+var maxFreqSum = function(s) {
+     const vowelCounts=new Map();
+     const consonantCounts=new Map();
+     let maxVowelCount=0;
+     let maxConsonantCount=0;
+     for(let i=0;i<s.length;i++){
+      var ch=s.charAt(i);
+      if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+       if(!vowelCounts.has(ch))vowelCounts.set(ch,1);
+       else vowelCounts.set(ch,vowelCounts.get(ch)+1); 
+      }else{
+       if(!consonantCounts.has(ch))consonantCounts.set(ch,1);
+       else consonantCounts.set(ch,consonantCounts.get(ch)+1);  
+      }
+     }
+     for(const key of vowelCounts.keys())
+       maxVowelCount=Math.max(vowelCounts.get(key),maxVowelCount);
+     for (const key of consonantCounts.keys()) 
+      maxConsonantCount=Math.max(consonantCounts.get(key),maxConsonantCount); 
+     return maxVowelCount+maxConsonantCount;       
+};
