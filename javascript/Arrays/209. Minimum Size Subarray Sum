@@ -1,0 +1,22 @@
+var minSubArrayLen = function(target, nums) {
+      if(nums[0]>=target)return 1;
+      let minlength=nums.length;
+      const sums= [];
+      sums.push(nums[0]);
+      for(let i=1;i<sums.length;i++)sums.push(0);
+      for(let i=1;i<nums.length;i++){
+       if(nums[i]>=target) return 1;
+       sums[i]=nums[i]+sums[i-1];
+       if(sums[i]>=target) {
+         for(let j=0;j<i;j++){
+           let currenttotal= sums[i]-sums[j];
+           if(nums[i]+nums[j]>=target &&j==i-1) return 2;
+           if(currenttotal>=target){
+             if(i-j<minlength)minlength=i-j;
+           }
+         }
+        }
+      }
+      if (minlength==nums.length && sums[sums.length-1]<target) return 0;
+      else return minlength;      
+};
