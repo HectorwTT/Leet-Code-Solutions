@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> findEvenNumbers(vector<int>& digits) {
+     unordered_map<int,int> map;
+     vector<int> evens;
+     for(int i=0;i<digits.size();i++){
+      if(map.find(digits[i])==map.end())map[digits[i]]=1;
+      else map[digits[i]]=map[digits[i]]+1;
+     }
+     for(int i=100;i<1000;i++){
+      if(i%2==1)continue;
+      int number=i;
+      bool hasDigits=true;
+      unordered_map<int,int> numMap;
+      while(number!=0){
+       int digit= number %10;
+       if(numMap.find(digit)==map.end())numMap[digit]=1;
+       else numMap[digit]=numMap[digit]+1;
+       number/=10;
+      }
+      for(auto key : numMap){   
+       if(map.find(key.first)==map.end() ||(map.find(key.first)!=map.end()
+         && numMap[key.first]>map[key.first])){
+           hasDigits=false;
+           break;
+       } 
+      }
+       if(hasDigits)evens.push_back(i);
+     }
+     std::sort(evens.begin(),evens.end());
+     return evens;      
+    }
+};
