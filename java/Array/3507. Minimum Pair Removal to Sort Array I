@@ -1,0 +1,37 @@
+class Solution {
+    public int minimumPairRemoval(int[] nums) {
+     int min=0;
+     HashMap<Integer,Integer> map;
+     PriorityQueue<Integer> pq;
+     List<Integer> list=new ArrayList<>();
+     int numNonDecreasing=1;
+     list.add(nums[0]);
+     for(int i=1;i<nums.length;i++){
+      list.add(nums[i]);
+      if(list.get(i)>=list.get(i-1))numNonDecreasing++;
+     }  
+     if(numNonDecreasing==list.size())return 0; 
+     boolean isNonDecreasing=false;
+     while(!isNonDecreasing){
+       map=new HashMap<>();
+       pq=new PriorityQueue<>();  
+       for(int i=1;i<list.size();i++){
+        int sum=list.get(i-1)+list.get(i);
+        pq.offer(sum);
+        if(!map.containsKey(sum))map.put(sum,i-1);
+       } 
+       int top=pq.remove();
+       int index=map.get(top);
+       list.set(index,top);
+       list.remove(index+1);
+       numNonDecreasing=1;
+       for(int i=1;i<list.size();i++){
+        if(list.get(i)<list.get(i-1))break;
+        else numNonDecreasing++;
+       }
+       min++;
+       isNonDecreasing=(numNonDecreasing==list.size());
+     }
+     return min;          
+    }
+}
