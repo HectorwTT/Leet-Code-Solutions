@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int maxFreqSum(string s) {
+     unordered_map<char,int> vowelCounts;
+     unordered_map<char,int> consonantCounts;
+     int maxVowelCount=0;
+     int maxConsonantCount=0;
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      if(ch=='a' || ch=='e' || ch=='i' || ch=='o' || ch=='u'){
+       if(vowelCounts.find(ch)==vowelCounts.end())vowelCounts[ch]=1;
+       else vowelCounts[ch]=vowelCounts[ch]+1; 
+      }else{
+       if(consonantCounts.find(ch)==consonantCounts.end())consonantCounts[ch]=1;
+       else consonantCounts[ch]=consonantCounts[ch]+1;  
+      }
+     }
+     for(auto key : vowelCounts)maxVowelCount=std::max(key.second,maxVowelCount);
+     for(auto key : consonantCounts)maxConsonantCount=std::max(key.second,maxConsonantCount); 
+     return maxVowelCount+maxConsonantCount;    
+    }
+};
