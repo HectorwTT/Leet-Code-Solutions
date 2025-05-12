@@ -1,0 +1,17 @@
+public class Solution {
+    public int[] ArrayRankTransform(int[] arr) {
+      int [] arrClone = new int[arr.Length];
+      int [] result= new int[arr.Length];
+      for(int i=0;i<arr.Length;i++)arrClone[i]=arr[i];
+      Array.Sort(arrClone);
+      Dictionary<int,int> map = new Dictionary<int,int>();
+      int rank=1;
+      for(int i=0;i<arrClone.Length;i++){
+        if(!map.ContainsKey(arrClone[i]))map[arrClone[i]]=rank++;
+      }
+      for(int i=0;i<arr.Length;i++){
+        result[i]= map[arr[i]];
+      }
+      return result;   
+    }
+}
