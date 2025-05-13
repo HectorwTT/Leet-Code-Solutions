@@ -1,0 +1,51 @@
+class Solution {
+    public int minimumCost(int[] start, int[] target, int[][] specialRoads) {
+        Set<List<Integer>> points = new HashSet<>();
+        points.add(Arrays.asList(start[0], start[1]));
+        points.add(Arrays.asList(target[0], target[1]));
+        for (int[] road : specialRoads) {
+            points.add(Arrays.asList(road[0], road[1]));
+            points.add(Arrays.asList(road[2], road[3]));
+        }
+
+        Map<List<Integer>, List<int[]>> adj = new HashMap<>();
+        for (List<Integer> p1 : points) {
+            adj.put(p1, new ArrayList<>());
+            for (List<Integer> p2 : points) {
+                if (!p1.equals(p2)) {
+                    int cost = Math.abs(p1.get(0) - p2.get(0)) + Math.abs(p1.get(1) - p2.get(1));
+                    adj.get(p1).add(new int[]{p2.get(0), p2.get(1), cost});
+                }
+            }
+        }
+
+        for (int[] road : specialRoads) {
+            List<Integer> from = Arrays.asList(road[0], road[1]);
+            List<Integer> to = Arrays.asList(road[2], road[3]);
+            adj.get(from).add(new int[]{to.get(0), to.get(1), road[4]});
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[2]));
+        Map<List<Integer>, Integer> dist = new HashMap<>();
+        for (List<Integer> p : points) dist.put(p, Integer.MAX_VALUE);
+        List<Integer> startList = Arrays.asList(start[0], start[1]);
+        pq.offer(new int[]{start[0], start[1], 0});
+        dist.put(startList, 0);
+
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            List<Integer> key = Arrays.asList(cur[0], cur[1]);
+            if (cur[2] > dist.get(key)) continue;
+            for (int[] nei : adj.get(key)) {
+                List<Integer> nextKey = Arrays.asList(nei[0], nei[1]);
+                int newDist = cur[2] + nei[2];
+                if (newDist < dist.get(nextKey)) {
+                    dist.put(nextKey, newDist);
+                    pq.offer(new int[]{nei[0], nei[1], newDist});
+                }
+            }
+        }
+
+        return dist.get(Arrays.asList(target[0], target[1]));
+    }
+}
