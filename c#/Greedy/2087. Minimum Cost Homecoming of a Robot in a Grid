@@ -1,0 +1,34 @@
+class Solution {
+    public int MinCost(int[] startPos, int[] homePos, int[] rowCosts, int[] colCosts) {
+     int total=0;
+      int startRow=startPos[0];
+      int startColumn=startPos[1];
+      int endRow=homePos[0];
+      int endColumn=homePos[1];
+      int currentRow=0;
+      int currentColumn=0;
+       if(startRow<endRow){
+       currentRow=startRow+1;
+       while(currentRow<=endRow){
+        total+=rowCosts[currentRow++];
+       } 
+      }else if(endRow<startRow){
+       currentRow=startRow-1;
+       while(currentRow>=endRow){
+        total+=rowCosts[currentRow--];
+       } 
+      }
+       if(startColumn<endColumn){
+       currentColumn=startColumn+1;
+       while(currentColumn<=endColumn){
+        total+=colCosts[currentColumn++];
+       } 
+      }else if(endColumn<startColumn){
+       currentColumn=startColumn-1;
+       while(currentColumn>=endColumn){
+        total+=colCosts[currentColumn--];
+       } 
+      }
+      return total;   
+    }
+}
