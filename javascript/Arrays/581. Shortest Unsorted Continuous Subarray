@@ -1,0 +1,14 @@
+var findUnsortedSubarray = function(nums) {
+      const nums1=[];
+      for(let i=0;i<nums.length;i++)nums1.push(nums[i]);
+      let left=0;
+      let right= nums.length-1;
+      nums1.sort((x,y)=>x-y);
+      while(left<=right){
+       if(nums[left]!=nums1[left] && nums[right]!=nums1[right])break;
+       if(nums[left]== nums1[left])left++;
+       if(nums[right]==nums1[right])right--;
+      }
+      if(left>right)return 0;
+      return right-left+1;       
+};
