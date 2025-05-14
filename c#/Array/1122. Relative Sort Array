@@ -1,0 +1,32 @@
+public class Solution {
+    public int[] RelativeSortArray(int[] arr1, int[] arr2) {
+     int [] arr3=new int[arr1.Length];  
+     IList<int> numsNotInArr2=new List<int>();
+     Dictionary<int,int> map1=new Dictionary<int,int>();
+     Dictionary<int,int> map2=new Dictionary<int,int>();
+     int index=0;
+     for(int i=0;i<arr2.Length;i++)map2[arr2[i]]=1;
+     for(int i=0;i<arr1.Length;i++){
+      if(!map2.ContainsKey(arr1[i]))numsNotInArr2.Add(arr1[i]);
+      else{
+        if(!map1.ContainsKey(arr1[i]))map1[arr1[i]]=1;
+        else map1[arr1[i]]=map1[arr1[i]]+1;
+      }  
+     }
+     for(int i=0;i<arr2.Length;i++){
+      int count=map1[arr2[i]];
+      while(count!=0){
+       arr3[index++]=arr2[i];
+       map1[arr2[i]]=map1[arr2[i]]-1;
+       count=map1[arr2[i]]; 
+      }  
+     }
+     if(numsNotInArr2.Count!=0){
+      ((List<int>)numsNotInArr2).Sort();
+      for(int i=0;i<numsNotInArr2.Count;i++){
+       arr3[index++]=numsNotInArr2[i];
+      }  
+     }  
+     return arr3;  
+    }
+}
