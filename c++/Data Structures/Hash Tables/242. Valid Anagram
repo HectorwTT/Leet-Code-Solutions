@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+     unordered_map<char,int> smap;
+     unordered_map<char,int> tmap;
+     for(int i=0;i<s.size();i++){
+      char ch=s[i];
+      if(smap.find(ch)==smap.end())smap[ch]=1;
+      else smap[ch]=smap[ch]+1;
+     } 
+     for(int i=0;i<t.size();i++){
+      char ch=t[i];
+      if(tmap.find(ch)==tmap.end())tmap[ch]=1;
+      else tmap[ch]=tmap[ch]+1;
+     }
+     for(auto key : smap){
+        if(tmap.find(key.first)==tmap.end())return false;
+        if(tmap[key.first]!=smap[key.first])return false;
+     }
+     for(auto key : tmap){
+        if(smap.find(key.first)==tmap.end())return false;
+        if(tmap[key.first]!=smap[key.first])return false;  
+     }
+     return true;   
+    }
+};
