@@ -1,0 +1,33 @@
+class Solution {
+public:
+    vector<int> relativeSortArray(vector<int>& arr1, vector<int>& arr2) {
+     vector<int>arr3;  
+     vector<int> numsNotInArr2;
+     unordered_map<int,int> map1;
+     unordered_map<int,int> map2;
+     int index=0;
+     for(int i=0;i<arr2.size();i++)map2[arr2[i]]=1;
+     for(int i=0;i<arr1.size();i++){
+      if(map2.find(arr1[i])==map2.end())numsNotInArr2.push_back(arr1[i]);
+      else{
+        if(map1.find(arr1[i])==map1.end())map1[arr1[i]]=1;
+        else map1[arr1[i]]=map1[arr1[i]]+1;
+      }  
+     }
+     for(int i=0;i<arr2.size();i++){
+      int count=map1[arr2[i]];
+      while(count!=0){
+       arr3.push_back(arr2[i]);
+       map1[arr2[i]]=map1[arr2[i]]-1;
+       count=map1[arr2[i]]; 
+      }  
+     }
+     if(numsNotInArr2.size()!=0){
+      std::sort(numsNotInArr2.begin(),numsNotInArr2.end());
+      for(int i=0;i<numsNotInArr2.size();i++){
+       arr3.push_back(numsNotInArr2[i]);
+      }  
+     }  
+     return arr3;    
+    }
+};
