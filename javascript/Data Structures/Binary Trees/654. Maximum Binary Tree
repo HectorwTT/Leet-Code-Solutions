@@ -1,0 +1,18 @@
+var constructMaximumBinaryTree = function(nums) {
+  return construct(nums, 0, nums.length);
+};
+var construct=function(nums,l,r) {
+ if (l == r) return null;
+ let max_i = max(nums, l, r);
+ const root = new TreeNode(nums[max_i]);
+ root.left = construct(nums, l, max_i);
+ root.right = construct(nums, max_i + 1, r);
+ return root;
+};
+var max=function(nums,l,r) {
+ let max_i = l;
+ for (let i = l; i < r; i++) {
+  if (nums[max_i] < nums[i])max_i = i;
+ }
+ return max_i;
+};
