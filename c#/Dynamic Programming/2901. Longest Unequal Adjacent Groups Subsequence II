@@ -1,0 +1,44 @@
+public class Solution {
+    public IList<string> GetWordsInLongestSubsequence(string[] words, int[] groups) {
+     IList<string> result=new List<string>();
+     IList<string> finalResult=new List<string>();
+     int [] lengths= new int[words.Length];
+     int maxLength=0;
+     Dictionary<int,int> wordLengths=new Dictionary<int,int>();    
+     int [] prevWordIndexes=new int[words.Length];  
+     Array.Fill(prevWordIndexes,-1);  
+     Array.Fill(lengths,1);
+     for(int i=1;i<words.Length;i++){
+      int groupsi=groups[i];
+      String wordsi=words[i];  
+      for(int j=0;j<i;j++){
+       String wordsj=words[j];
+       int groupsj=groups[j];
+       if(wordsi.Length!=wordsj.Length || groupsi==groupsj)continue; 
+       int hammingDistance=0;
+       for(int k=0;k<wordsi.Length;k++){
+        if(wordsi[k]!=wordsj[k])hammingDistance++;
+       }
+       if(hammingDistance==1 && lengths[i]<=lengths[j]){
+        lengths[i]=lengths[j]+1;
+        prevWordIndexes[i]=j;
+       } 
+      }
+     } 
+     for(int i=0;i<lengths.Length;i++){
+      maxLength=Math.Max(lengths[i],maxLength); 
+      if(!wordLengths.ContainsKey(lengths[i]))wordLengths[lengths[i]]=i;     
+     }    
+     if(maxLength==1){
+      result.Add(words[0]);
+     }else{
+       int index= wordLengths[maxLength];
+       while(index!=-1){
+        result.Add(words[index]);
+        index=prevWordIndexes[index];
+       }
+     } 
+     for(int i=result.Count-1;i>=0;i--)finalResult.Add(result[i]);   
+     return finalResult;   
+    }
+}
