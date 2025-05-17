@@ -1,0 +1,43 @@
+class Solution {
+    public List<String> getWordsInLongestSubsequence(String[] words, int[] groups) {
+     List<String> result=new ArrayList<>();
+     int [] lengths= new int[words.length];
+     int maxLength=0;
+     HashMap<Integer,Integer> wordLengths=new HashMap<>();    
+     int [] prevWordIndexes=new int[words.length];  
+     Arrays.fill(prevWordIndexes,-1);  
+     Arrays.fill(lengths,1);
+     for(int i=1;i<words.length;i++){
+      int groupsi=groups[i];
+      String wordsi=words[i];  
+      for(int j=0;j<i;j++){
+       String wordsj=words[j];
+       int groupsj=groups[j];
+       if(wordsi.length()!=wordsj.length() || groupsi==groupsj)continue; 
+       int hammingDistance=0;
+       for(int k=0;k<wordsi.length();k++){
+        if(wordsi.charAt(k)!=wordsj.charAt(k))hammingDistance++;
+       }
+       if(hammingDistance==1 && lengths[i]<=lengths[j]){
+        lengths[i]=lengths[j]+1;
+        prevWordIndexes[i]=j;
+       } 
+      }
+     } 
+     for(int i=0;i<lengths.length;i++){
+      maxLength=Math.max(lengths[i],maxLength); 
+      if(!wordLengths.containsKey(lengths[i]))wordLengths.put(lengths[i],i);     
+     }    
+     if(maxLength==1){
+      result.add(words[0]);
+     }else{
+       int index= wordLengths.get(maxLength);
+       while(index!=-1){
+        result.add(words[index]);
+        index=prevWordIndexes[index];
+       }
+       Collections.reverse(result);
+     }   
+     return result;
+    }
+}
