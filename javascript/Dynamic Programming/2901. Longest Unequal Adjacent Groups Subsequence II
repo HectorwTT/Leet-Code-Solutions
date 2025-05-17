@@ -1,0 +1,42 @@
+var getWordsInLongestSubsequence = function(words, groups) {
+     const result=[];
+     const finalResult=[];
+     const lengths=[];
+     let maxLength=0;
+     const wordLengths=new Map() ;    
+     const prevWordIndexes=[];  
+     for(let i=0;i<words.length;i++)prevWordIndexes.push(-1);  
+     for(let i=0;i<words.length;i++)lengths.push(1);
+     for(let i=1;i<words.length;i++){
+      let groupsi=groups[i];
+      let wordsi=words[i];  
+      for(let j=0;j<i;j++){
+       let wordsj=words[j];
+       let groupsj=groups[j];
+       if(wordsi.length!=wordsj.length || groupsi==groupsj)continue; 
+       let hammingDistance=0;
+       for(let k=0;k<wordsi.length;k++){
+        if(wordsi[k]!=wordsj[k])hammingDistance++;
+       }
+       if(hammingDistance==1 && lengths[i]<=lengths[j]){
+        lengths[i]=lengths[j]+1;
+        prevWordIndexes[i]=j;
+       } 
+      }
+     } 
+     for(let i=0;i<lengths.length;i++){
+      maxLength=Math.max(lengths[i],maxLength); 
+      if(!wordLengths.has(lengths[i]))wordLengths[lengths[i]]=i;     
+     }    
+     if(maxLength==1){
+      result.push(words[0]);
+     }else{
+       let index= wordLengths[maxLength];
+       while(index!=-1){
+        result.push(words[index]);
+        index=prevWordIndexes[index];
+       }
+     } 
+     for(let i=result.length-1;i>=0;i--)finalResult.push(result[i]);   
+     return finalResult;     
+};
