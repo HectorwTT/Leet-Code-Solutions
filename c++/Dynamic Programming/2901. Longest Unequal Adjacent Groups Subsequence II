@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<string> getWordsInLongestSubsequence(vector<string>& words, vector<int>& groups) {
+     vector<string> result;
+     vector<string> finalResult;
+     vector<int> lengths;
+     int maxLength=0;
+     unordered_map<int,int> wordLengths;    
+     vector<int> prevWordIndexes;  
+     for(int i=0;i<words.size();i++)prevWordIndexes.push_back(-1);  
+     for(int i=0;i<words.size();i++)lengths.push_back(1);
+     for(int i=1;i<words.size();i++){
+      int groupsi=groups[i];
+      string wordsi=words[i];  
+      for(int j=0;j<i;j++){
+       string wordsj=words[j];
+       int groupsj=groups[j];
+       if(wordsi.size()!=wordsj.size() || groupsi==groupsj)continue; 
+       int hammingDistance=0;
+       for(int k=0;k<wordsi.size();k++){
+        if(wordsi[k]!=wordsj[k])hammingDistance++;
+       }
+       if(hammingDistance==1 && lengths[i]<=lengths[j]){
+        lengths[i]=lengths[j]+1;
+        prevWordIndexes[i]=j;
+       } 
+      }
+     } 
+     for(int i=0;i<lengths.size();i++){
+      maxLength=std::max(lengths[i],maxLength); 
+      if(wordLengths.find(lengths[i])==wordLengths.end())wordLengths[lengths[i]]=i;     
+     }    
+     if(maxLength==1){
+      result.push_back(words[0]);
+     }else{
+       int index= wordLengths[maxLength];
+       while(index!=-1){
+        result.push_back(words[index]);
+        index=prevWordIndexes[index];
+       }
+     } 
+     for(int i=result.size()-1;i>=0;i--)finalResult.push_back(result[i]);   
+     return finalResult;    
+    }
+};
