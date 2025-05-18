@@ -1,0 +1,25 @@
+class Solution {
+private:
+ int maxSum=-10000;
+ int maxGain(TreeNode* node) {
+        if (node == NULL) return 0;
+
+        // Recursively get the max gain from left and right children
+        int leftGain = std::max(maxGain(node->left), 0);
+        int rightGain = std::max(maxGain(node->right), 0);
+
+        // Path through the current node (could be a new max path)
+        int currentPathSum = node->val + leftGain + rightGain;
+
+        // Update global maxSum if this path is better
+        maxSum = std::max(maxSum, currentPathSum);
+
+        // Return the max gain to continue the path with parent node
+        return node->val + std::max(leftGain, rightGain);
+    }
+public:
+    int maxPathSum(TreeNode* root) {
+        maxGain(root);
+        return maxSum;
+    }
+};
