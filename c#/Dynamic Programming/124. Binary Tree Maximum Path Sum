@@ -1,0 +1,22 @@
+public class Solution {
+    private int maxSum = -10000;
+
+    public int MaxPathSum(TreeNode root) {
+        MaxGain(root);
+        return maxSum;
+    }
+
+    private int MaxGain(TreeNode node) {
+        if (node == null) return 0;
+        // Recursively get the max gain from left and right children
+        int leftGain = Math.Max(MaxGain(node.left), 0);
+        int rightGain = Math.Max(MaxGain(node.right), 0);
+        // Path through the current node (could be a new max path)
+        int currentPathSum = node.val + leftGain + rightGain;
+        // Update global maxSum if this path is better
+        maxSum = Math.Max(maxSum, currentPathSum);
+        // Return the max gain to continue the path with parent node
+        return node.val + Math.Max(leftGain, rightGain);
+    }       
+    
+}
