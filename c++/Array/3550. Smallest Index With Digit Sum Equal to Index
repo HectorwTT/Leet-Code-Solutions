@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int smallestIndex(vector<int>& nums) {
+      int min=-1; 
+     for(int i=0;i<nums.size();i++){
+      int number=nums[i];
+      int total=0;
+      while(number!=0){
+       int mod=number%10;
+       total+=mod;
+       number/=10;
+      }
+      if(total==i){
+        min=i;
+        break;
+      }  
+     }
+     return min;        
+    }
+};
