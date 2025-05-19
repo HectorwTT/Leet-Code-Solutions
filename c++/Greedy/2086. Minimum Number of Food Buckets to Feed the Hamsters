@@ -1,0 +1,45 @@
+class Solution {
+public:
+    int minimumBuckets(string hamsters) {
+     vector<char>chars;
+     for(int i=0;i<hamsters.size();i++)chars.push_back(hamsters[i]);
+     if(chars.size()==1){
+       if(chars[0]=='H')  return -1;
+       else return 0;
+     }      
+     int total=0;
+     if(chars[0]=='H' && chars[1]=='H')return -1;
+     if(chars[hamsters.size()-1]=='H'
+         && chars[hamsters.size()-2]=='H')return -1;
+     for(int i=1;i<chars.size()-1;i++){
+      char ch=chars[i];
+      char previousCh=chars[i-1];
+      char nextCh=chars[i+1];
+      if(ch=='H'&& previousCh!='.' && nextCh!='.')return -1;
+     } 
+     if(chars[0]=='H' && chars[1]=='.'){
+      total++;  
+      chars[1]='B';
+     }
+     for(int i=1;i<chars.size()-1;i++){
+      char ch=chars[i];
+      char prevCh=chars[i-1];
+      char nextCh=chars[i+1];
+      if(ch=='B' || prevCh=='B')continue;
+      if(ch=='H'){
+       if(prevCh=='.' && nextCh=='H'){
+        total++;
+        chars[i-1]='B';
+       }else if(nextCh=='.'){
+        total++;
+        chars[i+1]='B';
+       }
+      }     
+     }
+     if(chars[chars.size()-1]=='H' && chars[chars.size()-2]=='.'){
+      total++;  
+      chars[chars.size()-2]='B';
+     }
+      return total;    
+    }
+};
