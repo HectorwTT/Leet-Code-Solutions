@@ -1,0 +1,17 @@
+public class Solution {
+    public int MinimumDeletions(string s) {
+     Stack<char>  stack=new Stack<char>();
+     int count=0;
+     for(int i=s.Length-1;i>=0;i--){
+      char ch=s[i];
+      if(ch=='a') stack.Push(ch);
+      else{
+       if(stack.Count!=0 && stack.Peek()=='a'){
+        stack.Pop();
+        count++; 
+       }else stack.Push(ch); 
+      }
+     }
+     return count;    
+    }
+}
