@@ -1,0 +1,17 @@
+class Solution {
+    public int minimumDeletions(String s) {
+     Stack<Character>  stack=new Stack<>();
+     int count=0;
+     for(int i=s.length()-1;i>=0;i--){
+      char ch=s.charAt(i);
+      if(ch=='a') stack.push(ch);
+      else{
+       if(!stack.isEmpty() && stack.peek()=='a'){
+        stack.pop();
+        count++; 
+       }else  stack.push(ch); 
+      }
+     }
+     return count;     
+    }
+}
