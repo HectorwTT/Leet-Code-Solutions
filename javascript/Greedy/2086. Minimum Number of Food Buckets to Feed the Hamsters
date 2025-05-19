@@ -1,0 +1,46 @@
+/**
+ * @param {string} hamsters
+ * @return {number}
+ */
+var minimumBuckets = function(hamsters) {
+     const chars=[];
+     for(let i=0;i<hamsters.length;i++)chars.push(hamsters.charAt(i));
+     if(chars.length==1){
+       if(chars[0]=='H')  return -1;
+       else return 0;
+     }      
+     let total=0;
+     if(chars[0]=='H' && chars[1]=='H')return -1;
+     if(chars[hamsters.length-1]=='H'
+         && chars[hamsters.length-2]=='H')return -1;
+     for(let i=1;i<chars.length-1;i++){
+      var ch=chars[i];
+      var previousCh=chars[i-1];
+      var nextCh=chars[i+1];
+      if(ch=='H'&& previousCh!='.' && nextCh!='.')return -1;
+     } 
+     if(chars[0]=='H' && chars[1]=='.'){
+      total++;  
+      chars[1]='B';
+     }
+     for(let i=1;i<chars.length-1;i++){
+      var ch=chars[i];
+      var prevCh=chars[i-1];
+      var nextCh=chars[i+1];
+      if(ch=='B' || prevCh=='B')continue;
+      if(ch=='H'){
+       if(prevCh=='.' && nextCh=='H'){
+        total++;
+        chars[i-1]='B';
+       }else if(nextCh=='.'){
+        total++;
+        chars[i+1]='B';
+       }
+      }     
+     }
+     if(chars[chars.length-1]=='H' && chars[chars.length-2]=='.'){
+      total++;  
+      chars[chars.length-2]='B';
+     }
+      return total;        
+};
