@@ -1,0 +1,44 @@
+public class Solution {
+    public int MinimumBuckets(string hamsters) {
+     char []chars=new char[hamsters.Length];
+     for(int i=0;i<hamsters.Length;i++)chars[i]=hamsters[i];
+     if(chars.Length==1){
+       if(chars[0]=='H')  return -1;
+       else return 0;
+     }      
+     int total=0;
+     if(chars[0]=='H' && chars[1]=='H')return -1;
+     if(chars[hamsters.Length-1]=='H'
+         && chars[hamsters.Length-2]=='H')return -1;
+     for(int i=1;i<chars.Length-1;i++){
+      char ch=chars[i];
+      char previousCh=chars[i-1];
+      char nextCh=chars[i+1];
+      if(ch=='H'&& previousCh!='.' && nextCh!='.')return -1;
+     } 
+     if(chars[0]=='H' && chars[1]=='.'){
+      total++;  
+      chars[1]='B';
+     }
+     for(int i=1;i<chars.Length-1;i++){
+      char ch=chars[i];
+      char prevCh=chars[i-1];
+      char nextCh=chars[i+1];
+      if(ch=='B' || prevCh=='B')continue;
+      if(ch=='H'){
+       if(prevCh=='.' && nextCh=='H'){
+        total++;
+        chars[i-1]='B';
+       }else if(nextCh=='.'){
+        total++;
+        chars[i+1]='B';
+       }
+      }     
+     }
+     if(chars[chars.Length-1]=='H' && chars[chars.Length-2]=='.'){
+      total++;  
+      chars[chars.Length-2]='B';
+     }
+      return total;   
+    }
+}
