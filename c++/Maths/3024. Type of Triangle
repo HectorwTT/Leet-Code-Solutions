@@ -1,0 +1,17 @@
+class Solution {
+public:
+    string triangleType(vector<int>& nums) {
+      int sizeA=nums[0];
+      int sizeB=nums[1];
+      int sizeC=nums[2];
+      unordered_map<int,int> map;
+      if(sizeA>=sizeB+sizeC || sizeB>=sizeA+sizeC || sizeC>=sizeA+sizeB ) return "none";
+      for(int i=0;i<nums.size();i++){
+       if(map.find(nums[i])==map.end())map[nums[i]]=1;
+       else map[nums[i]]=map[nums[i]]+1; 
+      }
+      if(map.size()==1)return "equilateral";
+      else if(map.size()==2)return "isosceles";
+      else return "scalene";       
+    }
+};
