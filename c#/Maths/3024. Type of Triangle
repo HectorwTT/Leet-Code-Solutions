@@ -1,0 +1,16 @@
+public class Solution {
+    public string TriangleType(int[] nums) {
+      int sizeA=nums[0];
+      int sizeB=nums[1];
+      int sizeC=nums[2];
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      if(sizeA>=sizeB+sizeC || sizeB>=sizeA+sizeC || sizeC>=sizeA+sizeB ) return "none";
+      for(int i=0;i<nums.Length;i++){
+       if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+       else map[nums[i]]=map[nums[i]]+1; 
+      }
+      if(map.Count==1)return "equilateral";
+      else if(map.Count==2)return "isosceles";
+      else return "scalene";    
+    }
+}
