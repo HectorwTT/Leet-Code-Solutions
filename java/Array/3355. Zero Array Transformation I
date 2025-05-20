@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isZeroArray(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int[] freq = new int[n + 1]; // for prefix sums
+
+        // Build difference array for queries coverage
+        for (int[] q : queries) {
+            freq[q[0]] += 1;
+            if (q[1] + 1 < n) freq[q[1] + 1] -= 1;
+        }
+
+        // Prefix sum to get coverage count per index
+        for (int i = 1; i < n; i++) {
+            freq[i] += freq[i - 1];
+        }
+
+        // Check if each nums[i] can be reduced to zero
+        for (int i = 0; i < n; i++) {
+            if (freq[i] < nums[i]) return false;
+        }
+        return true;
+    }
+}
