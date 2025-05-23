@@ -1,0 +1,38 @@
+#include <vector>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+class Solution {
+public:
+    int longestStrChain(vector<string>& words) {
+        sort(words.begin(), words.end(), [](const string& a, const string& b) {
+            return a.length() < b.length();
+        });
+
+        int n = words.size();
+        vector<int> lengths(n, 1);
+        int maxLen = 1;
+
+        for (int i = 1; i < n; ++i) {
+            for (int j = 0; j < i; ++j) {
+                if (words[j].length() + 1 != words[i].length()) continue;
+
+                if (hasOneLetterAdded(words[j], words[i]) && lengths[i] <= lengths[j]) {
+                    lengths[i] = lengths[j] + 1;
+                    maxLen = max(maxLen, lengths[i]);
+                }
+            }
+        }
+        return maxLen;
+    }
+
+private:
+    bool hasOneLetterAdded(const string& shorter, const string& longer) {
+        for (int i = 0; i < longer.length(); ++i) {
+            string candidate = longer.substr(0, i) + longer.substr(i + 1);
+            if (candidate == shorter) return true;
+        }
+        return false;
+    }
+};
