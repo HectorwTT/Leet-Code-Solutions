@@ -1,0 +1,55 @@
+class Solution {
+    public boolean validPartition(int[] nums) {
+      boolean []  twoEqualFromBehind=new boolean[nums.length];
+      boolean []  threeEqualFromBehind=new boolean[nums.length];
+      boolean []  threeConsecutiveFromBehind=new boolean[nums.length];
+      boolean []  twoEqualFromFront=new boolean[nums.length];
+      boolean []  threeEqualFromFront=new boolean[nums.length];
+      boolean []  threeConsecutiveFromFront=new boolean[nums.length];
+      boolean [] partitionsFromFront=new boolean[nums.length];
+      boolean [] partitionsFromBehind=new boolean[nums.length];
+      for(int i=1;i<nums.length;i++){
+       if(i==1){
+        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
+       }else if(i>=2){
+        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
+        if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
+        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
+       } 
+      }
+      for(int i=nums.length-2;i>=0;i--){
+       if(i==nums.length-2){
+        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true; 
+       }else if(i<=nums.length-3){
+        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true;
+        if(nums[i]==nums[i+1] && nums[i+2]==nums[i+1])threeEqualFromBehind[i]=true;
+        if(nums[i+1]==nums[i]+1 && nums[i+2]==nums[i+1]+1)threeConsecutiveFromBehind[i]=true;
+       } 
+      }
+      for(int i=1;i<nums.length;i++){
+       if(i==1) partitionsFromFront[i]=twoEqualFromFront[i];
+       else if(i==2){
+        partitionsFromFront[i]=(threeConsecutiveFromFront[i])||(threeEqualFromFront[i]);
+       }else{
+        partitionsFromFront[i]=(twoEqualFromFront[i]&& partitionsFromFront[i-2])
+                             ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
+                             ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
+       } 
+      }
+      for(int i=nums.length-2;i>=0;i--){
+       if(i==nums.length-2){
+        partitionsFromBehind[i]=twoEqualFromBehind[i];
+       }else if(i==nums.length-3){
+        partitionsFromBehind[i]=(threeConsecutiveFromBehind[i])||(threeEqualFromBehind[i]);
+       }else{
+        partitionsFromBehind[i]=(twoEqualFromBehind[i]&& partitionsFromBehind[i+2])
+                             ||(threeEqualFromBehind[i]&&partitionsFromBehind[i+3])
+                             ||(threeConsecutiveFromBehind[i]&& partitionsFromBehind[i+3]);
+       } 
+      }
+      for(int i=1;i<nums.length-2;i++){
+        if(partitionsFromFront[i] && partitionsFromBehind[i+1])return true;
+      }
+      return partitionsFromFront[nums.length-1];
+    }
+}
