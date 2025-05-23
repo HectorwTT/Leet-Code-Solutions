@@ -1,0 +1,31 @@
+public class Solution {
+    public int LongestStrChain(string[] words) {
+        // Sort words by length
+        Array.Sort(words, (s1, s2) => s1.Length.CompareTo(s2.Length));
+
+        int[] lengths = new int[words.Length];
+        Array.Fill(lengths, 1);
+        int maxLength = 1;
+
+        for (int i = 1; i < words.Length; i++) {
+            for (int j = 0; j < i; j++) {
+                if (words[j].Length + 1 != words[i].Length) continue;
+
+                if (HasOneLetterAdded(words[j], words[i]) && lengths[i] <= lengths[j]) {
+                    lengths[i] = lengths[j] + 1;
+                    maxLength = Math.Max(maxLength, lengths[i]);
+                }
+            }
+        }
+
+        return maxLength;
+    }
+
+    private bool HasOneLetterAdded(string shorter, string longer) {
+        for (int i = 0; i < longer.Length; i++) {
+            string candidate = longer.Substring(0, i) + longer.Substring(i + 1);
+            if (candidate.Equals(shorter)) return true;
+        }
+        return false;
+    }
+}
