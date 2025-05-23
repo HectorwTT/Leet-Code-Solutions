@@ -1,0 +1,37 @@
+class Solution {
+    public int longestStrChain(String[] words) {
+      Arrays.sort(words, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                if (s1.length() != s2.length()) {
+                    return Integer.compare(s1.length(), s2.length());
+                } else {
+                    return s1.compareTo(s2);
+                }
+            }
+        }); 
+     int [] lengths= new int[words.length];
+     for(int i=0;i<lengths.length;i++)lengths[i]=1;
+     for(int i=1;i<words.length;i++){
+      if(words[i].length()==1) continue; 
+      for(int j=0;j<i;j++){
+       if(words[j].length()+1!=words[i].length())continue; 
+       if(hasOneLetterAdded(words[j],words[i])      
+       && lengths[i]<=lengths[j]) lengths[i]=lengths[j]+1;
+      }
+     }
+     Arrays.sort(lengths);
+     return lengths[lengths.length-1]; 
+    }
+
+    public boolean hasOneLetterAdded(String shorter,String longer){
+     for(int i=0;i<longer.length();i++){
+      String word="";
+      if(i==0)word=longer.substring(i+1);
+      else if(i==longer.length()-1)word=longer.substring(0,i);
+      else word=longer.substring(0,i)+longer.substring(i+1);
+      if(word.equals(shorter))return true;  
+     }    
+     return false;
+    } 
+}
