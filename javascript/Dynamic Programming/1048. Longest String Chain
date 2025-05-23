@@ -1,0 +1,26 @@
+var longestStrChain = function(words) {
+    words.sort((a, b) => a.length - b.length);
+
+    let lengths = new Array(words.length).fill(1);
+    let maxLen = 1;
+
+    for (let i = 1; i < words.length; i++) {
+        for (let j = 0; j < i; j++) {
+            if (words[j].length + 1 !== words[i].length) continue;
+            if (hasOneLetterAdded(words[j], words[i]) && lengths[i] <= lengths[j]) {
+                lengths[i] = lengths[j] + 1;
+                maxLen = Math.max(maxLen, lengths[i]);
+            }
+        }
+    }
+
+    return maxLen;
+};
+
+function hasOneLetterAdded(shorter, longer) {
+    for (let i = 0; i < longer.length; i++) {
+        let candidate = longer.slice(0, i) + longer.slice(i + 1);
+        if (candidate === shorter) return true;
+    }
+    return false;
+}
