@@ -1,0 +1,28 @@
+class Solution {
+    static final int MOD = 1_000_000_007;
+    public int lengthAfterTransformations(String s, int t) {
+     // dp[c][j] = length of result of transforming character c (0-based for 'a'-'z') j times
+        int[][] dp = new int[26][t + 1];
+
+        // Base case: 0 transformations => length is 1
+        for (int c = 0; c < 26; c++) {
+            dp[c][0] = 1;
+        }
+
+        for (int j = 1; j <= t; j++) {
+            for (int c = 0; c < 25; c++) {
+                dp[c][j] = dp[c + 1][j - 1]; // non-'z' case
+            }
+            // 'z' case: becomes "ab"
+            dp[25][j] = (dp[0][j - 1] + dp[1][j - 1]) % MOD;
+        }
+
+        long result = 0;
+        for (char ch : s.toCharArray()) {
+            int idx = ch - 'a';
+            result = (result + dp[idx][t]) % MOD;
+        }
+
+        return (int) result;   
+    }
+}
