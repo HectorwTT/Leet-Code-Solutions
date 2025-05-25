@@ -1,0 +1,8 @@
+var minCuttingCost = function(n, m, k) {
+      if(m<=k && n<=k ) return 0;
+     else if(m==k)return (n-k)*k; 
+     else if(n==k)return (m-k)*k;
+     else if(n<k && m>k) return (m-k)*k;
+     else if(m<k && n>k) return (n-k)*k;
+     else return 0;   
+};
