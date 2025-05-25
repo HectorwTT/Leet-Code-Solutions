@@ -1,0 +1,8 @@
+long long minCuttingCost(int n, int m, int k) {
+     if(m<=k && n<=k ) return 0;
+     else if(m==k)return 1L*(n-k)*k; 
+     else if(n==k)return 1L*(m-k)*k;
+     else if(n<k && m>k) return 1L*(m-k)*k;
+     else if(m<k && n>k) return 1L*(n-k)*k;
+     else return 0;   
+}
