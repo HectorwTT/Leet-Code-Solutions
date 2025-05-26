@@ -1,31 +1,51 @@
 public class Solution {
     public int LongestStrChain(string[] words) {
-        // Sort words by length
-        Array.Sort(words, (s1, s2) => s1.Length.CompareTo(s2.Length));
+     Array.Sort(words, (s1, s2) => s1.Length.CompareTo(s2.Length));
+     Dictionary<int,IList<string>> wordsPerLength=new Dictionary<int,IList<string>>();
+     Dictionary<string,int> wordIndexes=new Dictionary<string,int>();   
+     int [] lengths= new int[words.Length];
+     int maxLength=1;
+     for(int i=0;i<lengths.Length;i++){
+        lengths[i]=1;
+        if(!wordsPerLength.ContainsKey(words[i].Length)){
+          IList<string> wordsList=new List<string>();
+          wordsList.Add(words[i]);
+          wordsPerLength[words[i].Length]=wordsList;  
+        }else{
+          IList<string> wordsList=wordsPerLength[words[i].Length];
+          wordsList.Add(words[i]);
+          wordsPerLength[words[i].Length]=wordsList;   
+        }
+        if(!wordIndexes.ContainsKey(words[i]))wordIndexes[words[i]]=i;
+        else wordIndexes[words[i]]=i;
+     }  
+     for(int i=1;i<words.Length;i++){
+      if(words[i].Length==1) continue; 
+      if(!wordsPerLength.ContainsKey(words[i].Length-1))continue;
+      IList<string> wordsList=wordsPerLength[words[i].Length-1];      
+      for(int j=0;j<wordsList.Count;j++){
+       String word=wordsList[j];
+       int index=wordIndexes[word]; 
+       if(IsSubsequence(words[index],words[i])      
+       &&   lengths[i]<=lengths[index]) lengths[i]=lengths[index]+1;
+      }
+      maxLength=Math.Max(maxLength,lengths[i]);
+     }     
+     return maxLength; 
+    }        
+    
 
-        int[] lengths = new int[words.Length];
-        Array.Fill(lengths, 1);
-        int maxLength = 1;
-
-        for (int i = 1; i < words.Length; i++) {
-            for (int j = 0; j < i; j++) {
-                if (words[j].Length + 1 != words[i].Length) continue;
-
-                if (HasOneLetterAdded(words[j], words[i]) && lengths[i] <= lengths[j]) {
-                    lengths[i] = lengths[j] + 1;
-                    maxLength = Math.Max(maxLength, lengths[i]);
-                }
+    public bool IsSubsequence(string s, string t) {
+        int index=0;
+        if(s.Length==0) return true;
+        for(int i=0;i<t.Length;i++){
+            char tch = t[i];
+            char sch= s[index];
+            if(tch==sch) {
+                if(index==s.Length-1)return true;
+                index++;
             }
         }
-
-        return maxLength;
-    }
-
-    private bool HasOneLetterAdded(string shorter, string longer) {
-        for (int i = 0; i < longer.Length; i++) {
-            string candidate = longer.Substring(0, i) + longer.Substring(i + 1);
-            if (candidate.Equals(shorter)) return true;
-        }
         return false;
-    }
+    } 
 }
