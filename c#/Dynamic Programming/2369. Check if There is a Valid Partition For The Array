@@ -1,29 +1,17 @@
 public class Solution {
     public bool ValidPartition(int[] nums) {
-      bool []  twoEqualFromBehind=new bool[nums.Length];
-      bool []  threeEqualFromBehind=new bool[nums.Length];
-      bool []  threeConsecutiveFromBehind=new bool[nums.Length];
       bool []  twoEqualFromFront=new bool[nums.Length];
       bool []  threeEqualFromFront=new bool[nums.Length];
       bool []  threeConsecutiveFromFront=new bool[nums.Length];
-      bool [] partitionsFromFront=new bool[nums.Length];
-      bool [] partitionsFromBehind=new bool[nums.Length];
+      bool [] partitionsFromFront=new bool[nums.Length];    
       for(int i=1;i<nums.Length;i++){
        if(i==1){
         if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
        }else if(i>=2){
         if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
         if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
-        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
-       } 
-      }
-      for(int i=nums.Length-2;i>=0;i--){
-       if(i==nums.Length-2){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true; 
-       }else if(i<=nums.Length-3){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true;
-        if(nums[i]==nums[i+1] && nums[i+2]==nums[i+1])threeEqualFromBehind[i]=true;
-        if(nums[i+1]==nums[i]+1 && nums[i+2]==nums[i+1]+1)threeConsecutiveFromBehind[i]=true;
+        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)
+         threeConsecutiveFromFront[i]=true;
        } 
       }
       for(int i=1;i<nums.Length;i++){
@@ -35,21 +23,7 @@ public class Solution {
                              ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
                              ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
        } 
-      }
-      for(int i=nums.Length-2;i>=0;i--){
-       if(i==nums.Length-2){
-        partitionsFromBehind[i]=twoEqualFromBehind[i];
-       }else if(i==nums.Length-3){
-        partitionsFromBehind[i]=(threeConsecutiveFromBehind[i])||(threeEqualFromBehind[i]);
-       }else{
-        partitionsFromBehind[i]=(twoEqualFromBehind[i]&& partitionsFromBehind[i+2])
-                             ||(threeEqualFromBehind[i]&&partitionsFromBehind[i+3])
-                             ||(threeConsecutiveFromBehind[i]&& partitionsFromBehind[i+3]);
-       } 
-      }
-      for(int i=1;i<nums.Length-2;i++){
-        if(partitionsFromFront[i] && partitionsFromBehind[i+1])return true;
-      }
+      }  
       return partitionsFromFront[nums.Length-1];   
     }
 }
