@@ -1,21 +1,13 @@
 var validPartition = function(nums) {
-      const twoEqualFromBehind=[];
-      const  threeEqualFromBehind=[];
-      const  threeConsecutiveFromBehind=[];
       const twoEqualFromFront=[];
       const threeEqualFromFront=[];
       const  threeConsecutiveFromFront=[];
-      const partitionsFromFront=[];
-      const partitionsFromBehind=[];
+      const partitionsFromFront=[];    
       for(let i=0;i<nums.length;i++){
-       twoEqualFromBehind.push(false);
-       threeEqualFromBehind.push(false);
-       threeConsecutiveFromBehind.push(false);
        twoEqualFromFront.push(false);
        threeEqualFromFront.push(false);
        threeConsecutiveFromFront.push(false);
-       partitionsFromFront.push(false);
-       partitionsFromBehind.push(false); 
+       partitionsFromFront.push(false);      
       }
       for(let i=1;i<nums.length;i++){
        if(i==1){
@@ -24,15 +16,6 @@ var validPartition = function(nums) {
         if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
         if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
         if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
-       } 
-      }
-      for(let i=nums.length-2;i>=0;i--){
-       if(i==nums.length-2){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true; 
-       }else if(i<=nums.length-3){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true;
-        if(nums[i]==nums[i+1] && nums[i+2]==nums[i+1])threeEqualFromBehind[i]=true;
-        if(nums[i+1]==nums[i]+1 && nums[i+2]==nums[i+1]+1)threeConsecutiveFromBehind[i]=true;
        } 
       }
       for(let i=1;i<nums.length;i++){
@@ -44,20 +27,6 @@ var validPartition = function(nums) {
                              ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
                              ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
        } 
-      }
-      for(let i=nums.length-2;i>=0;i--){
-       if(i==nums.length-2){
-        partitionsFromBehind[i]=twoEqualFromBehind[i];
-       }else if(i==nums.length-3){
-        partitionsFromBehind[i]=(threeConsecutiveFromBehind[i])||(threeEqualFromBehind[i]);
-       }else{
-        partitionsFromBehind[i]=(twoEqualFromBehind[i]&& partitionsFromBehind[i+2])
-                             ||(threeEqualFromBehind[i]&&partitionsFromBehind[i+3])
-                             ||(threeConsecutiveFromBehind[i]&& partitionsFromBehind[i+3]);
-       } 
-      }
-      for(let i=1;i<nums.length-2;i++){
-        if(partitionsFromFront[i] && partitionsFromBehind[i+1])return true;
-      }
+      }      
       return partitionsFromFront[nums.length-1];   
 };
