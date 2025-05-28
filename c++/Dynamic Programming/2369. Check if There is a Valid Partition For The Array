@@ -1,23 +1,15 @@
 class Solution {
 public:
     bool validPartition(vector<int>& nums) {
-      vector<bool> twoEqualFromBehind;
-      vector<bool>  threeEqualFromBehind;
-      vector<bool>  threeConsecutiveFromBehind;
       vector<bool> twoEqualFromFront;
       vector<bool>threeEqualFromFront;
       vector<bool>  threeConsecutiveFromFront;
-      vector<bool> partitionsFromFront;
-      vector<bool> partitionsFromBehind;
+      vector<bool> partitionsFromFront;   
       for(int i=0;i<nums.size();i++){
-       twoEqualFromBehind.push_back(false);
-       threeEqualFromBehind.push_back(false);
-       threeConsecutiveFromBehind.push_back(false);
        twoEqualFromFront.push_back(false);
        threeEqualFromFront.push_back(false);
        threeConsecutiveFromFront.push_back(false);
-       partitionsFromFront.push_back(false);
-       partitionsFromBehind.push_back(false); 
+       partitionsFromFront.push_back(false);  
       }
       for(int i=1;i<nums.size();i++){
        if(i==1){
@@ -27,16 +19,7 @@ public:
         if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
         if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
        } 
-      }
-      for(int i=nums.size()-2;i>=0;i--){
-       if(i==nums.size()-2){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true; 
-       }else if(i<=nums.size()-3){
-        if(nums[i]==nums[i+1])twoEqualFromBehind[i]=true;
-        if(nums[i]==nums[i+1] && nums[i+2]==nums[i+1])threeEqualFromBehind[i]=true;
-        if(nums[i+1]==nums[i]+1 && nums[i+2]==nums[i+1]+1)threeConsecutiveFromBehind[i]=true;
-       } 
-      }
+      }      
       for(int i=1;i<nums.size();i++){
        if(i==1) partitionsFromFront[i]=twoEqualFromFront[i];
        else if(i==2){
@@ -46,20 +29,6 @@ public:
                              ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
                              ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
        } 
-      }
-      for(int i=nums.size()-2;i>=0;i--){
-       if(i==nums.size()-2){
-        partitionsFromBehind[i]=twoEqualFromBehind[i];
-       }else if(i==nums.size()-3){
-        partitionsFromBehind[i]=(threeConsecutiveFromBehind[i])||(threeEqualFromBehind[i]);
-       }else{
-        partitionsFromBehind[i]=(twoEqualFromBehind[i]&& partitionsFromBehind[i+2])
-                             ||(threeEqualFromBehind[i]&&partitionsFromBehind[i+3])
-                             ||(threeConsecutiveFromBehind[i]&& partitionsFromBehind[i+3]);
-       } 
-      }
-      for(int i=1;i<nums.size()-2;i++){
-        if(partitionsFromFront[i] && partitionsFromBehind[i+1])return true;
       }
       return partitionsFromFront[nums.size()-1];      
     }
