@@ -1,0 +1,33 @@
+class Solution {
+    public int longestPalindrome(String word1, String word2) {
+        String s = word1 + word2;
+        int n = s.length();
+        int[][] dp = new int[n][n];
+        int res = 0;
+        int len1 = word1.length();
+
+        // Base case: single characters
+        for (int i = 0; i < n; i++) {
+            dp[i][i] = 1;
+        }
+
+        // Fill dp[i][j] = longest palindrome in s[i..j]
+        for (int len = 2; len <= n; len++) {
+            for (int i = 0; i <= n - len; i++) {
+                int j = i + len - 1;
+                if (s.charAt(i) == s.charAt(j)) {
+                    dp[i][j] = 2 + (i + 1 <= j - 1 ? dp[i + 1][j - 1] : 0);
+
+                    // Ensure one char from word1 and one from word2
+                    if (i < len1 && j >= len1) {
+                        res = Math.max(res, dp[i][j]);
+                    }
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
+            }
+        }
+
+        return res;
+    }
+}
