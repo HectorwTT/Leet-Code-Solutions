@@ -1,29 +1,21 @@
 public class Solution {
     public bool ValidPartition(int[] nums) {
-      bool []  twoEqualFromFront=new bool[nums.Length];
-      bool []  threeEqualFromFront=new bool[nums.Length];
-      bool []  threeConsecutiveFromFront=new bool[nums.Length];
-      bool [] partitionsFromFront=new bool[nums.Length];    
-      for(int i=1;i<nums.Length;i++){
-       if(i==1){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-       }else if(i>=2){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-        if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
-        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)
-         threeConsecutiveFromFront[i]=true;
-       } 
-      }
-      for(int i=1;i<nums.Length;i++){
-       if(i==1) partitionsFromFront[i]=twoEqualFromFront[i];
+     bool [] hasValidPartitions=new bool[nums.Length];          
+     for(int i=1;i<nums.Length;i++){
+       if(i==1) hasValidPartitions[i]=nums[i]==nums[i-1];
        else if(i==2){
-        partitionsFromFront[i]=(threeConsecutiveFromFront[i])||(threeEqualFromFront[i]);
+        hasValidPartitions[i]=(nums[2]==nums[1] && nums[1]==nums[0])
+                              ||(nums[i]==nums[i-1]+1 && nums[i]==nums[i-2]+2);
        }else{
-        partitionsFromFront[i]=(twoEqualFromFront[i]&& partitionsFromFront[i-2])
-                             ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
-                             ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
+        hasValidPartitions[i]=(nums[i]==nums[i-1]&& hasValidPartitions[i-2])
+                             ||(nums[i]==nums[i-1]
+                              && nums[i]==nums[i-2] 
+                              && hasValidPartitions[i-3])
+                             ||(nums[i]==nums[i-1]+1
+                                && nums[i-1]==nums[i-2]+1
+                                && hasValidPartitions[i-3]);
        } 
-      }  
-      return partitionsFromFront[nums.Length-1];   
+      }      
+      return hasValidPartitions[nums.Length-1];   
     }
 }
