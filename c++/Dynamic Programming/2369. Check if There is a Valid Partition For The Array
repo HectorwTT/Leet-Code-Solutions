@@ -1,35 +1,22 @@
 class Solution {
 public:
     bool validPartition(vector<int>& nums) {
-      vector<bool> twoEqualFromFront;
-      vector<bool>threeEqualFromFront;
-      vector<bool>  threeConsecutiveFromFront;
-      vector<bool> partitionsFromFront;   
-      for(int i=0;i<nums.size();i++){
-       twoEqualFromFront.push_back(false);
-       threeEqualFromFront.push_back(false);
-       threeConsecutiveFromFront.push_back(false);
-       partitionsFromFront.push_back(false);  
-      }
-      for(int i=1;i<nums.size();i++){
-       if(i==1){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-       }else if(i>=2){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-        if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
-        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
+     vector<bool> hasValidPartitions(nums.size(),false);          
+     for(int i=1;i<nums.size();i++){
+       if(i==1) hasValidPartitions[i]=nums[i]==nums[i-1];
+       else if(i==2){
+        hasValidPartitions[i]=(nums[2]==nums[1] && nums[1]==nums[0])
+                              ||(nums[i]==nums[i-1]+1 && nums[i]==nums[i-2]+2);
+       }else{
+        hasValidPartitions[i]=(nums[i]==nums[i-1]&& hasValidPartitions[i-2])
+                             ||(nums[i]==nums[i-1]
+                              && nums[i]==nums[i-2] 
+                              && hasValidPartitions[i-3])
+                             ||(nums[i]==nums[i-1]+1
+                                && nums[i-1]==nums[i-2]+1
+                                && hasValidPartitions[i-3]);
        } 
       }      
-      for(int i=1;i<nums.size();i++){
-       if(i==1) partitionsFromFront[i]=twoEqualFromFront[i];
-       else if(i==2){
-        partitionsFromFront[i]=(threeConsecutiveFromFront[i])||(threeEqualFromFront[i]);
-       }else{
-        partitionsFromFront[i]=(twoEqualFromFront[i]&& partitionsFromFront[i-2])
-                             ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
-                             ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
-       } 
-      }
-      return partitionsFromFront[nums.size()-1];      
+      return hasValidPartitions[nums.size()-1];  
     }
 };
