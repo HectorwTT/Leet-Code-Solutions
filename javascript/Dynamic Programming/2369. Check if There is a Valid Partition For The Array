@@ -1,32 +1,16 @@
-var validPartition = function(nums) {
-      const twoEqualFromFront=[];
-      const threeEqualFromFront=[];
-      const  threeConsecutiveFromFront=[];
-      const partitionsFromFront=[];    
-      for(let i=0;i<nums.length;i++){
-       twoEqualFromFront.push(false);
-       threeEqualFromFront.push(false);
-       threeConsecutiveFromFront.push(false);
-       partitionsFromFront.push(false);      
-      }
-      for(let i=1;i<nums.length;i++){
-       if(i==1){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-       }else if(i>=2){
-        if(nums[i]==nums[i-1])twoEqualFromFront[i]=true; 
-        if(nums[i]==nums[i-1] && nums[i-2]==nums[i-1])threeEqualFromFront[i]=true;
-        if(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1)threeConsecutiveFromFront[i]=true;
+var validPartition = function(nums){      
+ const hasValidPartitions=[];    
+ for(let i=0;i<nums.length;i++)hasValidPartitions.push(false);      
+ for(let i=1;i<nums.length;i++){
+  if(i==1) hasValidPartitions[i]=nums[i]==nums[i-1];
+  else if(i==2){
+        hasValidPartitions[i]=(nums[2]==nums[1] && nums[1]==nums[0])
+                              ||(nums[i]==nums[i-1]+1 && nums[i]==nums[i-2]+2);
+  }else{
+   hasValidPartitions[i]=(nums[i]==nums[i-1]&& hasValidPartitions[i-2])
+       ||(nums[i]==nums[i-1] && nums[i]==nums[i-2] && hasValidPartitions[i-3])
+       ||(nums[i]==nums[i-1]+1 && nums[i-1]==nums[i-2]+1 && hasValidPartitions[i-3]);
        } 
-      }
-      for(let i=1;i<nums.length;i++){
-       if(i==1) partitionsFromFront[i]=twoEqualFromFront[i];
-       else if(i==2){
-        partitionsFromFront[i]=(threeConsecutiveFromFront[i])||(threeEqualFromFront[i]);
-       }else{
-        partitionsFromFront[i]=(twoEqualFromFront[i]&& partitionsFromFront[i-2])
-                             ||(threeEqualFromFront[i]&&partitionsFromFront[i-3])
-                             ||(threeConsecutiveFromFront[i]&& partitionsFromFront[i-3]);
-       } 
-      }      
-      return partitionsFromFront[nums.length-1];   
+  }      
+  return hasValidPartitions[nums.length-1];  
 };
