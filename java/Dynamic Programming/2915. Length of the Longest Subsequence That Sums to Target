@@ -1,0 +1,40 @@
+class Solution {
+    public int lengthOfLongestSubsequence(List<Integer> nums, int target) {
+        // Early pruning: if total sum < target, no solution
+        int totalSum = nums.stream().mapToInt(Integer::intValue).sum();
+        if (totalSum < target) return -1;
+
+        int n = nums.size();
+        int[][] dp = new int[n][target + 1];
+
+        // Initialize dp with -1 (meaning no subsequence to form that sum)
+        for (int i = 0; i < n; i++) {
+            Arrays.fill(dp[i], -1);
+        }
+
+        // Base case: subsequence length 0 can make sum 0
+        for (int i = 0; i < n; i++) {
+            dp[i][0] = 0;
+        }
+
+        // First row: only one element nums[0]
+        if (nums.get(0) <= target) {
+            dp[0][nums.get(0)] = 1;
+        }
+
+        for (int i = 1; i < n; i++) {
+            int num = nums.get(i);
+            for (int sum = 0; sum <= target; sum++) {
+                // Option 1: do not take nums[i]
+                dp[i][sum] = dp[i-1][sum];
+
+                // Option 2: take nums[i], if possible
+                if (sum >= num && dp[i-1][sum - num] != -1) {
+                    dp[i][sum] = Math.max(dp[i][sum], dp[i-1][sum - num] + 1);
+                }
+            }
+        }
+
+        return dp[n - 1][target];
+    }
+}
