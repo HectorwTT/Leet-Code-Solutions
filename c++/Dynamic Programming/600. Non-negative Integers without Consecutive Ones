@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int findIntegers(int n) {
+        vector<int> dp(32,0);  // dp[i] = number of valid binary strings of length i without consecutive ones
+        dp[0] = 1;  // base case: empty string
+        dp[1] = 2;  // "0", "1"
+        
+        for (int i = 2; i < 32; i++) {
+            dp[i] = dp[i - 1] + dp[i - 2];
+        }
+
+        int res = 0;
+        int prevBit = 0;
+        
+        for (int i = 30; i >= 0; i--) {
+            if ((n & (1 << i)) != 0) {
+                res += dp[i];
+                if (prevBit == 1) {
+                    return res; // found "11", stop
+                }
+                prevBit = 1;
+            } else {
+                prevBit = 0;
+            }
+        }
+
+        return res + 1; // include n itself if it has no consecutive 1s    
+    }
+};
