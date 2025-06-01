@@ -1,0 +1,28 @@
+class Solution {
+    public int maximumLength(int[] nums, int k) {
+        int n = nums.length;
+        int[][] dp = new int[n][k + 1];
+        int result = 1;
+
+        for (int i = 0; i < n; ++i) {
+            // Base case: every element can start a new subsequence
+            Arrays.fill(dp[i], 1);
+
+            for (int j = 0; j < i; ++j) {
+                for (int h = 0; h <= k; ++h) {
+                    if (nums[i] == nums[j]) {
+                        dp[i][h] = Math.max(dp[i][h], dp[j][h] + 1);
+                    } else if (h > 0) {
+                        dp[i][h] = Math.max(dp[i][h], dp[j][h - 1] + 1);
+                    }
+                }
+            }
+
+            for (int h = 0; h <= k; ++h) {
+                result = Math.max(result, dp[i][h]);
+            }
+        }
+
+        return result;
+    }
+}
