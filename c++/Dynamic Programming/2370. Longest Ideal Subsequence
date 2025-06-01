@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int longestIdealString(string s, int k) {
+     vector<int>lengths(s.size(),1);
+     int maxLength=1;
+     unordered_map<char,int> map;
+     map[s[0]]=0;
+     for(int i=1;i<s.size();i++){
+      char ch=s[i];
+      int chVal=ch; 
+      int maxChVal=chVal+k;
+      int minChVal=chVal-k;
+      int currentChVal=chVal;
+      while(minChVal<=currentChVal && currentChVal>=97){
+        char currentCh=(char)currentChVal;
+        if(map.find(currentCh)==map.end()){
+         currentChVal--;
+         continue;   
+        }
+        int index=map[currentCh];
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal--;
+      }
+      currentChVal=chVal+1;
+       while(maxChVal>=currentChVal && currentChVal<=122){
+        char currentCh=(char)currentChVal;
+        if(map.find(currentCh)==map.end()){
+         currentChVal++;
+         continue;   
+        }
+        int index=map[currentCh];
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal++;
+      }
+      maxLength=std::max(lengths[i],maxLength);
+      if(map.find(ch)==map.end())map[ch]=i;
+      else map[ch]=i;
+     }
+      return maxLength;      
+    }
+};
