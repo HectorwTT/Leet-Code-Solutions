@@ -1,0 +1,41 @@
+class Solution {
+    public int longestIdealString(String s, int k) {
+     int [] lengths= new int[s.length()];
+     Arrays.fill(lengths,1);
+     int maxLength=1;
+     HashMap<Character,Integer> map=new HashMap<>();
+     map.put(s.charAt(0),0);
+     for(int i=1;i<s.length();i++){
+      char ch=s.charAt(i);
+      int chVal=ch; 
+      int maxChVal=chVal+k;
+      int minChVal=chVal-k;
+      int currentChVal=chVal;
+      while(minChVal<=currentChVal && currentChVal>=97){
+        char currentCh=(char)currentChVal;
+        if(!map.containsKey(currentCh)){
+         currentChVal--;
+         continue;   
+        }
+        int index=map.get(currentCh);
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal--;
+      }
+      currentChVal=chVal+1;
+       while(maxChVal>=currentChVal && currentChVal<=122){
+        char currentCh=(char)currentChVal;
+        if(!map.containsKey(currentCh)){
+         currentChVal++;
+         continue;   
+        }
+        int index=map.get(currentCh);
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal++;
+      }
+      maxLength=Math.max(lengths[i],maxLength);
+      if(!map.containsKey(ch))map.put(ch,i);
+      else map.replace(ch,i);
+     }
+      return maxLength; 
+    }
+}
