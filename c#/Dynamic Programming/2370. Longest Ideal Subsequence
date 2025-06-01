@@ -1,0 +1,41 @@
+public class Solution {
+    public int LongestIdealString(string s, int k) {
+     int [] lengths= new int[s.Length];
+     Array.Fill(lengths,1);
+     int maxLength=1;
+     Dictionary<char,int> map=new Dictionary<char,int>();
+     map[s[0]]=0;
+     for(int i=1;i<s.Length;i++){
+      char ch=s[i];
+      int chVal=ch; 
+      int maxChVal=chVal+k;
+      int minChVal=chVal-k;
+      int currentChVal=chVal;
+      while(minChVal<=currentChVal && currentChVal>=97){
+        char currentCh=(char)currentChVal;
+        if(!map.ContainsKey(currentCh)){
+         currentChVal--;
+         continue;   
+        }
+        int index=map[currentCh];
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal--;
+      }
+      currentChVal=chVal+1;
+       while(maxChVal>=currentChVal && currentChVal<=122){
+        char currentCh=(char)currentChVal;
+        if(!map.ContainsKey(currentCh)){
+         currentChVal++;
+         continue;   
+        }
+        int index=map[currentCh];
+        if(lengths[i]<=lengths[index])lengths[i]=lengths[index]+1;
+        currentChVal++;
+      }
+      maxLength=Math.Max(lengths[i],maxLength);
+      if(!map.ContainsKey(ch))map[ch]=i;
+      else map[ch]=i;
+     }
+      return maxLength;    
+    }
+}
