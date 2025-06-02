@@ -1,0 +1,30 @@
+var maximumLength = function(nums) {
+      const dp=[];
+      let numOfOdd=0;
+      let numOfEven=0;
+      let lastOddIndex=-1;
+      let lastEvenIndex=-1;
+      let maxLength=1;
+      for(let i=0;i<nums.length;i++)dp.push(1);
+      if(nums[0]%2==0){
+        numOfEven=1;
+        lastEvenIndex=0;
+      }else{
+        numOfOdd=1;
+        lastOddIndex=0;
+      }
+      for(let i=1;i<nums.length;i++){
+       if(nums[i]%2==0){
+        numOfEven++;
+        if(lastOddIndex!=-1)dp[i]=dp[lastOddIndex]+1;   
+        lastEvenIndex=i;
+       }else{
+        numOfOdd++;
+        if(lastEvenIndex!=-1)dp[i]=dp[lastEvenIndex]+1;
+        lastOddIndex=i;
+       }
+       let greaterNumber=Math.max(numOfOdd,numOfEven);
+       maxLength=Math.max(greaterNumber,dp[i]); 
+      }
+      return maxLength;    
+};
