@@ -1,0 +1,13 @@
+class Solution {
+    public String answerString(String word, int numFriends) {
+     List<String> answer=new ArrayList<>(); 
+     int n=word.length(); 
+     if(numFriends==1)return word;
+     for(int i=0;i<n;i++){
+      String substring=word.substring(i,i+Math.min(n-numFriends+1,n-i));
+      answer.add(substring);  
+     }   
+     answer.sort(null);
+     return answer.get(answer.size()-1);
+    }
+}
