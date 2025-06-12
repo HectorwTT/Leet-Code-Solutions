@@ -1,0 +1,10 @@
+class Solution {
+public:
+    int maxAdjacentDistance(vector<int>& nums) {
+     int max=std::abs(nums[0]-nums[nums.size()-1]);
+     for(int i=1;i<nums.size();i++){
+       max=std::max(std::abs(nums[i]-nums[i-1]),max); 
+     }  
+     return max;    
+    }
+};
