@@ -1,0 +1,20 @@
+class Solution {
+    public int partitionArray(int[] nums, int k) {
+      if(nums.length==1)return 1;
+      Arrays.sort(nums);
+      int count=0;  
+      int max=nums[nums.length-1];
+      int curr=nums[nums.length-1];
+      int index=nums.length-2;
+      while(index>=0){
+       curr=nums[index];
+       if(max-curr>k){
+        max=curr;
+        count++;
+       } 
+       index--;
+      }
+      count++;
+      return count;
+    }
+}
