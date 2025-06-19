@@ -1,0 +1,20 @@
+public class Solution {
+    public int PartitionArray(int[] nums, int k) {
+      if(nums.Length==1)return 1;
+      Array.Sort(nums);
+      int count=0;  
+      int max=nums[nums.Length-1];
+      int curr=nums[nums.Length-1];
+      int index=nums.Length-2;
+      while(index>=0){
+       curr=nums[index];
+       if(max-curr>k){
+        max=curr;
+        count++;
+       } 
+       index--;
+      }
+      count++;
+      return count;   
+    }
+}
