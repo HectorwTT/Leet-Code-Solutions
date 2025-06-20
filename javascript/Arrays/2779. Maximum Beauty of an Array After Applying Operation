@@ -1,0 +1,12 @@
+var maximumBeauty = function(nums, k) {
+      let max=1;
+      nums.sort((x,y)=>x-y);  
+      let start=0;
+      for(let i=0;i<nums.length;i++){
+        if(nums[i]-nums[start]>2*k){
+          max=Math.max(i-start,max);
+          while(nums[i]-nums[start]>2*k)start++;  
+        }else max=Math.max(i-start+1,max);       
+      } 
+      return max;      
+};
