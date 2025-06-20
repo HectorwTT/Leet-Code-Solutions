@@ -1,0 +1,47 @@
+public class Solution {
+    public string GenerateTag(string caption) {
+     string answer="#";
+     caption=caption.Trim();   
+     if(caption.Length==0)return answer;
+     if(caption.Length==1){
+      if(caption[0]==' ')return "#";
+      else return "#"+caption.ToLower();  
+     }     
+     if(caption[0]!=' '){
+      if(caption[0]>90)  answer+=caption[0];
+      else{
+       int firstChVal=caption[0]+32;
+       char firstCh=(char)firstChVal;
+       answer+=firstCh; 
+      }
+     }   
+     for(int i=1;i<caption.Length;i++){
+      char currentCh=caption[i];
+      char previousCh=caption[i-1];
+      if(currentCh==' ') continue; 
+      else{
+       if(previousCh==' '){
+        int currentChVal=currentCh;
+        if(currentChVal<=90)answer+=currentCh;
+        else{
+            currentChVal-=32;
+            char newCurrentCh=(char)currentChVal;
+            answer+=newCurrentCh;
+        }    
+       }else {
+         int currentChVal=currentCh;
+         if(currentChVal>90)answer+=currentCh; 
+         else{
+          currentChVal+=32;
+          char newCurrentCh=(char)currentChVal;
+          answer+=newCurrentCh;  
+         }
+
+       }
+      }
+      if(answer.Length==100)break;
+     }
+     answer=answer.Trim();
+     return answer;     
+    }
+}
