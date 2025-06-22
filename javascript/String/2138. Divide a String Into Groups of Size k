@@ -1,0 +1,27 @@
+var divideString = function(s, k, fill) {
+     let size=s.length/k;
+     let mod=s.length%k;
+     if(mod!=0)size++;
+     const answer=[];
+     for(let i=0;i<size;i++)answer.push("");
+     let index=0;
+     let count=0;
+     let word="";
+     let answerIndex=0;
+     while(index!=s.length){
+      if(count!=k){
+        word+=s[index++];
+        count++;
+      }else{
+        answer[answerIndex++]=word;
+        count=1;
+        word=""+s[index++];
+      } 
+     }
+     while(word.length!=k){
+      word+=fill;        
+     }  
+     if(answerIndex!=answer.length)answer[answerIndex]=word;
+     if(answer[answer.length-1]=="")answer.pop();
+     return answer;   
+};
