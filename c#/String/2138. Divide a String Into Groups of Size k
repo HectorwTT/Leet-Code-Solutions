@@ -1,0 +1,27 @@
+public class Solution {
+    public string[] DivideString(string s, int k, char fill) {
+     int size=s.Length/k;
+     int mod=s.Length%k;
+     if(mod!=0)size++;
+     string [] answer=new string[size];
+     int index=0;
+     int count=0;
+     string word="";
+     int answerIndex=0;
+     while(index!=s.Length){
+      if(count!=k){
+        word+=s[index++];
+        count++;
+      }else{
+        answer[answerIndex++]=word;
+        count=1;
+        word=""+s[index++];
+      } 
+     }
+     while(word.Length!=k){
+      word+=fill;        
+     }  
+     if(answerIndex!=answer.Length)answer[answerIndex]=word;
+     return answer;
+    }
+}
