@@ -1,0 +1,15 @@
+var findKDistantIndices = function(nums, key, k) {
+        const result=[];
+        for(let i=0;i<nums.length;i++){
+         for(let j=0;j<nums.length;j++){
+            if(Math.abs(i-j)<=k){
+             if(nums[j]==key){
+                result.push(i);
+                break;
+             }
+            }
+         }
+         }
+         result.sort((x,y)=>x-y);
+         return result;   
+};
