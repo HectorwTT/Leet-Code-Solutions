@@ -1,0 +1,18 @@
+class Solution {
+public:
+    vector<int> findKDistantIndices(vector<int>& nums, int key, int k) {
+        vector<int> result;
+        for(int i=0;i<nums.size();i++){
+         for(int j=0;j<nums.size();j++){
+            if(std::abs(i-j)<=k){
+             if(nums[j]==key){
+                result.push_back(i);
+                break;
+             }
+            }
+         }
+         }
+         std::sort(result.begin(),result.end());
+         return result;   
+    }
+};
