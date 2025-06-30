@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int findLHS(vector<int>& nums) {
+      unordered_map<int,int> map;
+      int max=0;     
+      for(int i=0;i<nums.size();i++){
+       if(map.find(nums[i])==map.end())map[nums[i]]=1;
+       else map[nums[i]]=map[nums[i]]+1; 
+      } 
+      for(auto key :  map){
+       if(map.find(key.first+1)!=map.end()){
+        max=std::max(max,map[key.first]+map[key.first+1]);
+       } 
+      }
+      return max;    
+    }
+};
