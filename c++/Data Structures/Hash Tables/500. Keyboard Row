@@ -1,0 +1,56 @@
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+     vector<string> answer;
+     unordered_map<char,int> firstRowMap;   
+     unordered_map<char,int> secondRowMap;   
+     unordered_map<char,int> thirdRowMap;   
+     firstRowMap['q']=1;
+     firstRowMap['w']=1;
+     firstRowMap['e']=1;
+     firstRowMap['r']=1;
+     firstRowMap['t']=1;
+     firstRowMap['y']=1;
+     firstRowMap['u']=1;
+     firstRowMap['i']=1;
+     firstRowMap['o']=1;
+     firstRowMap['p']=1;
+
+     secondRowMap['a']=1;
+     secondRowMap['s']=1;
+     secondRowMap['d']=1;
+     secondRowMap['f']=1;
+     secondRowMap['g']=1;
+     secondRowMap['h']=1;
+     secondRowMap['j']=1;
+     secondRowMap['k']=1;
+     secondRowMap['l']=1;
+     
+     thirdRowMap['z']=1;
+     thirdRowMap['x']=1;
+     thirdRowMap['c']=1;
+     thirdRowMap['v']=1;
+     thirdRowMap['b']=1;
+     thirdRowMap['n']=1;
+     thirdRowMap['m']=1;
+     for(int i=0;i<words.size();i++){
+      string word=words[i];
+      for (char &c : word) {
+        c = std::tolower(c); // convert each char to lowercase
+      }
+      int row1Count=0;
+      int row2Count=0;
+      int row3Count=0;
+      for(int j=0;j<word.size();j++){
+       char ch=word[j]; 
+       if(firstRowMap.find(ch)!=firstRowMap.end())row1Count++; 
+       else if(secondRowMap.find(ch)!=secondRowMap.end())row2Count++; 
+       else if(thirdRowMap.find(ch)!=thirdRowMap.end())row3Count++;
+      }  
+      if(row1Count==word.size() 
+          || row2Count==word.size() 
+          || row3Count==word.size() ) answer.push_back(words[i]);
+     }
+     return answer;
+    }
+};
