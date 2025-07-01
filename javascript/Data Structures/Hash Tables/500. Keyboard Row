@@ -1,0 +1,51 @@
+
+var findWords = function(words) {
+     const answer=[];
+     const firstRowMap=new Map() ;   
+     const secondRowMap=new Map();   
+     const thirdRowMap=new Map() ;   
+     firstRowMap.set('q',1);
+     firstRowMap.set('w',1);
+     firstRowMap.set('e',1);
+     firstRowMap.set('r',1);
+     firstRowMap.set('t',1);
+     firstRowMap.set('y',1);
+     firstRowMap.set('u',1);
+     firstRowMap.set('i',1);
+     firstRowMap.set('o',1);
+     firstRowMap.set('p',1);
+
+     secondRowMap.set('a',1);
+     secondRowMap.set('s',1);
+     secondRowMap.set('d',1);
+     secondRowMap.set('f',1);
+     secondRowMap.set('g',1);
+     secondRowMap.set('h',1);
+     secondRowMap.set('j',1);
+     secondRowMap.set('k',1);
+     secondRowMap.set('l',1);
+     
+     thirdRowMap.set('z',1);
+     thirdRowMap.set('x',1);
+     thirdRowMap.set('c',1);
+     thirdRowMap.set('v',1);
+     thirdRowMap.set('b',1);
+     thirdRowMap.set('n',1);
+     thirdRowMap.set('m',1);
+     for(let i=0;i<words.length;i++){
+      let word=words[i].toLowerCase();      
+      let row1Count=0;
+      let row2Count=0;
+      let row3Count=0;
+      for(let j=0;j<word.length;j++){
+       var ch=word.charAt(j); 
+       if(firstRowMap.has(ch))row1Count++; 
+       else if(secondRowMap.has(ch))row2Count++; 
+       else if(thirdRowMap.has(ch))row3Count++;
+      }  
+      if(row1Count==word.length 
+          || row2Count==word.length 
+          || row3Count==word.length ) answer.push(words[i]);
+     }
+     return answer;   
+};
