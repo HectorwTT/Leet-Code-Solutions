@@ -1,0 +1,12 @@
+class Solution {
+public:
+    int possibleStringCount(string word) {
+     int answer=1;
+     for(int i=1;i<word.size();i++){
+      char current=word[i];
+      char previous=word[i-1];
+      if(current==previous)answer++;  
+     }   
+     return answer;   
+    }
+};
