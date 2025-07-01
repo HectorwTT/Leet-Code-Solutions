@@ -1,0 +1,9 @@
+var possibleStringCount = function(word) {
+     let answer=1;
+     for(let i=1;i<word.length;i++){
+      var current=word.charAt(i);;
+      var previous=word.charAt(i-1);
+      if(current==previous)answer++;  
+     }   
+     return answer;   
+};
