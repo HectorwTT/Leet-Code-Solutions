@@ -1,0 +1,16 @@
+public class Solution {
+    public char KthCharacter(int k) {
+     string word="a";
+     while(word.Length<=k){
+      string newWord=word;  
+      for(int i=0;i<word.Length;i++){
+        char ch=word[i];
+        int chVal=ch+1;
+        char newCh=(char)chVal;
+        newWord+=newCh; 
+      }  
+      word=newWord;
+     } 
+     return word[k-1];     
+    }
+}
