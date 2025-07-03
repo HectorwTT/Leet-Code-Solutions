@@ -1,0 +1,37 @@
+var longestSubsequence = function(s, k) {
+        let n = s.length;
+        let count = 0;
+        let value = 0;
+        let power = 1;
+        let i = n - 1;
+
+        // Step 1: Add zeros and valid ones from right to left
+        for (; i >= 0; i--) {
+            var c = s[i];
+
+            if (c == '0') {
+                count++;
+            } else {
+                if ( value + power <= k) {
+                    value += power;
+                    count++;
+                }
+            }
+
+            // Stop if power goes beyond k to avoid overflow
+            if (power > k) {
+                i--;
+                break;
+            }
+            power <<= 1;
+        }
+
+        // Step 2: Count all remaining zeros on the left
+        for (; i >= 0; i--) {
+            if (s[i] == '0') {
+                count++;
+            }
+        }
+
+        return count;      
+};
