@@ -1,0 +1,14 @@
+public class Solution {
+    public int FindLucky(int[] arr) {
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     int answer=-1;
+     for(int i=0;i<arr.Length;i++){
+      if(!map.ContainsKey(arr[i]))map[arr[i]]=1;
+      else map[arr[i]] =map[arr[i]]+1; 
+     } 
+     foreach(var (key,value) in map){
+      if(key==value)answer=Math.Max(answer,value);
+     }   
+     return answer;     
+    }
+}
