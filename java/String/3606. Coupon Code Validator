@@ -1,0 +1,48 @@
+class Solution {
+    public List<String> validateCoupons(String[] code, String[] businessLine, boolean[] isActive) {
+      List<String> answer= new ArrayList<>();
+      HashMap<String,List<String>> coupons=new HashMap<>() ;
+      HashMap<String,Integer>categories=new HashMap<>();
+      List<String> categoriesList=new ArrayList<>();
+      categories.put("electronics",1);
+      categories.put("grocery",1);
+      categories.put("pharmacy",1);
+      categories.put("restaurant",1);
+      categoriesList.add("electronics");
+      categoriesList.add("grocery");
+      categoriesList.add("pharmacy");
+      categoriesList.add("restaurant");
+      for(int i=0;i<code.length;i++){
+       if(!isActive[i])continue;
+       if(!categories.containsKey(businessLine[i]))continue;
+       String coupon=code[i];
+       if(coupon.equals(""))continue;
+       int numOfValidChars=0;
+       for(int j=0;j<coupon.length();j++){
+        char ch=coupon.charAt(j);
+        if((ch>=48 && ch<=57) ||(ch>=65 && ch<=90) ||(ch>=97 && ch<=122) || ch=='_')
+         numOfValidChars++;
+        else break; 
+       }
+       if(numOfValidChars==coupon.length()){
+        if(!coupons.containsKey(businessLine[i])){
+          List<String> list=new ArrayList<>();
+          list.add(coupon);
+          coupons.put(businessLine[i],list);  
+        }else{
+          List<String> list=coupons.get(businessLine[i]);
+          list.add(coupon);
+          coupons.replace(businessLine[i],list);    
+        }
+       } 
+      }
+      for(int i=0;i<categoriesList.size();i++){
+        String category=categoriesList.get(i);
+        if(!coupons.containsKey(category))continue;
+        List<String> couponsList=coupons.get(category);
+        couponsList.sort(null);
+        answer.addAll(couponsList);
+      }
+      return answer;
+    }
+}
