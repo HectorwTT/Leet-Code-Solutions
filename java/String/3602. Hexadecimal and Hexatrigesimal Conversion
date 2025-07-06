@@ -1,0 +1,24 @@
+class Solution {
+    public String concatHex36(int n) {
+     int nsquared=n*n;
+     int ncubed=n*n*n; 
+     String hexadecimal=toBase(nsquared,16);
+     String hexatrigesimal=toBase(ncubed,36);   
+     return hexadecimal+hexatrigesimal;
+    }
+    public String toBase(int x,int b){
+      String base="";  
+      while(x>0){
+        int mod=x%b;
+        if(mod<10)base=mod+base;
+        else{
+          int chVal=65;
+          chVal+=(mod-10);
+          char ch=(char)chVal;
+          base=ch+base;  
+        }
+        x/=b;
+     }
+     return base;   
+    }
+}
