@@ -1,0 +1,46 @@
+var validateCoupons = function(code, businessLine, isActive) {
+      const answer= [];
+      const coupons=new Map() ;
+      const categories=new Map();
+      const categoriesList=[];
+      categories.set("electronics",1);
+      categories.set("grocery",1);
+      categories.set("pharmacy",1);
+      categories.set("restaurant",1);
+      categoriesList.push("electronics");
+      categoriesList.push("grocery");
+      categoriesList.push("pharmacy");
+      categoriesList.push("restaurant");
+      for(let i=0;i<code.length;i++){
+       if(!isActive[i])continue;
+       if(!categories.has(businessLine[i]))continue;
+       let coupon=code[i];
+       if(coupon=="")continue;
+       let numOfValidChars=0;
+       for(let j=0;j<coupon.length;j++){
+        var ch=coupon.charCodeAt(j);
+        if((ch>=48 && ch<=57) ||(ch>=65 && ch<=90) ||(ch>=97 && ch<=122) || ch==95)
+         numOfValidChars++;
+        else break; 
+       }
+       if(numOfValidChars==coupon.length){
+        if(!coupons.has(businessLine[i])){
+          const list=[];
+          list.push(coupon);
+          coupons.set(businessLine[i],list);  
+        }else{
+          const list=coupons.get(businessLine[i]);
+          list.push(coupon);
+          coupons.set(businessLine[i],list);    
+        }
+       } 
+      }
+      for(let i=0;i<categoriesList.length;i++){
+        let category=categoriesList[i];
+        if(!coupons.has(category))continue;
+        const couponsList=coupons.get(category);
+        couponsList.sort();
+        for(let j=0;j<couponsList.length;j++)answer.push(couponsList[j]);
+      }
+      return answer;   
+};
