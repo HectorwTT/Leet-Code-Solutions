@@ -1,0 +1,10 @@
+var canMakeArithmeticProgression = function(arr) {
+        arr.sort((x,y)=>x-y);
+        let a= arr[0];
+        let diff= arr[1]-arr[0];
+        for(let i=1;i<arr.length;i++){
+          let term= a+i*diff;
+          if(term!=arr[i])return false;
+        }
+        return true;    
+};
