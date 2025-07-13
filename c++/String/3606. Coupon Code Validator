@@ -1,0 +1,49 @@
+class Solution {
+public:
+    vector<string> validateCoupons(vector<string>& code, vector<string>& businessLine, vector<bool>& isActive) {
+      vector<string> answer;
+      unordered_map<string,vector<string>> coupons ;
+      unordered_map<string,int> categories;
+      vector<string> categoriesList;
+      categories["electronics"]=1;
+      categories["grocery"]=1;
+      categories["pharmacy"]=1;
+      categories["restaurant"]=1;
+      categoriesList.push_back("electronics");
+      categoriesList.push_back("grocery");
+      categoriesList.push_back("pharmacy");
+      categoriesList.push_back("restaurant");
+      for(int i=0;i<code.size();i++){
+       if(!isActive[i])continue;
+       if(categories.find(businessLine[i])==categories.end())continue;
+       string coupon=code[i];
+       if(coupon=="")continue;
+       int numOfValidChars=0;
+       for(int j=0;j<coupon.size();j++){
+        char ch=coupon[j];
+        if((ch>=48 && ch<=57) ||(ch>=65 && ch<=90) ||(ch>=97 && ch<=122) || ch==95)
+         numOfValidChars++;
+        else break; 
+       }
+       if(numOfValidChars==coupon.size()){
+        if(coupons.find(businessLine[i])==coupons.end()){
+          vector<string> list;
+          list.push_back(coupon);
+          coupons[businessLine[i]]=list;  
+        }else{
+          vector<string> list=coupons[businessLine[i]];
+          list.push_back(coupon);
+          coupons[businessLine[i]]=list;    
+        }
+       } 
+      }
+      for(int i=0;i<categoriesList.size();i++){
+        string category=categoriesList[i];
+        if(coupons.find(category)==coupons.end())continue;
+        vector<string> couponsList=coupons[category];
+        std::sort(couponsList.begin(),couponsList.end());
+        for(int j=0;j<couponsList.size();j++)answer.push_back(couponsList[j]);
+      }
+      return answer;  
+    }
+};
