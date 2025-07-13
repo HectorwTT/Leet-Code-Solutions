@@ -1,0 +1,24 @@
+
+var concatHex36 = function(n) {
+ let nsquared=n*n;
+ let ncubed=n*n*n; 
+ let hexadecimal=toBase(nsquared,16);
+ let hexatrigesimal=toBase(ncubed,36);   
+ return hexadecimal+hexatrigesimal;
+};
+var toBase=function(x,b){
+ let base="";  
+ while(x>0){
+  let mod=x%b;
+  if(mod<10)base=mod+base;
+  else{
+   let chVal=65;
+   chVal+=(mod-10);
+   var ch=String.fromCharCode(chVal);
+   base=ch+base;  
+  }
+  x-=mod;
+  x/=b;
+ }
+ return base;   
+};
