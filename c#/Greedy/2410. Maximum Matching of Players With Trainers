@@ -1,0 +1,17 @@
+public class Solution {
+    public int MatchPlayersAndTrainers(int[] players, int[] trainers) {
+     int max=0;
+     Array.Sort(players);
+     Array.Sort(trainers);
+     int playersIndex=0;
+     int trainersIndex=0;
+     while(playersIndex<players.Length && trainersIndex<trainers.Length){
+      if(players[playersIndex]<=trainers[trainersIndex]){
+        max++;
+        playersIndex++;
+        trainersIndex++;
+      }else  trainersIndex++;  
+     }
+     return max;        
+    }
+}
