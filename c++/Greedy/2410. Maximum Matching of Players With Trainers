@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int matchPlayersAndTrainers(vector<int>& players, vector<int>& trainers) {
+     int max=0;
+     std::sort(players.begin(),players.end());
+     std::sort(trainers.begin(),trainers.end());
+     int playersIndex=0;
+     int trainersIndex=0;
+     while(playersIndex<players.size() && trainersIndex<trainers.size()){
+      if(players[playersIndex]<=trainers[trainersIndex]){
+        max++;
+        playersIndex++;
+        trainersIndex++;
+      }else trainersIndex++;  
+     }
+     return max;        
+    }
+};
