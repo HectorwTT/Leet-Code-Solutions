@@ -1,0 +1,17 @@
+var matchPlayersAndTrainers = function(players, trainers) {
+     let max=0;
+     players.sort((x,y)=>x-y);
+     trainers.sort((x,y)=>x-y);
+     let playersIndex=0;
+     let trainersIndex=0;
+     while(playersIndex<players.length && trainersIndex<trainers.length){
+      if(players[playersIndex]<=trainers[trainersIndex]){
+        max++;
+        playersIndex++;
+        trainersIndex++;
+      }else{
+        trainersIndex++;
+      }  
+     }
+     return max;        
+};
