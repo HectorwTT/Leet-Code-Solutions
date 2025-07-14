@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int getDecimalValue(ListNode* head) {
+        stack<int> bits;
+        int decimalValue=0;
+        ListNode *  current= head;
+        int power=0;
+        while(current!=NULL){
+         bits.push(current->val);
+         current=current->next;   
+        }
+        while(bits.size()!=0){
+         int bit= bits.top();
+         bits.pop();
+         decimalValue+= bit*std::pow(2,power++);
+        }
+        return decimalValue;    
+    }
+};
