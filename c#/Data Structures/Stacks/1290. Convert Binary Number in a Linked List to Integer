@@ -1,0 +1,17 @@
+public class Solution {
+    public int GetDecimalValue(ListNode head) {
+        Stack<int> bits= new Stack<int>();
+        int decimalValue=0;
+        ListNode current= head;
+        int power=0;
+        while(current!=null){
+         bits.Push(current.val);
+         current=current.next;   
+        }
+        while(bits.Count!=0){
+         int bit= bits.Pop();
+         decimalValue+= bit*(int)Math.Pow(2,power++);
+        }
+        return decimalValue;   
+    }
+}
