@@ -1,0 +1,21 @@
+var subsetsWithDup = function(nums) {
+    nums.sort((a, b) => a - b); // Step 1: Sort to group duplicates
+    const result = [];
+    const path = [];
+
+    function backtrack(start) {
+        result.push([...path]);
+
+        for (let i = start; i < nums.length; i++) {
+            // Step 2: Skip duplicates at the same tree level
+            if (i > start && nums[i] === nums[i - 1]) continue;
+
+            path.push(nums[i]);
+            backtrack(i + 1);
+            path.pop(); // Backtrack
+        }
+    }
+
+    backtrack(0);
+    return result;
+};
