@@ -1,0 +1,103 @@
+import java.util.*;
+
+public class Solution {
+    public void solveSudoku(char[][] board) {
+        if (backtrack(board)) {
+            if (!isValidSudoku(board)) {
+                System.out.println("Warning: Final board is invalid.");
+            }
+        }
+    }
+
+    // Backtracking solver
+    private boolean backtrack(char[][] board) {
+        for (int row = 0; row < 9; row++) {
+            for (int col = 0; col < 9; col++) {
+                if (board[row][col] != '.') continue;
+
+                for (char num = '1'; num <= '9'; num++) {
+                    if (isValid(board, row, col, num)) {
+                        board[row][col] = num;
+                        if (backtrack(board)) return true;
+                        board[row][col] = '.'; // backtrack
+                    }
+                }
+
+                return false; // no valid digit found
+            }
+        }
+
+        return true; // solved!
+    }
+
+    // Per-cell validator
+    private boolean isValid(char[][] board, int row, int col, char num) {
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] == num) return false;      // Row
+            if (board[i][col] == num) return false;      // Column
+            int boxRow = 3 * (row / 3) + i / 3;
+            int boxCol = 3 * (col / 3) + i % 3;
+            if (board[boxRow][boxCol] == num) return false; // Box
+        }
+        return true;
+    }
+
+    // Your full board validator
+    public boolean isValidSudoku(char[][] board) {
+        int[] values = new int[9];
+        int column = 0;
+        int row = 0;
+        int index = 0;
+        long numcount = 0;
+        long distinctcount = 0;
+
+        // Check rows
+        while (row < 9) {
+            values[column] = board[row][column++];
+            if (column == 9) {
+                row++;
+                column = 0;
+                numcount = Arrays.stream(values).filter(ch -> ch != '.')
+                        .filter(ch -> ch >= 48 && ch <= 57).count();
+                distinctcount = Arrays.stream(values).filter(ch -> ch != '.')
+                        .distinct().count();
+                if (distinctcount != numcount) return false;
+            }
+        }
+
+        // Check columns
+        row = 0;
+        column = 0;
+        while (column < 9) {
+            values[row] = board[row++][column];
+            if (row == 9) {
+                row = 0;
+                column++;
+                numcount = Arrays.stream(values).filter(ch -> ch != '.')
+                        .filter(ch -> ch >= 48 && ch <= 57).count();
+                distinctcount = Arrays.stream(values).filter(ch -> ch != '.')
+                        .distinct().count();
+                if (distinctcount != numcount) return false;
+            }
+        }
+
+        // Check 3x3 boxes
+        for (int squarerow = 0; squarerow < 9; squarerow += 3) {
+            for (int squarecolumn = 0; squarecolumn < 9; squarecolumn += 3) {
+                for (int i = squarerow; i < squarerow + 3; i++) {
+                    for (int j = squarecolumn; j < squarecolumn + 3; j++) {
+                        values[index++] = board[i][j];
+                    }
+                }
+                index = 0;
+                numcount = Arrays.stream(values).filter(ch -> ch != '.')
+                        .filter(ch -> ch >= 48 && ch <= 57).count();
+                distinctcount = Arrays.stream(values)
+                        .filter(ch -> ch != '.').distinct().count();
+                if (distinctcount != numcount) return false;
+            }
+        }
+
+        return true;
+    }
+}
