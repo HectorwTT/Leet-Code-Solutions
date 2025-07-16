@@ -1,0 +1,18 @@
+public class Solution {
+    public IList<IList<int>> Subsets(int[] nums) {
+        var result = new List<IList<int>>();
+        var path = new List<int>();
+        Backtrack(nums, 0, path, result);
+        return result;
+    }
+
+    private void Backtrack(int[] nums, int start, List<int> path, List<IList<int>> result) {
+        result.Add(new List<int>(path));
+
+        for (int i = start; i < nums.Length; i++) {
+            path.Add(nums[i]);
+            Backtrack(nums, i + 1, path, result);
+            path.RemoveAt(path.Count - 1); // Backtrack
+        }
+    }
+}
