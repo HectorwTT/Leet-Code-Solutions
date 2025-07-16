@@ -1,0 +1,22 @@
+public class Solution {
+    public IList<IList<int>> SubsetsWithDup(int[] nums) {
+        Array.Sort(nums); // Step 1: sort to bring duplicates together
+        var result = new List<IList<int>>();
+        var path = new List<int>();
+        Backtrack(nums, 0, path, result);
+        return result;
+    }
+
+    private void Backtrack(int[] nums, int start, List<int> path, List<IList<int>> result) {
+        result.Add(new List<int>(path)); // Add current subset
+
+        for (int i = start; i < nums.Length; i++) {
+            // Step 2: skip duplicates at the same tree level
+            if (i > start && nums[i] == nums[i - 1]) continue;
+
+            path.Add(nums[i]);
+            Backtrack(nums, i + 1, path, result);
+            path.RemoveAt(path.Count - 1); // backtrack
+        }
+    }
+}
