@@ -1,0 +1,44 @@
+public class Solution {
+    public IList<IList<string>> SolveNQueens(int n) {
+        var result = new List<IList<string>>();
+        var board = new char[n][];
+        for (int i = 0; i < n; i++) {
+            board[i] = new string('.', n).ToCharArray();
+        }
+
+        Backtrack(0, board, result, n);
+        return result;
+    }
+
+    private void Backtrack(int row, char[][] board, List<IList<string>> result, int n) {
+        if (row == n) {
+            var solution = board.Select(r => new string(r)).ToList();
+            result.Add(solution);
+            return;
+        }
+
+        for (int col = 0; col < n; col++) {
+            if (IsValid(board, row, col, n)) {
+                board[row][col] = 'Q';
+                Backtrack(row + 1, board, result, n);
+                board[row][col] = '.'; // Backtrack
+            }
+        }
+    }
+
+    private bool IsValid(char[][] board, int row, int col, int n) {
+        // Check column
+        for (int i = 0; i < row; i++)
+            if (board[i][col] == 'Q') return false;
+
+        // Check upper-left diagonal
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--)
+            if (board[i][j] == 'Q') return false;
+
+        // Check upper-right diagonal
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++)
+            if (board[i][j] == 'Q') return false;
+
+        return true;
+    }
+}
