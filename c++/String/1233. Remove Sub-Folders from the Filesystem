@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<string> removeSubfolders(vector<string>& folder) {
+     vector<string> result;
+     std::sort(folder.begin(),folder.end());
+     string root=folder[0];
+     result.push_back(root);
+     for(int i=1;i<folder.size();i++){
+      if(!folder[i].starts_with(root+"/"))      
+      {
+        root=folder[i];
+        result.push_back(root);      
+      }
+     } 
+     return result;   
+    }
+};
