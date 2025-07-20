@@ -1,0 +1,13 @@
+var checkDivisibility = function(n) {
+     let digitSum=0;
+     let digitProduct=1;
+     let nCopy=n;
+     while(nCopy!=0){
+      let mod=nCopy%10;
+      digitSum+=mod;
+      digitProduct*=mod;
+      nCopy-=mod;
+      nCopy/=10;  
+     } 
+     return n%(digitSum+digitProduct)==0;     
+};
