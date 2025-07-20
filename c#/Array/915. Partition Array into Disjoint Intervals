@@ -1,0 +1,26 @@
+public class Solution {
+    public int PartitionDisjoint(int[] nums) {
+     int[] minRight=new int[nums.Length];
+      int[]  maxLeft=new int[nums.Length];
+      int ans=0;
+      int min=nums[nums.Length-1];
+      int max=nums[0];
+      maxLeft[0]=max;
+      for(int i=1;i<nums.Length;i++){
+       max=Math.Max(nums[i-1],max);
+       maxLeft[i]=max; 
+      }
+      minRight[nums.Length-1]=min;
+      for(int i=nums.Length-2;i>=0;i--){
+       min=Math.Min(nums[i+1],min);
+       minRight[i]=min; 
+      }       
+      for(int i=0;i<nums.Length;i++){
+       if(maxLeft[i]<=minRight[i]){
+        ans=i+1; 
+        break;
+       } 
+      }
+      return ans;   
+    }
+}
