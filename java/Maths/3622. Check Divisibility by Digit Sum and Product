@@ -1,0 +1,14 @@
+class Solution {
+    public boolean checkDivisibility(int n) {
+     int digitSum=0;
+     int digitProduct=1;
+     int nCopy=n;
+     while(nCopy!=0){
+      int mod=nCopy%10;
+      digitSum+=mod;
+      digitProduct*=mod;
+      nCopy/=10;  
+     } 
+     return n%(digitSum+digitProduct)==0;     
+    }
+}
