@@ -1,0 +1,39 @@
+class Solution {
+    public int maximumGain(String s, int x, int y) {
+        // First remove the higher scoring pattern
+        if (x > y) {
+            int scoreAB = removePattern(s, 'a', 'b', x);
+            int scoreBA = removePattern(remaining, 'b', 'a', y);
+            return scoreAB + scoreBA;
+        } else {
+            int scoreBA = removePattern(s, 'b', 'a', y);
+            int scoreAB = removePattern(remaining, 'a', 'b', x);
+            return scoreBA + scoreAB;
+        }
+    }
+
+    private String remaining; // To hold what's left after the first pattern removal
+
+    private int removePattern(String s, char first, char second, int points) {
+        Deque<Character> stack = new ArrayDeque<>();
+        int score = 0;
+        StringBuilder intermediate = new StringBuilder();
+
+        for (char ch : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek() == first && ch == second) {
+                stack.pop();
+                score += points;
+            } else {
+                stack.push(ch);
+            }
+        }
+
+        // Rebuild the remaining string in correct order
+        while (!stack.isEmpty()) {
+            intermediate.append(stack.removeLast());
+        }
+
+        remaining = intermediate.toString(); // Save for next pass
+        return score;
+    }
+}
