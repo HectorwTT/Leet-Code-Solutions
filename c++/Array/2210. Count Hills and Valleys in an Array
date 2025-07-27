@@ -1,0 +1,41 @@
+class Solution {
+public:
+    int countHillValley(vector<int>& nums) {
+     int total=0;   
+     int max=-1;
+     int min=-1;
+     vector<int> prevNonEqual;
+     vector<int> nextNonEqual;
+     for(int i=0;i<nums.size();i++){
+       prevNonEqual.push_back(0);
+       nextNonEqual.push_back(0); 
+     }
+     prevNonEqual[0]=101;
+     nextNonEqual[nextNonEqual.size()-1]=101;
+     for (int i = nums.size()-2; i>= 0; i--) {
+      if(nums[i]==nums[i+1])nextNonEqual[i]=nextNonEqual[i+1];
+      else nextNonEqual[i]=nums[i+1];
+     } 
+     for (int i = 1;i<nums.size(); i++) {
+      if(nums[i]==nums[i-1])prevNonEqual[i]=prevNonEqual[i-1];
+      else prevNonEqual[i]=nums[i-1];
+     }
+     for(int i=1;i<nums.size()-1;i++){ 
+      if(prevNonEqual[i]==101 
+          || nextNonEqual[i]==101 )continue;              
+      if(prevNonEqual[i]<nums[i] && nextNonEqual[i]<nums[i]){
+        if(max==-1){
+         total++;
+         max=nums[i];
+        }
+      }else max=-1;
+      if(prevNonEqual[i]>nums[i] && nextNonEqual[i]>nums[i]){
+        if(min==-1){
+          total++;
+          min=nums[i];
+        }
+      }else min=-1;       
+     }
+     return total;   
+    }
+};
