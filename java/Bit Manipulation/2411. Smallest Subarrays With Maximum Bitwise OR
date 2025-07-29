@@ -1,0 +1,36 @@
+class Solution {
+    public int[] smallestSubarrays(int[] nums) {
+     int [] answer=new int[nums.length];
+     int max=0;
+     for(int i=0;i<nums.length;i++)max=Math.max(max,nums[i]);   
+     String maxBinary=Integer.toBinaryString(max);
+     int[] lastPositions=new int[maxBinary.length()];
+     answer[answer.length-1]=1;
+     String lastBinaryString=Integer.toBinaryString(nums[nums.length-1]);
+     if(nums[nums.length-1]<max){
+      String zeroes="0".repeat(maxBinary.length()-lastBinaryString.length());
+      lastBinaryString=zeroes+lastBinaryString;  
+     }
+     for(int i=0;i<lastBinaryString.length();i++){
+      if(lastBinaryString.charAt(i)=='1')lastPositions[i]=answer.length-1;  
+     }
+     for(int i=answer.length-2;i>=0;i--){
+      String currentBinaryString=Integer.toBinaryString(nums[i]);
+      int maxDistance=1;
+      if(nums[i]<max){
+         String zeroes="0".repeat(maxBinary.length()-currentBinaryString.length());
+        currentBinaryString=zeroes+currentBinaryString;  
+      }
+      for(int j=0;j<currentBinaryString.length();j++){
+       if(currentBinaryString.charAt(j)=='1') lastPositions[j]=i;
+       else{
+        int lastPosition=lastPositions[j];
+       int dist=lastPosition-i+1;
+       maxDistance=Math.max(dist,maxDistance);
+       } 
+      }
+      answer[i]=maxDistance;
+     }
+     return answer;
+    }
+}
