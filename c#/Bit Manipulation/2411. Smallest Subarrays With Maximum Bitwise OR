@@ -1,0 +1,36 @@
+public class Solution {
+    public int[] SmallestSubarrays(int[] nums) {
+     int [] answer=new int[nums.Length];
+     int max=0;
+     for(int i=0;i<nums.Length;i++)max=Math.Max(max,nums[i]);   
+     string maxBinary=Convert.ToString(max, 2);
+     int[] lastPositions=new int[maxBinary.Length];
+     answer[answer.Length-1]=1;
+     string lastBinaryString=Convert.ToString(nums[nums.Length-1], 2);
+     if(nums[nums.Length-1]<max){
+      string zeroes= new string('0', maxBinary.Length-lastBinaryString.Length);
+      lastBinaryString=zeroes+lastBinaryString;  
+     }
+     for(int i=0;i<lastBinaryString.Length;i++){
+      if(lastBinaryString[i]=='1')lastPositions[i]=answer.Length-1;  
+     }
+     for(int i=answer.Length-2;i>=0;i--){
+      string currentBinaryString=Convert.ToString(nums[i], 2);
+      int maxDistance=1;
+      if(nums[i]<max){
+        string zeroes=new string('0', maxBinary.Length-currentBinaryString.Length);;
+        currentBinaryString=zeroes+currentBinaryString;  
+      }
+      for(int j=0;j<currentBinaryString.Length;j++){
+       if(currentBinaryString[j]=='1') lastPositions[j]=i;
+       else{
+        int lastPosition=lastPositions[j];
+       int dist=lastPosition-i+1;
+       maxDistance=Math.Max(dist,maxDistance);
+       } 
+      }
+      answer[i]=maxDistance;
+     }
+     return answer;   
+    }
+}
