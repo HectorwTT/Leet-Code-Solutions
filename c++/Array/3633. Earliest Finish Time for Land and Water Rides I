@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int earliestFinishTime(vector<int>& landStartTime, vector<int>& landDuration, vector<int>& waterStartTime, vector<int>& waterDuration) {
+     int min=10001;
+      for(int i=0;i<landStartTime.size();i++){
+       int landEndTime=landStartTime[i]+landDuration[i];         
+       for(int j=0;j<waterStartTime.size();j++){
+        int waterEndTime=0;
+        if(landEndTime<=waterStartTime[j])waterEndTime=waterStartTime[j]+waterDuration[j];
+        else waterEndTime=landEndTime+waterDuration[j];
+        min=std::min(waterEndTime,min); 
+       } 
+      }  
+      for(int i=0;i<waterStartTime.size();i++){
+       int waterEndTime=waterStartTime[i]+waterDuration[i];         
+       for(int j=0;j<landStartTime.size();j++){
+        int landEndTime=0;
+        if(waterEndTime<=landStartTime[j])landEndTime=landStartTime[j]+landDuration[j];
+        else landEndTime=waterEndTime+landDuration[j];
+        min=std::min(landEndTime,min); 
+       } 
+      }
+      return min;       
+    }
+};
