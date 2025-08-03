@@ -1,24 +1,22 @@
-class Solution {
-    public int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
-      int min=10001;
-      for(int i=0;i<landStartTime.length;i++){
-       int landEndTime=landStartTime[i]+landDuration[i];         
-       for(int j=0;j<waterStartTime.length;j++){
-        int waterEndTime=0;
+var earliestFinishTime = function(landStartTime, landDuration, waterStartTime, waterDuration) {
+      let min=10001;
+      for(let i=0;i<landStartTime.length;i++){
+       let landEndTime=landStartTime[i]+landDuration[i];         
+       for(let j=0;j<waterStartTime.length;j++){
+        let waterEndTime=0;
         if(landEndTime<=waterStartTime[j])waterEndTime=waterStartTime[j]+waterDuration[j];
         else waterEndTime=landEndTime+waterDuration[j];
         min=Math.min(waterEndTime,min); 
        } 
       }  
-      for(int i=0;i<waterStartTime.length;i++){
-       int waterEndTime=waterStartTime[i]+waterDuration[i];         
-       for(int j=0;j<landStartTime.length;j++){
-        int landEndTime=0;
+      for(let i=0;i<waterStartTime.length;i++){
+       let waterEndTime=waterStartTime[i]+waterDuration[i];         
+       for(let j=0;j<landStartTime.length;j++){
+        let landEndTime=0;
         if(waterEndTime<=landStartTime[j])landEndTime=landStartTime[j]+landDuration[j];
         else landEndTime=waterEndTime+landDuration[j];
         min=Math.min(landEndTime,min); 
        } 
       }
-      return min;  
-    }
-}
+      return min;    
+};
