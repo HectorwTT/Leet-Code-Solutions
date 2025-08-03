@@ -1,0 +1,24 @@
+public class Solution {
+    public int EarliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
+      int min=10001;
+      for(int i=0;i<landStartTime.Length;i++){
+       int landEndTime=landStartTime[i]+landDuration[i];         
+       for(int j=0;j<waterStartTime.Length;j++){
+        int waterEndTime=0;
+        if(landEndTime<=waterStartTime[j])waterEndTime=waterStartTime[j]+waterDuration[j];
+        else waterEndTime=landEndTime+waterDuration[j];
+        min=Math.Min(waterEndTime,min); 
+       } 
+      }  
+      for(int i=0;i<waterStartTime.Length;i++){
+       int waterEndTime=waterStartTime[i]+waterDuration[i];         
+       for(int j=0;j<landStartTime.Length;j++){
+        int landEndTime=0;
+        if(waterEndTime<=landStartTime[j])landEndTime=landStartTime[j]+landDuration[j];
+        else landEndTime=waterEndTime+landDuration[j];
+        min=Math.Min(landEndTime,min); 
+       } 
+      }
+      return min;    
+    }
+}
