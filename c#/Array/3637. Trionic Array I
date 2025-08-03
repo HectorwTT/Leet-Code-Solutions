@@ -1,0 +1,21 @@
+public class Solution {
+    public bool IsTrionic(int[] nums) {
+      int p=-1;
+      int q=-1;      
+      for(int i=1;i<nums.Length;i++){
+        if(nums[i]==nums[i-1])return false;
+        else if(nums[i]<nums[i-1])break;
+        else p=i;
+      } 
+      if(p==-1)return false;
+      for(int i=p+1;i<nums.Length;i++){
+        if(nums[i]==nums[i-1])return false;
+        else if(nums[i]>nums[i-1])break;
+        else q=i;
+      } if(q==-1 || q==nums.Length-1)return false;
+      for(int i=q+1;i<nums.Length;i++){
+        if(nums[i]<=nums[i-1])return false;
+      }
+      return p!=-1 && q!=-1;   
+    }
+}
