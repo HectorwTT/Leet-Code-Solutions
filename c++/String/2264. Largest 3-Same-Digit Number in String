@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string largestGoodInteger(string num) {
+     string answer="";
+     int numberOfConsecutive=1;
+     int largest=-1;
+     for(int i=1;i<num.size();i++){
+      char currentCh=num[i]; 
+      char previousCh=num[i-1];
+      if(currentCh!=previousCh)numberOfConsecutive=1;
+      else{
+       numberOfConsecutive++;
+       if(numberOfConsecutive==3){
+        int number=currentCh-48;
+        largest=std::max(number,largest);
+        numberOfConsecutive=1;
+       } 
+      }
+     }
+     if(largest!=-1)answer+=to_string(largest)+to_string(largest)+to_string(largest);   
+     return answer;   
+    }
+};
