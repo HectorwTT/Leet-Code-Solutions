@@ -1,0 +1,28 @@
+public class Solution {
+    public bool IsStrictlyPalindromic(int n) {
+     int b=2;      
+     while(b<=n-2){
+      if(!IsPalindrome(NumberToBase(n,b++))) return false;
+     }
+     return true;
+    }
+    public bool IsPalindrome(string n){
+      int left=0;
+      int right=n.Length-1;
+      while(left<right){
+       if(n[left]!=n[right]) return false;
+       left++;
+       right--;
+      } 
+      return true;   
+    }
+    public string NumberToBase(int n,int b){
+     string result="";
+     while(n!=0){
+      int mod= n%b;
+      result=mod+result;
+      n/=b;
+     }
+     return result;
+    }    
+}
