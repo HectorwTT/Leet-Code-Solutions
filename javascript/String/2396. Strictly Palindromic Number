@@ -1,0 +1,26 @@
+var isStrictlyPalindromic = function(n) {
+     let b=2;      
+     while(b<=n-2){
+      if(!isPalindrome(numberToBase(n,b++))) return false;
+     }
+     return true;
+};
+var isPalindrome=function(n){
+     let left=0;
+     let right=n.length-1;
+     while(left<right){
+       if(n[left]!=n[right]) return false;
+       left++;
+       right--;
+      } 
+      return true;   
+};
+var numberToBase=function(n,b){
+     let result="";
+     while(n!=0){
+      let mod= n%b;
+      result=mod+result;
+      n/=b;
+     }
+     return result;
+};           
