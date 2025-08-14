@@ -1,0 +1,20 @@
+var largestGoodInteger = function(num) {
+     var answer="";
+     let numberOfConsecutive=1;
+     let largest=-1;
+     for(let i=1;i<num.length;i++){
+      var currentCh=num.charAt(i); 
+      var previousCh=num.charAt(i-1);
+      if(currentCh!=previousCh)numberOfConsecutive=1;
+      else{
+       numberOfConsecutive++;
+       if(numberOfConsecutive==3){
+        let number=num.charCodeAt(i)-48;
+        largest=Math.max(number,largest);
+        numberOfConsecutive=1;
+       } 
+      }
+     }
+     if(largest!=-1)answer=(""+largest).repeat(3);   
+     return answer;   
+};
