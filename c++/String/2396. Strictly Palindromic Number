@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool isStrictlyPalindromic(int n) {
+     int b=2;      
+     while(b<=n-2){
+      if(!isPalindrome(numberToBase(n,b++))) return false;
+     }
+     return true;
+    }
+    bool isPalindrome(string n){
+      int left=0;
+      int right=n.size()-1;
+      while(left<right){
+       if(n[left]!=n[right]) return false;
+       left++;
+       right--;
+      } 
+      return true;   
+    }
+    string numberToBase(int n,int b){
+     string result="";
+     while(n!=0){
+      int mod= n%b;
+      result=to_string(mod)+result;
+      n/=b;
+     }
+     return result;
+    }    
+};
