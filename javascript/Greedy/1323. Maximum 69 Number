@@ -1,0 +1,20 @@
+var maximum69Number  = function(num) {
+  let string="";
+  let numOfSixes=0; 
+  let number=""+num;
+  let answer=0;
+  for(let i=0;i<number.length;i++){
+   var ch=number.charAt(i);
+   if(ch=='9' || numOfSixes==1)string+=ch;
+   else {
+    string+="9";
+    numOfSixes++;
+   }
+  }
+  for(let i=string.length-1;i>=0;i--){
+   let power=string.length-1-i;
+   let chVal=string.charCodeAt(i)-48;
+   answer+=chVal*Math.pow(10,power); 
+  }
+  return answer;   
+};
