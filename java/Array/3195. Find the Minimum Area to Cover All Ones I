@@ -1,0 +1,48 @@
+class Solution {
+    public int minimumArea(int[][] grid) {
+     int  northRow=-1 ;
+     int southRow=-1;
+     int eastColumn=-1;
+     int westColumn=-1;
+     for(int i=0;i<grid.length;i++){
+      for(int j=0;j<grid[i].length;j++){
+        if(grid[i][j]==1){
+          northRow=i;
+          break;  
+        }
+      }
+      if(northRow!=-1)break;  
+     }
+
+     for(int i=grid.length-1;i>=0;i--){
+      for(int j=0;j<grid[i].length;j++){
+        if(grid[i][j]==1){
+          southRow=i;
+          break;  
+        }
+      }
+      if(southRow!=-1)break;  
+     }
+      
+     for(int j=0;j<grid[0].length;j++){
+      for(int i=northRow;i<=southRow;i++){
+        if(grid[i][j]==1){
+          westColumn=j;
+          break;  
+        }
+      }
+      if(westColumn!=-1)break;  
+     }
+
+     for(int j=grid[0].length-1;j>=0;j--){
+      for(int i=northRow;i<=southRow;i++){
+        if(grid[i][j]==1){
+          eastColumn=j;
+          break;  
+        }
+      }
+      if(eastColumn!=-1)break;  
+     }
+     return (southRow-northRow+1)*(eastColumn-westColumn+1);
+    }
+}
