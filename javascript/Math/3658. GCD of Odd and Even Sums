@@ -1,0 +1,20 @@
+var gcdOfOddEvenSums = function(n) {
+     let  sumOdd=1;
+     let sumEven=2;
+     let count=1;
+     let odd=1;
+     let even=2;
+     while(count<n){
+      odd+=2; 
+      even+=2;
+      sumOdd+=odd;
+      sumEven+=even;
+      count++;
+     }
+     return gcd(sumOdd,sumEven);     
+    };
+
+    var gcd=function(a,b){
+      if (b == 0) return a;
+      return gcd(b, a % b);   
+    } 
