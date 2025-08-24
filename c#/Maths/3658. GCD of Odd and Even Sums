@@ -1,0 +1,22 @@
+public class Solution {
+    public int GcdOfOddEvenSums(int n) {
+     int  sumOdd=1;
+     int sumEven=2;
+     int count=1;
+     int odd=1;
+     int even=2;
+     while(count<n){
+      odd+=2; 
+      even+=2;
+      sumOdd+=odd;
+      sumEven+=even;
+      count++;
+     }
+     return Gcd(sumOdd,sumEven);     
+    }
+
+    int Gcd(int a, int b){
+      if (b == 0) return a;
+      return Gcd(b, a % b);   
+    }      
+}
