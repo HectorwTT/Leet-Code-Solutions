@@ -1,0 +1,21 @@
+public class Solution {
+    public string ConvertToTitle(int columnNumber) {
+     string title="";
+     string answer="";
+     while(columnNumber>0){
+      int mod=columnNumber%26;
+      if(mod==0)title+='Z';
+      else{
+       int number=64+mod;
+       char ch=(char)number;
+       title+=ch; 
+      }
+      columnNumber/=26;
+      if(mod==0)columnNumber--;   
+     }
+     for(int i=title.Length-1;i>=0;i--){
+      answer+=title[i];  
+     }  
+     return answer;
+    }
+}
