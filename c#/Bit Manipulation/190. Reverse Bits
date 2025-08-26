@@ -1,0 +1,14 @@
+public class Solution {
+    public int ReverseBits(int n) {
+     string binary="";
+     int answer=0;
+     while(n>0){
+      int mod=n%2;
+      binary=mod+binary;
+      n/=2; 
+     }
+     string paddedBinary= binary.PadLeft(32, '0');
+     for(int i=0;i<paddedBinary.Length;i++) if(paddedBinary[i]=='1')answer+=(int)Math.Pow(2,i); 
+     return answer;
+    }
+}
