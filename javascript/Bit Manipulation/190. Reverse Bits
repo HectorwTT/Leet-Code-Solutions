@@ -1,0 +1,18 @@
+var reverseBits = function(n) {
+     let binary="";
+     let answer=0;
+     while(n>0){
+      let mod=n%2;
+      binary=mod+binary;
+      if(mod==1)n--;
+      n/=2; 
+     }
+     let numberOfZeroes=32-binary.length;
+     let count=0;
+     while(count<numberOfZeroes){
+      binary="0"+binary;
+      count++;  
+     }
+     for(let i=0;i<binary.length;i++) if(binary.charAt(i)=='1')answer+=Math.pow(2,i); 
+     return answer; 
+};
