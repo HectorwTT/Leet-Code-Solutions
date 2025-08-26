@@ -1,0 +1,15 @@
+var areaOfMaxDiagonal = function(dimensions) {
+  let maxArea=0;
+     let maxDiagonal=0.0;
+     for(let i=0;i<dimensions.length;i++){
+      let lengthSquared=dimensions[i][0]*dimensions[i][0];
+      let widthSquared=dimensions[i][1]*dimensions[i][1]; 
+      let area=dimensions[i][0]*dimensions[i][1]; 
+      let diagonal=Math.pow(lengthSquared+widthSquared,0.5);
+      if(diagonal>maxDiagonal){
+       maxDiagonal=diagonal;
+       maxArea=area; 
+      }else if(diagonal==maxDiagonal) maxArea=Math.max(area,maxArea); 
+     }
+     return maxArea;    
+};
