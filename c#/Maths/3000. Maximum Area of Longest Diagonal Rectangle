@@ -1,0 +1,17 @@
+public class Solution {
+    public int AreaOfMaxDiagonal(int[][] dimensions) {
+        int maxArea=0;
+     double maxDiagonal=0.0;
+     for(int i=0;i<dimensions.Length;i++){
+      int lengthSquared=dimensions[i][0]*dimensions[i][0];
+      int widthSquared=dimensions[i][1]*dimensions[i][1]; 
+      int area=dimensions[i][0]*dimensions[i][1]; 
+      double diagonal=Math.Pow(lengthSquared+widthSquared,0.5);
+      if(diagonal>maxDiagonal){
+       maxDiagonal=diagonal;
+       maxArea=area; 
+      }else if(diagonal==maxDiagonal) maxArea=Math.Max(area,maxArea); 
+     }
+     return maxArea;    
+    }
+}
