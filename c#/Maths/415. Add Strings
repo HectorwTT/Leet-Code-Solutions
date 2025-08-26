@@ -1,0 +1,46 @@
+public class Solution {
+    public string AddStrings(string a, string b) {
+     Stack<int> astack= new Stack<int>();
+     Stack<int> bstack= new Stack<int>();
+     Stack<int> reststack= new Stack<int>();
+     String result="";
+     int carryover=0;
+     for(int i=0;i<a.Length;i++){
+      char ch= a[i];
+      int chval= ch-48;
+      astack.Push(chval);
+     }
+     for(int i=0;i<b.Length;i++){
+      char ch= b[i];
+      int chval= ch-48;
+      bstack.Push(chval);
+     }
+     while(astack.Count!=0 && bstack.Count!=0){
+      int aval=astack.Pop();
+      int bval=bstack.Pop();
+      int total=aval+bval+carryover;
+      if(total>=10){
+        total-=10;
+        carryover=1;
+      }else{
+        carryover=0;
+      }
+      result= total+result;
+     }
+     if(astack.Count==0)reststack= bstack;
+     else reststack=astack;
+     while(reststack.Count!=0){
+       int restval= reststack.Pop();
+       int total= restval+carryover;
+       if(total>=10){
+         total-=10;
+         carryover=1;
+       }else {
+         carryover=0;
+       }
+       result=total+result;
+     }
+     if(carryover==1) result="1"+result;
+     return result;   
+    }
+}
