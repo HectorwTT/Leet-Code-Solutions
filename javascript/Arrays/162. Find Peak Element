@@ -1,0 +1,14 @@
+var findPeakElement = function(nums) {
+     let prev=0;
+     let curr=0;
+     let next=0;
+     for(let i=0;i<nums.length;i++){
+      if(i==0)prev=Math.pow(-2,31)-1;
+      else prev=nums[i-1];
+      curr= nums[i];
+      if(i==nums.length-1)next=Math.pow(-2,31)-1;
+      else next= nums[i+1];
+      if(curr>next && curr>prev) return i;
+     }   
+      return 0;    
+};
