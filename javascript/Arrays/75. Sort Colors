@@ -1,0 +1,16 @@
+var sortColors = function(nums) {
+       const map=new Map();
+       let start=0;
+       for(let i=0;i<nums.length;i++){
+        if(!map.has(nums[i]))map.set(nums[i],1);
+        else map.set(nums[i],map.get(nums[i])+1); 
+       }
+       for(let i=0;i<3;i++){
+        if(!map.has(i))continue;
+        let count=map.get(i);
+        let index=start+count;
+        for(let j=start;j<index;j++)nums[j]=i;
+        start=index;
+       }
+       return ;  
+};
