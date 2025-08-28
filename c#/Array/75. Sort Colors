@@ -1,0 +1,18 @@
+public class Solution {
+    public void SortColors(int[] nums) {
+       Dictionary<int,int> map=new Dictionary<int,int>();
+       int start=0;
+       for(int i=0;i<nums.Length;i++){
+        if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+        else map[nums[i]]=map[nums[i]]+1; 
+       }
+       for(int i=0;i<3;i++){
+        if(!map.ContainsKey(i))continue;
+        int count=map[i];
+        int index=start+count;
+        for(int j=start;j<index;j++)nums[j]=i;
+        start=index;
+       }
+       return ;
+    }
+}
