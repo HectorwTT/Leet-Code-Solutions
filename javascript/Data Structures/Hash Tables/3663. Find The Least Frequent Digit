@@ -1,0 +1,25 @@
+var getLeastFrequentDigit = function(n) {
+      const map=new Map();
+      let answer=9;
+      let str=""+n;
+      let min=str.length;
+      while(n!=0){
+       let mod=n%10;
+       if(!map.has(mod))map.set(mod,1); 
+       else map.set(mod,map.get(mod)+1);  
+       n-=mod;     
+       n/=10; 
+      }
+      
+      for(const key of map.keys()){
+        let count=map.get(key);
+        min=Math.min(count,min);  
+      }  
+      for(const key of map.keys()){
+        let count=map.get(key);
+        if(count==min){
+          answer=Math.min(answer,key);  
+        }
+      }
+      return answer;     
+};
