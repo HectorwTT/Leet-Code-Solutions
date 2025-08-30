@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int getLeastFrequentDigit(int n) {
+      unordered_map<int,int> map;
+      int answer=9;
+      int min=to_string(n).size();
+      while(n!=0){
+       int mod=n%10;
+       if(map.find(mod)==map.end())map[mod]=1; 
+       else map[mod]=map[mod]+1;       
+       n/=10; 
+      }
+      
+      for(auto key: map){
+        int count=key.second;
+        min=std::min(count,min);  
+      }  
+      for(auto key:map){
+        int count=key.second;
+        if(count==min){
+          answer=std::min(answer,key.first);  
+        }
+      }
+      return answer;   
+    }
+};
