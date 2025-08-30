@@ -1,0 +1,25 @@
+public class Solution {
+    public int GetLeastFrequentDigit(int n) {
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      int answer=(int)Math.Pow(2,31)-1;
+      int min=(int)Math.Pow(2,31)-1;
+      while(n!=0){
+       int mod=n%10;
+       if(!map.ContainsKey(mod))map[mod]=1; 
+       else map[mod]=map[mod]+1;       
+       n/=10; 
+      }
+      
+     foreach(var(key,value)in map){
+      int count= map[key];
+      min=Math.Min(min,count);
+     } 
+      foreach(var(key,value) in map){
+        int count=map[key];
+        if(count==min){
+          answer=Math.Min(answer,key);  
+        }
+      }
+      return answer;    
+    }
+}
