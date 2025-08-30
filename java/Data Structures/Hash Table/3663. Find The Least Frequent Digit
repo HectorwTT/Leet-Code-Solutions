@@ -1,0 +1,25 @@
+class Solution {
+    public int getLeastFrequentDigit(int n) {
+      HashMap<Integer,Integer> map=new HashMap<>();
+      int answer=(int)Math.pow(2,31)-1;
+      int min=(int)Math.pow(2,31)-1;
+      while(n!=0){
+       int mod=n%10;
+       if(!map.containsKey(mod))map.put(mod,1);
+       else map.replace(mod,map.get(mod)+1);       
+       n/=10; 
+      }
+      for(Integer key:map.keySet()){
+        int count=map.get(key);
+        min=Math.min(count,min);
+      }
+
+      for(Integer key:map.keySet()){
+        int count=map.get(key);
+        if(count==min){
+          answer=Math.min(answer,key);  
+        }
+      }
+      return answer;  
+    }
+}
