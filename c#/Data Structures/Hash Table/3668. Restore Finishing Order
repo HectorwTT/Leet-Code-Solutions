@@ -1,0 +1,14 @@
+public class Solution {
+    public int[] RecoverOrder(int[] order, int[] friends) {
+     int [] answer=new int[friends.Length];
+     int index=0;
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     for(int i=0;i<friends.Length;i++){
+       map[friends[i]]=1; 
+     }  
+     for(int i=0;i<order.Length;i++){
+      if(map.ContainsKey(order[i]))answer[index++]=order[i] ; 
+     }
+     return answer;    
+    }
+}
