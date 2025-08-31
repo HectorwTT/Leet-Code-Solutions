@@ -1,0 +1,12 @@
+var recoverOrder = function(order, friends) {
+     const answer=[];
+     let index=0;
+     const map=new Map();
+     for(let i=0;i<friends.length;i++){
+       map.set(friends[i],1); 
+     }  
+     for(let i=0;i<order.length;i++){
+      if(map.has(order[i]))answer[index++]=order[i] ; 
+     }
+     return answer;    
+};
