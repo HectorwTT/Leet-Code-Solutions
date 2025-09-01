@@ -1,0 +1,17 @@
+var numOfSubarrays = function(arr, k, threshold) {
+      const sums=[];
+      let answer=0;
+      let total=0;
+      for(let i=0;i<arr.length;i++){
+       total+=arr[i];
+       sums.push(total);
+      } 
+      for(let i=k-1;i<arr.length;i++){
+        let sum=0;
+        if(i==k-1)sum=sums[i];
+        else sum=sums[i]-sums[i-k];
+        let average=sum/k;
+        if(average>=threshold)answer++;
+      } 
+      return answer;     
+};
