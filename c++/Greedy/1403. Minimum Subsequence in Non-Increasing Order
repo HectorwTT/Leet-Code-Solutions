@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> minSubsequence(vector<int>& nums) {
+      vector<int> list;
+      std::sort(nums.begin(),nums.end());
+      long sum=0;
+      long total=0;
+      int index=nums.size()-1;
+      for(int i=0;i<nums.size();i++)sum+=1L*nums[i];
+      while(total<=sum-total){
+       total+=nums[index]; 
+       list.push_back(nums[index--]);
+      }
+      return list;    
+    }
+};
