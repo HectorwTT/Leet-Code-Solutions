@@ -1,0 +1,26 @@
+var largestSumAfterKNegations = function(nums, k) {
+        let score=0;
+        nums.sort((x,y)=>x-y);
+        let index=0;
+        let count=0;
+        while(count !=k){
+         nums[index]= -1*nums[index];
+         if(index+1 < nums.length && nums[index+1]<=0 )index++;
+         else{
+            if(index+1==nums.length)break;
+            let next= nums[index+1];
+            let current= nums[index];
+            if(index<nums.length && current>0 && next>0 && next<current)index++;
+         }
+         count++;
+         if(k>nums.length ){
+             nums.sort((x,y)=>x-y);
+             index=0;
+         }
+        }
+        for(let i=0;i<nums.length;i++){
+         score+=nums[i];
+        }
+        
+        return score;  
+};
