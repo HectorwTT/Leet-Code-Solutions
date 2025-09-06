@@ -1,0 +1,19 @@
+public class Solution {
+    public int[] SortArrayByParity(int[] nums) {
+     int []  answer=new int[nums.Length];
+     int numOfEven=0;
+     int numOfOdd=0;
+     int evenIndex=0;
+     int oddIndex=0;
+     for(int i=0;i<nums.Length;i++){
+      if(nums[i]%2==0)numOfEven++;
+      else numOfOdd++;   
+     } 
+     oddIndex=numOfEven;
+     for(int i=0;i<nums.Length;i++){
+       if(nums[i]%2==0)answer[evenIndex++]=nums[i];
+       else answer[oddIndex++]=nums[i]; 
+     }
+     return answer;   
+    }
+}
