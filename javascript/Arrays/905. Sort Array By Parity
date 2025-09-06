@@ -1,0 +1,12 @@
+var sortArrayByParity = function(nums) {
+  const evens=[];
+  const odds=[];
+  const answer=[];
+  for(let i=0;i<nums.length;i++){
+   if(nums[i]%2==0)evens.push(nums[i]);
+   else odds.push(nums[i]); 
+  } 
+  for(let i=0;i<evens.length;i++)answer.push(evens[i]);
+  for(let i=0;i<odds.length;i++)answer.push(odds[i]);
+  return answer;
+};
