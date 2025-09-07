@@ -1,0 +1,13 @@
+public class Solution {
+    public int[] SumZero(int n) {
+     int [] answer=new int[n];
+     int min=-1*(n/2);
+     int max=n/2;
+     int index=0;
+     for(int i=min;i<=max;i++){
+      if(n%2==0 && i==0 )  continue;
+      answer[index++]=i;
+     }  
+     return answer;   
+    }
+}
