@@ -1,0 +1,14 @@
+var sumZero = function(n) {
+     const answer=[];
+     let min=-1*(n/2);
+     let max=1*(n/2);
+     if(n%2==1){
+      min=(n-1)/2*-1; 
+      max=(n-1)/2; 
+     }
+     for(let i=min;i<=max;i++){
+      if(n%2==0 && i==0 )  continue;
+      answer.push(i);
+     }  
+     return answer;    
+};
