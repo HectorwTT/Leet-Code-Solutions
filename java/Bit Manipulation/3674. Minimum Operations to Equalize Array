@@ -1,0 +1,7 @@
+class Solution {
+    public int minOperations(int[] nums) {
+      int count=(int)Arrays.stream(nums).distinct().count(); 
+      if(count==1) return 0;
+      else return 1;
+    }
+}
