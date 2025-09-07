@@ -1,0 +1,11 @@
+public class Solution {
+    public int MinOperations(int[] nums) {
+     Dictionary<int,int>map=new Dictionary<int,int>();
+     for(int i=0;i<nums.Length;i++){
+      if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+      else map[nums[i]]=map[nums[i]]+1;  
+     }
+     if(map.Count==1) return 0;
+     else return 1;     
+    }
+}
