@@ -1,0 +1,13 @@
+class Solution {
+public:
+    vector<int> sumZero(int n) {
+     vector<int> answer;
+     int min=-1*(n/2);
+     int max=n/2;
+     for(int i=min;i<=max;i++){
+      if(n%2==0 && i==0 )  continue;
+      answer.push_back(i);
+     }  
+     return answer;   
+    }
+};
