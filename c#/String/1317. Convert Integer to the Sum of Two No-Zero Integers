@@ -1,0 +1,18 @@
+public class Solution {
+    public int[] GetNoZeroIntegers(int n) {
+      int [] answer=new int[2];
+      int first  =1;
+      int second  =n-1;
+      String firstValue=""+first;
+      String secondValue=""+second; 
+      while(secondValue.IndexOf("0")!=-1 || firstValue.IndexOf("0")!=-1){
+        first++;
+       second--;
+       firstValue=""+first;
+       secondValue=""+second; 
+      }
+      answer[0]=first;
+      answer[1]=second;
+      return answer;   
+    }
+}
