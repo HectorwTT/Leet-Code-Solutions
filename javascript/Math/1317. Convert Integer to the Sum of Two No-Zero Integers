@@ -1,0 +1,16 @@
+var getNoZeroIntegers = function(n) {
+      const answer=[];
+      let first  =1;
+      let second  =n-1;
+      let firstValue=""+first;
+      let secondValue=""+second; 
+      while(secondValue.indexOf("0")!=-1 || firstValue.indexOf("0")!=-1){
+       first++;
+       second--;
+       firstValue=""+first;
+       secondValue=""+second; 
+      }
+      answer.push(first);
+      answer.push(second);
+      return answer;  
+};
