@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string sortVowels(string s) {
+      int index=0;
+      string answer="";
+       std::priority_queue<int, std::vector<int>, std::greater<int>> chars;
+      for(int i=0;i<s.size();i++){
+       char ch=s[i];
+       if(ch=='A' || ch=='a' 
+           || ch=='E' || ch=='e' 
+           || ch=='I' || ch=='i' 
+           || ch=='O' || ch=='o'
+           || ch=='U' || ch=='u'){
+            int chVal=ch;
+            chars.push(chVal); 
+           }    
+      }
+      
+      for(int i=0;i<s.size();i++){
+        char ch=s[i];
+       if(ch=='A' || ch=='a' 
+           || ch=='E' || ch=='e' 
+           || ch=='I' || ch=='i' 
+           || ch=='O' || ch=='o'
+           || ch=='U' || ch=='u'){
+            int chVal=chars.top(); 
+            chars.pop();
+            answer+=(char)chVal;
+       }else answer+=ch;   
+      } 
+      return answer;  
+    }
+};
