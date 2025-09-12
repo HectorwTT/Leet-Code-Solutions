@@ -1,0 +1,14 @@
+class Solution {
+public:
+    bool doesAliceWin(string s) {
+     int numOfVowels=0;
+     int numOfConsonants=0;
+     for(int i=0;i<s.size();i++){
+      char ch = s[i];
+      if(ch=='a' || ch =='e' || ch=='i' || ch=='o' || ch=='u')numOfVowels++;
+      else numOfConsonants++;  
+     }
+     if(numOfVowels==0) return false;
+     else return true;   
+    }
+};
