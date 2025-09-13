@@ -1,21 +1,23 @@
-class Solution {
-    public int smallestAbsent(int[] nums) {
+public class Solution {
+    public int SmallestAbsent(int[] nums) {
      int answer=0;
-     Arrays.sort(nums);
-     int sum=(int)Arrays.stream(nums).sum();
-     double average=sum/nums.length;
-     HashMap<Integer,Integer> map=new HashMap<>();
-     for(int i=0;i<nums.length;i++){
+     Array.Sort(nums);
+     int sum=0;     
+     Dictionary<int,int> dict=new Dictionary<int,int>();
+     for(int i=0;i<nums.Length;i++){
+      sum+=nums[i];
       if(nums[i]<=0)continue;  
       else{
-        if(!map.containsKey(nums[i]))map.put(nums[i],1);
+        if(!dict.ContainsKey(nums[i]))dict[nums[i]]=1;
       }
+      
      }
+     double average=sum/nums.Length;
      int min=nums[0];
-     int max=nums[nums.length-1];
+     int max=nums[nums.Length-1];
      for(int i=min;i<=max;i++){
-       if(map.containsKey(i) || i<=0)continue;
-       int floor=(int)Math.floor(average);
+       if(dict.ContainsKey(i) || i<=0)continue;
+       int floor=(int)Math.Floor(average);
        if(floor<i)return i;
      }
      if(max<0) return 1;
