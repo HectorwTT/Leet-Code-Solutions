@@ -1,0 +1,10 @@
+public class Solution {
+    public int EarliestTime(int[][] tasks) {
+     int answer=(int)Math.Pow(2,31);  
+     for(int i=0;i<tasks.Length;i++){
+      int finish=tasks[i][0]+tasks[i][1];
+      answer=Math.Min(answer,finish);        
+     } 
+     return answer;    
+    }
+}
