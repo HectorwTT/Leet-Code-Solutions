@@ -1,0 +1,20 @@
+class Solution {
+    public int[] maxKDistinct(int[] nums, int k) {
+      List<Integer> answer=new  ArrayList<>();
+      int count=0;
+      PriorityQueue<Integer> pq=new PriorityQueue<>((a,b)->b-a);
+      HashMap<Integer,Integer> map=new HashMap<>();
+      for(int i=0;i<nums.length;i++){
+        if(!map.containsKey(nums[i])){
+         map.put(nums[i],1);
+         pq.offer(nums[i]);   
+        }
+      }
+      while(!pq.isEmpty() && count<k){
+       int number=pq.poll();
+       answer.add(number); 
+       count++;
+      }
+      return answer.stream().mapToInt(Integer::intValue).toArray();   
+    }
+}
