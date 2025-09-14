@@ -1,0 +1,8 @@
+var earliestTime = function(tasks) {
+     let answer=Math.pow(2,31);  
+     for(let i=0;i<tasks.length;i++){
+      let finish=tasks[i][0]+tasks[i][1];
+      answer=Math.min(answer,finish);        
+     } 
+     return answer;   
+};
