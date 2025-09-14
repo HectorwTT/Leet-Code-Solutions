@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> maxKDistinct(vector<int>& nums, int k) {
+      vector<int> answer;
+      int count=0;
+      priority_queue<int> pq;
+      unordered_map<int,int> map;
+      for(int i=0;i<nums.size();i++){
+        if(map.find(nums[i])==map.end()){
+         map[nums[i]]=1;
+         pq.push(nums[i]);   
+        }
+      }
+      while(!pq.empty() && count<k){
+       int number=pq.top();
+       pq.pop();
+       answer.push_back(number); 
+       count++;
+      }
+      return answer;   
+    }
+};
