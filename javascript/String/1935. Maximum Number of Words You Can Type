@@ -1,0 +1,21 @@
+var canBeTypedWords = function(text, brokenLetters) {
+      const  words=text.split( " ");
+      let answer=0;
+      const map=new Map();
+      for(let i=0;i<brokenLetters.length;i++){
+       if(!map.has(brokenLetters.charAt(i)))map.set(brokenLetters.charAt(i),1); 
+      }
+      for(let i=0;i<words.length;i++){
+        let word=words[i];
+        let canFullyType=true;
+        for(let j=0;j<word.length;j++){
+         var ch=word.charAt(j);
+         if(map.has(ch)){
+           canFullyType=false;
+           break; 
+         }   
+        }
+        if(canFullyType)answer++;
+      }
+      return answer;  
+};
