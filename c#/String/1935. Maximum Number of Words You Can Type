@@ -1,0 +1,23 @@
+public class Solution {
+    public int CanBeTypedWords(string text, string brokenLetters) {
+      string []  words=text.Split(' ');
+      int answer=0;
+      Dictionary<char,int>map=new Dictionary<char,int>();
+      for(int i=0;i<brokenLetters.Length;i++){
+       if(!map.ContainsKey(brokenLetters[i]))map[brokenLetters[i]]=1; 
+      }
+      for(int i=0;i<words.Length;i++){
+        string word=words[i];
+        bool canFullyType=true;
+        for(int j=0;j<word.Length;j++){
+         char ch=word[j];
+         if(map.ContainsKey(ch)){
+           canFullyType=false;
+           break; 
+         }   
+        }
+        if(canFullyType)answer++;
+      }
+      return answer;  
+    }
+}
