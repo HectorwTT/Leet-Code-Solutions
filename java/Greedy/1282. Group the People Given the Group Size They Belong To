@@ -1,0 +1,37 @@
+class Solution {
+    public List<List<Integer>> groupThePeople(int[] groupSizes) {
+      HashMap<Integer,List<List<Integer>>> map=new HashMap<>();
+      List<List<Integer>> answer=new ArrayList<>(); 
+      List<Integer> sizes=new ArrayList<>();     
+      for(int i=0;i<groupSizes.length;i++){
+       int groupSize=groupSizes[i];
+       if(!map.containsKey(groupSize)){
+        List<Integer> list=new ArrayList<>();
+        list.add(i);
+        sizes.add(groupSize);
+        List<List<Integer>> lists=new ArrayList<>();
+        lists.add(list);
+        map.put(groupSize,lists);
+       }else{
+         List<List<Integer>> lists=map.get(groupSize);
+         List<Integer> list=lists.get(lists.size()-1);
+         if(list.size()==groupSize){
+          List<Integer> newList=new ArrayList<>();
+          newList.add(i);
+          lists.add(newList);
+          map.replace(groupSize,lists);  
+         }else{
+           list.add(i);
+           lists.set(lists.size()-1,list); 
+           map.replace(groupSize,lists);
+         }
+       } 
+      }
+      sizes.sort(null);
+      for(int i=0;i<sizes.size();i++){
+       List<List<Integer>>lists=map.get(sizes.get(i));
+       answer.addAll(lists); 
+      }
+      return answer;        
+    }
+}
