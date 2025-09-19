@@ -1,0 +1,42 @@
+class Spreadsheet {
+    private int [][]matrix;
+    public Spreadsheet(int rows) {
+      matrix=new int[rows][26];  
+    }
+    
+    public void setCell(String cell, int value) {
+     int column=cell.charAt(0) -65;  
+     int row=Integer.parseInt(cell.substring(1))-1;
+     matrix[row][column]=value;
+    }
+    
+    public void resetCell(String cell) {
+      int column=cell.charAt(0) -65;  
+     int row=Integer.parseInt(cell.substring(1))-1;
+     matrix[row][column]=0;   
+    }
+    
+    public int getValue(String formula) {
+     String first=formula.substring(1,formula.indexOf("+"));
+     String second=formula.substring(formula.indexOf("+")+1);
+     if(first.charAt(0)>=65 && first.charAt(0)<=90){
+       int column=first.charAt(0)-65;
+       int row=Integer.parseInt(first.substring(1))-1; 
+       first=""+ matrix[row][column];
+     }
+     if(second.charAt(0)>=65 && second.charAt(0)<=90){
+       int column=second.charAt(0)-65;
+       int row=Integer.parseInt(second.substring(1))-1; 
+       second=""+ matrix[row][column];  
+     }
+      return Integer.parseInt(first)+Integer.parseInt(second);   
+    }
+}
+
+/**
+ * Your Spreadsheet object will be instantiated and called as such:
+ * Spreadsheet obj = new Spreadsheet(rows);
+ * obj.setCell(cell,value);
+ * obj.resetCell(cell);
+ * int param_3 = obj.getValue(formula);
+ */
