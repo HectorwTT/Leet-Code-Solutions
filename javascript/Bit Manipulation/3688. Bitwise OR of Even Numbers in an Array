@@ -1,0 +1,6 @@
+var evenNumberBitwiseORs = function(nums) {
+     let answer=0;
+     let count=0;
+     for(let i=0;i<nums.length;i++)if(nums[i]%2==0)answer|=nums[i];
+     return answer;   
+};
