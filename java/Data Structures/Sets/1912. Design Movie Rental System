@@ -1,0 +1,99 @@
+class MovieRentingSystem {
+    // Unrented movies by movieId
+    private Map<Integer, TreeSet<MovieEntry>> unrentedMap;
+    // Rented movies
+    private TreeSet<MovieEntry> rentedSet;
+    // Lookup for fast reference
+    private Map<String, MovieEntry> lookup;
+
+    public MovieRentingSystem(int n, int[][] entries) {
+        unrentedMap = new HashMap<>();
+        rentedSet = new TreeSet<>();
+        lookup = new HashMap<>();
+
+        for (int[] e : entries) {
+            int shop = e[0], movie = e[1], price = e[2];
+            MovieEntry me = new MovieEntry(shop, movie, price);
+            lookup.put(key(shop, movie), me);
+
+            unrentedMap.putIfAbsent(movie, new TreeSet<>());
+            unrentedMap.get(movie).add(me);
+        }
+    }
+
+    // Search top 5 shops for a movie (without removing)
+    public List<Integer> search(int movie) {
+        List<Integer> res = new ArrayList<>();
+        if (!unrentedMap.containsKey(movie)) return res;
+
+        TreeSet<MovieEntry> set = unrentedMap.get(movie);
+        int count = 0;
+        for (MovieEntry me : set) {
+            if (count == 5) break;
+            res.add(me.shop);
+            count++;
+        }
+        return res;
+    }
+
+    // Rent a movie
+    public void rent(int shop, int movie) {
+        String k = key(shop, movie);
+        MovieEntry me = lookup.get(k);
+        if (me == null) return;
+
+        unrentedMap.get(movie).remove(me);
+        rentedSet.add(me);
+    }
+
+    // Drop a movie
+    public void drop(int shop, int movie) {
+        String k = key(shop, movie);
+        MovieEntry me = lookup.get(k);
+        if (me == null) return;
+
+        rentedSet.remove(me);
+        unrentedMap.get(movie).add(me);
+    }
+
+    // Report top 5 rented movies
+    public List<List<Integer>> report() {
+        List<List<Integer>> res = new ArrayList<>();
+        int count = 0;
+        for (MovieEntry me : rentedSet) {
+            if (count == 5) break;
+            res.add(Arrays.asList(me.shop, me.movie));
+            count++;
+        }
+        return res;
+    }
+
+    private String key(int shop, int movie) {
+        return shop + ":" + movie;
+    }
+
+    // Helper class
+    static class MovieEntry implements Comparable<MovieEntry> {
+        int shop, movie, price;
+        MovieEntry(int s, int m, int p) { shop = s; movie = m; price = p; }
+
+        @Override
+        public int compareTo(MovieEntry o) {
+            if (this.price != o.price) return this.price - o.price;
+            if (this.shop != o.shop) return this.shop - o.shop;
+            return this.movie - o.movie;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (!(o instanceof MovieEntry)) return false;
+            MovieEntry me = (MovieEntry) o;
+            return shop == me.shop && movie == me.movie && price == me.price;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(shop, movie, price);
+        }
+    }
+}
