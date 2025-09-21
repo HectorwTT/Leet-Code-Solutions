@@ -1,0 +1,8 @@
+public class Solution {
+    public int EvenNumberBitwiseORs(int[] nums) {
+     int answer=0;
+     int count=0;
+     for(int i=0;i<nums.Length;i++)if(nums[i]%2==0)answer|=nums[i];
+     return answer;     
+    }
+}
