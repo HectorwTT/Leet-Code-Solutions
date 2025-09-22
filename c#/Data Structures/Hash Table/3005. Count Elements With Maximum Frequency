@@ -1,1 +1,18 @@
-
+public class Solution {
+    public int MaxFrequencyElements(int[] nums) {
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      int answer=0;
+      for(int i=0;i<nums.Length;i++){
+       if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+       else map[nums[i]]=map[nums[i]]+1; 
+      }
+      int max=0;
+      foreach(var(key,value)in map){
+        max=Math.Max(max,map[key]);
+      }  
+      foreach(var(key,value)in map){
+       if(map[key]==max) answer+=map[key];
+      }
+      return answer;   
+    }
+}
