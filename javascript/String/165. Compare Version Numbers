@@ -1,0 +1,36 @@
+var compareVersion = function(version1, version2) {
+      const numbers1=version1.split(/\./);
+      const numbers2=version2.split(/\./);
+      let index1=0;
+      let index2=0;
+      let maxIndex=Math.max(numbers1.length,numbers2.length);
+      let num1="";
+      let num2="";
+      while(index1<maxIndex &&  index2<maxIndex){
+       if(index1>=numbers1.length){
+        num1+="0";
+        index1++;
+        num2+=parseInt(numbers2[index2++]);
+       }else if(index2>=numbers2.length){
+        num2+="0";
+        index2++;
+        num1+=parseInt(numbers1[index1++]);
+       }
+       else{
+       let number1=parseInt(numbers1[index1]);
+       let number2=parseInt(numbers2[index2]);
+       if(number1<number2)return -1;
+       else if(number1>number2)return 1; 
+       else{
+        index1++;
+        index2++;
+        num1+=number1;
+        num2+=number2;
+       } 
+       }
+       
+      }
+      if(num1.localeCompare(num2)<0)return -1;
+      else if(num1.localeCompare(num2)>0)return 1;
+      else return 0;     
+};
