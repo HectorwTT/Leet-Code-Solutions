@@ -1,0 +1,39 @@
+public class Solution {
+    public int CompareVersion(string version1, string version2) {
+      char[] delimiters = { '.' };
+      string [] numbers1=version1.Split(delimiters,StringSplitOptions.RemoveEmptyEntries);
+      string [] numbers2=version2.Split(delimiters,StringSplitOptions.RemoveEmptyEntries);
+      int index1=0;
+      int index2=0;
+      int maxIndex=Math.Max(numbers1.Length,numbers2.Length);
+      string num1="";
+      string num2="";
+      while(index1<maxIndex &&  index2<maxIndex){
+       if(index1>=numbers1.Length){
+        num1+="0";
+        index1++;
+        num2+=int.Parse(numbers2[index2++]);
+       }else if(index2>=numbers2.Length){
+        num2+="0";
+        index2++;
+        num1+=int.Parse(numbers1[index1++]);
+       }
+       else{
+        int number1=int.Parse(numbers1[index1]);
+       int number2=int.Parse(numbers2[index2]);
+       if(number1<number2)return -1;
+       else if(number1>number2)return 1; 
+       else{
+        index1++;
+        index2++;
+        num1+=number1;
+        num2+=number2;
+       } 
+       }
+       
+      }
+      if(num1.CompareTo(num2)<0)return -1;
+      else if(num1.CompareTo(num2)>0)return 1;
+      else return 0;    
+    }
+}
