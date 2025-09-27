@@ -1,0 +1,45 @@
+public class Solution {
+    public string MajorityFrequencyGroup(string s) {
+     Dictionary<char,int>map1=new Dictionary<char,int>();
+     Dictionary<int,List<char>> map2=new Dictionary<int,List<char>>();
+     int maxSize=0;
+     int maxFrequency=0;
+     List<char> list=new List<char>(); 
+     String answer="";
+     for(int i=0;i<s.Length;i++){
+      char ch=s[i];
+      if(!map1.ContainsKey(ch))map1[ch]=1;
+      else map1[ch]=map1[ch]+1;  
+     }
+     foreach(var(key,value)in map1){
+      int count=map1[key];
+      if(!map2.ContainsKey(count)){
+        List<char> chars=new List<char>();
+        chars.Add(key);
+        map2[count]=chars;
+      }else{
+        List<char> chars=map2[count];
+        chars.Add(key);
+        map2[count]=chars;
+      }  
+     }
+     foreach(var(key,value)in map2){
+      int size=map2[key].Count;
+      maxSize=Math.Max(maxSize,size);  
+     } 
+     foreach(var(key,value)in map2){
+       if(map2[key].Count!=maxSize)continue;
+       List<char> chars=map2[key];
+       char ch=chars[0];
+       int frequency=map1[ch];
+       maxFrequency=Math.Max(frequency,maxFrequency);
+       if(maxFrequency==frequency)list=map2[key]; 
+     }
+     list.Sort();
+     for(int i=0;i<list.Count;i++){
+      char ch=list[i];
+      answer+=ch;  
+     }
+     return answer;   
+    }
+}
