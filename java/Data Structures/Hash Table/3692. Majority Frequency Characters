@@ -1,0 +1,45 @@
+class Solution {
+    public String majorityFrequencyGroup(String s) {
+     HashMap<Character,Integer>map1=new HashMap<>();
+     HashMap<Integer,List<Character>> map2=new HashMap<>();
+     int maxSize=0;
+     int maxFrequency=0;
+     List<Character> list=new ArrayList<>(); 
+     String answer="";
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(!map1.containsKey(ch))map1.put(ch,1);
+      else map1.replace(ch,map1.get(ch)+1);  
+     }
+     for(Character key:map1.keySet()){
+      int count=map1.get(key);
+      if(!map2.containsKey(count)){
+        List<Character> chars=new ArrayList<>();
+        chars.add(key);
+        map2.put(count,chars);
+      }else{
+        List<Character> chars=map2.get(count);
+        chars.add(key);
+        map2.put(count,chars);
+      }  
+     }
+     for(Integer key:map2.keySet()){
+      int size=map2.get(key).size();
+      maxSize=Math.max(maxSize,size);  
+     } 
+     for(Integer key:map2.keySet()){
+       if(map2.get(key).size()!=maxSize)continue;
+       List<Character> chars=map2.get(key);
+       char ch=chars.get(0);
+       int frequency=map1.get(ch);
+       maxFrequency=Math.max(frequency,maxFrequency);
+       if(maxFrequency==frequency)list=map2.get(key); 
+     }
+     list.sort(null);
+     for(int i=0;i<list.size();i++){
+      char ch=list.get(i);
+      answer+=ch;  
+     }
+     return answer;  
+    }
+}
