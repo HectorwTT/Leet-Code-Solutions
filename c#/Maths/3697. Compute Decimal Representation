@@ -1,0 +1,16 @@
+public class Solution {
+    public int[] DecimalRepresentation(int n) {
+      List<int> list=new List<int>();
+      int power=0;
+      while(n!=0){
+       int mod=n%10;
+       if(mod!=0)list.Add(mod*(int)Math.Pow(10,power));
+       power++;
+       n/=10; 
+      }
+      int [] answer=new int[list.Count];
+      int index=list.Count-1;
+      for(int i=0;i<answer.Length;i++) answer[i]=list[index--]; 
+      return answer;        
+    }
+}
