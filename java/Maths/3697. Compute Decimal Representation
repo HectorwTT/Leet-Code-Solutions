@@ -1,0 +1,16 @@
+class Solution {
+    public int[] decimalRepresentation(int n) {
+      List<Integer> list=new ArrayList<>();
+      int power=0;
+      while(n!=0){
+       int mod=n%10;
+       if(mod!=0)list.add(mod*(int)Math.pow(10,power));
+       power++;
+       n/=10; 
+      }
+      int [] answer=new int[list.size()];
+      int index=list.size()-1;
+      for(int i=0;i<answer.length;i++) answer[i]=list.get(index--); 
+      return answer;      
+    }
+}
