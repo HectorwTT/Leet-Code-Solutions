@@ -1,0 +1,15 @@
+var decimalRepresentation = function(n) {
+      const list=[];
+      let power=0;
+      while(n!=0){
+       let mod=n%10;
+       if(mod!=0)list.push(mod*Math.pow(10,power));
+       power++;
+       n-=mod;
+       n/=10; 
+      }
+      const answer=[];
+      let index=list.length-1;
+      for(let i=0;i<list.length;i++) answer.push(list[index--]); 
+      return answer;       
+};
