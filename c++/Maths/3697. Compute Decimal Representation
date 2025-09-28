@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> decimalRepresentation(int n) {
+      vector<int> list;
+      int power=0;
+      while(n!=0){
+       int mod=n%10;
+       if(mod!=0)list.push_back(mod*std::pow(10,power));
+       power++;
+       n/=10; 
+      }
+      vector<int> answer;
+      int index=list.size()-1;
+      for(int i=0;i<list.size();i++) answer.push_back(list[index--]); 
+      return answer;    
+    }
+};
