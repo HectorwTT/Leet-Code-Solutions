@@ -1,0 +1,14 @@
+var maxBottlesDrunk = function(numBottles, numExchange) {
+ let fullBottles=numBottles;
+ let emptyBottles=0;
+ let bottlesDrunk=0;
+ emptyBottles=fullBottles;
+ fullBottles=0;
+ bottlesDrunk=emptyBottles;
+ while(fullBottles+emptyBottles>=numExchange){
+  emptyBottles-=numExchange;
+  fullBottles++;
+  numExchange++;
+ }   
+ return bottlesDrunk+fullBottles;   
+};
