@@ -1,0 +1,64 @@
+var numberToWords = function(num) {
+  if(num<10){
+       if(num==0)return "Zero"; 
+       else if(num==1)return "One";
+       else if(num==2) return "Two";
+       else if(num==3) return "Three";
+       else if(num==4) return "Four";
+       else if(num==5) return "Five";
+       else if(num==6) return "Six";
+       else if(num==7) return "Seven";
+       else if(num==8) return "Eight";
+       else return "Nine";
+      }else if(num>=10 && num<100){
+        if(num==10)return"Ten";
+        else if(num==11)return "Eleven";
+        else if(num==12) return "Twelve";
+        else if(num==13) return "Thirteen";
+        else if(num==14) return "Fourteen";
+        else if(num==15) return "Fifteen";
+        else if(num==16) return "Sixteen";
+        else if(num==17) return "Seventeen";
+        else if(num==18) return "Eighteen";
+        else if(num==19) return "Nineteen";
+        else if(num==20) return "Twenty";
+        else if(num==30) return "Thirty";
+        else if(num==40) return "Forty";
+        else if(num==50) return "Fifty";
+        else if(num==60) return "Sixty";
+        else if(num==70) return "Seventy";
+        else if(num==80) return "Eighty";
+        else if(num==90) return "Ninety";
+        else if(num>60 && num<70) return "Sixty "+numberToWords(num-60);
+        else if(num>70 && num<80) return "Seventy " +numberToWords(num-70);
+        else if(num>80 && num<90) return "Eighty " +numberToWords(num-80);
+        else if(num>20 && num<30) return "Twenty "+numberToWords(num-20);
+        else if(num>30 && num<40) return "Thirty " +numberToWords(num-30);
+        else if(num>40 && num<50) return "Forty " +numberToWords(num-40);
+        else if(num>50 && num<60) return "Fifty "+numberToWords(num-50);
+        else if(num>60 && num<70) return "Sixty "+numberToWords(num-60);
+        else if(num>70 && num<80) return "Seventy " +numberToWords(num-70);
+        else if(num>80 && num<90) return "Eighty " +numberToWords(num-80);
+        else  return "Ninety "+numberToWords(num-90);
+      }else if(num>=100 && num<1000){
+        let modHundred=num%100;
+        let numHundred=(num-modHundred)/100;
+        if(modHundred==0) return numberToWords(numHundred)+" Hundred";
+        else return numberToWords(numHundred)+" Hundred "+numberToWords(modHundred);
+      }else if(num>=1000 && num<1000000){
+        let modThousand=num%1000;
+        let numThousand=(num-modThousand)/1000;
+        if(modThousand==0) return numberToWords(numThousand)+" Thousand";
+        else return numberToWords(numThousand)+" Thousand "+numberToWords(modThousand);
+      }else if(num>=1000000 && num<1000000000){
+       let modMillion=num%1000000;
+       let numMillion=(num-modMillion)/1000000;
+        if(modMillion==0) return numberToWords(numMillion)+" Million";
+        else return numberToWords(numMillion)+" Million "+numberToWords(modMillion);
+      }else{
+       let modBillion=num%1000000000;
+       let numBillion=(num-modBillion)/1000000000; 
+        if(modBillion==0) return numberToWords(numBillion)+" Billion";
+        else return numberToWords(numBillion)+" Billion "+numberToWords(modBillion);
+      }       
+};
