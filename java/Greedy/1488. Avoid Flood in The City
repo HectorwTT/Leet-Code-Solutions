@@ -1,0 +1,37 @@
+class Solution {
+    
+    public int[] avoidFlood(int[] rains) {
+        int n = rains.length;
+        // min-heap which maintains the next earliest occuring index of any lake
+        PriorityQueue<Integer> nextEarliest = new PriorityQueue<>();
+        Map<Integer,Queue<Integer>> idxList = new HashMap<>();
+        for(int i=0;i<n;i++) {
+            idxList.computeIfAbsent(rains[i], key -> new LinkedList<>()).offer(i);
+        }
+        int[] res = new int[n];
+        for(int i=0;i<n;i++) {
+            if(rains[i] > 0) {
+                res[i] = -1;
+
+                // flooding situation without a dry day [1,2,4,2,0,3] for 2 
+                if(!nextEarliest.isEmpty() && nextEarliest.peek() == i)
+                    return new int[0];
+
+                idxList.get(rains[i]).poll();
+                // if rain happens in the current lake in future, offer the next index of this lake into the pq
+                if(!idxList.get(rains[i]).isEmpty())
+                    nextEarliest.offer(idxList.get(rains[i]).peek());
+            }
+            // rains[i] == 0
+            else {
+                if(nextEarliest.isEmpty())
+                    res[i] = 1;
+                else {
+                    // dry out the lake on which rain would fall the earliest
+                    res[i] = rains[nextEarliest.poll()];
+                }
+            }
+        }
+        return res;
+    }
+}
