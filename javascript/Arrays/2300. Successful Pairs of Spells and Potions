@@ -1,0 +1,34 @@
+var successfulPairs = function(spells, potions, success) {
+    // Sort potions in ascending order
+    potions.sort((a, b) => a - b);
+    
+    const answer = [];
+    const m = potions.length;
+
+    for (let spell of spells) {
+        // Minimum potion strength needed for this spell
+        let minPotion = Math.ceil(success / spell);
+
+        // Binary search to find first potion >= minPotion
+        let index = binarySearch(potions, minPotion);
+
+        // Count of successful pairs = potions from index to end
+        answer.push(m - index);
+    }
+
+    return answer;
+};
+
+// Standard binary search to find first element >= key
+function binarySearch(arr, key) {
+    let left = 0, right = arr.length - 1;
+    while (left <= right) {
+        let mid = Math.floor((left + right) / 2);
+        if (arr[mid] < key) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left; // first index where arr[i] >= key
+}
