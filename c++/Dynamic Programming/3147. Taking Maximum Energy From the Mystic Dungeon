@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int maximumEnergy(vector<int>& energy, int k) {
+     vector<int> dp;
+     for(int i=0;i<energy.size();i++)dp.push_back(0);
+     for(int i=dp.size()-1;i>dp.size()-1-k;i--)dp[i]=energy[i];
+     for(int i=dp.size()-1-k;i>=0;i--)dp[i]=dp[i+k]+energy[i];  
+     std::sort(dp.begin(),dp.end());
+     return dp[dp.size()-1];    
+    }
+};
