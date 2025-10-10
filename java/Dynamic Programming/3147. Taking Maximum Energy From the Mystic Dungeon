@@ -1,0 +1,9 @@
+class Solution {
+    public int maximumEnergy(int[] energy, int k) {
+     int [] dp=new  int[energy.length];
+     for(int i=dp.length-1;i>dp.length-1-k;i--)dp[i]=energy[i];
+     for(int i=dp.length-1-k;i>=0;i--)dp[i]=dp[i+k]+energy[i];  
+     Arrays.sort(dp);
+     return dp[dp.length-1];    
+    }
+}
