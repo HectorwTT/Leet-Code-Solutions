@@ -1,0 +1,9 @@
+public class Solution {
+    public int MaximumEnergy(int[] energy, int k) {
+     int [] dp=new  int[energy.Length];
+     for(int i=dp.Length-1;i>dp.Length-1-k;i--)dp[i]=energy[i];
+     for(int i=dp.Length-1-k;i>=0;i--)dp[i]=dp[i+k]+energy[i];  
+     Array.Sort(dp);
+     return dp[dp.Length-1];    
+    }
+}
