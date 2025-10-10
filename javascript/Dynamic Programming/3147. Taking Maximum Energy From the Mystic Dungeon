@@ -1,0 +1,8 @@
+var maximumEnergy = function(energy, k) {
+     const dp=[];
+     for(let i=0;i<energy.length;i++)dp.push(0);
+     for(let i=dp.length-1;i>dp.length-1-k;i--)dp[i]=energy[i];
+     for(let i=dp.length-1-k;i>=0;i--)dp[i]=dp[i+k]+energy[i];  
+     dp.sort((x,y)=>x-y);
+     return dp[dp.length-1];    
+};
