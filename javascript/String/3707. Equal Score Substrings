@@ -1,0 +1,16 @@
+var scoreBalance = function(s) {
+      const sum=[];
+      let total=0;
+      for(let i=0;i<s.length;i++){
+       var ch=s.charCodeAt(i);
+       let value=ch-96; 
+       total+=value;
+       sum.push(total);
+      }
+      for(let i=0;i<s.length;i++){
+       let prefix=sum[i];
+       let suffix=total-sum[i];
+       if(prefix==suffix) return true;
+      }   
+      return false;   
+};
