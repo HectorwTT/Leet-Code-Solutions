@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool scoreBalance(string s) {
+      vector<int> sum;
+      int total=0;
+      for(int i=0;i<s.size();i++){
+       char ch=s[i];
+       int value=ch-96; 
+       total+=value;
+       sum.push_back(total);
+      }
+      for(int i=0;i<s.size();i++){
+       int prefix=sum[i];
+       int suffix=total-sum[i];
+       if(prefix==suffix) return true;
+      }   
+      return false;     
+    }
+};
