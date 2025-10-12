@@ -1,0 +1,14 @@
+var sumDivisibleByK = function(nums, k) {
+      let answer=0;
+      const map=new Map();
+      for(let i=0;i<nums.length;i++){
+       if(!map.has(nums[i]))map.set(nums[i],1);
+       else map.set(nums[i],map.get(nums[i])+1);  
+      } console.log(map);
+      for(const key of map.keys()){
+       let count=map.get(key);
+       if(count%k!=0)continue;
+       answer+=key*count; 
+      }  
+      return answer;      
+};
