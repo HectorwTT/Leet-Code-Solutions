@@ -1,0 +1,16 @@
+public class Solution {
+    public int SumDivisibleByK(int[] nums, int k) {
+      int answer=0;
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      for(int i=0;i<nums.Length;i++){
+       if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+       else map[nums[i]]=map[nums[i]]+1;  
+      } 
+      foreach(var(key,value) in map){
+       int count=map[key];
+       if(count%k!=0)continue;
+       answer+=key*count; 
+      }  
+      return answer;    
+    }
+}
