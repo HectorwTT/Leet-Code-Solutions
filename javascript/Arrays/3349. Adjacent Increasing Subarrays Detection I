@@ -1,0 +1,18 @@
+var hasIncreasingSubarrays = function(nums, k) {
+     const increasingFromFront=[];
+     const increasingFromBehind=[];
+     for(let i=0;i<nums.length;i++)increasingFromFront.push(1);
+     for(let i=0;i<nums.length;i++)increasingFromBehind.push(1);
+     for(let i=1;i<nums.length;i++){
+      if(nums[i]>nums[i-1])increasingFromFront[i]=increasingFromFront[i-1]+1;
+     }
+     for(let i=nums.length;i>=0;i--){
+      if(nums[i]<nums[i+1])increasingFromBehind[i]=increasingFromBehind[i+1]+1;
+     }
+     for(let i=0;i<nums.length;i++){
+      if(((increasingFromFront[i]>=increasingFromBehind[i+1])
+       ||(increasingFromBehind[i+1]>=increasingFromFront[i]))
+      && increasingFromFront[i]>=k && increasingFromBehind[i+1]>=k) return true; 
+     }
+     return false;  
+};
