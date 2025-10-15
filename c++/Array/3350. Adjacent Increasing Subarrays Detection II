@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int maxIncreasingSubarrays(vector<int>& nums) {
+      int max=0;
+      vector<int>increasingFromFront;
+      vector<int>increasingFromBehind;      
+      for(int i=0;i<nums.size();i++)increasingFromFront.push_back(1);
+      for(int i=0;i<nums.size();i++)increasingFromBehind.push_back(1);
+      for(int i=1;i<nums.size();i++){
+        if(nums[i]>nums[i-1])increasingFromFront[i]=increasingFromFront[i-1]+1;
+      }
+      for(int i=nums.size()-2;i>=0;i--){
+        if(nums[i]<nums[i+1])increasingFromBehind[i]=increasingFromBehind[i+1]+1;
+      }
+      for(int i=0;i<nums.size()-1;i++){
+       max=std::max(max,std::min(increasingFromFront[i],increasingFromBehind[i+1]));  
+      }
+      return max;  
+    }
+};
