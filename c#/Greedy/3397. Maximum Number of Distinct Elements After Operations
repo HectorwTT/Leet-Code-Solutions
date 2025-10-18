@@ -1,0 +1,20 @@
+public class Solution {
+    public int MaxDistinctElements(int[] nums, int k) {
+     int [] nums1=new int[nums.Length];
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     Array.Sort(nums);
+     nums1[0]=nums[0]-k;
+     map[nums1[0]]=1;
+     int lastUsed=nums1[0];
+     for(int i=1;i<nums1.Length;i++){
+      int smallest=nums[i]-k;  
+      int largest=nums[i]+k;
+      if(lastUsed<smallest) nums1[i]=smallest;
+      else if(lastUsed>=smallest &&  lastUsed<largest)nums1[i]=lastUsed+1;
+      else nums1[i]=lastUsed;
+      lastUsed=nums1[i];
+      if(!map.ContainsKey(nums1[i]))map[nums1[i]]=1;  
+     }
+     return map.Count;    
+    }
+}
