@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int maxDistinctElements(vector<int>& nums, int k) {
+     vector<int> nums1;
+     unordered_map<int,int> map;
+     std::sort(nums.begin(),nums.end());
+     nums1.push_back(nums[0]-k);
+     map[nums1[0]]=1;
+     int lastUsed=nums1[0];
+     for(int i=1;i<nums.size();i++){
+      int smallest=nums[i]-k;  
+      int largest=nums[i]+k;
+      if(lastUsed<smallest) nums1.push_back(smallest);
+      else if(lastUsed>=smallest &&  lastUsed<largest)nums1.push_back(lastUsed+1);
+      else nums1.push_back(lastUsed);
+      lastUsed=nums1[i];
+      if(map.find(nums1[i])==map.end())map[nums1[i]]=1;  
+     }
+     return map.size();    
+    }
+};
