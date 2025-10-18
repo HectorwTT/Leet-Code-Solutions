@@ -1,0 +1,18 @@
+var maxDistinctElements = function(nums, k) {
+     const nums1=[];
+     const map=new Map();
+     nums.sort((x,y)=>x-y);
+     nums1.push(nums[0]-k);
+     map.set(nums1[0],1);
+     let lastUsed=nums1[0];
+     for(let i=1;i<nums.length;i++){
+      let smallest=nums[i]-k;  
+      let largest=nums[i]+k;
+      if(lastUsed<smallest) nums1.push(smallest);
+      else if(lastUsed>=smallest &&  lastUsed<largest )nums1.push(lastUsed+1);
+      else nums1.push(lastUsed);
+      lastUsed=nums1[i];
+      if(!map.has(nums1[i]))map.set(nums1[i],1);  
+     }
+     return map.size;    
+};
