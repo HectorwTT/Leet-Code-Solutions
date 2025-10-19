@@ -1,0 +1,13 @@
+class Solution {
+    public int missingMultiple(int[] nums, int k) {
+      List<Integer>multiples=new ArrayList<>();   
+      for(int i=0;i<nums.length;i++){
+       if(nums[i]%k==0 && !multiples.contains(nums[i]))multiples.add(nums[i]); 
+      }
+      multiples.sort(null);
+      for(int i=0;i<multiples.size();i++){
+       if(multiples.get(i)!=k*(i+1)) return k*(i+1);
+      } 
+      return k*(multiples.size()+1);  
+    }
+}
