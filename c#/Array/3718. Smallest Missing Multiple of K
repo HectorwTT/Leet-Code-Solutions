@@ -1,0 +1,13 @@
+public class Solution {
+    public int MissingMultiple(int[] nums, int k) {
+      List<int>multiples=new List<int>();   
+      for(int i=0;i<nums.Length;i++){
+       if(nums[i]%k==0 && !multiples.Contains(nums[i]))multiples.Add(nums[i]); 
+      }
+      multiples.Sort();
+      for(int i=0;i<multiples.Count;i++){
+       if(multiples[i]!=k*(i+1)) return k*(i+1);
+      } 
+      return k*(multiples.Count+1);    
+    }
+}
