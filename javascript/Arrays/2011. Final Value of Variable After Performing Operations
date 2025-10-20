@@ -1,0 +1,9 @@
+var finalValueAfterOperations = function(operations) {
+     let value=0;    
+     for(let i=0;i<operations.length;i++){
+       let op=operations[i];
+       if(op.indexOf("--")!=-1)value--;
+       else value++;  
+     }
+     return value;   
+};
