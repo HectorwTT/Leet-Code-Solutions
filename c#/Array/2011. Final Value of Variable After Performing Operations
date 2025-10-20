@@ -1,0 +1,11 @@
+public class Solution {
+    public int FinalValueAfterOperations(string[] operations) {
+     int value=0;    
+     for(int i=0;i<operations.Length;i++){
+       string op=operations[i];
+       if(op.IndexOf("--")!=-1)value--;
+       else value++;  
+     }
+     return value;  
+    }
+}
