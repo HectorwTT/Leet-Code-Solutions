@@ -1,0 +1,31 @@
+public class Solution {
+    public int NextBeautifulNumber(int n) {
+      bool hasBeenFound=false;
+      int number=n+1;
+      while(!hasBeenFound){
+       Dictionary<int,int> map=new Dictionary<int,int>();
+       string str=""+number;
+       bool isBalanced=true;
+       for(int i=0;i<str.Length;i++){
+        int value=str[i]-48;
+        if(!map.ContainsKey(value))map[value]=1;
+        else map[value]=map[value]+1;
+        if(map[value]>value){
+           isBalanced=false;
+           break;
+        }
+       }
+       if(!isBalanced){
+        number++;
+        continue;
+       }
+       int numberOfBalanced=0;
+        foreach(var(key,value)in map){
+        if(map[key]==key)numberOfBalanced++;
+       }
+       if(numberOfBalanced==map.Count)hasBeenFound=true;
+       else number++;
+      } 
+      return number;     
+    }
+}
