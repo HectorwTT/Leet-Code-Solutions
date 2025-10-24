@@ -1,0 +1,32 @@
+class Solution {
+public:
+    int nextBeautifulNumber(int n) {
+      bool hasBeenFound=false;
+      int number=n+1;
+      while(!hasBeenFound){
+       unordered_map<int,int> map;
+       string str=to_string(number);
+       bool isBalanced=true;
+       for(int i=0;i<str.size();i++){
+        int value=str[i]-48;
+        if(map.find(value)==map.end())map[value]=1;
+        else map[value]=map[value]+1;
+        if(map[value]>value){
+           isBalanced=false;
+           break;
+        }
+       }
+       if(!isBalanced){
+        number++;
+        continue;
+       }
+       int numberOfBalanced=0;
+        for(auto key: map){
+        if(key.first==key.second)numberOfBalanced++;
+       }
+       if(numberOfBalanced==map.size())hasBeenFound=true;
+       else number++;
+      } 
+      return number;  
+    }
+};
