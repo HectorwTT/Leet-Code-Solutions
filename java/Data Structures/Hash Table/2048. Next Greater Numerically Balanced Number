@@ -1,0 +1,31 @@
+class Solution {
+    public int nextBeautifulNumber(int n) {
+      boolean hasBeenFound=false;
+      int number=n+1;
+      while(!hasBeenFound){
+       HashMap<Integer,Integer> map=new HashMap<>();
+       String string=""+number;
+       boolean isBalanced=true;
+       for(int i=0;i<string.length();i++){
+        int value=string.charAt(i)-48;
+        if(!map.containsKey(value))map.put(value,1);
+        else map.replace(value,map.get(value)+1);
+        if(map.get(value)>value){
+           isBalanced=false;
+           break;
+        }
+       }
+       if(!isBalanced){
+        number++;
+        continue;
+       }
+       int numberOfBalanced=0;
+       for(Integer key:map.keySet()){
+        if(map.get(key)==key)numberOfBalanced++;
+       }
+       if(numberOfBalanced==map.size())hasBeenFound=true;
+       else number++;
+      } 
+      return number;   
+    }
+}
