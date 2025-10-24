@@ -1,0 +1,29 @@
+var nextBeautifulNumber = function(n) {
+      let hasBeenFound=false;
+      let number=n+1;
+      while(!hasBeenFound){
+       const map=new Map();
+       let string=""+number;
+       let isBalanced=true;
+       for(let i=0;i<string.length;i++){
+        let value=string.charCodeAt(i)-48;
+        if(!map.has(value))map.set(value,1);
+        else map.set(value,map.get(value)+1);
+        if(map.get(value)>value){
+           isBalanced=false;
+           break;
+        }
+       }
+       if(!isBalanced){
+        number++;
+        continue;
+       }
+       let numberOfBalanced=0;
+       for(const key of map.keys()){
+        if(map.get(key)==key)numberOfBalanced++;
+       }
+       if(numberOfBalanced==map.size)hasBeenFound=true;
+       else number++;
+      } 
+      return number;      
+};
