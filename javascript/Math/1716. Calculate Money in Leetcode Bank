@@ -1,0 +1,17 @@
+var totalMoney = function(n) {
+     let count= 1;
+     let answer=0;
+     let weeklyTotal=0;
+     let moneyOnMonday=0;
+     while(count<=n){
+      if(count%7==1){
+        moneyOnMonday++;
+        weeklyTotal=moneyOnMonday;
+      }else{
+        weeklyTotal++;
+      }
+      answer+=weeklyTotal;
+      count++;  
+     }
+     return answer;    
+};
