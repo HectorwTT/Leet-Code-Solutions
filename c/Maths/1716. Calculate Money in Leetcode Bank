@@ -1,0 +1,17 @@
+int totalMoney(int n) {
+     int count= 1;
+     int answer=0;
+     int weeklyTotal=0;
+     int moneyOnMonday=0;
+     while(count<=n){
+      if(count%7==1){
+        moneyOnMonday++;
+        weeklyTotal=moneyOnMonday;
+      }else{
+        weeklyTotal++;
+      }
+      answer+=weeklyTotal;
+      count++;  
+     }
+     return answer;       
+}
