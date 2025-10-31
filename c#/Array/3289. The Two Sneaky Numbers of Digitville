@@ -1,0 +1,14 @@
+public class Solution {
+    public int[] GetSneakyNumbers(int[] nums) {
+      int [] answer=new int[2];
+      int index=0;
+      Array.Sort(nums);
+      for(int i=1;i<nums.Length;i++){
+       if(nums[i]==nums[i-1]){
+        answer[index++]=nums[i];
+        if(index==2)break;
+       } 
+      }
+      return answer;  
+    }
+}
