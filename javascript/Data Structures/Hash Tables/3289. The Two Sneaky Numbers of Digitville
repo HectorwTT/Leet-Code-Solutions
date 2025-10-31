@@ -1,0 +1,12 @@
+
+var getSneakyNumbers = function(nums) {
+      const answer=[];
+      const map=new Map();
+      for(let i=0;i<nums.length;i++){
+       if(map.has(nums[i])){
+        answer.push(nums[i]);
+        if(answer.length==2)break;
+       }else map.set(nums[i],1);        
+      }
+      return answer;   
+};
