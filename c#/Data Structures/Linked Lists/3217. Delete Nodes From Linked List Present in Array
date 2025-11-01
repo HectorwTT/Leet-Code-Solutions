@@ -1,0 +1,15 @@
+public class Solution {
+    public ListNode ModifiedList(int[] nums, ListNode head) {
+     Dictionary<int,int>map=new Dictionary<int,int>();
+     for(int i=0;i<nums.Length;i++)if(!map.ContainsKey(nums[i]))map[nums[i]]=1;       
+     while(head!=null && map.ContainsKey(head.val))head=head.next;
+     ListNode current=head;
+     ListNode previous=head;
+     while(current!=null){
+      if(map.ContainsKey(current.val))previous.next=current.next;
+      else previous=current;
+      current=current.next;
+     }
+     return head;  
+    }
+}
