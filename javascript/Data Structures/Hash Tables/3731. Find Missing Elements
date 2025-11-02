@@ -1,0 +1,15 @@
+var findMissingElements = function(nums) {
+      const answer=[];
+      const map=new Map();
+      let min=nums[0];
+      let max=nums[0];
+      for(let i=0;i<nums.length;i++){
+       map.set(nums[i],1); 
+       min=Math.min(min,nums[i]);
+       max=Math.max(max,nums[i])
+      }  
+     for(let i=min;i<=max;i++){
+      if(!map.has(i))answer.push(i); 
+     }
+      return answer;   
+};
