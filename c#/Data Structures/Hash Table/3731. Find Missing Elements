@@ -1,0 +1,14 @@
+public class Solution {
+    public IList<int> FindMissingElements(int[] nums) {
+      IList<int> answer=new List<int>();
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      Array.Sort(nums);
+      for(int i=0;i<nums.Length;i++){
+       map[nums[i]]=1; 
+      }  
+     for(int i=nums[0];i<=nums[nums.Length-1];i++){
+      if(!map.ContainsKey(i))answer.Add(i); 
+     }
+      return answer;   
+    }
+}
