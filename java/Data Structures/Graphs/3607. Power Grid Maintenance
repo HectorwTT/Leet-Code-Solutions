@@ -1,0 +1,61 @@
+import java.util.*;
+
+class Solution {
+    public int[] processQueries(int c, int[][] connections, int[][] queries) {
+        // Build adjacency list
+        List<Integer>[] g = new ArrayList[c + 1];
+        for (int i = 1; i <= c; i++) g[i] = new ArrayList<>();
+        for (int[] e : connections) {
+            g[e[0]].add(e[1]);
+            g[e[1]].add(e[0]);
+        }
+
+        // Find connected components
+        int[] comp = new int[c + 1];
+        Arrays.fill(comp, -1);
+        int cid = 0;
+        for (int i = 1; i <= c; i++) {
+            if (comp[i] == -1) {
+                dfs(i, cid, comp, g);
+                cid++;
+            }
+        }
+
+        // Each component stores a TreeSet of online stations
+        TreeSet<Integer>[] sets = new TreeSet[cid];
+        for (int i = 0; i < cid; i++) sets[i] = new TreeSet<>();
+        for (int i = 1; i <= c; i++) sets[comp[i]].add(i);
+
+        List<Integer> ansList = new ArrayList<>();
+
+        for (int[] q : queries) {
+            int op = q[0], x = q[1];
+            int cc = comp[x];
+            if (op == 1) {
+                if (sets[cc].contains(x)) {
+                    // x is online → return itself
+                    ansList.add(x);
+                } else {
+                    // x offline → return smallest online in component, or -1
+                    if (sets[cc].isEmpty()) ansList.add(-1);
+                    else ansList.add(sets[cc].first());
+                }
+            } else {
+                // take station offline
+                sets[cc].remove(x);
+            }
+        }
+
+        // convert to array
+        int[] ans = new int[ansList.size()];
+        for (int i = 0; i < ans.length; i++) ans[i] = ansList.get(i);
+        return ans;
+    }
+
+    void dfs(int node, int cid, int[] comp, List<Integer>[] g) {
+        comp[node] = cid;
+        for (int nei : g[node]) {
+            if (comp[nei] == -1) dfs(nei, cid, comp, g);
+        }
+    }
+}
