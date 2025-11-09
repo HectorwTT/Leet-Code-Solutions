@@ -1,0 +1,30 @@
+public class Solution {
+    public int MinimumDistance(int[] nums) {
+     int min=10000;
+     Dictionary<int,IList<int>> map=new Dictionary<int,IList<int>>();
+     for(int i=0;i<nums.Length;i++){
+      if(!map.ContainsKey(nums[i])){
+       IList<int> list=new List<int>();
+       list.Add(i);
+       map[nums[i]]=list; 
+      }else{
+       IList<int> list=map[nums[i]];
+       list.Add(i);
+       map[nums[i]]=list; 
+      }  
+     }
+     foreach(var(key,value) in  map){
+      IList<int> list=map[key];
+      if(list.Count<3)continue;
+      for(int i=0;i<=list.Count-3;i++){
+        int a=list[i];
+        int b=list[i+1];
+        int c=list[i+2];
+        int dist=Math.Abs(a-b)+Math.Abs(b-c)+Math.Abs(a-c);
+        min=Math.Min(dist,min); 
+      }  
+     }
+     if(min==10000)return -1;
+     else return min;    
+    }
+}
