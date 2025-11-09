@@ -1,0 +1,30 @@
+class Solution {
+    public int minimumDistance(int[] nums) {
+     int min=10000;
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i])){
+       List<Integer> list=new ArrayList<>();
+       list.add(i);
+       map.put(nums[i],list); 
+      }else{
+       List<Integer> list=map.get(nums[i]);
+       list.add(i);
+       map.replace(nums[i],list); 
+      }  
+     }
+     for(Integer key:map.keySet()){
+      List<Integer> list=map.get(key);
+      if(list.size()<3)continue;
+      for(int i=0;i<=list.size()-3;i++){
+        int a=list.get(i);
+        int b=list.get(i+1);
+        int c=list.get(i+2);
+        int dist=Math.abs(a-b)+Math.abs(b-c)+Math.abs(a-c);
+        min=Math.min(dist,min); 
+      }  
+     }
+     if(min==10000)return -1;
+     else return min;   
+    }
+}
