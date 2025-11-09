@@ -1,0 +1,28 @@
+var minimumDistance = function(nums) {
+     let min=10000;
+     const map=new Map();
+     for(let i=0;i<nums.length;i++){
+      if(!map.has(nums[i])){
+       const list=[];
+       list.push(i);
+       map.set(nums[i],list); 
+      }else{
+       const list=map.get(nums[i]);
+       list.push(i);
+       map.set(nums[i],list); 
+      }  
+     }
+     for(const key of map.keys()){
+      const list=map.get(key);
+      if(list.length<3)continue;
+      for(let i=0;i<=list.length-3;i++){
+        let a=list[i];
+        let b=list[i+1];
+        let c=list[i+2];
+        let dist=Math.abs(a-b)+Math.abs(b-c)+Math.abs(a-c);
+        min=Math.min(dist,min); 
+      }  
+     }
+     if(min==10000)return -1;
+     else return min;    
+};
