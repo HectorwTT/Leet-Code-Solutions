@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int maxOperations(string s) {
+     int answer=0;
+     int numberOfOnes=0;
+     for(int i=0;i<s.size();i++){
+      char bit=s[i];
+      if(bit=='1')numberOfOnes++;
+      else{
+       if(i>0 && s[i-1]=='1') answer+=numberOfOnes;
+      }   
+     }
+     return answer;   
+    }
+};
