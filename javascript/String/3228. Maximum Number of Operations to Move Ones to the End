@@ -1,0 +1,12 @@
+var maxOperations = function(s) {
+     let answer=0;
+     let numberOfOnes=0;
+     for(let i=0;i<s.length;i++){
+      var bit=s.charAt(i);
+      if(bit=='1') numberOfOnes++;
+      else{
+       if(i>0 && s.charAt(i-1)=='1') answer+=numberOfOnes;
+      }   
+     }
+     return answer;    
+};
