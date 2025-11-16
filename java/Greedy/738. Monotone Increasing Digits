@@ -1,0 +1,42 @@
+class Solution {
+    public int monotoneIncreasingDigits(int n) {
+     String number=""+n;
+     int numOfIncreasing=0;
+     int numOfEqual=1;
+     int split=-1;
+     for(int i=1;i<number.length();i++){
+      char prev=number.charAt(i-1);  
+      char curr=number.charAt(i);
+      if(prev<curr){
+        numOfIncreasing++;
+        numOfEqual=1;
+      }else if(prev==curr){
+        numOfEqual++;
+        numOfIncreasing=0;
+      }else{
+        split=i;
+        break;
+      } 
+     }
+     if(numOfIncreasing==number.length()-1  || split==-1)return n;
+     else if(numOfEqual!=0){
+      int startEqualNums=split-numOfEqual;
+      char start=number.charAt(startEqualNums);
+      int startMinusOne=start-1;
+      char startMinusOneCh=(char)startMinusOne; 
+      String substring=""+startMinusOneCh;
+      String nine="9";   
+      String answer=number.substring(0,startEqualNums)
+       +substring+nine.repeat(number.length()-startEqualNums-1);
+      return Integer.parseInt(answer);  
+     }else{
+       char start=number.charAt(split-1);
+       int startMinusOne=start-1;
+       char startMinusOneCh=(char)startMinusOne;
+       String substring=""+startMinusOneCh;
+       String nine="9";
+       String answer=number.substring(0,split-1)+substring+nine.repeat(number.length()-split);
+       return Integer.parseInt(answer);
+     }    
+    }
+}
