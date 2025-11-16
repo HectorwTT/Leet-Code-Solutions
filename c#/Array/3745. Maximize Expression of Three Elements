@@ -1,0 +1,6 @@
+public class Solution {
+    public int MaximizeExpressionOfThree(int[] nums) {
+      Array.Sort(nums);
+      return nums[nums.Length-1]+nums[nums.Length-2]-nums[0];    
+    }
+}
