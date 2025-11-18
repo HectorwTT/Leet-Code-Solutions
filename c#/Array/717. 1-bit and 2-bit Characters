@@ -1,0 +1,19 @@
+public class Solution {
+    public bool IsOneBitCharacter(int[] bits) {
+     int index=0;
+      IList<string> list=new List<string>();
+      while(index!=bits.Length){
+       if(bits[index]==0){
+         list.Add("0");
+         index++;
+       }else{
+         string binary="";
+         binary+=bits[index];
+         binary+=bits[index+1];
+         list.Add(binary);
+         index+=2;
+       }
+      } 
+      return (list[list.Count-1].Equals("0"));   
+    }
+}
