@@ -1,0 +1,17 @@
+var isOneBitCharacter = function(bits) {
+      let index=0;
+      const list=[];
+      while(index!=bits.length){
+       if(bits[index]==0){
+         list.push("0");
+         index++;
+       }else{
+         let binary="";
+         binary+=bits[index];
+         binary+=bits[index+1];
+         list.push(binary);
+         index+=2;
+       }
+      } 
+      return (list[list.length-1]=="0");    
+};
