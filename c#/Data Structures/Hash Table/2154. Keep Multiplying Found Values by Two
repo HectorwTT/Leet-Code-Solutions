@@ -1,0 +1,15 @@
+public class Solution {
+    public int FindFinalValue(int[] nums, int original) {
+      Dictionary<int,int>map=new Dictionary<int,int>();
+      int answer=original;
+      bool hasBeenFound=false;
+      for(int i=0;i<nums.Length;i++){
+        if(!map.ContainsKey(nums[i]))map[nums[i]]=1;
+      }   
+      while(!hasBeenFound){
+       if(map.ContainsKey(answer)) answer*=2; 
+       else hasBeenFound=true;
+      }  
+      return answer;
+    }
+}
