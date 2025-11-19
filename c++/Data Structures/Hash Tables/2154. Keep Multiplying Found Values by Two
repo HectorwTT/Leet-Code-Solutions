@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int findFinalValue(vector<int>& nums, int original) {
+      unordered_map<int,int> map;
+      int answer=original;
+      bool hasBeenFound=false;
+      for(int i=0;i<nums.size();i++){
+        if(map.find(nums[i])==map.end())map[nums[i]]=1;
+      }   
+      while(!hasBeenFound){
+       if(map.find(answer)!=map.end()) answer*=2; 
+       else hasBeenFound=true;
+      }  
+      return answer;
+    }
+};
