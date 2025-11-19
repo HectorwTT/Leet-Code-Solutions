@@ -1,0 +1,13 @@
+var findFinalValue = function(nums, original) {
+      const map=new Map();
+      let answer=original;
+      let hasBeenFound=false;
+      for(let i=0;i<nums.length;i++){
+        if(!map.has(nums[i]))map.set(nums[i],1);
+      }   
+      while(!hasBeenFound){
+       if(map.has(answer)) answer*=2; 
+       else hasBeenFound=true;
+      }  
+      return answer;  
+};
