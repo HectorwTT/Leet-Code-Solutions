@@ -1,0 +1,15 @@
+var sumAndMultiply = function(n) {
+     let sum=0;
+     let number=0;
+     let power=0;
+     while(n!=0){
+      let mod=n%10;
+      n-=mod;
+      n/=10;
+      if(mod!=0){
+       sum+=mod;
+       number+=(mod*Math.pow(10,power++)); 
+      } 
+     }   
+     return sum*number;      
+};
