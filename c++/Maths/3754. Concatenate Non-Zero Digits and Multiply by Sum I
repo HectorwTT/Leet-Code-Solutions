@@ -1,0 +1,18 @@
+class Solution {
+public:
+    long long sumAndMultiply(int n) {
+     long sum=0;
+     long number=0;
+     long power=0;
+     long n1=1L*n;
+     while(n1!=0){
+      long mod=n1%10;
+      n1/=10;
+      if(mod!=0){
+       sum+=mod;
+       number+=(mod*(long)std::pow(10,power++)); 
+      } 
+     }   
+     return sum*number;       
+    }
+};
