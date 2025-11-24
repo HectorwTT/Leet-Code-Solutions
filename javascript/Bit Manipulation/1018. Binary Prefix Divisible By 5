@@ -1,0 +1,9 @@
+var prefixesDivBy5 = function(nums) {
+     const  result=[];
+     let remainder = 0;
+     for (let i=0;i<nums.length;i++) {
+        remainder = (remainder * 2 + (nums[i])) % 5;
+        result.push(remainder == 0);
+     }
+     return result;     
+};
