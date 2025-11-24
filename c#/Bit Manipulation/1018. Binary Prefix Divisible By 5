@@ -1,0 +1,11 @@
+public class Solution {
+    public IList<bool> PrefixesDivBy5(int[] nums) {
+     IList<bool> result = new List<bool>();
+     int remainder = 0;
+     for (int i=0;i<nums.Length;i++) {
+        remainder = (remainder * 2 + (nums[i])) % 5;
+        result.Add(remainder == 0);
+     }
+     return result;   
+    }
+}
