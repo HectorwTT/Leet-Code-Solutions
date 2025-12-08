@@ -1,0 +1,40 @@
+class Solution {
+    public int[] sortByReflection(int[] nums) {
+      int [] ans=new int[nums.length];
+      Arrays.sort(nums);
+      HashMap<Integer,Integer> map=new HashMap<>();
+      HashMap<Integer,Integer> map1=new HashMap<>();
+      PriorityQueue<Integer> heap = new PriorityQueue<>(
+    (a, b) -> {
+        int cmp = Integer.compare(map.get(a), map.get(b)); // primary sort by map value
+        if (cmp != 0) return cmp;
+        return Integer.compare(a, b); // secondary sort by number
+    }
+);
+      for(int i=0;i<nums.length;i++){
+       String binary=Integer.toBinaryString(nums[i]);
+       StringBuffer sb=new StringBuffer(binary);
+       sb.reverse();
+       String newBinary=sb.toString();
+       int newNumber=Integer.parseInt(newBinary,2);
+       if(!map.containsKey(nums[i])){
+        map.put(nums[i],newNumber);
+        map1.put(nums[i],1);
+        heap.offer(nums[i]);
+       }else{
+        map1.replace(nums[i],map1.get(nums[i])+1);
+       } 
+      }
+      int index=0;
+      while(index!=nums.length && !heap.isEmpty()){
+       int number=heap.poll();
+       int count=map1.get(number);
+       int current=0;
+       while(current!=count){
+        ans[index++]=number;
+        current++;
+       } 
+      } 
+      return ans;
+    }
+}
