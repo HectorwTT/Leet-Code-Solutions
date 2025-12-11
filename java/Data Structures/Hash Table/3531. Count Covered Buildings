@@ -1,0 +1,54 @@
+class Solution {
+    public int countCoveredBuildings(int n, int[][] buildings) {
+     int answer=0;
+     HashMap<Integer,List<Integer>> xpoints=new HashMap<>(); 
+     HashMap<Integer,List<Integer>> ypoints=new HashMap<>();  
+     for(int i=0;i<buildings.length;i++){
+      int x= buildings[i][0];
+      int y=buildings[i][1];
+      if(!xpoints.containsKey(x)){
+       List<Integer>list=new ArrayList<>();
+       list.add(y);
+       xpoints.put(x,list);
+      }else{
+       List<Integer>list=xpoints.get(x);
+       list.add(y);
+       xpoints.replace(x,list);
+      } 
+
+      if(!ypoints.containsKey(y)){
+       List<Integer>list=new ArrayList<>();
+       list.add(x);
+       ypoints.put(y,list);
+      }else{
+       List<Integer>list=ypoints.get(y);
+       list.add(x);
+       ypoints.replace(y,list);
+      }     
+     }
+     for(Integer key:xpoints.keySet()){
+      List<Integer> list=xpoints.get(key);
+      list.sort(null);
+      xpoints.replace(key,list);  
+     }
+
+     for(Integer key:ypoints.keySet()){
+      List<Integer> list=ypoints.get(key);
+      list.sort(null);
+      ypoints.replace(key,list);  
+     }
+     
+     for(int i=0;i<buildings.length;i++){
+         int x=buildings[i][0];
+         int y=buildings[i][1];
+         List<Integer> xList=xpoints.get(x);
+         List<Integer> yList=ypoints.get(y);
+         int yFirst=xList.get(0);
+         int yLast=xList.get(xList.size()-1);
+         int xFirst=yList.get(0);
+         int xLast=yList.get(yList.size()-1);
+         if(x>xFirst && x<xLast && y>yFirst && y<yLast)answer++;
+     }
+     return answer;
+    }
+}
