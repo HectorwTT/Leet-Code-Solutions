@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int absDifference(vector<int>& nums, int k) {
+        int smallestSum=0;
+       int largestSum=0;
+       std::sort(nums.begin(),nums.end());
+       int index=0;
+       while(index!=k){
+        smallestSum+=nums[index];
+        largestSum+=nums[nums.size()-1-index];
+        index++;
+       }
+       return std::abs(largestSum-smallestSum);  
+    }
+};
