@@ -1,0 +1,14 @@
+public class Solution {
+    public int AbsDifference(int[] nums, int k) {
+       int smallestSum=0;
+       int largestSum=0;
+       Array.Sort(nums);
+       int index=0;
+       while(index!=k){
+        smallestSum+=nums[index];
+        largestSum+=nums[nums.Length-1-index];
+        index++;
+       }
+       return Math.Abs(largestSum-smallestSum);   
+    }
+}
