@@ -1,0 +1,93 @@
+class Solution {
+    public int[] countMentions(int numberOfUsers, List<List<String>> events) {
+      int []  answer=new  int[numberOfUsers] ; 
+      HashMap<Integer,Integer> offlineUsers=new HashMap<>();
+      HashMap<Integer,Integer>onlineUsers=new  HashMap<>();
+      HashMap<Integer,List<Integer>>onlineTimes=new HashMap<>();
+      HashMap<Integer,List<Integer>>offlineTimes=new HashMap<>();
+      HashMap<Integer,List<Integer>> timestamps=new HashMap<>();
+      int startTime=Integer.MAX_VALUE; 
+      int endTime=0;
+      for(int i=0;i<numberOfUsers;i++)onlineUsers.put(i,1);
+      for(int i=0;i< events.size();i++){
+       List<String> list=events.get(i);
+       String type=list.get(0);  
+       String timestamp=list.get(1); 
+       String ids=list.get(2);
+       int time= Integer.parseInt(timestamp);
+       startTime=Math.min(time,startTime);
+       endTime=Math.max(time,endTime);
+       if(type.equals("OFFLINE")){
+        int id= Integer.parseInt(ids);
+        int newTime=time+60;
+        if(!onlineTimes.containsKey(newTime)){
+          List<Integer> onlineIds=new ArrayList<>();
+          onlineIds.add(id);
+          onlineTimes.put(newTime,onlineIds);
+        }else{
+          List<Integer> onlineIds=onlineTimes.get(newTime);
+          onlineIds.add(id);
+          onlineTimes.replace(newTime,onlineIds);
+        }
+        if(!offlineTimes.containsKey(time)){
+          List<Integer>offlineIds=new ArrayList<>();
+          offlineIds.add(id);
+          offlineTimes.put(time,offlineIds);
+        }else{
+          List<Integer> offlineIds=offlineTimes.get(time);
+          offlineIds.add(id);
+          offlineTimes.replace(time,offlineIds);
+        }
+       }else{
+        if(!timestamps.containsKey(time)){
+         List<Integer> indexes=new ArrayList<>();
+         indexes.add(i);
+         timestamps.put(time,indexes);
+        }else{
+         List<Integer> indexes=timestamps.get(time);
+         indexes.add(i);
+         timestamps.replace(time,indexes);
+        }
+       }
+      }
+      for(int i=startTime;i<=endTime;i++){
+       if(onlineTimes.containsKey(i)){
+         List<Integer> onlineIds=onlineTimes.get(i);
+        for(int j=0;j<onlineIds.size();j++){
+         offlineUsers.remove(onlineIds.get(j));   
+         onlineUsers.put(onlineIds.get(j),1); 
+        }
+       } 
+       if(offlineTimes.containsKey(i)){
+        List<Integer> offlineIds=offlineTimes.get(i);
+        for(int j=0;j<offlineIds.size();j++){
+         onlineUsers.remove(offlineIds.get(j));   
+         offlineUsers.put(offlineIds.get(j),1);   
+        }
+       } 
+       
+          if(!timestamps.containsKey(i))continue;  
+          List<Integer> indexes=timestamps.get(i); 
+          for(int j=0;j<indexes.size();j++ ){
+            int index=indexes.get(j);
+            List<String>event=events.get(index);
+            String mentions_string=event.get(2);
+            if(mentions_string.equals("ALL")){
+             for(int k=0;k<numberOfUsers;k++)answer[k]++; 
+             continue;
+            }
+            if(mentions_string.equals("HERE")){
+             for(Integer key:onlineUsers.keySet())answer[key]++;
+             continue;
+            }
+            String [] ids= mentions_string.split("\\s+");
+            for(int k=0;k<ids.length;k++){
+             String substring=ids[k].substring(2);
+             int id=Integer.parseInt(substring);
+             answer[id]++;            
+           }
+        }                  
+      }
+      return answer;
+    }
+}
