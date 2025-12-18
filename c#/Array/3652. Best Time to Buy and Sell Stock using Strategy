@@ -1,0 +1,39 @@
+public class Solution {
+    public long MaxProfit(int[] prices, int[] strategy, int k) {
+      long []  profitsFromFront=new long[prices.Length];
+      long []  profitsFromBehind=new long[prices.Length];
+      long [] totals=new long[prices.Length];
+      long answer=0;
+      long profitFromFront=0;
+      long profitFromBehind=0;
+      long totalFromFront=0;
+      long totalFromBehind=0;
+      long []totalsFromFront=new long[prices.Length];
+      long []totalsFromBehind=new long[prices.Length];
+      for(int i=0;i<prices.Length;i++){
+        profitFromFront+=(1L*prices[i])*(1L*strategy[i]);
+        profitsFromFront[i]=profitFromFront;
+        totalFromFront+=1L*prices[i];
+        totalsFromFront[i]=totalFromFront;
+      }  
+      for(int i=prices.Length-1;i>=0;i--){
+        profitFromBehind+=(1L*prices[i])*(1L*strategy[i]);
+        profitsFromBehind[i]=profitFromBehind;
+        totalFromBehind+=1L*prices[i];
+        totalsFromBehind[i]=totalFromBehind;
+      }
+       answer=profitFromFront;  
+       long currentTotal=0;
+       if(k!=prices.Length)
+        currentTotal=totalsFromFront[k-1]-totalsFromFront[(k/2)-1]+profitsFromBehind[k];
+       else 
+        currentTotal=totalsFromFront[k-1]-totalsFromFront[(k/2)-1];
+       answer=Math.Max(answer,currentTotal);  
+       for(int i=0;i<prices.Length-k;i++){
+        currentTotal=profitsFromFront[i]+totalsFromFront[i+k]-totalsFromFront[i+(k/2)];
+        if(i<prices.Length-k-1)currentTotal+=profitsFromBehind[i+k+1];
+        answer=Math.Max(answer,currentTotal);
+       }
+       return answer;   
+    }
+}
