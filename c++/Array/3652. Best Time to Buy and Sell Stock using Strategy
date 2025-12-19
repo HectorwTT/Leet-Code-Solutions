@@ -1,0 +1,46 @@
+class Solution {
+public:
+    long long maxProfit(vector<int>& prices, vector<int>& strategy, int k) {
+      vector<long> profitsFromFront;
+      vector<long> profitsFromBehind;
+      vector<long> totals;
+      long answer=0;
+      long profitFromFront=0;
+      long profitFromBehind=0;
+      long totalFromFront=0;
+      long totalFromBehind=0;
+      vector<long>totalsFromFront;
+      vector<long>totalsFromBehind;
+      for(int i=0;i<prices.size();i++){
+        profitsFromFront.push_back(0);
+        profitsFromBehind.push_back(0);
+        totalsFromFront.push_back(0);
+        totalsFromBehind.push_back(0);
+      }
+      for(int i=0;i<prices.size();i++){
+        profitFromFront+=(1L*prices[i])*(1L*strategy[i]);
+        profitsFromFront[i]=profitFromFront;
+        totalFromFront+=1L*prices[i];
+        totalsFromFront[i]=totalFromFront;
+      }  
+      for(int i=prices.size()-1;i>=0;i--){
+        profitFromBehind+=(1L*prices[i])*(1L*strategy[i]);
+        profitsFromBehind[i]=profitFromBehind;
+        totalFromBehind+=1L*prices[i];
+        totalsFromBehind[i]=totalFromBehind;
+      }
+       answer=profitFromFront;  
+       long currentTotal=0;
+       if(k!=prices.size())
+        currentTotal=totalsFromFront[k-1]-totalsFromFront[(k/2)-1]+profitsFromBehind[k];
+       else 
+        currentTotal=totalsFromFront[k-1]-totalsFromFront[(k/2)-1];
+       answer=std::max(answer,currentTotal);  
+       for(int i=0;i<prices.size()-k;i++){
+        currentTotal=profitsFromFront[i]+totalsFromFront[i+k]-totalsFromFront[i+(k/2)];
+        if(i<prices.size()-k-1)currentTotal+=profitsFromBehind[i+k+1];
+        answer=std::max(answer,currentTotal);
+       }
+       return answer;  
+    }
+};
