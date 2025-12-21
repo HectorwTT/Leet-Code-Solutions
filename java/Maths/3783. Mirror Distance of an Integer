@@ -1,0 +1,9 @@
+class Solution {
+    public int mirrorDistance(int n) {
+      String number=""+n;
+      StringBuffer sb=new StringBuffer(number);  
+      sb.reverse();
+      int reverse=Integer.parseInt(sb.toString());
+      return Math.abs(n-reverse);
+    }
+}
