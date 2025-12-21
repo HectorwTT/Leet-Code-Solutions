@@ -1,0 +1,42 @@
+class Solution {
+    public int minDeletionSize(String[] strs) {
+     int index=0;
+     int length=strs[0].length();
+     List<String> words=new ArrayList<>();
+     while(index!=length){
+      int numOfChars=1;  
+      for(int i=1;i<strs.length;i++){
+        char curr=strs[i].charAt(index);
+        char prev=strs[i-1].charAt(index);
+        if(words.size()==0){
+         if(prev<=curr)numOfChars++;
+         else break;   
+        }else{
+          String currWord=words.get(i)+curr;
+          String prevWord=words.get(i-1)+prev;
+          if(prevWord.compareTo(currWord)<=0)numOfChars++;
+          else break;  
+        }
+      }
+      if(numOfChars==strs.length){
+       if(words.size()==0){
+        for(int i=0;i<strs.length;i++){
+         char ch=strs[i].charAt(index);
+         String word=""+ch;
+         words.add(word);   
+        } 
+       }else{
+        for(int i=0;i<words.size();i++){
+          String word= words.get(i);
+          char ch=strs[i].charAt(index);
+          String newWord=word+ch;
+          words.set(i,newWord); 
+        }
+       } 
+      }
+      index++; 
+     } 
+     if(words.size()==0)return length;
+     else return length-words.get(0).length();     
+    }
+}
