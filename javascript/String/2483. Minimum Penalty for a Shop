@@ -1,0 +1,46 @@
+var bestClosingTime = function(customers) {
+     const  numberOfYs=[];
+     const numberOfNs=[]; 
+     for(let i=0;i<customers.length;i++){
+      numberOfYs.push(0);
+      numberOfNs.push(0);  
+     }
+     let minimumPenalty=customers.length;
+     let answer=0;
+     let totalOfYs=0;
+     let totalOfNs=0;
+     for(let i=0;i<customers.length;i++){
+      var ch= customers.charAt(i);
+      if(ch=='Y'){
+       totalOfYs++;
+       if(i==0)numberOfYs[i]=1;
+       else{
+        numberOfYs[i]=totalOfYs;
+        numberOfNs[i]=numberOfNs[i-1];
+       }
+      }else{
+        totalOfNs++;
+        if(i==0)numberOfNs[i]=1;
+        else{
+         numberOfNs[i]=totalOfNs;
+         numberOfYs[i]=numberOfYs[i-1];   
+        } 
+      }      
+     } 
+     let penalty=0;
+     for(let i=0;i<customers.length;i++){
+      penalty=0;
+      if(i==0)penalty=totalOfYs;
+      else{
+       let numberOfNsBeforeClosing=numberOfNs[i-1]; 
+       let numberOfYsAfterClosing=totalOfYs-numberOfYs[i-1];
+       penalty=numberOfNsBeforeClosing+numberOfYsAfterClosing;
+      }
+      if(penalty<minimumPenalty){
+       minimumPenalty=penalty;
+       answer=i; 
+      }
+     }
+     if(totalOfNs<minimumPenalty)answer=customers.length;
+     return answer;  
+};
