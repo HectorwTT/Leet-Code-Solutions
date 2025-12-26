@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int minDeletionSize(vector<string>& strs) {
+     string first=strs[0];
+     int length=first.size();      
+     vector<int> dp;          
+     for(int i=0;i<length;i++)dp.push_back(1);
+     for(int col=1;col<length;col++){       
+      for(int j=0;j<col;j++){
+        int numOfRows=0; 
+        for(int i=0;i<strs.size();i++){
+         string str= strs[i];  
+         char curr=str[col];   
+         char prev=str[j];
+         if(prev>curr) break;
+         else numOfRows++;  
+         }
+         if(numOfRows==strs.size() && dp[col]<=dp[j])dp[col]=dp[j]+1;          
+        }
+      }  
+     std::sort(dp.begin(),dp.end());
+     return length-dp[dp.size()-1];    
+    }
+};
