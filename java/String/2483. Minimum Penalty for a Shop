@@ -1,0 +1,62 @@
+class Solution {
+    public int bestClosingTime(String customers) {
+     int [] numberOfYs=new int[customers.length()];
+     int [] numberOfNs=new int[customers.length()]; 
+     int minimumPenalty=customers.length();
+     HashMap<Integer,List<Integer>> map=new HashMap<>();
+     int totalOfYs=0;
+     int totalOfNs=0;
+     for(int i=0;i<customers.length();i++){
+      char ch= customers.charAt(i);
+      if(ch=='Y'){
+       totalOfYs++;
+       if(i==0)numberOfYs[i]=1;
+       else{
+        numberOfYs[i]=totalOfYs;
+        numberOfNs[i]=numberOfNs[i-1];
+       }
+      }else{
+        totalOfNs++;
+        if(i==0)numberOfNs[i]=1;
+        else{
+         numberOfNs[i]=totalOfNs;
+         numberOfYs[i]=numberOfYs[i-1];   
+        } 
+      }      
+     } 
+     int penalty=0;
+     for(int i=0;i<customers.length();i++){
+      penalty=0;
+      if(i==0)penalty=totalOfYs;
+      else{
+       int numberOfNsBeforeClosing=numberOfNs[i-1]; 
+       int numberOfYsAfterClosing=totalOfYs-numberOfYs[i-1];
+       penalty=numberOfNsBeforeClosing+numberOfYsAfterClosing;
+      }
+      minimumPenalty=Math.min(penalty,minimumPenalty);
+      if(!map.containsKey(penalty)){
+        List<Integer> indexes=new ArrayList<>();
+        indexes.add(i);
+        map.put(penalty,indexes);
+      }else{
+        List<Integer> indexes=map.get(penalty);
+        indexes.add(i);
+        map.replace(penalty,indexes);
+      }
+     }
+     penalty=totalOfNs;
+     minimumPenalty=Math.min(penalty,minimumPenalty);
+     if(!map.containsKey(penalty)){
+        List<Integer> indexes=new ArrayList<>();
+        indexes.add(customers.length());
+        map.put(penalty,indexes);
+     }else{
+        List<Integer> indexes=map.get(penalty);
+        indexes.add(customers.length());
+        map.replace(penalty,indexes);
+     } 
+     List<Integer> indexes=map.get(minimumPenalty);
+     indexes.sort(null);
+     return indexes.get(0);
+    }
+}
