@@ -1,0 +1,44 @@
+public class Solution {
+    public int BestClosingTime(string customers) {
+     int [] numberOfYs=new int[customers.Length];
+     int [] numberOfNs=new int[customers.Length]; 
+     int minimumPenalty=customers.Length;
+     int answer=0;
+     int totalOfYs=0;
+     int totalOfNs=0;
+     for(int i=0;i<customers.Length;i++){
+      char ch= customers[i];
+      if(ch=='Y'){
+       totalOfYs++;
+       if(i==0)numberOfYs[i]=1;
+       else{
+        numberOfYs[i]=totalOfYs;
+        numberOfNs[i]=numberOfNs[i-1];
+       }
+      }else{
+        totalOfNs++;
+        if(i==0)numberOfNs[i]=1;
+        else{
+         numberOfNs[i]=totalOfNs;
+         numberOfYs[i]=numberOfYs[i-1];   
+        } 
+      }      
+     } 
+     int penalty=0;
+     for(int i=0;i<customers.Length;i++){
+      penalty=0;
+      if(i==0)penalty=totalOfYs;
+      else{
+       int numberOfNsBeforeClosing=numberOfNs[i-1]; 
+       int numberOfYsAfterClosing=totalOfYs-numberOfYs[i-1];
+       penalty=numberOfNsBeforeClosing+numberOfYsAfterClosing;
+      }
+      if(penalty<minimumPenalty){
+       minimumPenalty=penalty;
+       answer=i; 
+      }
+     }
+     if(totalOfNs<minimumPenalty)answer=customers.Length;
+     return answer;   
+    }
+}
