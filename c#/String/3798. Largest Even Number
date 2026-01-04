@@ -1,0 +1,19 @@
+public class Solution {
+    public string LargestEven(string s) {
+      int numberOfTwos=0;
+      int lastTwoIndex=0;
+      char ch='0';
+      for(int i=0;i<s.Length;i++){
+       ch=s[i];
+       if(ch=='2'){
+        numberOfTwos++; 
+        lastTwoIndex=i;
+       } 
+      }
+      if(numberOfTwos==0) return "";
+      else{
+       if(ch=='1') return s.Substring(0,lastTwoIndex+1);
+       else return s;
+      }   
+    }
+}
