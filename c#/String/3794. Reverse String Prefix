@@ -1,0 +1,11 @@
+public class Solution {
+    public string ReversePrefix(string s, int k) {
+     int index=k-1;
+     string answer="";
+     while(index>=0){
+      answer+=s[index--];  
+     }
+     answer+=s.Substring(k);
+     return answer;   
+    }
+}
