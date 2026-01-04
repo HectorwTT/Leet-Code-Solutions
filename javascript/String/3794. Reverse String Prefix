@@ -1,0 +1,9 @@
+var reversePrefix = function(s, k) {
+     let index=k-1;
+     var answer="";
+     while(index>=0){
+      answer+=s.charAt(index--);  
+     }
+     answer+=s.substring(k);
+     return answer;    
+};
