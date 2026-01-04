@@ -1,0 +1,7 @@
+class Solution {
+    public String reversePrefix(String s, int k) {
+      StringBuffer sb= new StringBuffer(s.substring(0,k));
+      sb.reverse();
+      return sb.toString()+s.substring(k);  
+    }
+}
