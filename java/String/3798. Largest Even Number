@@ -1,0 +1,19 @@
+class Solution {
+    public String largestEven(String s) {
+      int numberOfTwos=0;
+      int lastTwoIndex=0;
+      char ch='0';
+      for(int i=0;i<s.length();i++){
+       ch=s.charAt(i);
+       if(ch=='2'){
+        numberOfTwos++; 
+        lastTwoIndex=i;
+       } 
+      }
+      if(numberOfTwos==0) return "";
+      else{
+       if(ch=='1') return s.substring(0,lastTwoIndex+1);
+       else return s;
+      }    
+    }
+}
