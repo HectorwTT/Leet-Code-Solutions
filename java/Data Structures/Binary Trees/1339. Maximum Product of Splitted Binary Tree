@@ -1,0 +1,26 @@
+class Solution {
+    long totalSum = 0;
+    long maxProduct = 0;
+    final int MOD = 1_000_000_007;
+
+    public int maxProduct(TreeNode root) {
+        totalSum = sum(root);        // total sum of all nodes
+        dfs(root);                    // compute subtree sums & max product
+        return (int)(maxProduct % MOD);
+    }
+
+    private long sum(TreeNode node) {
+        if (node == null) return 0;
+        return node.val + sum(node.left) + sum(node.right);
+    }
+
+    private long dfs(TreeNode node) {
+        if (node == null) return 0;
+        long left = dfs(node.left);
+        long right = dfs(node.right);
+        long subSum = node.val + left + right;
+        long product = subSum * (totalSum - subSum);
+        maxProduct = Math.max(maxProduct, product);
+        return subSum;
+    }
+}
