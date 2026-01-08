@@ -1,0 +1,24 @@
+class Solution {
+    public int maxDotProduct(int[] nums1, int[] nums2) {
+     int  [] [] dp=new int[nums1.length] [nums2.length];   
+     int firstRowMax=nums1[0]*nums2[0];
+     int answer=0;
+     dp[0][0]=firstRowMax;
+     for(int j=1;j<nums2.length;j++){
+      int current=nums1[0]*nums2[j];
+      firstRowMax=Math.max(firstRowMax,current);
+      dp[0][j]=firstRowMax;
+     }
+     answer=firstRowMax;
+     for(int i=1;i<nums1.length;i++){
+      for(int j=0;j<nums2.length;j++){
+        int current=nums1[i]*nums2[j];
+        if(j==0) dp[i][j]=Math.max(dp[i-1][j],current);   
+        else
+         dp[i][j]=Math.max(dp[i-1][j-1]+current,Math.max(current,Math.max(dp[i-1][j],dp[i][j-1])));
+        answer=Math.max(answer,dp[i][j]);
+      }  
+     }
+     return answer;
+    }
+}
