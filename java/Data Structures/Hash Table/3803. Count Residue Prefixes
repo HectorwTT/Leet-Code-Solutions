@@ -1,0 +1,13 @@
+class Solution {
+    public int residuePrefixes(String s) {
+      HashMap<Character,Integer> map=new HashMap<>();
+      int answer=0;
+      for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       if(!map.containsKey(ch))map.put(ch,1);
+       else map.replace(ch,map.get(ch)+1);
+       if(map.size()==(i+1)%3)answer++;
+      } 
+      return answer; 
+    }
+}
