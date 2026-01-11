@@ -1,0 +1,13 @@
+public class Solution {
+    public int ResiduePrefixes(string s) {
+      Dictionary<char,int> map=new Dictionary<char,int>();
+      int answer=0;
+      for(int i=0;i<s.Length;i++){
+       char ch=s[i];
+       if(!map.ContainsKey(ch))map[ch]=1;
+       else map[ch]=map[ch]+1;
+       if(map.Count==(i+1)%3)answer++;
+      } 
+      return answer;    
+    }
+}
