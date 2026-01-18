@@ -1,0 +1,60 @@
+class Solution {
+    public int largestMagicSquare(int[][] grid) {
+     int maxLength=Math.min(grid.length,grid[0].length);
+     int answer=1;
+     for(int length=2;length<=maxLength;length++){
+      for(int i=0;i<=grid.length-length;i++){
+       for(int j=0;j<=grid[0].length-length;j++){
+        HashMap<Integer,Integer> squareRowSumMap=new HashMap<>();
+        HashMap<Integer,Integer>squareColumnSumMap=new HashMap<>();
+        HashMap<Integer,Integer>squareDiagonalSumMap=new HashMap<>();
+        for(int squareRow=i;squareRow<i+length;squareRow++){
+          int squareRowSum=0;            
+          for(int squareColumn=j;squareColumn<j+length;squareColumn++){
+            squareRowSum+=grid[squareRow][squareColumn];
+          }
+          if(!squareRowSumMap.containsKey(squareRowSum))squareRowSumMap.put(squareRowSum,1);  
+        }
+
+        for(int squareColumn=j;squareColumn<j+length;squareColumn++){
+          int squareColumnSum=0;            
+          for(int squareRow=i;squareRow<i+length;squareRow++){
+            squareColumnSum+=grid[squareRow][squareColumn];
+          }
+          if(!squareColumnSumMap.containsKey(squareColumnSum))
+           squareColumnSumMap.put(squareColumnSum,1);  
+        }
+
+        int squareRowDiagonal=i;
+        int squareColumnDiagonal=j;
+        int squareForwardDiagonalSum=0;
+        while(squareRowDiagonal<i+length && squareColumnDiagonal<j+length){
+         squareForwardDiagonalSum+=grid[squareRowDiagonal++][squareColumnDiagonal++];
+        } 
+        if(!squareDiagonalSumMap.containsKey(squareForwardDiagonalSum))
+         squareDiagonalSumMap.put(squareForwardDiagonalSum,1);
+
+        squareRowDiagonal=i;
+        squareColumnDiagonal=j+length-1;
+        int squareBackwardDiagonalSum=0;
+        while(squareRowDiagonal<i+length && squareColumnDiagonal>=j){
+         squareBackwardDiagonalSum+=grid[squareRowDiagonal++][squareColumnDiagonal--];
+        } 
+        if(!squareDiagonalSumMap.containsKey(squareBackwardDiagonalSum))
+        squareDiagonalSumMap.put(squareBackwardDiagonalSum,1);
+       if(squareRowSumMap.size()==1 && squareColumnSumMap.size()==1 
+           && squareDiagonalSumMap.size()==1){
+            boolean areAllEqual=false;
+            for(Integer key:squareRowSumMap.keySet()){
+             if(squareColumnSumMap.containsKey(key) && squareDiagonalSumMap.containsKey(key))
+             areAllEqual=true;   
+            }
+            if(areAllEqual)answer=Math.max(answer,length);
+            break;
+           }
+       } 
+      }  
+     }
+     return answer;   
+    }
+}
