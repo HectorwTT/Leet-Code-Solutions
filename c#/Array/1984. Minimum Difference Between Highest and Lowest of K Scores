@@ -1,0 +1,10 @@
+public class Solution {
+    public int MinimumDifference(int[] nums, int k) {
+      int answer=(int)Math.Pow(10,5)+1;
+      Array.Sort(nums);
+      for(int i=0;i<=nums.Length-k;i++){
+       answer=Math.Min(answer,nums[i+k-1]-nums[i]); 
+      } 
+      return answer;   
+    }
+}
