@@ -1,0 +1,23 @@
+public class Solution {
+    public IList<IList<int>> MinimumAbsDifference(int[] arr) {
+       IList<IList<int>> list= new List<IList<int>>();
+        Array.Sort(arr);
+        int min =(int)Math.Pow(10,6)+1;
+        for(int i=1;i<arr.Length;i++){         
+            if(arr[i]-arr[i-1]>=0){
+             if(min>arr[i]-arr[i-1]) min= arr[i]-arr[i-1];
+            }         
+        }
+        for(int i=1;i<arr.Length;i++){
+         if(arr[i]-arr[i-1]>=0){
+            if(arr[i]-arr[i-1]==min){
+                List<int> pair= new List<int>();
+                pair.Add(arr[i-1]);
+                pair.Add(arr[i]);
+                list.Add(pair);
+            }
+         }
+        }
+        return list;   
+    }
+}
