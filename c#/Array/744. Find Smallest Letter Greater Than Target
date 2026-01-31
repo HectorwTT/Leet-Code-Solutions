@@ -1,0 +1,14 @@
+public class Solution {
+    public char NextGreatestLetter(char[] letters, char target) {
+      char answer=letters[0];
+      List<char> chars=new List<char>();
+      for(int i=1;i<letters.Length;i++){
+        if(letters[i]>target)chars.Add(letters[i]);
+      }
+      if(answer>target)chars.Add(answer);  
+      if(chars.Count==0) return answer;
+      chars.Sort();
+      answer=chars[0];
+      return answer;  
+    }
+}
