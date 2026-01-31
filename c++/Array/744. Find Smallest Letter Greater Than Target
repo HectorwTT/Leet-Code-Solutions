@@ -1,0 +1,15 @@
+class Solution {
+public:
+    char nextGreatestLetter(vector<char>& letters, char target) {
+      char answer=letters[0];
+      vector<char> chars;
+      for(int i=1;i<letters.size();i++){
+        if(letters[i]>target)chars.push_back(letters[i]);
+      }
+      if(answer>target)chars.push_back(answer);  
+      if(chars.size()==0) return answer;
+      std::sort(chars.begin(),chars.end());
+      answer=chars[0];
+      return answer;
+    }
+};
