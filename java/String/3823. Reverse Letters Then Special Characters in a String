@@ -1,0 +1,20 @@
+class Solution {
+    public String reverseByType(String s) {
+     String answer="";
+     Stack<Character> lowerCaseLetters =new Stack<>();   
+     Stack<Character> specialLetters=new Stack<>();
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(ch>=97 && ch<=122) lowerCaseLetters.push(ch);
+      else specialLetters.push(ch);
+     }
+     for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       char last=ch;
+      if(ch>=97 && ch<=122) last=lowerCaseLetters.pop();
+      else last=specialLetters.pop();  
+      answer+=last;
+     }
+     return answer;
+    }
+}
