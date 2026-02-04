@@ -1,0 +1,15 @@
+class Solution {
+    public int countMonobit(int n) {
+     int answer=1;
+     int number=1;
+     while(number<=n){
+      String binary=Integer.toBinaryString(number);
+      int length=binary.length();
+      String one="1";
+      String string=one.repeat(length);
+      if(string.equals(binary)) answer++; 
+      number++;
+     }   
+     return answer;
+    }
+}
