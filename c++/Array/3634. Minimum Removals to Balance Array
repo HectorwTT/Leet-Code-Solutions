@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int minRemoval(vector<int>& nums, int k) {
+        int n = nums.size();
+        std::sort(nums.begin(),nums.end());
+
+        int ans = n;
+        int right = 0;
+
+        for (int left = 0; left < n; left++) {
+            while (right < n && nums[right] <= (long) nums[left] * k) {
+                right++;
+            }
+            ans = std::min(ans, n - (right - left));
+        }
+
+        return ans;     
+    }
+};
