@@ -1,0 +1,15 @@
+var dominantIndices = function(nums) {
+      const sums=[];
+      let total=0;
+      let answer=0;
+      for(let i=0;i<nums.length;i++){
+       total+=nums[i];
+       sums.push(total); 
+      }
+      for(let i=0;i<nums.length-1;i++){
+       let number=nums.length-(i+1);
+       let average=(total-sums[i])/number;
+       if(nums[i]>average) answer++;
+      }
+      return answer;  
+};
