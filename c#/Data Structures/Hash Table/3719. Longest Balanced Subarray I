@@ -1,0 +1,19 @@
+public class Solution {
+    public int LongestBalanced(int[] nums) {
+     int  answer=0;
+    Dictionary<int,int> evenNumberMap;
+    Dictionary<int,int> oddNumberMap;
+     for(int i=0;i<nums.Length;i++){
+      evenNumberMap=new Dictionary<int,int>();
+      oddNumberMap=new Dictionary<int,int>();  
+      if(nums[i]%2==0)evenNumberMap[nums[i]]=1;
+      else oddNumberMap[nums[i]]=1;  
+      for(int j=i+1;j<nums.Length;j++){
+         if(nums[j]%2==0){if(!evenNumberMap.ContainsKey(nums[j]))evenNumberMap[nums[j]]=1;}
+         else{ if(!oddNumberMap.ContainsKey(nums[j]))oddNumberMap[nums[j]]=1; }
+         if(evenNumberMap.Count==oddNumberMap.Count)answer=Math.Max(answer,j-i+1); 
+      }  
+     }
+     return answer;   
+    }
+}
