@@ -1,0 +1,22 @@
+class Solution {
+    public int longestBalanced(String s) {
+     int  answer=1;
+     HashMap<Character,Integer> chars;
+     for(int i=0;i<s.length();i++){
+      chars=new HashMap<>();  
+      chars.put(s.charAt(i),1);  
+      for(int j=i+1;j<s.length();j++){
+         if(!chars.containsKey(s.charAt(j)))chars.put(s.charAt(j),1);
+         else chars.put(s.charAt(j),chars.get(s.charAt(j))+1); 
+         int numberOfFirst=chars.get(s.charAt(i));
+        int numberOfEqual=0;
+        for(Character key:chars.keySet()){
+            if(chars.get(key)==numberOfFirst)numberOfEqual++;  
+        } 
+        if(numberOfEqual==chars.size())answer=Math.max(answer,j-i+1); 
+      }
+      
+     }
+     return answer;    
+    }
+}
