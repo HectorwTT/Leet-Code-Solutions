@@ -1,0 +1,15 @@
+class Solution {
+    public List<Integer> toggleLightBulbs(List<Integer> bulbs) {
+     int [] statusOfBulbs=new int[100];
+     List<Integer> answer=new ArrayList<>();
+     for(int i=0;i<bulbs.size();i++){
+      int bulb=bulbs.get(i)-1;
+      if(statusOfBulbs[bulb]==0)statusOfBulbs[bulb]=1;
+      else statusOfBulbs[bulb]=0; 
+     }
+     for(int i=0;i<statusOfBulbs.length;i++){
+      if(statusOfBulbs[i]==1)answer.add(i+1);  
+     }
+     return answer;   
+    }
+}
