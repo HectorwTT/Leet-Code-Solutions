@@ -1,0 +1,19 @@
+public class Solution {
+    public string MapWordWeights(string[] words, int[] weights) {
+      string answer="";
+      for(int i=0;i<words.Length;i++){
+       string word=words[i];
+       int sum=0;
+       for(int j=0;j<word.Length;j++){
+        char ch=word[j];
+        int chVal=ch-97;
+        sum+=weights[chVal]; 
+       }
+       int weightMod26=sum%26;
+       int newChVal=122-weightMod26;
+       char newCh=(char)newChVal; 
+       answer+=newCh;
+      }  
+      return answer;  
+    }
+}
