@@ -1,0 +1,19 @@
+class Solution {
+    public String mapWordWeights(String[] words, int[] weights) {
+      String answer="";
+      for(int i=0;i<words.length;i++){
+       String word=words[i];
+       int sum=0;
+       for(int j=0;j<word.length();j++){
+        char ch=word.charAt(j);
+        int chVal=ch-97;
+        sum+=weights[chVal]; 
+       }
+       int weightMod26=sum%26;
+       int newChVal=122-weightMod26;
+       char newCh=(char)newChVal; 
+       answer+=newCh;
+      }  
+      return answer;
+    }
+}
