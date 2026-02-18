@@ -1,0 +1,16 @@
+var hasAlternatingBits = function(n) {
+       var binary="";
+       let numOfAdjacent=0;
+       while(n!=0){
+        let mod=n%2;
+        binary+=mod;
+        if(mod==1)n--;
+        n/=2;
+       }
+       for(let i=1;i<binary.length;i++){
+        var bit=binary.charAt(i);
+        var prev=binary.charAt(i-1);
+        if(bit!=prev)numOfAdjacent++;
+       } 
+       return numOfAdjacent==binary.length-1;  
+};
