@@ -1,0 +1,17 @@
+public class Solution {
+    public bool HasAlternatingBits(int n) {
+       string binary="";
+       int numOfAdjacent=0;
+       while(n!=0){
+        int mod=n%2;
+        binary+=mod;
+        n/=2;
+       }
+       for(int i=1;i<binary.Length;i++){
+        char bit=binary[i];
+        char prev=binary[i-1];
+        if(bit!=prev)numOfAdjacent++;
+       } 
+       return numOfAdjacent==binary.Length-1;   
+    }
+}
