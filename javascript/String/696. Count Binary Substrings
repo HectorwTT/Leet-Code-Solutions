@@ -1,0 +1,29 @@
+var countBinarySubstrings = function(s) {
+     const numOfZeroes=[];
+     const numOfOnes=[];
+     for(let i=0;i<s.length;i++){
+       numOfZeroes.push(0);
+       numOfOnes.push(0); 
+     }
+     let countOfZeroes=0;
+     let countOfOnes=0; 
+     let total=0;  
+     for(let i=0;i<s.length;i++){
+      var bit=s[i];
+      if(bit=='1'){
+       countOfZeroes=0;
+       countOfOnes++;
+      }else{
+       countOfOnes=0;
+       countOfZeroes++;
+      }
+      if(countOfZeroes!=0) numOfZeroes[i]=countOfZeroes;
+      if(countOfOnes!=0)numOfOnes[i]=countOfOnes;
+      if(numOfZeroes[i]!=0){
+       if(i-countOfZeroes>=0 && numOfOnes[i-countOfZeroes]>=numOfZeroes[i]) total++; 
+      }else if(numOfOnes[i]!=0){
+        if(i-countOfOnes>=0 && numOfZeroes[i-countOfOnes]>=numOfOnes[i])total++;  
+      }else continue;
+     }
+    return total;   
+};
