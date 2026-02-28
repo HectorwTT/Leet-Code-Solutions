@@ -1,0 +1,27 @@
+class Solution {
+public:
+    vector<int> minDistinctFreqPair(vector<int>& nums) {
+      vector<int> answer;
+      answer.push_back(-1); 
+      answer.push_back(-1);     
+      vector<int> list;
+      unordered_map<int,int> map;
+      for(int i=0;i<nums.size();i++){
+       if(map.find(nums[i])==map.end()){
+        list.push_back(nums[i]);
+        map[nums[i]]=1; 
+       }else map[nums[i]]=map[nums[i]]+1; 
+      } 
+      std::sort(list.begin(),list.end());
+      for(int i=0;i<list.size();i++){
+       for(int j=i+1;j<list.size();j++){
+        if(map[list[i]]!=map[list[j]]){
+          answer [0] =list[i];
+          answer[1] =list[j];
+          return answer;
+        } 
+       } 
+      }
+      return answer;   
+    }
+};
