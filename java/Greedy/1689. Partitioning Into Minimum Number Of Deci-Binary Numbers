@@ -1,0 +1,11 @@
+class Solution {
+    public int minPartitions(String n) {
+      int answer=0;  
+      for(int i=0;i<n.length();i++){
+        char ch=n.charAt(i);
+        int digit=ch-48;
+        answer=Math.max(digit,answer);
+      }
+      return answer;
+    }
+}
