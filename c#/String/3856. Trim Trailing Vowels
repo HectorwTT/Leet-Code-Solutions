@@ -1,0 +1,14 @@
+public class Solution {
+    public string TrimTrailingVowels(string s) {
+      int last=s.Length-1;
+      for(int i=last;i>=0;i--){
+       char ch=s[i];
+       if(ch!='a' && ch!='e' && ch!='i' && ch!='o' && ch!='u'){
+        last=i;
+        break;
+       }else last=i-1; 
+      }
+      if(last==-1) return "";
+      else return s.Substring(0,last+1);     
+    }
+}
