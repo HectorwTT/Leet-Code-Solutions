@@ -1,0 +1,14 @@
+class Solution {
+    public String trimTrailingVowels(String s) {
+      int last=s.length()-1;
+      for(int i=last;i>=0;i--){
+       char ch=s.charAt(i);
+       if(ch!='a' && ch!='e' && ch!='i' && ch!='o' && ch!='u'){
+        last=i;
+        break;
+       }else last=i-1; 
+      }
+      if(last==-1) return "";
+      else return s.substring(0,last+1);  
+    }
+}
