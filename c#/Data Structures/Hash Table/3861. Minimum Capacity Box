@@ -1,0 +1,14 @@
+public class Solution {
+    public int MinimumIndex(int[] capacity, int itemSize) {
+      Dictionary<int,int> map=new Dictionary<int,int>();
+      int min=101;
+      for(int i=0;i<capacity.Length;i++){
+       if(capacity[i]>=itemSize){
+        min=Math.Min(min,capacity[i]);
+        if(!map.ContainsKey(capacity[i]))map[capacity[i]]=i;
+       } 
+      }  
+      if(min==101)return -1;
+      else return map[min];  
+    }
+}
