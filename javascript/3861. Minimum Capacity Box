@@ -1,0 +1,12 @@
+var minimumIndex = function(capacity, itemSize) {
+      const map=new Map();
+      let min=101;
+      for(let i=0;i<capacity.length;i++){
+       if(capacity[i]>=itemSize){
+        min=Math.min(min,capacity[i]);
+        if(!map.has(capacity[i]))map.set(capacity[i],i);
+       } 
+      }  
+      if(min==101)return -1;
+      else return map.get(min);  
+};
