@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int firstUniqueEven(vector<int>& nums) {
+      unordered_map<int,int> map;
+      unordered_map<int,int> map1;
+      int minIndex=nums.size();
+      for(int i=0;i<nums.size();i++){
+       if(nums[i]%2==1) continue; 
+       if(map.find(nums[i])==map.end())map[nums[i]]=1; 
+       else map[nums[i]]=map[nums[i]]+1;
+       if(map1.find(nums[i])==map.end())map1[nums[i]]=i; 
+      }
+      for(auto key: map){
+       if(key.second==1){
+        minIndex=std::min(map1[key.first],minIndex);
+       } 
+      }
+      if(minIndex==nums.size())return -1;
+      else return nums[minIndex];     
+    }
+};
