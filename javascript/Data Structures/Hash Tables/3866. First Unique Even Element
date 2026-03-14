@@ -1,0 +1,18 @@
+var firstUniqueEven = function(nums) {
+      const map=new Map();
+      const map1=new Map();
+      let minIndex=nums.length;
+      for(let i=0;i<nums.length;i++){
+       if(nums[i]%2==1) continue; 
+       if(!map.has(nums[i]))map.set(nums[i],1); 
+       else map.set(nums[i],map.get(nums[i])+1);
+       if(!map1.has(nums[i]))map1.set(nums[i],i); 
+      }
+      for(const key of map.keys()){
+       if(map.get(key)==1){
+        minIndex=Math.min(map1.get(key),minIndex);
+       } 
+      }
+      if(minIndex==nums.length)return -1;
+      else return nums[minIndex];   
+};
