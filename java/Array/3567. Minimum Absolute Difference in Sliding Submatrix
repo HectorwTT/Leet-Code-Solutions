@@ -1,0 +1,29 @@
+class Solution {
+    public int[][] minAbsDiff(int[][] grid, int k) {
+     int [][] answer= new int [grid.length-k+1][grid[0].length-k+1];
+     int row=0;
+     int col=0;
+     for(int i=0;i<=grid.length-k;i++){
+      for(int j=0;j<=grid[0].length-k;j++){
+       List<Integer> list=new ArrayList<>(); 
+       for(int l=i;l<i+k;l++){
+        for(int m=j;m<j+k;m++){
+         if(!list.contains(grid[l][m]))list.add(grid[l][m]);   
+        }
+       }
+       list.sort(null);
+       int min=(int)(Math.pow(10,5)+1)-(-1*(int)Math.pow(10,5)-1); 
+       if(list.size()==1)min=0;
+       for(int a=1;a<list.size();a++){
+        min=Math.min(min,Math.abs(list.get(a)-list.get(a-1)));
+       }
+       if(col==answer[0].length){
+        row++;
+        col=0;
+       }
+       answer[row][col++]=min;
+      }  
+     }
+     return answer;   
+    }
+}
