@@ -1,0 +1,19 @@
+class Solution {
+public:
+    bool uniformArray(vector<int>& nums1) {
+      int numberOfEven=0;
+      int numberOfOdd=0;
+      for(int i=0;i<nums1.size();i++){
+       if(nums1[i]%2==0)numberOfEven++;
+       else numberOfOdd++; 
+      }
+      if(nums1.size()%2==0){
+       if(numberOfOdd>=nums1.size()/2)return true;
+       else if(numberOfEven>=nums1.size()/2) return true;
+      }else{
+        if((nums1.size()-1)/2>=numberOfOdd)return true;
+        else if((nums1.size()-1)/2>=numberOfEven ) return true;
+      }  
+      return false;   
+    }
+};
