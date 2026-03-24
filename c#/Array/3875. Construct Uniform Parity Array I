@@ -1,0 +1,18 @@
+public class Solution {
+    public bool UniformArray(int[] nums1) {
+      int numberOfEven=0;
+      int numberOfOdd=0;
+      for(int i=0;i<nums1.Length;i++){
+       if(nums1[i]%2==0)numberOfEven++;
+       else numberOfOdd++; 
+      }
+      if(nums1.Length%2==0){
+       if(numberOfOdd>=nums1.Length/2)return true;
+       else if(numberOfEven>=nums1.Length/2) return true;
+      }else{
+        if((nums1.Length-1)/2>=numberOfOdd)return true;
+        else if((nums1.Length-1)/2>=numberOfEven ) return true;
+      }  
+      return false;   
+    }
+}
