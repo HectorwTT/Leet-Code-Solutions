@@ -1,0 +1,38 @@
+class Solution {
+    public boolean canPartitionGrid(int[][] grid) {
+     long []  horizontalSums=new long[grid.length];   
+     long [] verticalSums=new long [grid[0].length];  
+     int row=0;
+     int col=0;
+     long rowSum=0;
+     long colSum=0;
+     int horizontalIndex=0;
+     int verticalIndex=0;
+     for(int i=0;i<grid.length;i++){
+      long sum=0; 
+      for(int j=0;j<grid[i].length;j++){
+        sum+=(1L*grid[i][j]);
+      } 
+      rowSum+=sum;
+      horizontalSums[horizontalIndex++]=rowSum;
+     } 
+
+     for(int j=0;j<grid[0].length;j++){
+      long sum=0; 
+      for(int i=0;i<grid.length;i++){
+        sum+=(1L*grid[i][j]);
+      } 
+      colSum+=sum;
+      verticalSums[verticalIndex++]=colSum;
+     } 
+     for(int i=0;i<horizontalSums.length;i++){
+      long otherSum=rowSum-horizontalSums[i];
+      if(otherSum==horizontalSums[i])return true;
+     }
+     for(int i=0;i<verticalSums.length;i++){
+      long otherSum=colSum-verticalSums[i];
+      if(otherSum==verticalSums[i])return true;
+     }
+     return false;
+    }
+}
