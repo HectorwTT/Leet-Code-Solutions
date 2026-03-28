@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int minAbsoluteDifference(vector<int>& nums) {
+     int answer=101;
+      unordered_map<int,int> lastIndexesMap;
+      unordered_map<int,int> nextIndexesMap;
+      for(int i=0;i<nums.size();i++){
+       if(nums[i]==1){
+        if(lastIndexesMap.find(2)!=lastIndexesMap.end())
+          answer=std::min(answer,i-lastIndexesMap[2]); 
+        lastIndexesMap[1]=i; 
+       }else if(nums[i]==2){
+        if(lastIndexesMap.find(1)!=lastIndexesMap.end())
+         answer=std::min(answer,i-lastIndexesMap[1]); 
+        lastIndexesMap[2]=i; 
+       } 
+      } 
+
+     for(int i=nums.size()-1;i>=0;i--){
+       if(nums[i]==1){
+        if(nextIndexesMap.find(2)!=nextIndexesMap.end())
+         answer=std::min(answer,nextIndexesMap[2]-i); 
+        nextIndexesMap[1]=i; 
+       }else if(nums[i]==2){
+        if(nextIndexesMap.find(1)!=nextIndexesMap.end())
+         answer=std::min(answer,nextIndexesMap[1]-i); 
+        nextIndexesMap[2]=i; 
+       } 
+      }
+      if(answer==101) return -1;
+      else return answer;       
+    }
+};
