@@ -1,0 +1,26 @@
+var minAbsoluteDifference = function(nums) {
+      let answer=101;
+      const lastIndexesMap=new Map();
+      const nextIndexesMap=new Map();
+      for(let i=0;i<nums.length;i++){
+       if(nums[i]==1){
+        if(lastIndexesMap.has(2)) answer=Math.min(answer,i-lastIndexesMap.get(2)); 
+        lastIndexesMap.set(1,i); 
+       }else if(nums[i]==2){
+        if(lastIndexesMap.has(1)) answer=Math.min(answer,i-lastIndexesMap.get(1)); 
+        lastIndexesMap.set(2,i); 
+       } 
+      } 
+
+     for(let i=nums.length-1;i>=0;i--){
+       if(nums[i]==1){
+        if(nextIndexesMap.has(2)) answer=Math.min(answer,nextIndexesMap.get(2)-i); 
+        nextIndexesMap.set(1,i); 
+       }else if(nums[i]==2){
+        if(nextIndexesMap.has(1)) answer=Math.min(answer,nextIndexesMap.get(1)-i); 
+        nextIndexesMap.set(2,i); 
+       } 
+      }
+      if(answer==101) return -1;
+      else return answer;   
+};
