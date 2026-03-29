@@ -1,0 +1,10 @@
+var firstMatchingIndex = function(s) {
+     let left=0;
+     let right=s.length-1;
+     while(left<=right){
+      var ch1=s.charAt(left++);
+      var ch2=s.charAt(right--);
+      if(ch1==ch2)return left-1;  
+     } 
+     return -1;   
+};
