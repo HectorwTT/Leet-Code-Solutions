@@ -1,0 +1,64 @@
+class Solution {
+    public List<Integer> survivedRobotsHealths(int[] positions, int[] healths, String directions) {
+      List<Integer> answer=new ArrayList<>();
+      HashMap<Integer,Integer> map=new HashMap<>();
+      HashMap<Integer,Character> map1=new HashMap<>();
+      String directions1="";
+      Stack<Integer> stack=new Stack<>();
+      int index=0;
+      int [] positions1=new int[positions.length];
+      int []  healths1=new int[healths.length];   
+      for(int i=0;i<positions.length;i++){
+       map.put(positions[i],healths[i]); 
+       map1.put(positions[i],directions.charAt(i));
+       positions1[i]=positions[i];
+      } 
+      Arrays.sort(positions1);
+      for(int i=0;i<positions1.length;i++){
+       directions1+=map1.get(positions1[i]); 
+       healths1[i]=map.get(positions1[i]);
+      }
+      while(index<directions1.length() && directions1.charAt(index)=='L')index++;
+       if(index!=directions1.length()){
+        stack.push(positions1[index]);        
+        for(int i=index+1;i<directions1.length();i++){
+        char curr= directions1.charAt(i);
+        if(curr=='R')stack.push(positions1[i]);
+        else if(stack.isEmpty()) continue;
+        else{
+         int healthOfCurr=healths1[i];
+         int healthOfPrev=map.get(stack.peek());
+         if(healthOfCurr==healthOfPrev){
+          int position=stack.pop();
+          map.replace(position,0);
+          map.replace(positions1[i],0);
+         }else if(healthOfCurr<healthOfPrev){
+           int position=stack.pop();
+           healthOfPrev--;
+           map.replace(position,healthOfPrev);
+           map.replace(positions1[i],0);
+           stack.push(position);
+         }else{
+          while(!stack.isEmpty() && healthOfCurr>healthOfPrev){
+           healthOfCurr--;
+           int position=stack.pop();
+           map.replace(position,0);
+           if(!stack.isEmpty())healthOfPrev=map.get(stack.peek());   
+          }
+          if(!stack.isEmpty()){
+           map.replace(positions1[i],0); 
+           if(healthOfCurr==healthOfPrev){
+            map.replace(stack.peek(),0);
+            stack.pop();
+           }else  map.replace(stack.peek(),map.get(stack.peek())-1);
+          }else map.replace(positions1[i],healthOfCurr);
+         } 
+        }
+       }
+     } 
+     for(int i=0;i<positions.length;i++){
+       if(map.get(positions[i])!=0)answer.add(map.get(positions[i])); 
+     }
+     return answer;
+    }
+}
