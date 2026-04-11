@@ -1,0 +1,32 @@
+class Solution {
+    public int minimumDistance(int[] nums) {
+     int  []  lastIndexes=new int[nums.length];
+     int [] nextIndexes=new int[nums.length];
+     HashMap<Integer,Integer> lastIndexesMap=new HashMap<>();
+     HashMap<Integer,Integer> nextIndexesMap=new HashMap<>();   
+     int answer=3*(int)Math.pow(10,5); 
+     Arrays.fill(lastIndexes,-1);
+     Arrays.fill(nextIndexes,-1);
+     for(int i=0;i<nums.length;i++){
+      if(!lastIndexesMap.containsKey(nums[i]))lastIndexesMap.put(nums[i],i); 
+      else{
+        lastIndexes[i]=lastIndexesMap.get(nums[i]);
+        lastIndexesMap.replace(nums[i],i);
+      }
+     }  
+     for(int i=nums.length-1;i>=0;i--){
+      if(!nextIndexesMap.containsKey(nums[i]))nextIndexesMap.put(nums[i],i); 
+      else{
+        nextIndexes[i]=nextIndexesMap.get(nums[i]);
+        nextIndexesMap.replace(nums[i],i);
+      }
+     }
+     for(int i=0;i<nums.length;i++){
+      if(lastIndexes[i]==-1 || nextIndexes[i]==-1) continue;
+      answer=Math.min(answer,Math.abs(lastIndexes[i]-i)+Math.abs(lastIndexes[i]-nextIndexes[i])
+                      +Math.abs(nextIndexes[i]-i)); 
+     }
+     if(answer==3*(int)Math.pow(10,5))return -1;
+     else return answer;
+    }
+}
