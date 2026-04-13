@@ -1,0 +1,54 @@
+import java.util.*;
+
+class Solution {
+    public int maxNumberOfFamilies(int n, int[][] reservedSeats) {
+
+        HashMap<Integer, Set<Integer>> map = new HashMap<>();
+
+        // build map: row -> set of reserved seats
+        for (int[] seat : reservedSeats) {
+            int row = seat[0];
+            int col = seat[1];
+
+            map.putIfAbsent(row, new HashSet<>());
+            map.get(row).add(col);
+        }
+
+        int max = 0;
+
+        // rows with NO reservations
+        max += (n - map.size()) * 2;
+
+        // process only rows with reservations
+        for (int row : map.keySet()) {
+
+            Set<Integer> reserved = map.get(row);
+
+            boolean leftFree =
+                !reserved.contains(2) &&
+                !reserved.contains(3) &&
+                !reserved.contains(4) &&
+                !reserved.contains(5);
+
+            boolean rightFree =
+                !reserved.contains(6) &&
+                !reserved.contains(7) &&
+                !reserved.contains(8) &&
+                !reserved.contains(9);
+
+            boolean middleFree =
+                !reserved.contains(4) &&
+                !reserved.contains(5) &&
+                !reserved.contains(6) &&
+                !reserved.contains(7);
+
+            if (leftFree && rightFree) {
+                max += 2;
+            } else if (leftFree || rightFree || middleFree) {
+                max += 1;
+            }
+        }
+
+        return max;
+    }
+}
