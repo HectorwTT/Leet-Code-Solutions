@@ -1,0 +1,17 @@
+class Solution {
+    public int minMirrorPairDistance(int[] nums) {
+     int  answer=nums.length;
+     HashMap<Integer,Integer> map1=new HashMap<>();
+     for(int i=nums.length-1;i>=0;i--){
+      String number=""+nums[i];
+      StringBuffer sb=new StringBuffer(number);
+      int reverse=Integer.parseInt(sb.reverse().toString());
+      if(map1.containsKey(reverse))answer=Math.min(answer,Math.abs(i-map1.get(reverse)));  
+      if(!map1.containsKey(nums[i])) map1.put(nums[i],i);     
+      else map1.replace(nums[i],i);  
+     }      
+   
+     if(answer==nums.length)return -1;
+     else return answer;  
+    }
+}
