@@ -1,0 +1,22 @@
+class Solution {
+    public int firstStableIndex(int[] nums, int k) {
+      int min=nums.length;  
+      int maxVal=0;
+      int minVal=nums.length;
+      int [] maxValues=new int[nums.length];
+      int [] minValues=new int[nums.length];
+      for(int i=0;i<nums.length;i++){
+       maxVal=Math.max(maxVal,nums[i]);
+       maxValues[i]=maxVal; 
+      }
+      minVal=maxVal;
+      for(int i=nums.length-1;i>=0;i--){
+       minVal=Math.min(minVal,nums[i]);
+       minValues[i]=minVal; 
+       int instabilityVal=maxValues[i]-minValues[i];
+       if(instabilityVal<=k) min=Math.min(min,i);
+      }
+      if(min==nums.length) return -1;
+      else return min;
+    }
+}
