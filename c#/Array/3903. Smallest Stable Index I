@@ -1,0 +1,22 @@
+public class Solution {
+    public int FirstStableIndex(int[] nums, int k) {
+      int min=nums.Length;  
+      int maxVal=0;
+      int minVal=nums.Length;
+      int [] maxValues=new int[nums.Length];
+      int [] minValues=new int[nums.Length];
+      for(int i=0;i<nums.Length;i++){
+       maxVal=Math.Max(maxVal,nums[i]);
+       maxValues[i]=maxVal; 
+      }
+      minVal=maxVal;
+      for(int i=nums.Length-1;i>=0;i--){
+       minVal=Math.Min(minVal,nums[i]);
+       minValues[i]=minVal; 
+       int instabilityVal=maxValues[i]-minValues[i];
+       if(instabilityVal<=k) min=Math.Min(min,i);
+      }
+      if(min==nums.Length) return -1;
+      else return min;   
+    }
+}
