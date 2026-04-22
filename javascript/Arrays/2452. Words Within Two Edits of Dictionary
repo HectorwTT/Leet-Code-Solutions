@@ -1,0 +1,17 @@
+var twoEditWords = function(queries, dictionary) {
+      const answer=[];
+      for(let i=0;i<queries.length;i++){
+       for(let j=0;j<dictionary.length;j++){
+        if(queries[i].length!=dictionary[j].length)continue;
+        let count=0;
+        for(let k=0;k<queries[i].length;k++){
+         if(queries[i][k]!=dictionary[j][k])count++;   
+        }
+        if(count<=2){
+         answer.push(queries[i]);
+         break;
+        } 
+       } 
+      }
+      return answer;     
+};
