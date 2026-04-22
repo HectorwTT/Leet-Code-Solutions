@@ -1,0 +1,19 @@
+public class Solution {
+    public IList<string> TwoEditWords(string[] queries, string[] dictionary) {
+      IList<string> answer=new List<string>();
+      for(int i=0;i<queries.Length;i++){
+       for(int j=0;j<dictionary.Length;j++){
+        if(queries[i].Length!=dictionary[j].Length)continue;
+        int count=0;
+        for(int k=0;k<queries[i].Length;k++){
+         if(queries[i][k]!=dictionary[j][k])count++;   
+        }
+        if(count<=2){
+         answer.Add(queries[i]);
+         break;
+        } 
+       } 
+      }
+      return answer;     
+    }
+}
