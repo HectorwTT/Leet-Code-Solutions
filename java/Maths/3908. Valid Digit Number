@@ -1,0 +1,11 @@
+class Solution {
+    public boolean validDigit(int n, int x) {
+      String number="" +n;
+      if(number.charAt(0)==48+x)return false;
+      int count=0;
+      for(int i=1;i<number.length();i++){
+       if(number.charAt(i)==48+x) return true;
+      } 
+      return false;
+    }
+}
