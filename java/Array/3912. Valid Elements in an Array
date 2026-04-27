@@ -1,0 +1,28 @@
+class Solution {
+    public List<Integer> findValidElements(int[] nums) {
+      boolean[] isValid=new boolean[nums.length];       
+      List<Integer> answer=new ArrayList<>();
+      int maxFromFront=nums[0];
+      int maxFromBack=nums[nums.length-1];
+      HashMap<Integer,Integer> map1=new HashMap<>();
+      HashMap<Integer,Integer> map2=new HashMap<>();
+      isValid[0]=true;
+      isValid[nums.length-1]=true;
+      for(int i=1;i<nums.length;i++){
+       maxFromFront=Math.max(nums[i],maxFromFront);
+       if(maxFromFront==nums[i] && nums[i]!=nums[0] && !map1.containsKey(nums[i]))isValid[i]=true; 
+       if(!map1.containsKey(nums[i]))map1.put(nums[i],i);
+       else map1.replace(nums[i],i);
+      }  
+      for(int i=nums.length-2;i>=0;i--){
+       maxFromBack=Math.max(nums[i],maxFromBack);
+       if(maxFromBack==nums[i] && nums[i]!=nums[nums.length-1] && !map2.containsKey(nums[i]))isValid[i]=true;
+       if(!map2.containsKey(nums[i]))map2.put(nums[i],i);
+       else map2.replace(nums[i],i); 
+      }
+      for(int i=0;i<nums.length;i++){
+       if(isValid[i]) answer.add(nums[i]);
+      }
+      return answer;
+    }
+}
