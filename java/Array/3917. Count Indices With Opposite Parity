@@ -1,0 +1,25 @@
+class Solution {
+    public int[] countOppositeParity(int[] nums) {
+      int []  answer=new int[nums.length];
+      int []  numOfEven=new int[nums.length];
+      int []  numOfOdd=new int[nums.length];
+      int totalOdd=0;
+      int totalEven=0;
+      for(int i=0;i<nums.length;i++){
+       if(nums[i]%2==0){
+        totalEven++;
+        numOfEven[i]=totalEven;
+        if(i!=0)numOfOdd[i]=numOfOdd[i-1];
+       }else{
+         totalOdd++;
+         numOfOdd[i]=totalOdd;
+         if(i!=0)numOfEven[i]=numOfEven[i-1];
+       }  
+      }
+      for(int i=0;i<nums.length;i++){
+       if(nums[i]%2==0)answer[i]=totalOdd-numOfOdd[i]; 
+       else answer[i]=totalEven-numOfEven[i];
+      } 
+      return answer;
+    }
+}
