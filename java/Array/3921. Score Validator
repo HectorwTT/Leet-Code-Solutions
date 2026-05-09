@@ -1,0 +1,13 @@
+class Solution {
+    public int[] scoreValidator(String[] events) {
+       int []  answer=new int[2];
+       for(int i=0;i<events.length;i++){
+        if(answer[1]==10)continue;
+        if(events[i].equals("W"))answer[1]++;
+        else if(events[i].equals("WD"))answer[0]++;
+        else if(events[i].equals("NB"))answer[0]++;
+        else answer[0]+=Integer.parseInt(events[i]);
+       } 
+       return answer;   
+    }
+}
