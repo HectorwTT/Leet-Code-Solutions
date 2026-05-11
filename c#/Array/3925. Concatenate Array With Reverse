@@ -1,0 +1,15 @@
+public class Solution {
+    public int[] ConcatWithReverse(int[] nums) {
+     int [] answer= new int[nums.Length*2];
+     int index=0;
+     Stack<int> stack=new Stack<int>();
+     for(int i=0;i<nums.Length;i++){
+      answer[index++]=nums[i];
+      stack.Push(nums[i]);  
+     }
+     while(stack.Count!=0){
+      answer[index++] =stack.Pop(); 
+     } 
+     return answer;    
+    }
+}
