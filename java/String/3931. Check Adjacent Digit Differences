@@ -1,0 +1,10 @@
+class Solution {
+    public boolean isAdjacentDiffAtMostTwo(String s) {
+      for(int i=1;i<s.length();i++){
+       int current=s.charAt(i);
+       int previous=s.charAt(i-1);
+       if(Math.abs(current-previous)>2)return false; 
+      }  
+      return true;
+    }
+}
