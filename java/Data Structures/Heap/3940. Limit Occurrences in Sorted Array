@@ -1,0 +1,23 @@
+class Solution {
+    public int[] limitOccurrences(int[] nums, int k) {
+      PriorityQueue<Integer>  pq=new PriorityQueue<>();
+      HashMap<Integer,Integer> map=new HashMap<>();
+      int[] answer;
+      List<Integer> list=new ArrayList<>();
+      for(int i=0;i<nums.length;i++){
+       if(!map.containsKey(nums[i])){
+        map.put(nums[i],1); 
+        pq.offer(nums[i]);
+       }else map.replace(nums[i],map.get(nums[i])+1);
+      }
+      
+      int index=0;
+      while(!pq.isEmpty()){
+       int number=pq.remove();
+       for(int i=0;i<k && i<map.get(number);i++)list.add(number); 
+      }  
+      answer=new int[list.size()];
+      for(int i=0;i<answer.length;i++)answer[i]=list.get(index++);
+      return answer;   
+    }
+}
