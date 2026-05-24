@@ -1,0 +1,7 @@
+var minimumSwaps = function(nums) {
+ let answer=0;
+ let numOfZeroes=0;      
+ for(let i=0;i<nums.length;i++) if(nums[i]==0)numOfZeroes++;
+ for(let i=nums.length-numOfZeroes;i<nums.length;i++)if(nums[i]!=0) answer++;  
+ return answer;     
+};
