@@ -1,0 +1,9 @@
+class Solution {
+    public int minimumSwaps(int[] nums) {
+      int answer=0;
+      int numOfZeroes=0;      
+      for(int i=0;i<nums.length;i++) if(nums[i]==0)numOfZeroes++;
+      for(int i=nums.length-numOfZeroes;i<nums.length;i++)if(nums[i]!=0) answer++;  
+      return answer;
+    }
+}
