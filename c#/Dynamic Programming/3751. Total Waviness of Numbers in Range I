@@ -1,0 +1,17 @@
+public class Solution {
+    public int TotalWaviness(int num1, int num2) {
+      int answer=0;
+      for(int i=num1;i<=num2;i++){
+       String number=""+i;
+       if(number.Length<3)continue;
+       for(int j=1;j<number.Length-1;j++){
+        char curr=number[j];
+        char prev=number[j-1];
+        char next=number[j+1];
+        if(curr>prev && curr>next)answer++;
+        else if(curr<prev && curr<next)answer++;
+       } 
+      }
+      return answer;     
+    }
+}
