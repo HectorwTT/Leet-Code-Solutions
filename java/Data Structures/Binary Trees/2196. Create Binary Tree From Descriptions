@@ -1,0 +1,53 @@
+class Solution {
+    public TreeNode createBinaryTree(int[][] descriptions) {
+      TreeNode  root=null;
+      TreeNode current=null;
+      int rootVal=0;
+      HashMap<Integer,Map<String,Integer>> nodes=new HashMap<>();
+      HashMap<Integer,Integer> children=new HashMap<>();
+      Queue<TreeNode> q=new LinkedList<>();
+      for(int i=0;i<descriptions.length;i++){
+       if(!nodes.containsKey(descriptions[i][0])){
+        Map <String,Integer> map=new HashMap<>();
+        if(descriptions[i][2]==1)map.put("left",descriptions[i][1]);
+        else map.put("right",descriptions[i][1]);
+        nodes.put(descriptions[i][0],map); 
+       }else{
+        Map <String,Integer> map=nodes.get(descriptions[i][0]);
+        if(descriptions[i][2]==1)map.put("left",descriptions[i][1]);
+        else map.put("right",descriptions[i][1]);
+        nodes.replace(descriptions[i][0],map); 
+       }
+       if(!children.containsKey(descriptions[i][1]))children.put(descriptions[i][1],1); 
+      }
+      for(Integer key:nodes.keySet()){
+       if(!children.containsKey(key)){
+        rootVal=key;
+        break;
+       } 
+      }
+      current=new TreeNode(rootVal);
+      root=current;
+      q.add(current);
+      while(!q.isEmpty()){
+       current=q.remove(); 
+       int val= current.val;
+       if(!nodes.containsKey(val))continue;
+       Map<String,Integer>map=nodes.get(val);
+        TreeNode left=null;
+        TreeNode right=null;
+        
+        if(map.containsKey("left")){
+         left=new TreeNode(map.get("left"));
+         q.add(left); 
+         current.left=left;  
+        }else current.left=null;
+        if(map.containsKey("right")){
+         right=new TreeNode(map.get("right"));
+         q.add(right);
+         current.right=right;
+        }else current.right=null;
+      }
+      return root;
+    }
+}
