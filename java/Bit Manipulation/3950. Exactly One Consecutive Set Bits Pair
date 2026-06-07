@@ -1,0 +1,12 @@
+class Solution {
+    public boolean consecutiveSetBits(int n) {
+       String binary=Integer.toBinaryString(n);
+       int answer=0;
+       for(int i=1;i<binary.length();i++){
+        char bit=binary.charAt(i);
+        char prev=binary.charAt(i-1);
+        if(prev ==bit && bit=='1')answer++;
+       }
+       return answer==1;   
+    }
+}
