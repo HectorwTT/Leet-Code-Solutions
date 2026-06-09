@@ -1,0 +1,12 @@
+class Solution {
+public:
+    long long maxTotalValue(vector<int>& nums, int k) {
+       long min=std::pow(10,9);
+       long max=-1;
+       for(int i=0;i<nums.size();i++){
+        min=std::min(1L*nums[i],min);
+        max=std::max(1L*nums[i],max);
+       }
+       return k*(max-min);    
+    }
+};
