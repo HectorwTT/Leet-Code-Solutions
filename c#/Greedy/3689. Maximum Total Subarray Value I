@@ -1,0 +1,11 @@
+public class Solution {
+    public long MaxTotalValue(int[] nums, int k) {
+       long min=(long)Math.Pow(10,9);
+       long max=-1;
+       for(int i=0;i<nums.Length;i++){
+        min=Math.Min(1L*nums[i],min);
+        max=Math.Max(1L*nums[i],max);
+       }
+       return k*(max-min);    
+    }
+}
