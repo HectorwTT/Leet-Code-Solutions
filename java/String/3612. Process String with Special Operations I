@@ -1,0 +1,22 @@
+class Solution {
+    public String processStr(String s) {
+     String result="";
+     for(int i=0;i<s.length();i++){
+      char ch=s.charAt(i);
+      if(ch>=97 && ch<=122)result+=ch;
+      else if(ch=='*'){
+        if(result.length()==0)continue;
+        result=result.substring(0,result.length()-1);
+      }else if(ch=='#'){
+       StringBuffer sb=new StringBuffer(result);
+       sb.append(result);
+       result=sb.toString(); 
+      }else{
+       StringBuffer sb=new StringBuffer(result);
+       sb.reverse();
+       result=sb.toString(); 
+      }  
+     }
+     return result;   
+    }
+}
