@@ -1,0 +1,22 @@
+class Solution {
+    public int maxDigitRange(int[] nums) {
+     int maxRange=0;
+     HashMap<Integer,Integer> map=new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      String number =nums[i]+"";
+      int max= 0;
+      int min=9;
+      int diff=0;
+      for(int j=0;j<number.length();j++){
+       int digit=number.charAt(j)-48;
+       max=Math.max(max,digit);
+       min=Math.min(min,digit);      
+       } 
+       diff=max-min;
+       maxRange=Math.max(maxRange,diff);
+       if(!map.containsKey(diff))map.put(diff,nums[i]);
+       else map.replace(diff,map.get(diff)+nums[i]);
+      } System.out.println(map);
+      return map.get(maxRange); 
+     }     
+}
