@@ -1,0 +1,22 @@
+public class Solution {
+    public int MaxDigitRange(int[] nums) {
+     int maxRange=0;
+     Dictionary<int,int> map=new Dictionary<int,int>();
+     for(int i=0;i<nums.Length;i++){
+      string number =nums[i]+"";
+      int max= 0;
+      int min=9;
+      int diff=0;
+      for(int j=0;j<number.Length;j++){
+       int digit=number[j]-48;
+       max=Math.Max(max,digit);
+       min=Math.Min(min,digit);      
+       } 
+       diff=max-min;
+       maxRange=Math.Max(maxRange,diff);
+       if(!map.ContainsKey(diff))map[diff]=nums[i];
+       else map[diff]=map[diff]+nums[i];
+      } 
+      return map[maxRange];    
+    }
+}
