@@ -1,0 +1,31 @@
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+     int first=1001;
+     int last=0;
+     int currentCapacity=capacity;
+     HashMap<Integer,Integer> fromMap=new HashMap<>();
+     HashMap<Integer,Integer> toMap=new HashMap<>();
+     for(int i=0;i<trips.length;i++){
+      first=Math.min(first,trips[i][1]); 
+      last=Math.max(last,trips[i][2]);
+      if(!fromMap.containsKey(trips[i][1]))fromMap.put(trips[i][1],trips[i][0]);
+      else fromMap.put(trips[i][1],fromMap.get(trips[i][1])+trips[i][0]);
+      if(!toMap.containsKey(trips[i][2]))toMap.put(trips[i][2],trips[i][0]);
+      else toMap.put(trips[i][2],toMap.get(trips[i][2])+trips[i][0]);
+     }
+     for(int i=first;i<=last;i++){
+      if(fromMap.containsKey(i)){
+       if(toMap.containsKey(i)) currentCapacity+=toMap.get(i); 
+       int numberOfPassengers =fromMap.get(i);
+       if(numberOfPassengers>currentCapacity) return false;
+       currentCapacity-=numberOfPassengers;           
+      }else{
+       if(toMap.containsKey(i)){
+        if(currentCapacity+toMap.get(i)>capacity)currentCapacity=capacity;
+        else currentCapacity+=toMap.get(i);         
+       }
+      }  
+     }
+     return true;       
+    }
+}
