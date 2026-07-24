@@ -1,0 +1,15 @@
+class Solution {
+    public int maxChunksToSorted(int[] arr) {
+     PriorityQueue<Integer> pq=new PriorityQueue<>();
+     int total=0;
+     int sum=0;
+     int answer=0;
+     for(int i=0;i<arr.length;i++)pq.offer(arr[i]);
+     for(int i=0;i<arr.length;i++){
+      sum+=pq.poll();
+      total+=arr[i];
+      if(sum==total)answer++;  
+     }
+     return answer;
+    }
+}
