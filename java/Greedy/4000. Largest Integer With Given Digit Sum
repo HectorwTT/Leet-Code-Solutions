@@ -1,0 +1,18 @@
+class Solution {
+    public int largestInteger(int n, int s) {
+      return  Integer.parseInt(getNumber(n,s));   
+    }
+
+    public String getNumber(int n,int s){
+     if(s<10){
+       String number=""+s;
+       String zero="0";
+       number+= zero.repeat(n-1);
+       return number;
+     }else if(s>=10 && n==1) return "-1";
+     else{
+       if (getNumber(n-1,s-9).equals("-1")) return "-1";
+       else return "9"+getNumber(n-1,s-9); 
+     } 
+    }
+}
