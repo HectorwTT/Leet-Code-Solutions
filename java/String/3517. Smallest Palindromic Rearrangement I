@@ -1,0 +1,27 @@
+class Solution {
+    public String smallestPalindrome(String s) {
+      String front="";
+      String middle="" ; 
+      String end="";
+      HashMap<Character,Integer> map=new HashMap<>();
+      List<Character> list=new ArrayList<>();
+      for(int i=0;i<s.length();i++){
+       char ch=s.charAt(i);
+       if(!map.containsKey(ch)){
+        map.put(ch,1);
+        list.add(ch);
+       }else map.replace(ch,map.get(ch)+1);
+      }
+      list.sort(null);
+      for(int i=0;i<list.size();i++){
+        char ch=list.get(i);
+        String str=""+ch;
+        if(map.get(ch)%2==1) middle+=str;   
+        int number=map.get(ch)/2;
+        String str1=str.repeat(number);
+        front+=str1;
+        end=str1+end;
+      }
+      return front+middle+end;
+    }
+}
