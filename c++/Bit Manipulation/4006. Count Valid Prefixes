@@ -1,0 +1,21 @@
+class Solution {
+public:
+    int countValidPrefixes(string s) {
+      int answer=1;
+      int numberOfZeroes=0;
+      int numberOfOnes=0;
+      if(s[0]=='0') numberOfZeroes++;
+      else numberOfOnes++;  
+      for(int i=1;i<s.size();i++){
+       char bit=s[i];
+       if(bit=='0')numberOfZeroes++;
+       else numberOfOnes++;
+       if(i%2==1){
+         if(numberOfOnes==numberOfZeroes)answer++;
+       } else{
+        if(numberOfOnes -numberOfZeroes==1 || numberOfZeroes-numberOfOnes==1)answer++;
+       }   
+      }
+      return answer;       
+    }
+};
