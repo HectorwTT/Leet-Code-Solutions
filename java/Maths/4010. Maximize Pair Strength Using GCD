@@ -1,0 +1,23 @@
+class Solution {
+    public long maxPairStrength(int[] nums) {
+     long answer=0;
+     for(int i=0;i<nums.length;i++){
+      for(int j=i+1;j<nums.length;j++){
+       long divisor=1L*gcd(nums[i],nums[j]); 
+       long product=1L*nums[i]*1L*nums[j];
+       divisor=divisor*divisor;
+       answer=Math.max(product/divisor,answer);
+      }  
+     } 
+     return answer;    
+    }
+    
+    public  int gcd(int a, int b) {
+        // Base case: if b becomes 0, the GCD is a
+        if (b == 0) {
+            return a;
+        }
+        // Recursive case: call gcd with b and the remainder of a divided by b
+        return gcd(b, a % b);
+    }
+}
