@@ -1,0 +1,10 @@
+var elevatorRequests = function(n, requests) {
+      let answer=0;
+      let current=0;
+      for(let i=0;i<requests.length;i++){
+       let next=requests[i];
+       answer+=Math.abs(next-current); 
+       current=next;
+      } 
+      return answer;   
+};
