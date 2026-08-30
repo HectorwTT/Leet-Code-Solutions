@@ -1,0 +1,22 @@
+class Solution {
+    public int countSpecialIntegers(int[] nums) {
+     int answer=0;
+     HashMap<Integer,Integer> map1=new HashMap<>();
+     HashMap<Integer,Integer> map2=new HashMap<>();
+     HashMap<Integer,Integer> map3=new HashMap<>();
+     for(int i=0;i<nums.length;i++){
+      if(!map1.containsKey(nums[i]))map1.put(nums[i],i);
+      if(!map2.containsKey(nums[i]))map2.put(nums[i],i);
+      else map2.replace(nums[i],i);
+      if(!map3.containsKey(nums[i]))map3.put(nums[i],1);
+      else map3.replace(nums[i],map3.get(nums[i])+1);  
+     }
+     for(Integer key:map1.keySet()){
+      int start=map1.get(key);
+      int end=map2.get(key);
+      int count=map3.get(key);
+      if(start+count-1==end)answer++;  
+     }   
+     return answer;
+    }
+}
