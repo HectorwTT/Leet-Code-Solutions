@@ -1,0 +1,25 @@
+class Solution {
+    public int countSpecialIntegers(int[] nums) {
+      int answer=0;
+      HashMap<Integer,Integer> counts=new  HashMap<>();
+      HashMap<Integer,Integer> secondPositions=new HashMap<>();
+      HashMap<Integer,Integer> starts= new HashMap<>();
+      HashMap<Integer,Integer> ends=new HashMap<>();
+      for(int i=0;i<nums.length;i++){
+        if(!counts.containsKey(nums[i]))counts.put(nums[i],1);
+        else counts.replace(nums[i],counts.get(nums[i])+1);
+        if(!starts.containsKey(nums[i])){
+          starts.put(nums[i],i);
+          ends.put(nums[i],i);
+        }else ends.replace(nums[i],i);    
+        if(counts.get(nums[i])==2)secondPositions.put(nums[i],i);
+      }
+      for(Integer key:counts.keySet()){
+       if(counts.get(key)==3){
+        if(ends.get(key)-secondPositions.get(key)==secondPositions.get(key)-starts.get(key))
+          answer++;
+       } 
+      }
+      return answer;    
+    }
+}
