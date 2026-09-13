@@ -1,0 +1,23 @@
+var countSpecialIntegers = function(nums) {
+      let answer=0;
+      const counts=new Map();
+      const secondPositions=new Map();
+      const starts= new Map();
+      const ends=new Map();
+      for(let i=0;i<nums.length;i++){
+        if(!counts.has(nums[i]))counts.set(nums[i],1);
+        else counts.set(nums[i],counts.get(nums[i])+1);
+        if(!starts.has(nums[i])){
+          starts.set(nums[i],i);
+          ends.set(nums[i],i);
+        }else ends.set(nums[i],i);    
+        if(counts.get(nums[i])==2)secondPositions.set(nums[i],i);
+      }
+      for(const key of counts.keys()){
+       if(counts.get(key)==3){
+        if(ends.get(key)-secondPositions.get(key)==secondPositions.get(key)-starts.get(key))
+          answer++;
+       } 
+      }
+      return answer;   
+};
