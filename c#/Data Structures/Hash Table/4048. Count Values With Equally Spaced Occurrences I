@@ -1,0 +1,24 @@
+public class Solution {
+    public int CountSpecialIntegers(int[] nums) {
+      int answer=0;
+      Dictionary<int,int> counts=new  Dictionary<int,int>();
+      Dictionary<int,int> secondPositions=new Dictionary<int,int>();
+      Dictionary<int,int> starts= new Dictionary<int,int>();
+      Dictionary<int,int> ends=new Dictionary<int,int>();
+      for(int i=0;i<nums.Length;i++){
+        if(!counts.ContainsKey(nums[i]))counts[nums[i]]=1;
+        else counts[nums[i]]=counts[nums[i]]+1;
+        if(!starts.ContainsKey(nums[i])){
+          starts[nums[i]]=i;
+          ends[nums[i]]=i;
+        }else ends[nums[i]]=i;    
+        if(counts[nums[i]]==2)secondPositions[nums[i]]=i;
+      }
+      foreach(var(key,value)in counts){
+       if(counts[key]==3){
+        if(ends[key]-secondPositions[key]==secondPositions[key]-starts[key])answer++;
+       } 
+      }
+      return answer;   
+    }
+}
