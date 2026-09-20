@@ -1,0 +1,12 @@
+class Solution {
+    public int countIntersectingIntervals(int[][] intervals) {
+     int answer=0; 
+     Arrays.sort(intervals,Arrays::compare);
+     for(int i=0;i<intervals.length;i++){
+      for(int j=i+1;j<intervals.length;j++){
+       if(intervals[j][0]<=intervals[i][1]) answer++;
+      }  
+     }
+     return answer;         
+    }
+}
