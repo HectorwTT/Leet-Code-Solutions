@@ -1,0 +1,24 @@
+class Solution {
+    public int minRotations(String s) {
+     int answer=0;
+     if(s.charAt(0)-48<=5)answer+=s.charAt(0)-48;
+     else answer+=1+9-(s.charAt(0)-48);
+     for(int i=1;i<s.length();i++){
+      int next=s.charAt(i)-48;
+      int curr=s.charAt(i-1)-48;
+      if(next==curr)continue;
+      else if(next>curr){
+        int forward=next-curr;
+        int backward=curr;
+        if(next!=0)backward+=(1+9-next);
+        answer+=Math.min(forward,backward);
+      }else if(curr>next){
+        int backward=curr-next;
+        int forward=9-curr; 
+        if(forward!=9)forward+=(1+next);
+        answer+=Math.min(forward,backward);   
+      }       
+     }
+     return answer;   
+    }
+}
