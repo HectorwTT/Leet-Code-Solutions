@@ -1,0 +1,24 @@
+public class Solution {
+    public int MinRotations(string s) {
+     int answer=0;
+     if(s[0]-48<=5)answer+=s[0]-48;
+     else answer+=1+9-(s[0]-48);
+     for(int i=1;i<s.Length;i++){
+      int next=s[i]-48;
+      int curr=s[i-1]-48;
+      if(next==curr)continue;
+      else if(next>curr){
+        int forward=next-curr;
+        int backward=curr;
+        if(next!=0)backward+=(1+9-next);
+        answer+=Math.Min(forward,backward);
+      }else if(curr>next){
+        int backward=curr-next;
+        int forward=9-curr; 
+        if(forward!=9)forward+=(1+next);
+        answer+=Math.Min(forward,backward);   
+      }       
+     }
+     return answer;      
+    }
+}
