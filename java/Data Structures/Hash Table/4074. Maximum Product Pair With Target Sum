@@ -1,0 +1,26 @@
+class Solution {
+    public int[] maxProductPair(int[] nums, int target) {
+     int [] answer=new int[2];
+     Arrays.fill(answer,-1);
+     HashMap<Integer,Integer> map=new HashMap<>();
+     int maxProduct=-1*Integer.MIN_VALUE;
+     for(int i=0;i<nums.length;i++){
+      if(!map.containsKey(nums[i]))map.put(nums[i],i);
+      else map.replace(nums[i],i);
+      if(map.containsKey(target-nums[i]) && map.get(target-nums[i])!=i){
+        if(nums[i]*(target-nums[i])>maxProduct){
+         maxProduct=nums[i]*(target-nums[i]);
+         if(nums[i]==target-nums[i])continue;
+         else if(nums[i]>target-nums[i]){
+          answer[0]=i;
+          answer[1]=map.get(target-nums[i]);  
+         }else{
+          answer[0]=map.get(target-nums[i]);
+          answer[1]=i;  
+         }
+        }    
+      }  
+     }
+     return answer; 
+    }
+}
