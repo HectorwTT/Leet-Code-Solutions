@@ -1,0 +1,62 @@
+
+import java.util.*;
+
+class Solution {
+    public int minSwaps(int[] nums) {
+        int index = 0;
+        int[] newNums = new int[nums.length];
+        int answer = 0;
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        Comparator<Integer> comp = (a, b) -> {
+            int sumA = digitSum(a);
+            int sumB = digitSum(b);
+
+            if (sumA != sumB) {
+                return Integer.compare(sumA, sumB);
+            }
+
+            return Integer.compare(a, b);
+        };
+
+        PriorityQueue<Integer> pq = new PriorityQueue<>(comp);
+
+        for (int num : nums) {
+            pq.offer(num);
+        }
+
+        while (!pq.isEmpty()) {
+            newNums[index++] = pq.poll();
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            map.put(newNums[i], i);
+        }
+
+        for (int i = 0; i < nums.length; i++) {
+            while (map.get(nums[i]) != i) {
+                int target = map.get(nums[i]);
+
+                int tmp = nums[i];
+                nums[i] = nums[target];
+                nums[target] = tmp;
+
+                answer++;
+            }
+        }
+
+        return answer;
+    }
+
+    private int digitSum(int num) {
+        int sum = 0;
+
+        while (num > 0) {
+            sum += num % 10;
+            num /= 10;
+        }
+
+        return sum;
+    }
+}
