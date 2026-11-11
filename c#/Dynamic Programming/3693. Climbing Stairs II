@@ -1,0 +1,20 @@
+public class Solution {
+    public int ClimbStairs(int n, int[] costs) {
+       int [] dp=new  int[n+1];
+       int [] newCosts=new int[costs.Length+1];
+       for(int i=1;i<newCosts.Length;i++){
+        newCosts[i]=costs[i-1];
+       }
+       dp[1]=newCosts[1]+1;
+       if(n==1)return dp[1];
+       dp[2]=Math.Min(dp[1]+newCosts[2]+1,newCosts[2]+4);
+       if(n==2)return dp[2];
+       for(int i=3;i<=n;i++){
+        int costMinus3=dp[i-3]+newCosts[i]+((i-(i-3))*(i-(i-3)));
+        int costMinus2=dp[i-2]+newCosts[i]+((i-(i-2))*(i-(i-2)));
+        int costMinus1=dp[i-1]+newCosts[i]+((i-(i-1))*(i-(i-1)));
+        dp[i]=Math.Min(costMinus1,Math.Min(costMinus2,costMinus3));
+       } 
+       return dp[n];   
+    }
+}
