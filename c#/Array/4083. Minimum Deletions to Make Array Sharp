@@ -1,0 +1,9 @@
+public class Solution {
+    public int MinDeletions(int[] nums) {
+     int numberOfNonZeroXORs=0;
+     for(int i=1;i<nums.Length;i++){
+      if(nums[i]==nums[i-1])numberOfNonZeroXORs++;  
+     }   
+     return numberOfNonZeroXORs;   
+    }
+}
