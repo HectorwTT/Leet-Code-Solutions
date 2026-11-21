@@ -1,0 +1,27 @@
+class Solution {
+    public String[] assignUmbrella(int[] rain) {
+      String [] answer=new String[rain.length];
+      int countAlice=0;
+      int countBob=0;
+      for(int i=0;i<rain.length-1;i++){
+       if(rain[i]==0)answer[i]="None";
+       if(rain[i]==1){
+        if(rain[i]!=rain[i+1]){
+         answer[i]="Bob";
+         countBob++;
+        }else{
+          if(countBob<countAlice){
+            answer[i]="Bob";
+            countBob++;
+          }else{
+            answer[i]="Alice";
+            countAlice++;
+          }
+        }
+       } 
+      }
+      if(rain[rain.length-1]==0)answer[answer.length-1]="None";
+      else answer[answer.length-1]="Bob";
+      return answer;     
+    }
+}
