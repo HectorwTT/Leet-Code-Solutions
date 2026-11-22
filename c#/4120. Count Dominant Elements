@@ -1,0 +1,15 @@
+public class Solution {
+    public int CountDominantElements(int[] nums) {
+     if(nums.Length==1)return 1;
+     int answer=0;
+     if(nums[0]>=nums[1])answer++;
+     if(nums[nums.Length-1]>=nums[nums.Length-2])answer++;
+     for(int i= 1;i<nums.Length-1;i++){
+      double curr=nums[i];
+      double total=nums[i-1]+nums[i+1];
+      double  average=total/2;
+      if(curr>=average)answer++;
+     } 
+     return answer;    
+    }
+}
