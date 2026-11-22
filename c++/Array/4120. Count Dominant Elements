@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int countDominantElements(vector<int>& nums) {
+     if(nums.size()==1)return 1;
+     int answer=0;
+     if(nums[0]>=nums[1])answer++;
+     if(nums[nums.size()-1]>=nums[nums.size()-2])answer++;
+     for(int i= 1;i<nums.size()-1;i++){
+      double curr=nums[i];
+      double total=nums[i-1]+nums[i+1];
+      double  average=total/2;
+      if(curr>=average)answer++;
+     } 
+     return answer;      
+    }
+};
