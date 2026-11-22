@@ -1,0 +1,13 @@
+var countDominantElements = function(nums) {
+     if(nums.length==1)return 1;
+     let answer=0;
+     if(nums[0]>=nums[1])answer++;
+     if(nums[nums.length-1]>=nums[nums.length-2])answer++;
+     for(let i= 1;i<nums.length-1;i++){
+      var curr=nums[i];
+      var total=nums[i-1]+nums[i+1];
+      var  average=total/2;
+      if(curr>=average)answer++;
+     } 
+     return answer;   
+};
