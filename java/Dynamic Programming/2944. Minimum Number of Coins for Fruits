@@ -1,0 +1,23 @@
+
+class Solution {
+    public int minimumCoins(int[] prices) {
+        int n = prices.length;
+
+        int[] dp = new int[n + 1];
+
+        dp[n] = 0;
+
+        for (int i = n - 1; i >= 0; i--) {
+
+            dp[i] = Integer.MAX_VALUE;
+
+            for (int j = i + 1; j <= Math.min(n, 2 * (i + 1)); j++) {
+
+                dp[i] = Math.min(dp[i],
+                                 prices[i] + dp[j]);
+            }
+        }
+
+        return dp[0];
+    }
+}
